@@ -4,7 +4,7 @@ var app = require ('../../app');
 /*var models = require ('../../models');
 var User = models.User;
 var Avatar = models.Avatar;*/
-var User = require ('../../models/User');
+var User = require ('../../models/user');
 
 var protocol = 'https';
 var usehttps = app.get('use-https');
