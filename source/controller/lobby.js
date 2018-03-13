@@ -23,7 +23,7 @@ var get = function (req, res, next)
 	    var tutorialId = req.params.tutorialId;
 	    var tid = req.body.tut.id;
 	    
-	    res.render ('lobby/lobby', {
+	    res.render ('Lobby/lobby', {
 	        title: 'Lobby UI',
 	        userId: userId,
 	        moduleId: moduleId,
