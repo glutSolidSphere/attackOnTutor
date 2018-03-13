@@ -1,6 +1,6 @@
 "use strict";
 
-var user = require('./User');
+var user = require('./user');
 var userTutorial = require('./userTutorial');
 
 //Simulate a database table with one entry.

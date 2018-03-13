@@ -1,9 +1,9 @@
 //var User = models.User;
-var User = require ('../../models/User');
+var User = require ('../../models/user');
 //var Tutorial = models.Tutorial;
-var Tutorial = require ('../../models/Tutorial');
+var Tutorial = require ('../../models/tutorial');
 //var Avatar = models.Avatar;
-var Avatar = require ('../../models/Avatar');
+var Avatar = require ('../../models/avatar');
 //var userTutorial = models.userTutorial;
 var userTutorial = require ('../../models/userTutorial');
 //var userAvatar = models.userAvatar;

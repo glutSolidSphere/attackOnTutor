@@ -1,6 +1,6 @@
 'use strict';
 
-var tutorial = require('./Tutorial');
+var tutorial = require('./tutorial');
 var userTutorial = require('./userTutorial');
 var avatar = require('./avatar');
 var userAvatar = require ('./userAvatar');
