@@ -10,6 +10,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 	
 	$scope.showBattleWindow = false;
 	$scope.showSplash = false;
+	$scope.showStartSplash = false;
 	$scope.showEndSplash = false;
 	
 	$scope.currentTime = 30;
@@ -52,8 +53,8 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
         //Ensure the user logged in is a tutor, otherwise do not initialise all these socket listeners.
         if (data.userType == 'tutor') {
             socket.on ('show splash', function (data) {
-                $scope.showSplash = true;
 				$scope.showBattleWindow = true;
+				$scope.showStartSplash = true;
 				
 				$scope.health = 100;
 				$scope.maxHealth = 100;
@@ -73,7 +74,6 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 						overdriveDuration = data.rewards[group].overdriveDuration;
 					}
 				}
-				console.log ( data.rewards );
 				$scope.currentTime = $scope.battleDuration = overdriveDuration;
 				
 				var users = data.userList;
@@ -89,14 +89,18 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					return groupKeysToRank[a] - groupKeysToRank[b];
 				});
 				
+				var groupIndex = 0;
+				
 				$scope.setUpGroups (sortedGroupKeysByRank, users);
 				
-				var groupIndex = 0;
-				$scope.showGroupRankings ( groupIndex, sortedGroupKeysByRank, data );
+				setTimeout ( function () {
+					$scope.showStartSplash = false;
+					
+					$scope.showSplash = true;
+					
+					$scope.showGroupRankings ( groupIndex, sortedGroupKeysByRank, data );
+				}, 1000);
             });
-			
-			socket.on ('start battle', function ( data ) {
-			});
 			
 			//Get the runes from the server.
 			socket.on ('tutor set rune', function (data) {

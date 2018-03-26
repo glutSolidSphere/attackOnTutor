@@ -362,31 +362,6 @@
 					</div>
 				</div>
 				
-				<!-- Avatar of player
-				<div class="player-avatar-group"
-				id="player-avatar-group"
-				style="
-					bottom : 50%;
-					right : 0px;
-					position : fixed;
-				">
-					<div class="player-avatar"
-					id="player-avatar"
-					ng-style="{'width' : studentAvatar.avatarWidth + 'vw', 'height' : studentAvatar.avatarHeight + 'vw',
-							'margin-top' : studentAvatar.avatarHeight * -0.5 + 'vw'}"
-					style="
-						right : 0px;
-						top : 0px;
-						position : absolute;
-						z-index : 100;
-						background : url({{studentAvatar.userAvatar}}) no-repeat;
-						background-size: cover;
-						image-rendering:pixelated;
-					">
-					</div>
-				</div>
-				-->
-				
 				<!-- Avatar of tutor -->
 				<div class="tutor-avatar-group"
 					id="tutor-avatar-group"
@@ -541,88 +516,6 @@
 					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{currentTime/battleDuration * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{currentTime/battleDuration * 100}}%">
 					</div>
 				</div>
-				
-				<!--
-				<div class="group-list-container" id="group-list-container"
-				style="
-				width : 30vw;
-				height : 10vw;
-				bottom : 4.5vw;
-				left : 35vw;
-				position : fixed;
-				">
-					<div class="group-name-header"
-					style="
-						position:absolute;
-						width:100%;
-						height:3vw;
-						left:0px;
-						top:-3vw;
-						font-size:2vw;
-						color:white;
-						background-color:#888888;
-						padding-left:1.5vw;
-					">
-						Groups
-					</div>
-					<div class="group-container"
-					style="
-						width : 100%;
-						height : 100%;
-						position : absolute;
-						overflow-y : scroll;
-						padding-top : 1.5vw;
-					">
-						<div class="group-row-container"
-						ng-repeat="group in groups"
-						style="
-							width : calc(100% - 1.5vw);
-							height : 3vw;
-							font-size : 2vw;
-							margin-bottom : 1.5vw;
-							background-color:#888888;
-							position:relative;
-						">
-							<div class="group-icon smoothImage"
-							style="
-								width : 2vw;
-								height : 2vw;
-								margin : 0.5vw;
-								float : left;
-								background-color:red;
-								-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-								filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-							">
-							</div>
-							<div class="group-name"
-							style="
-								width: calc(100% - {{group.groupName == groupName ? 8.5 : 3.5}}vw);
-								height: 100%;
-								text-overflow: ellipsis;
-								overflow: hidden;
-								white-space: nowrap;
-							">
-								{{group.groupName}}
-							</div>
-							<div class="member-name"
-								ng-show="group.groupName == groupName"
-								style="
-									width: 5vw;
-									height: 3vw;
-									font-size: 2vw;
-									position: absolute;
-									text-align: center;
-									color: white;
-									background-color: green;
-									right:0;
-									top:0;
-								">
-									You
-							</div>
-						</div>
-					</div>
-				</div>
-				-->
 				
 				<!-- Splash screen -->
 				<div ng-show="showSplash == true" id="battle-splash-overlay" class="battle-splash-container"
@@ -1000,8 +893,51 @@
 					</div>
 				</div>
 				
+				<!-- Start splash screen -->
+				<div ng-if="showStartSplash == true" id="start-splash-overlay" class="start-splash-container"
+				style ="
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				position:absolute;
+				"
+				>
+					<!-- Background screen -->
+					<div
+					class="start-splash-background"
+					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}"
+					style="
+					width : 100%;
+					height : 100%;
+					top : 0;
+					left : 0;
+					position : fixed;
+					background : rgba(255,255,255,1);
+					background-color : rgba(255,255,255,1);
+					"
+					>
+						<div class="start-splash-text font"
+						style="
+						font-size: 20vw;
+						color: red;
+						position: fixed;
+						width: 100%;
+						height: auto;
+						margin-left: -50%;
+						margin-top: -20%;
+						text-align: center;
+						top: 50%;
+						left: 50%;
+						text-shadow: 0.7vw 0.7vw #999999;
+						">
+						OVERDRIVE
+						</div>
+					</div>
+				</div>	
+				
 				<!-- End Splash screen -->
-				<div ng-show="showEndSplash == true" id="battle-splash-overlay" class="battle-splash-container"
+				<div ng-show="showEndSplash == true" id="battle-splash-overlay" class="battle-splash-container"\
 				style ="
 				width:100%;
 				height:100%;
@@ -1228,6 +1164,38 @@
 						</div>
 					</div>
 					
+					<!-- Background screen -->
+					<div
+					class="start-splash-background"
+					ng-show="showFinSplash == true"
+					ng-class="{'show' : showFinSplash == true, 'hide' : showFinSplash == false}"
+					style="
+					width : 100%;
+					height : 100%;
+					top : 0;
+					left : 0;
+					position : fixed;
+					background : rgba(255,255,255,1);
+					background-color : rgba(255,255,255,1);
+					"
+					>
+						<div class="start-splash-text font"
+						style="
+						font-size: 20vw;
+						color: red;
+						position: fixed;
+						width: 100%;
+						height: auto;
+						margin-left: -50%;
+						margin-top: -20%;
+						text-align: center;
+						top: 50%;
+						left: 50%;
+						text-shadow: 0.7vw 0.7vw #999999;
+						">
+						FINISH
+						</div>
+					</div>
 					<!-- <div class="loot-container container" id="loot-container"
 					style="
 						width : 50%;
@@ -1840,19 +1808,91 @@
 					</div>
 				</div>
 				
-				<!-- End Splash screen -->
-				<div ng-show="showEndSplash == true" id="battle-splash-overlay" class="battle-splash-container"
+				<!-- Start splash screen -->
+				<div ng-if="showStartSplash == true" id="start-splash-overlay" class="start-splash-container"
 				style ="
 				width:100%;
 				height:100%;
 				top:0;
 				left:0;
 				position:absolute;
-				background-color:rgba(0,255,0,.5);
 				"
 				>
-				</div>
-			
+					<!-- Background screen -->
+					<div
+					class="start-splash-background"
+					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}"
+					style="
+					width : 100%;
+					height : 100%;
+					top : 0;
+					left : 0;
+					position : fixed;
+					background : rgba(255,255,255,1);
+					background-color : rgba(255,255,255,1);
+					"
+					>
+						<div class="start-splash-text font"
+						style="
+						font-size: 20vw;
+						color: red;
+						position: fixed;
+						width: 100%;
+						height: auto;
+						margin-left: -50%;
+						margin-top: -20%;
+						text-align: center;
+						top: 50%;
+						left: 50%;
+						text-shadow: 0.7vw 0.7vw #999999;
+						">
+						OVERDRIVE
+						</div>
+					</div>
+				</div>	
+				
+				<!-- End splash screen -->
+				<div ng-if="showEndSplash == true" id="end-splash-overlay" class="end-splash-container"
+				style ="
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				position:absolute;
+				"
+				>
+					<!-- Background screen -->
+					<div
+					class="end-splash-background"
+					ng-class="{'show' : showEndSplash == true, 'hide' : showEndSplash == false}"
+					style="
+					width : 100%;
+					height : 100%;
+					top : 0;
+					left : 0;
+					position : fixed;
+					background : rgba(255,255,255,1);
+					background-color : rgba(255,255,255,1);
+					"
+					>
+						<div class="end-splash-text font"
+						style="
+						font-size: 20vw;
+						color: red;
+						position: fixed;
+						width: 100%;
+						height: auto;
+						margin-left: -50%;
+						margin-top: -20%;
+						text-align: center;
+						top: 50%;
+						left: 50%;
+						text-shadow: 0.7vw 0.7vw #999999;
+						">
+						FINISH
+						</div>
+					</div>
+				</div>	
 			</div>
 		</div>
 		

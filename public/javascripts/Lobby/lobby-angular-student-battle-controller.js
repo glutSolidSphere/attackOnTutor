@@ -11,6 +11,8 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
 	
 	$scope.showBattleWindow = false;
 	$scope.showSplash = false;
+	$scope.showStartSplash = false;
+	$scope.showFinSplash = false;
 	$scope.showEndSplash = false;
 	
 	$scope.currentTime = 30;
@@ -57,8 +59,8 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
         //Ensure the user logged in is a student, otherwise do not initialise all these socket listeners.
         if (data.userType == 'student') {
             socket.on ('show splash', function (data) {
-                $scope.showSplash = true;
 				$scope.showBattleWindow = true;
+				$scope.showStartSplash = true;
 				
 				$scope.health = 100;
 				$scope.maxHealth = 100;
@@ -97,10 +99,17 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
 					return groupKeysToRank[a] - groupKeysToRank[b];
 				});
 				
+				var groupIndex = 0;
+				
 				$scope.setUpGroups (sortedGroupKeysByRank, users);
 				
-				var groupIndex = 0;
-				$scope.showGroupRankings ( groupIndex, sortedGroupKeysByRank, data );
+				setTimeout ( function () {
+					$scope.showStartSplash = false;
+					
+					$scope.showSplash = true;
+					
+					$scope.showGroupRankings ( groupIndex, sortedGroupKeysByRank, data );
+				}, 1000);
             });
 			
 			socket.on ('start battle', function ( data ) {
@@ -408,8 +417,15 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
 	 *
      */
     $scope.claimLoot = function () {
-		$scope.showBattleWindow = false;
-		$scope.showEndSplash = false;
+		$scope.showFinSplash = true;
+		setTimeout ( function()
+		{
+			$scope.$apply (function() {
+				$scope.showEndSplash = false;
+				$scope.showBattleWindow = false;
+				$scope.showFinSplash = false;
+			});
+		}, 1000);
 	};
 	
 	 /**
