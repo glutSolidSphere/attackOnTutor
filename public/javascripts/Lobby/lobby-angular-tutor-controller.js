@@ -5,11 +5,14 @@
  * @module javascripts/lobby/lobby-angular-tutor-controller
  */
 angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
+	$scope.showPrompt = false;
     $scope.userInfo = {};
 	$scope.socket = socket;
     $scope.health = 100;
     $scope.maxHealth = 100;
 	$scope.selectedGroups = [];
+	$scope.groupRangeIndex = 0;
+	$scope.mouseoverGroupIndex = 0
     $scope.composerQuestion = {
         'description' : ''
     };
@@ -65,7 +68,13 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
             });
 
             socket.on ('reset health', function (data) {
+				$scope.showPrompt = false;
                 $scope.health = $scope.maxHealth;
+				socket.emit ('update health', $scope.health);
+            });
+			
+			socket.on ('overdrive prompt', function (data) {
+				$scope.showPrompt = true;
             });
         }
     });
@@ -73,7 +82,28 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
     /*
      *  Scope functions used by angular in the DOM.
      */
+	 
+	/**
+    * Allow users to iterate through the list of groups.
+    *
+    */
+    $scope.respawn = function () {
+		socket.emit ('tutor respawn', {
+		});
+    }
 
+	/**
+    * Allow users to iterate through the list of groups.
+    *
+    */
+    $scope.scrollGroupList = function (direction) {
+		var newIndexRange = $scope.groupRangeIndex + direction;
+		if ( newIndexRange >= 0 && newIndexRange < ($scope.socket.getAllSocketGroups().length - 3) )
+		{
+			$scope.groupRangeIndex = newIndexRange;
+		}
+    }
+	
     /**
      * Check if the index of the current group is already selected in the question composer.
      *
@@ -91,7 +121,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
      */
 	$scope.toggleSelectedGroup = function (index) {
 		if ($scope.inSelectedGroups(index)) {
-			delete $scope.selectedGroups[$scope.selectedGroups.indexOf (index)];
+			$scope.selectedGroups.splice ($scope.selectedGroups.indexOf (index), 1);
 		} else {
             //The first group is the default group for the entire lobby.
             if (index == 0) {
@@ -101,7 +131,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
             {
                 //When any sub groups are selected prevent the tutor from sending to the group that contains the entire tutorial as well.
                 if ($scope.inSelectedGroups(0)) {
-                    delete $scope.selectedGroups[$scope.selectedGroups.indexOf (0)];
+                   $scope.selectedGroups.splice ($scope.selectedGroups.indexOf (0), 1);
                 }
             }
 			$scope.selectedGroups.push (index);
@@ -129,8 +159,8 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
 		var groupNames = [];
         //Get the names of all the selected groups.
 		$scope.selectedGroups.forEach (function (value) {
-            if ($scope.socket.getSocketGroups()[value]) {
-                groupNames.push ($scope.socket.getSocketGroups()[value]);
+            if ($scope.socket.getAllSocketGroups()[value]) {
+                groupNames.push ($scope.socket.getAllSocketGroups()[value]);
             }
 		});
 
@@ -190,7 +220,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
             $scope.health = healthLeft;
         } else {
             $scope.health = 0;
-            socket.emit ('experience payout', uuid);
+            socket.emit ('tutor death', uuid);
         }
 
         socket.emit ('update health', $scope.health);
@@ -202,6 +232,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
      * Send a message to the server to transmit to the students that the battle has started.
      */
     $scope.startBattle = function () {
+		$scope.showPrompt = false;
 		socket.emit ('start battle');
 	};
 });

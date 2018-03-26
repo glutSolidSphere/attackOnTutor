@@ -9,6 +9,7 @@ angular.module('lobbyApp').controller ('chatCtrl', function ($scope, $window, so
 
     $scope.chatMessage = "";
     $scope.selectedGroup = 0;
+	$scope.groupRangeIndex = 0;
     $scope.defaultGroup = "";
 	$scope.messages = {};
 	$scope.typingMessages = [];
@@ -125,6 +126,18 @@ angular.module('lobbyApp').controller ('chatCtrl', function ($scope, $window, so
     /*
      *  Scope functions used by angular in the DOM.
      */
+	 
+	 /**
+    * Allow users to iterate through the list of groups.
+    *
+    */
+    $scope.scrollGroupList = function (direction) {
+		var newIndexRange = $scope.groupRangeIndex + direction;
+		if ( newIndexRange >= 0 && newIndexRange < ($scope.socket.getAllSocketGroups().length - 3) )
+		{
+			$scope.groupRangeIndex = newIndexRange;
+		}
+    }
 
      /**
      * Set the group with the given index as the selected chat channel.

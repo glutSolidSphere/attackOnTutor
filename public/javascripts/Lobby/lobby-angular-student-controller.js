@@ -34,6 +34,7 @@ angular.module('lobbyApp').controller ('studentCtrl', function($scope, socket) {
 
         $scope.tutorInfo.imgSrc = data.tutorAvatar;
         $scope.tutorInfo.username = data.tutorName;
+		console.log ($scope.tutorInfo);
 
         //Ensure the user logged in is a student, otherwise do not initialise all these socket listeners.
         if (data.userType == 'student') {
@@ -96,12 +97,6 @@ angular.module('lobbyApp').controller ('studentCtrl', function($scope, socket) {
                 $scope.health = data;
             });
 
-            socket.on ('experience payout', function (data) {
-                $scope.userInfo.exp += data.exp;
-                $scope.userInfo.level = $scope.calculateLevel($scope.userInfo.exp);
-                $scope.userInfo.expToNext = $scope.expToNextLevel($scope.userInfo.level + 1);
-            });
-
             socket.on ('damage shoutout', function (data) {
                 $scope.userInfo.exp += data.experience;
                 $scope.userInfo.level = $scope.calculateLevel($scope.userInfo.exp);
@@ -148,6 +143,7 @@ angular.module('lobbyApp').controller ('studentCtrl', function($scope, socket) {
     		});
     		if ( $scope.questions[questionUuid].answers[index] ) {
     			$scope.questions[questionUuid].answers[index].selected = true;
+				$scope.updateAnswer(questionUuid);
     		}
     	}
     };

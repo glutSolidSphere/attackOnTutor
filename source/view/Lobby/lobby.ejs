@@ -86,12 +86,163 @@
 				from { transform: scale(0); opacity : 0; }
 				to { transform: scale(1); opacity : 1; }
 			}
+			
+			@keyframes pulse
+			{
+				0% { transform: scale(0); opacity : 0; }
+				75% { transform: scale (1); opacity : 1; }
+				100% { transform: scale(1); opacity : 0; }
+			}
+			
+			.firedFromTutor
+			{
+				opacity : 1 !important;
+				transform : scale(1) !important;
+				left : 90% !important;
+			}
+			
+			.firedFromStudent
+			{
+				opacity : 1 !important;
+				transform : scale(1) !important;
+				left : 10% !important;
+			}
+			
+			.firedFromTutorEnd
+			{
+				opacity : 0 !important;
+				transform : scale(1.3) !important;
+				left : 90% !important;
+			}
+			
+			.firedFromStudentEnd
+			{
+				opacity : 0 !important;
+				transform : scale(1.3) !important;
+				left : 10% !important;
+			}
+			
+			.user-active
+			{
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+			}
+		
+			.user-active:hover
+			{
+				background-color:#888888;
+				color:white;
+			}
+			
+			.user-active.active
+			{
+				background-color:#888888;
+				color:white;
+			}
+			
+			.user-active-text::after {
+				content:"";
+				position:absolute;
+				background-color:#888888;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:2px;
+				width:100%;
+				top:100%;
+				left:0;
+				opacity : 0;
+			}
+			
+			.user-active-text::before {
+				content:"";
+				position:absolute;
+				background-color:#888888;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:2px;
+				width:100%;
+				bottom:100%;
+				left:0;
+				opacity : 0;
+			}
+			
+			.user-active.active .user-active-text::before
+			{
+				height : 2px;
+				bottom : 103%;
+				opacity : 0.75;
+				background-color:#888888;
+			}
+			
+			.user-active.active:hover .user-active-text::before
+			{
+				height : 2px;
+				bottom : 103%;
+				opacity : 1;
+				background-color:#888888;
+			}
+			
+			.user-active.active .user-active-text::after
+			{
+				height : 2px;
+				top : 103%;
+				opacity : 0.75;
+				background-color:#888888;
+			}
+			
+			.user-active.active:hover .user-active-text::after
+			{
+				height : 2px;
+				top : 103%;
+				opacity : 1;
+				background-color:#888888;
+			}
+			
+			.select-group-button::before {
+				content:"";
+				position:absolute;
+				background-color:#888888;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:0px;
+				width:100%;
+				top:100%;
+				left:0;
+				opacity : 0;
+			}
+			
+			.select-group.selected .select-group-button::before
+			{
+				height : 1.7vw;
+				top:100%;
+				opacity : 1;
+			}
+			
 		</style>
     </head>
 
     <body ng-app="lobbyApp">
 	
-		<ul id="header"> <!-- Header -->
+		<ul id="header"
+		style="
+			height:5vw;
+			margin-bottom:1.5vw;
+		"> <!-- Header -->
 			<li class="header">
 				<a class="active font headerGeneralFontSize" href="/">Index Page</a>
 			</li>
@@ -102,11 +253,11 @@
 		</ul>
 	
 		<div ng-controller="socketCtrl" class="container" id="header-bar"> <!-- Title Box -->
-			<div class="row">
+			<!--<div class="row">
 				<div class="text-center col-md-12 col-sm-12 col-xs-12">
 					<h1 class="font whiteFont centerText boldText lobbyBottomFiller">Welcome to <%= moduleId %> <%= tutorialId %>'s Lobby!</h1>
 				</div>
-			</div>
+			</div>-->
 		</div>
 		
 		<div ng-controller="studentBattleCtrl">
@@ -134,66 +285,107 @@
 				>
 				</div>
 				
-				<!-- Effects for attacks -->
-				<div class="effect"
-					ng-repeat="effect in effects"
-					ng-style="{'left' : effect.positionLeft + 'px', 'top' : effect.positionTop + 'px',
-								'width' : effect.width + 'px', 'height' : effect.height + 'px',
-								'margin-left' : effect.marginLeft + 'px', 'margin-top' : effect.height * -0.5 + 'px'}"
-					style="
-						z-index : 0;
-						position : fixed;
-						background : url({{effect.image}});
-					">
-				</div>
-				
 				<!-- Avatars of students -->
 				<div class="student-group"
-					ng-repeat="group in groups"
-					id="group-{{group.groupName}}"
-					ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}"
-					style="
-						position : fixed;
-					">
+				ng-repeat="group in groups"
+				id="group-{{group.groupName}}"
+				ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}"
+				style="
+					position : fixed;
+				">
 					<div class="student-group-avatar"
-						id="student-{{student.userId}}"
-						ng-repeat="student in group.members"
-						ng-style="{'width' : student.avatarWidth + 'vw', 'height' : student.avatarHeight + 'vw',
-								'bottom' : student.displacementBottom + 'vw', 'right' : student.displacementRight + 'vw',
-								'margin-right' : student.avatarWidth * -0.5 + 'vw', 'margin-bottom' : student.avatarHeight * -0.5 + 'vw'}"
+					id="student-{{student.userId}}"
+					ng-repeat="student in group.members"
+					style="
+						width: {{student.avatarWidth}}vw;
+						height: {{student.avatarHeight}}vw;
+						bottom: {{student.displacementBottom}}vw;
+						right: {{student.displacementRight * $index}}vw;
+						margin-right: {{student.avatarWidth * -0.5}}vw;
+						margin-bottom: {{student.avatarHeight * -0.5}}vw;
+						position : absolute;
+						z-index : {{100 - $index}};
+						background : url({{student.userAvatar}}) no-repeat;
+						background-size: cover;
+						-webkit-filter:brightness({{ student.userId == userId ? 100 : 70}}%);
+						filter:brightness({{ student.userId == userId ? 100 : 70}}%);
+						image-rendering:pixelated;
+					">
+					</div>
+					<div class="group-row-container"
+					style="
+					width: {{tutorAvatar.avatarWidth}}vw;
+					height: 3vw;
+					font-size: 2vw;
+					background-color: #888888;
+					position: absolute;
+					right: -7vw;
+					top: 6vw;
+					z-index : 101;
+					">
+						<div class="group-icon smoothImage"
 						style="
-							position : absolute;
-							z-index : 100;
-							background : url({{student.userAvatar}}) no-repeat;
-							background-size: cover;
-							image-rendering:pixelated;
+							width : 2vw;
+							height : 2vw;
+							margin : 0.5vw;
+							float : left;
+							background-color:red;
+							-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+							filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
 						">
+						</div>
+						<div class="group-name"
+						style="
+							width: calc(100% - {{group.groupName == groupName ? 8.5 : 3.5}}vw);
+							height: 100%;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+						">
+							{{group.groupName}}
+						</div>
+						<div class="member-name"
+							ng-show="group.groupName == groupName"
+							style="
+								width: 5vw;
+								height: 3vw;
+								font-size: 2vw;
+								position: absolute;
+								text-align: center;
+								color: white;
+								background-color: green;
+								right:0;
+								top:0;
+							">
+								You
+						</div>
 					</div>
 				</div>
 				
-				<!-- Avatar of player -->
+				<!-- Avatar of player
 				<div class="player-avatar-group"
-					id="player-avatar-group"
-					style="
-						bottom : 50%;
-						right : 0px;
-						position : fixed;
-					">
+				id="player-avatar-group"
+				style="
+					bottom : 50%;
+					right : 0px;
+					position : fixed;
+				">
 					<div class="player-avatar"
-						id="player-avatar"
-						ng-style="{'width' : studentAvatar.avatarWidth + 'vw', 'height' : studentAvatar.avatarHeight + 'vw',
-								'margin-top' : studentAvatar.avatarHeight * -0.5 + 'vw'}"
-						style="
-							right : 0px;
-							top : 0px;
-							position : absolute;
-							z-index : 100;
-							background : url({{studentAvatar.userAvatar}}) no-repeat;
-							background-size: cover;
-							image-rendering:pixelated;
-						">
+					id="player-avatar"
+					ng-style="{'width' : studentAvatar.avatarWidth + 'vw', 'height' : studentAvatar.avatarHeight + 'vw',
+							'margin-top' : studentAvatar.avatarHeight * -0.5 + 'vw'}"
+					style="
+						right : 0px;
+						top : 0px;
+						position : absolute;
+						z-index : 100;
+						background : url({{studentAvatar.userAvatar}}) no-repeat;
+						background-size: cover;
+						image-rendering:pixelated;
+					">
 					</div>
 				</div>
+				-->
 				
 				<!-- Avatar of tutor -->
 				<div class="tutor-avatar-group"
@@ -201,6 +393,7 @@
 					style="
 						bottom : 50%;
 						position : fixed;
+						left : 3vw;
 					">
 					<div class="tutor-avatar"
 						ng-style="{'width' : tutorAvatar.avatarWidth + 'vw', 'height' : tutorAvatar.avatarHeight + 'vw',
@@ -212,36 +405,109 @@
 						">
 					</div>
 					
-					<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
+					<div class="tutor-battle-panel-container"
+					style="
+						width : {{tutorAvatar.avatarWidth}}vw;
+						height : 7vw;
+						position : absolute;
+						bottom : {{tutorAvatar.avatarHeight * -0.5}}vw;
+						left : 0;
+						z-index : 100;
+						background-color:red;
+					">
+						<div class="tutor-battle-panel-header"
+						style="
+							position:absolute;
+							width:100%;
+							height:3vw;
+							left:0px;
+							font-size:2vw;
+							color:white;
+							background-color:#888888;
+							padding-left:1.5vw;
+							z-index : 1;
+						">
+							{{tutorAvatar.tutorName}}
+						</div>
+						<div class="tutor-battle-container"
+						style="
+							position : absolute;
+							width : 100%;
+							height : 100%;
+							overflow : hidden;
+						">
+							<div class="tutor-label-details-container"
+							style="
+								width : 100%;
+								height : 2vw;
+								font-size : 1.5vw;
+								margin-left : 1.5vw;
+								margin-top : 3vw;
+							">
+								Bonus Loot: +{{totalDeath}}
+							</div>
+						</div>
+						<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
 						style= "
 							position: absolute;
 							z-index : 100;
-							top : {{-tutorAvatar.avatarHeight * 0.4}}px;
-							left : {{tutorAvatar.avatarWidth}}px;
-							width : 300px;
+							width : 100%;
+							height : 2vw;
+							bottom: 0;
 						">
-						Health: {{health}} / {{maxHealth}}
-						<br>
-						<div class="progress">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
-							{{health/maxHealth * 100}}%
 							</div>
+						</div>
+						<div class="tutor-label-details-container"
+						style="
+						width: 100%;
+						height: 2vw;
+						font-size: 1.5vw;
+						bottom: 0;
+						position: absolute;
+						z-index: 101;
+						text-align: center;
+						">
+								Health: {{health}} / {{maxHealth}}
 						</div>
 					</div>
 				</div>
 				
-				<!-- Runes displayed on each group to direct attacks towards specific groups -->
+				<!-- Effects for attacks -->
+				<div class="effect {{effect.animation}}"
+				ng-repeat="effect in effects"
+				style="
+				left : {{effect.positionLeft}}px;
+				top : {{effect.positionTop}}px;
+				width : {{effect.width}}vw;
+				height : {{effect.height}}vw;
+				margin-left : {{effect.marginLeft}}vw;
+				margin-top : {{effect.marginTop}}vw;
+				background : url({{effect.image}});
+				-webkit-transition: left {{effect.duration}}s ease-in, opacity 0.2s ease-out, transform 0.2s ease-out;
+				-moz-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				-ms-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				-o-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				transform : scale(0);
+				opacity : 0;
+				z-index : 0;
+				position : fixed;
+				">
+				</div>
+				
+				<!-- Runes -->
 				<div class="rune"
 					ng-repeat="rune in runes"
 					ng-class="{'completed-rune' : rune.completed, 'incomplete-rune' : !rune.completed}"
 					style="
-						width : {{rune.width}}px;
-						height: {{rune.height}}px;
+						width : {{rune.width}}vw;
+						height: {{rune.height}}vw;
 						bottom: {{rune.positionBottom}}%;						
 						right: {{rune.positionRight}}%;
 						
-						margin-bottom : {{rune.height * -0.5}}px;
-						margin-right : {{rune.width * -0.5}}px;
+						margin-bottom : {{rune.height * -0.5}}vw;
+						margin-right : {{rune.width * -0.5}}vw;
 						
 						position : fixed;
 						background : white;
@@ -249,9 +515,9 @@
 					<div class="rune-symbol"
 						ng-repeat="symbol in rune.symbols"
 						ng-class="{'completed-symbol' : symbol.completed, 'incomplete-symbol' : !symbol.completed}"
-						ng-style="{'width' : symbol.width + 'px', 'height' : symbol.height + 'px',
+						ng-style="{'width' : symbol.width + 'vw', 'height' : symbol.height + 'vw',
 								'top' : symbol.positionTop + '%', 'left' : symbol.positionLeft + '%',
-								'margin-left' : symbol.width * -0.5 + 'px', 'margin-top' : symbol.height * -0.5 + 'px'}"
+								'margin-left' : symbol.width * -0.5 + 'vw', 'margin-top' : symbol.height * -0.5 + 'vw'}"
 						style="
 							position : absolute;
 							background : red;
@@ -269,13 +535,95 @@
 						top : 0;
 						left : 50%;
 						width : 100%;
-						height : 3%;
+						height : 2vw;
 						margin-left : -50%;
 					">
 					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{currentTime/battleDuration * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{currentTime/battleDuration * 100}}%">
 					</div>
 				</div>
-			
+				
+				<!--
+				<div class="group-list-container" id="group-list-container"
+				style="
+				width : 30vw;
+				height : 10vw;
+				bottom : 4.5vw;
+				left : 35vw;
+				position : fixed;
+				">
+					<div class="group-name-header"
+					style="
+						position:absolute;
+						width:100%;
+						height:3vw;
+						left:0px;
+						top:-3vw;
+						font-size:2vw;
+						color:white;
+						background-color:#888888;
+						padding-left:1.5vw;
+					">
+						Groups
+					</div>
+					<div class="group-container"
+					style="
+						width : 100%;
+						height : 100%;
+						position : absolute;
+						overflow-y : scroll;
+						padding-top : 1.5vw;
+					">
+						<div class="group-row-container"
+						ng-repeat="group in groups"
+						style="
+							width : calc(100% - 1.5vw);
+							height : 3vw;
+							font-size : 2vw;
+							margin-bottom : 1.5vw;
+							background-color:#888888;
+							position:relative;
+						">
+							<div class="group-icon smoothImage"
+							style="
+								width : 2vw;
+								height : 2vw;
+								margin : 0.5vw;
+								float : left;
+								background-color:red;
+								-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+								filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+							">
+							</div>
+							<div class="group-name"
+							style="
+								width: calc(100% - {{group.groupName == groupName ? 8.5 : 3.5}}vw);
+								height: 100%;
+								text-overflow: ellipsis;
+								overflow: hidden;
+								white-space: nowrap;
+							">
+								{{group.groupName}}
+							</div>
+							<div class="member-name"
+								ng-show="group.groupName == groupName"
+								style="
+									width: 5vw;
+									height: 3vw;
+									font-size: 2vw;
+									position: absolute;
+									text-align: center;
+									color: white;
+									background-color: green;
+									right:0;
+									top:0;
+								">
+									You
+							</div>
+						</div>
+					</div>
+				</div>
+				-->
+				
 				<!-- Splash screen -->
 				<div ng-show="showSplash == true" id="battle-splash-overlay" class="battle-splash-container"
 				style ="
@@ -290,64 +638,363 @@
 					<div class="group-ranking-container" id="group-ranking-container"
 					ng-repeat="group in rankedGroups"
 					style="
-					width : 50%;
-					height : 50%;
-					top : 25%;
-					left : 25%;
+					width : 70vw;
+					height : 40vw;
+					top : calc(50% - 20vw);
+					left : 15vw;
 					position : fixed;
 					background-color : white;
 					padding:0;
-					box-shadow:5px 5px #888888;
+					box-shadow:0.7vw 0.7vw #888888;
 					">
 						<div class="group-name-header"
 						style="
 							position:absolute;
 							width:100%;
-							padding-top:5%;
-							bottom:100%;
+							height:3vw;
 							left:0px;
-							font-size:100%;
+							font-size:2vw;
 							color:white;
 							background-color:#888888;
+							padding-left:1.5vw;
 						">
 							{{group.groupName}}
-						</div>
-						<div class="group-rank-header"
+						<div class="group-color-tag"
 						style="
-							position:absolute;
-							width:30%;
-							padding-top:5%;
-							bottom:100%;
-							left:70%;
-							font-size:100%;
-							background-color:yellow;
-							color:black;
-							z-index:1;
+							width: 10vw;
+							height: 3vw;
+							font-size: 2vw;
+							position: absolute;
+							text-align: center;
+							color: white;
+							background-color: red;
+							-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+							filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+							right:0;
+							top:0;
 						">
-							{{group.ranking}}
+						</div>
 						</div>
 						<div class="group-members-container"
 						style="
 							position : absolute;
-							width : 98%;
-							height : 98%;
-							top : 1%;
-							left : 1%;
-							overflow-y : scroll;
+							width : 100%;
+							height : 100%;
 						">
-							<div class="group-member-icon smoothImage"
-							ng-repeat="member in group.members"
+							<div class="mvp-icon-container"
+							ng-repeat="member in group.topMembers"
 							style="
-								float:left;
-								width : 15%;
-								padding-top:15%;
-								margin : 5%;
-								margin-bottom : 0;
-								background : url({{member.userAvatar}}) no-repeat;
-								background-size: cover;
-								border-radius : 50%;
-								border:none;
+								width : {{member.size}}vw;
+								height : {{member.size}}vw;
+								position: absolute;
+								bottom : 18vw;
+								margin-left: {{member.size * -0.5}}vw;
+								left : {{member.positionLeft}}%;
 							">
+								<div class="mvp-icon smoothImage"
+								style="
+									width : 24vw;
+									height : 24vw;
+									background : url({{member.userAvatar}}) no-repeat;
+									background-size: cover;
+									position: absolute;
+									margin-left : -12vw;
+									left : {{member.size * 0.5}}vw;
+									bottom : 0;
+								">
+								</div>
+								<div class="mvp-label-container"
+								style="
+									width : 100%;
+									height : 100%;
+									position : absolute;
+									bottom : 0;
+								">
+									<div class="mvp-label-details-container"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 3vw;
+										text-align : center;
+									">
+										{{member.answersSubmitted}} / {{group.totalQuestions}}
+									</div>
+									
+									<div class="mvp-label-details-container"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 1.5vw;
+										text-align : center;
+									">
+										Questions answered
+									</div>
+									
+									<div class="mvp-label-header"
+									style="
+										position:absolute;
+										width:100%;
+										height:3vw;
+										left:0px;
+										bottom:0;
+										font-size:2vw;
+										color:white;
+										background-color:#888888;
+									">
+										<div class="mvp-icon smoothImage"
+										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
+										style="
+											width : 2vw;
+											height : 2vw;
+											margin : 0.5vw;
+											float : left;
+										">
+										</div>
+										<div class="mvp-name"
+										style="
+											width: calc(100% - 3.5vw);
+											height: 100%;
+											text-overflow: ellipsis;
+											overflow: hidden;
+											white-space: nowrap;
+										">
+											{{member.username}}
+										</div>
+										<div class="member-name"
+										ng-show="member.userId == userId"
+										style="
+											width: 5vw;
+											height: 3vw;
+											font-size: 2vw;
+											position: absolute;
+											text-align: center;
+											color: white;
+											background-color: green;
+											right:0;
+											top:-3vw;
+										">
+											You
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="rewards-panel-container"
+							style="
+								width : 25vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								left : 1.5vw;
+								background-color:red;
+							">
+								<div class="rewards-panel-header"
+								style="
+									position:absolute;
+									width:100%;
+									height:3vw;
+									left:0px;
+									font-size:2vw;
+									color:white;
+									background-color:#888888;
+									padding-left:1.5vw;
+									z-index : 1;
+								">
+									Rewards
+								</div>
+								<div class="rewards-container"
+								style="
+									position : absolute;
+									width : 100%;
+									height : 100%;
+									overflow : hidden;
+								">
+									<div class="mvp-label-details-container"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 2vw;
+										margin-left : 1.5vw;
+										margin-top : 3vw;
+									">
+										Overdrive Time: +{{group.overdriveDuration/1000.0}}s
+									</div>
+									<div class="mvp-label-details-container"
+									ng-if="groupName == group.groupName"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 2vw;
+										margin-left : 1.5vw;
+									">
+										Bonus Loot: +{{bonusLootAmount}}
+									</div>
+								</div>
+							</div>
+							
+							<div class="tier-panel-container"
+							style="
+								width : 14vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								left : 28vw;
+								background-color:red;
+								box-shadow:0.7vw 0.7vw #888888;
+							">
+								<div class="tier-container"
+								style="
+									position : absolute;
+									width : 100%;
+									height : 100%;
+									font-size : 4vw;
+									text-align : center;
+								">
+									{{group.ranking}}
+								</div>
+							</div>
+
+							<div class="members-container"
+							style="
+								width : 25vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								right : 1.5vw;
+								overflow-y : scroll;
+							">
+								<div class="member-label-container"
+								ng-repeat="member in group.allMembers"
+								style="
+									width : calc(100% - 2.5vw);
+									height : 3vw;
+									font-size : 2vw;
+									margin-bottom : 1.5vw;
+									margin-left : 1.5vw;
+									background-color:#888888;
+									position:relative;
+								">
+									<div class="member-icon smoothImage"
+									ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
+									style="
+										width : 2vw;
+										height : 2vw;
+										margin : 0.5vw;
+										float : left;
+									">
+									</div>
+									<div class="member-name"
+									style="
+										width: calc(100% - {{member.userId == userId ? 8.5 : 3.5}}vw);
+										height: 100%;
+										text-overflow: ellipsis;
+										overflow: hidden;
+										white-space: nowrap;
+									">
+										{{member.username}}
+									</div>
+									<div class="member-name"
+										ng-show="member.userId == userId"
+										style="
+											width: 5vw;
+											height: 3vw;
+											font-size: 2vw;
+											position: absolute;
+											text-align: center;
+											color: white;
+											background-color: green;
+											right:0;
+											top:0;
+										">
+											You
+									</div>
+								</div>
+							</div>
+							<!--
+							<div class="members-panel-container"
+							style="
+								width : 25vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								right : 1.5vw;
+								background-color:red;
+							">
+								<div class="members-panel-header"
+								style="
+									position:absolute;
+									width:100%;
+									height:3vw;
+									left:0px;
+									font-size:2vw;
+									color:white;
+									background-color:#888888;
+									padding-left:1.5vw;
+								">
+									Members
+								</div>
+								<div class="members-container"
+								style="
+									position : absolute;
+									width : 100%;
+									height : 100%;
+									overflow-y : scroll;
+								">
+									<div class="member-label-container"
+									style="
+										width : calc(100% - 3vw);
+										height : 3vw;
+										font-size : 2vw;
+										margin-left : 1.5vw;
+									">
+									</div>
+									
+									<div class="member-label-container"
+									ng-repeat="member in group.allMembers"
+									style="
+										width : calc(100% - 3vw);
+										height : 3vw;
+										font-size : 2vw;
+										margin-top : 1.5vw;
+										margin-left : 1.5vw;
+										background-color:#888888;
+									">
+										<div class="member-icon smoothImage"
+										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat',
+													'background-size' : 'cover'}"
+										style="
+											width : 2vw;
+											height : 2vw;
+											margin : 0.5vw;
+											float : left;
+										">
+										</div>
+										<div class="member-name"
+										style="
+											width: calc(100% - 3.5vw);
+											height: 100%;
+											text-overflow: ellipsis;
+											overflow: hidden;
+											white-space: nowrap;
+										">
+											{{member.username}}
+										</div>
+										
+									</div>
+								</div>
+							</div>
+							-->
+						</div>
+						<div class="group-ranking-timer-container"
+							style="
+							position: absolute;
+							top: -1.5vw;
+							left: 50%;
+							width: 100%;
+							height: 1.5vw;
+							margin-left: -50%;
+							">
+							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{group.currentTime/group.totalDisplayTime * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{group.currentTime/group.totalDisplayTime * 100}}%">
 							</div>
 						</div>
 					</div>
@@ -364,7 +1011,224 @@
 				background-color:rgba(0,0,0,.5);
 				"
 				>
-					<div class="loot-container container" id="loot-container"
+					<div class="loot-list-container" id="loot-list-container"
+					style="
+					width: 35vw;
+					height: 30vw;
+					top: calc(50% - 15vw);
+					left: 12.5vw;
+					position: fixed;
+					padding-top : 3vw;
+					background-color: white;
+					">
+						<div class="loot-list-header"
+						style="
+							position:absolute;
+							width:100%;
+							height:3vw;
+							left:0px;
+							top:0;
+							font-size:2vw;
+							color:white;
+							background-color:#888888;
+							padding-left:1.5vw;
+							z-index : 1;
+						">
+							Loot
+						</div>
+						<div class="loot-list"
+						style="
+							width : 100%;
+							height : calc(100% - 6vw);
+							position : absolute;
+							padding-top : 1.5vw;
+							overflow-y : scroll;
+						">
+							<div class="loot-item-container"
+							ng-repeat="lootItem in loot"
+							ng-click="selectLoot ($index);"
+							ng-mouseover="selectLoot ($index);"
+							style="
+								width : calc(100% - 2.5vw);
+								height : 3vw;
+								font-size : 2vw;
+								margin-bottom : 1.5vw;
+								margin-left : 1.5vw;
+								padding-left: 1.5vw;
+								background-color:#888888;
+								position:relative;
+								cursor:pointer;
+							">
+								<div class="loot-item-pointer smoothImage"
+									ng-show="selectedLootIndex == $index"
+									style="
+										width : 2vw;
+										height : 2vw;
+										position : absolute;
+										right : 0.5vw;;
+										top : 0.5vw;
+										background-color : red;
+									">
+								</div>
+								<div class="loot-item-name"
+								style="
+									width: 100%;
+									height: 100%;
+									text-overflow: ellipsis;
+									overflow: hidden;
+									white-space: nowrap;
+								">
+									{{lootItem.name}}
+								</div>
+							</div>
+						</div>
+						<div class="loot-close-container"
+						ng-click="claimLoot()"
+						style="
+						position: absolute;
+						width: 10vw;
+						height: 3vw;
+						font-size: 2vw;
+						bottom: 0;
+						right: 0;
+						background: red;
+						cursor: pointer;
+						">
+							<div class="loot-close-text"
+							style="
+								font-size:100%;
+								color:white;
+								position:relative;
+								float:left;
+								top:50%;
+								left:50%;
+								transform:translate(-50%,-50%);
+							">
+								Claim
+							</div>
+						</div>
+					</div>
+					
+					<div class="loot-info-container" id="loot-info-container"
+					style="
+					width: 35vw;
+					height: 30vw;
+					top: calc(50% - 15vw);
+					left: 52.5vw;
+					position: fixed;
+					background-color: white;
+					">
+						<div ng-show="loot.length == 0 || selectedLootIndex >= loot.length || selectedLootIndex < 0">
+							<div class="loot-info-header"
+							style="
+								position:absolute;
+								width:100%;
+								height:10vw;
+								top:50%;
+								left:0;
+								font-size:5vw;
+								color:red;
+								margin-top:-5vw;
+								text-align:center;
+								z-index : 1;
+							">
+								EMPTY
+							</div>
+						</div>
+						<div ng-show="loot.length > 0 && selectedLootIndex >= 0 && selectedLootIndex < loot.length">
+							<div class="loot-info-header"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								z-index : 1;
+							">
+								{{loot[selectedLootIndex].name}}
+							</div>
+							<div class="loot-info-image-container"
+							style="
+								background-color: yellow;
+								width: 32vw;
+								height: 10vw;
+								top: 4.5vw;
+								left: 1.5vw;
+								position: absolute;
+							">
+								<div class="loot-info-icon smoothImage"
+								style="
+									width : 10vw;
+									height : 10vw;
+									margin-left : 11vw;
+									background : url({{selectedLootItem.icon}}) no-repeat;
+									background-size: cover;
+								">
+								</div>
+							</div>
+							<div class="loot-info-details-container"
+							style="
+								position: absolute;
+								width: calc(100% - 3vw);
+								height: 12.5vw;
+								overflow: hidden;
+								top: 16vw;
+								left: 1.5vw;
+							">
+								<div class="loot-info-details"
+								style="
+									width: 100%;
+									height: 3vw;
+									font-size: 2vw;
+								">
+									<div class="loot-info-details-label"
+									style="
+									float : left;
+									">
+										Type:
+									</div>
+									<div class="loot-info-details-content"
+									style="
+									float : right;
+									">
+										{{loot[selectedLootIndex].type}}
+									</div>
+								</div>
+								<div class="loot-info-details"
+								style="
+									width: 100%;
+									height: 3vw;
+									font-size: 2vw;
+								">
+									<div class="loot-info-details-label"
+									style="
+									float : left;
+									">
+										Value:
+									</div>
+									<div class="loot-info-details-content"
+									style="
+									float : right;
+									">
+										+{{loot[selectedLootIndex].value}} exp
+									</div>
+								</div>
+								<div class="loot-info-details"
+								style="
+									width: 100%;
+									height: 6vw;
+									font-size: 1.5vw;
+								">
+									{{loot[selectedLootIndex].flavour}}
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- <div class="loot-container container" id="loot-container"
 					style="
 						width : 50%;
 						height : 50%;
@@ -431,7 +1295,7 @@
 								CLAIM
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -461,39 +1325,64 @@
 				>
 				</div>
 				
-				<!-- Effects for attacks -->
-				<div class="effect"
-					ng-repeat="effect in effects"
-					ng-style="{'left' : effect.positionLeft + 'px', 'top' : effect.positionTop + 'px',
-								'width' : effect.width + 'px', 'height' : effect.height + 'px',
-								'margin-left' : effect.marginLeft + 'px', 'margin-top' : effect.marginTop + 'px'}"
-					style="
-						position : fixed;
-						background : url({{effect.image}});
-					">
-				</div>
-				
 				<!-- Avatars of students -->
 				<div class="student-group"
-					ng-repeat="group in groups"
-					id="group-{{group.groupName}}"
-					ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}"
-					style="
-						position : fixed;
-					">
+				ng-repeat="group in groups"
+				id="group-{{group.groupName}}"
+				ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}"
+				style="
+					position : fixed;
+				">
 					<div class="student-group-avatar"
-						id="student-{{student.userId}}"
-						ng-repeat="student in group.members"
-						ng-style="{'width' : student.avatarWidth + 'vw', 'height' : student.avatarHeight + 'vw',
-								'bottom' : student.displacementBottom + 'vw', 'right' : student.displacementRight + 'vw',
-								'margin-right' : student.avatarWidth * -0.5 + 'vw', 'margin-bottom' : student.avatarHeight * -0.5 + 'vw'}"
+					id="student-{{student.userId}}"
+					ng-repeat="student in group.members"
+					style="
+						width: {{student.avatarWidth}}vw;
+						height: {{student.avatarHeight}}vw;
+						bottom: {{student.displacementBottom}}vw;
+						right: {{student.displacementRight * $index}}vw;
+						margin-right: {{student.avatarWidth * -0.5}}vw;
+						margin-bottom: {{student.avatarHeight * -0.5}}vw;
+						position : absolute;
+						z-index : {{100 - $index}};
+						background : url({{student.userAvatar}}) no-repeat;
+						background-size: cover;
+						image-rendering:pixelated;
+					">
+					</div>
+					<div class="group-row-container"
+					ng-click="selectGroup ($index)"
+					style="
+					width: {{tutorAvatar.avatarWidth}}vw;
+					height: 3vw;
+					font-size: 2vw;
+					background-color: #888888;
+					position: absolute;
+					right: -7vw;
+					top: 6vw;
+					z-index : 101;
+					">
+						<div class="group-icon smoothImage"
 						style="
-							position : absolute;
-							z-index : 100;
-							background : url({{student.userAvatar}}) no-repeat;
-							background-size: cover;
-							image-rendering:pixelated;
+							width : 2vw;
+							height : 2vw;
+							margin : 0.5vw;
+							float : left;
+							background-color:red;
+							-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+							filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
 						">
+						</div>
+						<div class="group-name"
+						style="
+							width: calc(100% - 3.5vw);
+							height: 100%;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;
+						">
+							{{group.groupName}}
+						</div>
 					</div>
 				</div>
 				
@@ -503,6 +1392,7 @@
 					style="
 						bottom : 50%;
 						position : fixed;
+						left : 3vw;
 					">
 					<div class="tutor-avatar"
 						ng-style="{'width' : tutorAvatar.avatarWidth + 'vw', 'height' : tutorAvatar.avatarHeight + 'vw',
@@ -514,22 +1404,95 @@
 						">
 					</div>
 					
-					<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
+					<div class="tutor-battle-panel-container"
+					style="
+						width : {{tutorAvatar.avatarWidth}}vw;
+						height : 7vw;
+						position : absolute;
+						bottom : {{tutorAvatar.avatarHeight * -0.5}}vw;
+						left : 0;
+						z-index : 100;
+						background-color:red;
+					">
+						<div class="tutor-battle-panel-header"
+						style="
+							position:absolute;
+							width:100%;
+							height:3vw;
+							left:0px;
+							font-size:2vw;
+							color:white;
+							background-color:#888888;
+							padding-left:1.5vw;
+							z-index : 1;
+						">
+							{{tutorAvatar.tutorName}}
+						</div>
+						<div class="tutor-battle-container"
+						style="
+							position : absolute;
+							width : 100%;
+							height : 100%;
+							overflow : hidden;
+						">
+							<div class="tutor-label-details-container"
+							style="
+								width : 100%;
+								height : 2vw;
+								font-size : 1.5vw;
+								margin-left : 1.5vw;
+								margin-top : 3vw;
+							">
+								Bonus Loot: +{{totalDeath}}
+							</div>
+						</div>
+						<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
 						style= "
 							position: absolute;
 							z-index : 100;
-							top : {{-tutorAvatar.avatarHeight * 0.4}}px;
-							left : {{tutorAvatar.avatarWidth}}px;
-							width : 300px;
+							width : 100%;
+							height : 2vw;
+							bottom: 0;
 						">
-						Health: {{health}} / {{maxHealth}}
-						<br>
-						<div class="progress">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
-							{{health/maxHealth * 100}}%
 							</div>
 						</div>
+						<div class="tutor-label-details-container"
+						style="
+						width: 100%;
+						height: 2vw;
+						font-size: 1.5vw;
+						bottom: 0;
+						position: absolute;
+						z-index: 101;
+						text-align: center;
+						">
+								Health: {{health}} / {{maxHealth}}
+						</div>
 					</div>
+				</div>
+				
+				<!-- Effects for attacks -->
+				<div class="effect {{effect.animation}}"
+				ng-repeat="effect in effects"
+				style="
+				left : {{effect.positionLeft}}px;
+				top : {{effect.positionTop}}px;
+				width : {{effect.width}}vw;
+				height : {{effect.height}}vw;
+				margin-left : {{effect.marginLeft}}vw;
+				margin-top : {{effect.marginTop}}vw;
+				background : url({{effect.image}});
+				-webkit-transition: left {{effect.duration}}s ease-in, opacity 0.2s ease-out, transform 0.2s ease-out;
+				-moz-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				-ms-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				-o-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
+				transform : scale(0);
+				opacity : 0;
+				z-index : 0;
+				position : fixed;
+				">
 				</div>
 				
 				<!-- Effects for attack damage
@@ -544,18 +1507,32 @@
 					">
 				</div> -->
 				
-				<!-- Runes displayed on each group to direct attacks towards specific groups -->
+				<div class="select-target-prompt-container font"
+				ng-show="selectedGroupIndex == -1"
+				style="
+				width:10vw;
+				height:5vw;
+				position:fixed;
+				left:calc(50% - 5vw);
+				top:calc(50% - 2.5vw);
+				font-size:3vw;
+				color:red;
+				">
+					Select a group from the left to target it!
+				</div>
+				
+				<!-- Runes -->
 				<div class="rune"
 					ng-repeat="rune in runes"
 					ng-class="{'completed-rune' : rune.completed, 'incomplete-rune' : !rune.completed}"
 					style="
-						width : {{rune.width}}px;
-						height: {{rune.height}}px;
+						width : {{rune.width}}vw;
+						height: {{rune.height}}vw;
 						bottom: {{rune.positionBottom}}%;						
 						right: {{rune.positionRight}}%;
 						
-						margin-bottom : {{rune.height * -0.5}}px;
-						margin-right : {{rune.width * -0.5}}px;
+						margin-bottom : {{rune.height * -0.5}}vw;
+						margin-right : {{rune.width * -0.5}}vw;
 						
 						position : fixed;
 						background : white;
@@ -563,9 +1540,9 @@
 					<div class="rune-symbol"
 						ng-repeat="symbol in rune.symbols"
 						ng-class="{'completed-symbol' : symbol.completed, 'incomplete-symbol' : !symbol.completed}"
-						ng-style="{'width' : symbol.width + 'px', 'height' : symbol.height + 'px',
+						ng-style="{'width' : symbol.width + 'vw', 'height' : symbol.height + 'vw',
 								'top' : symbol.positionTop + '%', 'left' : symbol.positionLeft + '%',
-								'margin-left' : symbol.width * -0.5 + 'px', 'margin-top' : symbol.height * -0.5 + 'px'}"
+								'margin-left' : symbol.width * -0.5 + 'vw', 'margin-top' : symbol.height * -0.5 + 'vw'}"
 						style="
 							position : absolute;
 							background : red;
@@ -576,13 +1553,14 @@
 					</div>
 				</div>
 				
+				<!-- Battle timer -->
 				<div class="timer-container"
 					style="
 						position : fixed;
 						top : 0;
 						left : 50%;
 						width : 100%;
-						height : 3%;
+						height : 2vw;
 						margin-left : -50%;
 					">
 					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{currentTime/battleDuration * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{currentTime/battleDuration * 100}}%">
@@ -600,67 +1578,263 @@
 				background-color:rgba(255,0,0,.5);
 				"
 				>
+					<!-- Container for the group ranking display -->
 					<div class="group-ranking-container" id="group-ranking-container"
 					ng-repeat="group in rankedGroups"
 					style="
-					width : 50%;
-					height : 50%;
-					top : 25%;
-					left : 25%;
+					width : 70vw;
+					height : 40vw;
+					top : calc(50% - 20vw);
+					left : 15vw;
 					position : fixed;
 					background-color : white;
 					padding:0;
-					box-shadow:5px 5px #888888;
+					box-shadow:0.7vw 0.7vw #888888;
 					">
+						<!-- Header for the display -->
 						<div class="group-name-header"
 						style="
 							position:absolute;
 							width:100%;
-							padding-top:5%;
-							bottom:100%;
+							height:3vw;
 							left:0px;
-							font-size:100%;
+							font-size:2vw;
 							color:white;
 							background-color:#888888;
+							padding-left:1.5vw;
 						">
 							{{group.groupName}}
+							
+							<div class="group-color-tag"
+							style="
+								width: 10vw;
+								height: 3vw;
+								font-size: 2vw;
+								position: absolute;
+								text-align: center;
+								color: white;
+								background-color: red;
+								-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+								filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+								right:0;
+								top:0;
+							">
+							</div>
 						</div>
-						<div class="group-rank-header"
-						style="
-							position:absolute;
-							width:30%;
-							padding-top:5%;
-							bottom:100%;
-							left:70%;
-							font-size:100%;
-							background-color:yellow;
-							color:black;
-							z-index:1;
-						">
-							{{group.ranking}}
-						</div>
+						
+						<!-- Container for the main content of the group ranking display -->
 						<div class="group-members-container"
 						style="
 							position : absolute;
-							width : 98%;
-							height : 98%;
-							top : 1%;
-							left : 1%;
-							overflow-y : scroll;
+							width : 100%;
+							height : 100%;
 						">
-							<div class="group-member-icon smoothImage"
-							ng-repeat="member in group.members"
+							<!-- MVPs of the Q&A round -->
+							<div class="mvp-icon-container"
+							ng-repeat="member in group.topMembers"
 							style="
-								float:left;
-								width : 15%;
-								padding-top:15%;
-								margin : 5%;
-								margin-bottom : 0;
-								background : url({{member.userAvatar}}) no-repeat;
-								background-size: cover;
-								border-radius : 50%;
-								border:none;
+								width : {{member.size}}vw;
+								height : {{member.size}}vw;
+								position: absolute;
+								bottom : 18vw;
+								margin-left: {{member.size * -0.5}}vw;
+								left : {{member.positionLeft}}%;
 							">
+								<div class="mvp-icon smoothImage"
+								style="
+									width : 24vw;
+									height : 24vw;
+									background : url({{member.userAvatar}}) no-repeat;
+									background-size: cover;
+									position: absolute;
+									margin-left : -12vw;
+									left : {{member.size * 0.5}}vw;
+									bottom : 0;
+								">
+								</div>
+								<div class="mvp-label-container"
+								style="
+									width : 100%;
+									height : 100%;
+									position : absolute;
+									bottom : 0;
+								">
+									<div class="mvp-label-details-container"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 3vw;
+										text-align : center;
+									">
+										{{member.answersSubmitted}} / {{group.totalQuestions}}
+									</div>
+									
+									<div class="mvp-label-details-container"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 1.5vw;
+										text-align : center;
+									">
+										Questions answered
+									</div>
+									
+									<div class="mvp-label-header"
+									style="
+										position:absolute;
+										width:100%;
+										height:3vw;
+										left:0px;
+										bottom:0;
+										font-size:2vw;
+										color:white;
+										background-color:#888888;
+									">
+										<div class="mvp-icon smoothImage"
+										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
+										style="
+											width : 2vw;
+											height : 2vw;
+											margin : 0.5vw;
+											float : left;
+										">
+										</div>
+										<div class="mvp-name"
+										style="
+											width: calc(100% - 3.5vw);
+											height: 100%;
+											text-overflow: ellipsis;
+											overflow: hidden;
+											white-space: nowrap;
+										">
+											{{member.username}}
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Rewards for each group's performance -->
+							<div class="rewards-panel-container"
+							style="
+								width : 25vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								left : 1.5vw;
+								background-color:red;
+							">
+								<div class="rewards-panel-header"
+								style="
+									position:absolute;
+									width:100%;
+									height:3vw;
+									left:0px;
+									font-size:2vw;
+									color:white;
+									background-color:#888888;
+									padding-left:1.5vw;
+									z-index : 1;
+								">
+									Rewards
+								</div>
+								<div class="rewards-container"
+								style="
+									position : absolute;
+									width : 100%;
+									height : 100%;
+									overflow : hidden;
+								">
+									<div class="mvp-label-details-container"
+									style="
+										width : 100%;
+										height : 3vw;
+										font-size : 2vw;
+										margin-left : 1.5vw;
+										margin-top : 3vw;
+									">
+										Overdrive Time: +{{group.overdriveDuration/1000.0}}s
+									</div>
+								</div>
+							</div>
+							
+							<!-- Reward tier for the group -->
+							<div class="tier-panel-container"
+							style="
+								width : 14vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								left : 28vw;
+								background-color:red;
+								box-shadow:0.7vw 0.7vw #888888;
+							">
+								<div class="tier-container"
+								style="
+									position : absolute;
+									width : 100%;
+									height : 100%;
+									font-size : 4vw;
+									text-align : center;
+								">
+									{{group.ranking}}
+								</div>
+							</div>
+
+							<!-- List of all members in the group -->
+							<div class="members-container"
+							style="
+								width : 25vw;
+								height : 15vw;
+								position : absolute;
+								bottom : 1.5vw;
+								right : 1.5vw;
+								overflow-y : scroll;
+							">
+								<div class="member-label-container"
+								ng-repeat="member in group.allMembers"
+								style="
+									width : calc(100% - 2.5vw);
+									height : 3vw;
+									font-size : 2vw;
+									margin-bottom : 1.5vw;
+									margin-left : 1.5vw;
+									background-color:#888888;
+									position:relative;
+								">
+									<div class="member-icon smoothImage"
+									ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
+									style="
+										width : 2vw;
+										height : 2vw;
+										margin : 0.5vw;
+										float : left;
+									">
+									</div>
+									<div class="member-name"
+									style="
+										width: calc(100% - 3.5vw);
+										height: 100%;
+										text-overflow: ellipsis;
+										overflow: hidden;
+										white-space: nowrap;
+									">
+										{{member.username}}
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Timer for the display of each group's rank -->
+						<div class="group-ranking-timer-container"
+							style="
+							position: absolute;
+							top: -1.5vw;
+							left: 50%;
+							width: 100%;
+							height: 1.5vw;
+							margin-left: -50%;
+							">
+							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{group.currentTime/group.totalDisplayTime * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{group.currentTime/group.totalDisplayTime * 100}}%">
 							</div>
 						</div>
 					</div>
@@ -686,93 +1860,270 @@
 			<div class="row" id="battle-container">
 				<div ng-controller="tutorCtrl">
 					
-					<div class="col-md-3 col-md-offset-1 col-sm-3 col-xs-5 affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'">
-						<div class="text-center row smoothImage border-normal">
-							<div class="font whiteFont level-container">
-								<div class="row"> <!-- Tutor Details -->
-	                    			<div class="col-md-4 col-sm-6 col-xs-6">
-										<img ng-src="{{userInfo.imgSrc}}" class="img-responsive smoothImage fullImage"/>
-									</div>
-
-									<div class="col-md-8 col-sm-6 col-xs-6">
-				                   		<h2 class="brownFont centerText boldText"><%= username %></h2>
-				                    </div>
-				                </div>
-
-								<div class="tutorial-level-bar centerText lobbyGeneralFontSize">
-			                        Health: {{health}} / {{maxHealth}}
-			                        <br>
-			                        <div class="progress">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
-										{{health/maxHealth * 100}}%
-										</div>
-			                        </div>
-			                    </div>
-								
-								<div id="battle-mode-options-container" class="centerText lobbyGeneralFontSize">
-			                        <div class="battle-mode-toggle-div">
-										<button class="btn" ng-click="startBattle()">Start Battle</button>
-			                        </div>
-			                    </div>
-			                </div>
+					<div class="affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'"
+					style="
+						left:3.5vw;
+						top:6.5vw;
+						width:25vw;
+						height:auto;
+					">
+						<div class="font whiteFont text-center smoothImage level-container"
+						style="
+						background-color:white;
+						position:relative;
+						padding-top:4.5vw;
+						padding-bottom:1.5vw;
+						box-shadow:0.7vw 0.7vw #999999;
+						">
+							<div class="tutor-name-header"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								<%= username %>
+							</div>
+							
+							<div class="tutor-avatar-container"
+							style="
+								background-color: yellow;
+								width: calc(100%-3vw);
+								height: 10vw;
+								margin-left:1.5vw;
+								margin-right:1.5vw;
+							">
+								<div class="loot-info-icon smoothImage"
+								style="
+									width : 10vw;
+									height : 10vw;
+									margin-left : 6vw;
+									background : url({{userInfo.imgSrc}}) no-repeat;
+									background-size: cover;
+								">
+								</div>
+							</div>
+							
+							<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
+							style= "
+								width: calc(100%-3vw);
+								margin-left:1.5vw;
+								margin-right:1.5vw;
+								height : 2vw;
+								position:relative;
+							">
+								<div class="tutor-label-details-container"
+								style="
+								position:absolute;
+								left:50%;
+								margin-left:-25%;
+								font-size:1.5vw;
+								">
+										Health: {{health}} / {{maxHealth}}
+								</div>
+								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
+								</div>
+							</div>
 						</div>
-						<div class="row smoothImage border-normal">
+						<div class="smoothImage"
+						style="
+						position:relative;
+						background-color:white;
+						margin-top:1.5vw;
+						padding-top:3.5vw;
+						">
+							<div class="active-users-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Active Users
+							</div>
+							
 							<div ng-controller="activeUsersCtrl">
-								<div class="col-md-12 col-sm-12 col-xs-12" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
-									<div class="text-center row">
-										<h2 class="font whiteFont centerText boldText lobbyBottomFiller"> Active Users </h2>
-									</div>
-									
+								<div class="" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
 									<!-- List of Groups -->
-									<div class="row">
-										<div class="groups-list">
-			                                <div class="container-fluid">
-			                                    <div class="row outer-container font">
-			                                        <button class="btn select-group" ng-class="{'btn-success' : selectedGroup == $index, 'btn-info' : selectedGroup != $index}" ng-repeat="group in socket.getAllSocketGroups()" ng-click="setSelectedGroup($index)">{{group}}</button>
-			                                    </div>
-			                                </div>
+									<div class="groups-list"
+									style="
+									height: 4vw;
+									width: 100%;
+									overflow: hidden;
+									">
+										<div class=""
+										style="
+										height: 3vw;
+										width: 1000vw;
+										">
+											<div class="select-group"
+											ng-class="{'selected' : selectedGroup == ($index + groupRangeIndex)}"
+											ng-repeat="group in socket.getAllSocketGroups() | limitTo : 4 : groupRangeIndex"
+											ng-click="setSelectedGroup($index + groupRangeIndex)"
+											style="
+												width:5.6vw;
+												margin-left:0.5vw;
+												font-size:1vw;
+												position:relative;
+												display:inline-block;
+											">
+												<button class="btn select-group-button"
+												style="
+												width:5.6vw;
+												height:3vw;
+												font-size:1vw;
+												text-overflow: ellipsis;
+												overflow: hidden;
+												white-space: nowrap;
+												">
+													{{group}}
+												</button>
+											</div>
+										</div>
+									</div>
+									<div class=""
+									style="
+									height: 2vw;
+									width: calc(100% - 1vw);
+									background-color:#888888;
+									margin-left:0.5vw;
+									position:relative;
+									">
+										<div class="font whiteFont"
+										style="
+										font-size:1.5vw;
+										text-align:center;
+										">
+											{{socket.getAllSocketGroups()[selectedGroup]}}
+										</div>
+										<div class="users-list-scroll-left"
+										ng-click="scrollGroupList(-1)"
+										style="
+										height:1vw;
+										width:1vw;
+										position:absolute;
+										background-color:red;
+										left:0.5vw;
+										top:0.5vw;
+										">
+										</div>
+										<div class="users-list-scroll-right"
+										ng-click="scrollGroupList(1)"
+										style="
+										height:1vw;
+										width:1vw;
+										position:absolute;
+										background-color:red;
+										right:0.5vw;
+										top:0.5vw;
+										">
 										</div>
 									</div>
 									
 									<!-- List and Toggle Tutees in Groups -->
-									<div class="row outer-container" ng-if="socket.getUserType() =='tutor'">
-										<div class="users-active-list">
-											<div class="users-active">
-												<div class="user-active border-gold-trimmed maximumWidth" ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]">
-				                                    <div class="container-fluid">
-				                                        <div class="row-fluid font lobbyGeneralFontSize" ng-click="selectUser(user.socketId);" ng-style="{'color' : selectedUsers.indexOf (user.socketId) < 0 ? 'white' : 'yellow'}">
-				                                            {{user.username}}
-				                                        </div>
-				                                    </div>
-				                                </div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="row outer-container" ng-if="socket.getUserType() == 'student'">
-										<div class="users-active-list">
-											<div class="users-active">
-												<div class="user-active border-gold-trimmed maximumWidth" ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]">
-				                                    <div class="container-fluid">
-				                                        <div class="row-fluid font lobbyGeneralFontSize" ng-click="selectUser(user.socketId);" ng-style="{'color' : selectedUsers.indexOf (user.socketId) < 0 ? 'white' : 'yellow'}">
-				                                            {{user.username}}
-				                                        </div>
-				                                    </div>
-				                                </div>
+									<div class="">
+										<div class="users-active-list"
+										style="
+										max-height: 12vw;
+										min-height: 12vw;
+										height: 12vw;
+										overflow-y: scroll;
+										padding-top: 0.5vw;
+										margin-left:0.5vw;
+										margin-right:0.5vw;
+										">
+											<div class="user-active"
+											ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]"
+											ng-class="{'active' : selectedUsers.indexOf (user.socketId) >= 0 }"
+											style="
+											margin-right: 1.5vw;
+											margin-bottom : 1vw;
+											padding-left: 1.5vw;
+											position:relative;
+											cursor:pointer;
+											">
+												<div class="user-active-text font"
+												ng-click="selectUser(user.socketId);"
+												style="
+												font-size:1.5vw;
+												">
+													{{user.username}}
+												</div>
+												<div class="font users-active-tag"
+												ng-show="user.userId == userId"
+												style="
+												position:absolute;
+												top:0px;
+												right:0px;
+												padding-left:0.5vw;
+												width:3vw;
+												background-color:green;
+												font-size:1.5vw;
+												">
+													You
+												</div>
 											</div>
 										</div>
 									</div>
 									
 									<!-- Tutors will be able to Create and Delete Groups -->
-									<div class="row-fluid" ng-if="socket.getUserType() == 'tutor'">
-										<div class="row">
-			                            	<input class="input-group-name font maximumWidth lobbyGeneralFontSize" ng-model="$parent.$parent.newGroupName" placeholder="Type Your Group Name Here!"/>
+									<div class="" ng-if="socket.getUserType() == 'tutor'"
+									style="
+									padding-bottom:0.5vw;
+									">
+										<div class="input-group-name-container"
+										style="
+										margin:0.5vw;
+										margin-bottom:0;
+										height:3vw;
+										">
+			                            	<input class="input-group-name font maximumWidth"
+											style="
+											font-size:1.5vw;
+											"
+											ng-model="$parent.$parent.newGroupName" placeholder="Enter a group name here."/>
 			                        	</div>
 
-			                        	<div class="row">
-			                            	<button class="btn create-group font" ng-click="createGroup()" ng-disabled="!isValidGroupParams()">Create Group!</button>
+			                        	<div class="group-buttons-container"
+										style="
+										margin-left:0.5vw;
+										margin-right:0.5vw;
+										margin-top:0;
+										height:3vw;
+										">
+											<div>
+												<button class="btn font" ng-click="createGroup()" ng-disabled="!isValidGroupParams()"
+												style="
+													float:right;
+													height:3vw;
+													font-size:1.5vw;
+													padding:0.5vw;
+												">
+													CREATE
+												</button>
+											</div>
 			                            	<div ng-if="selectedGroup > 0">
-			                            		<button class="btn delete-group font" ng-click="deleteGroup()">Delete Group</button>
+			                            		<button class="btn font" ng-click="deleteGroup()"
+												style="
+													float:left;
+													height:3vw;
+													font-size:1.5vw;
+													padding:0.5vw;
+												">
+													DELETE
+												</button>
 			                            	</div>
 			                        	</div>
 			                        </div>
@@ -781,314 +2132,1329 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-7 col-md-offset-4 col-sm-9 col-sm-offset-3 col-xs-7 col-xs-offset-5 smoothImage border-normal" id="question-list-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'">
-						<div class="text-center row"> <!-- Question Composer -->
-							<h2 class="font whiteFont centerText boldText lobbyBottomFiller">Question Composer</h2>
-						</div>
-
-						<div class="row">
-							<div class="question-area">
-								<textarea class="question-description-input font maximumWidth lobbyGeneralFontSize" ng-model="composerQuestion.description" placeholder="Type Your Question Here!" type="text"  ng-trim="false"></textarea>
+					
+					<div id="tutor-question-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'"
+					style="
+					margin-left: 30vw;
+					top: 6.5vw;
+					width: 65vw;
+					height: auto;
+					">
+						<!-- Question composer -->
+						<div class="question-composer-container"
+						style="
+						position:relative;
+						background-color:white;
+						padding-top:3vw;
+						">
+							<div class="question-composer-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Question Composer
+							</div>
+							
+							<div class="question-area"
+							style="
+								font-size:1.5vw;
+								margin-left:1.5vw;
+								margin-top:1.5vw;
+								margin-right:1.5vw;
+							">
+								<textarea class="question-description-input font maximumWidth" ng-model="composerQuestion.description" placeholder="Type Your Question Here!" type="text"  ng-trim="false"
+								style="
+								resize:vertical;
+								"></textarea>
+							</div>
+							
+							<!-- List of Groups -->
+							<div class="groups-list"
+							style="
+							height: 4vw;
+							margin-left:1.5vw;
+							margin-right:1.5vw;
+							margin-top:1vw;
+							overflow: hidden;
+							">
+								<div class=""
+								style="
+								height: 3vw;
+								width: 1000vw;
+								">
+									<div class="select-group"
+									ng-class="{'selected' : inSelectedGroups(($index + groupRangeIndex))}"
+									ng-repeat="group in socket.getAllSocketGroups() | limitTo : ((groupRangeIndex + $index) > 0 ? 6 : 7) : groupRangeIndex"
+									ng-if="(groupRangeIndex + $index) > 0"
+									ng-click="toggleSelectedGroup($index + groupRangeIndex)"
+									style="
+										width:9.1vw;
+										margin-right:1.5vw;
+										font-size:1vw;
+										position:relative;
+										display:inline-block;
+									">
+										<button class="btn select-group-button"
+										style="
+										width:9.1vw;
+										height:3vw;
+										font-size:1vw;
+										text-overflow: ellipsis;
+										overflow: hidden;
+										white-space: nowrap;
+										">
+											{{group}}
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class=""
+							style="
+							height: 2vw;
+							margin-right:1.5vw;
+							margin-left:1.5vw;
+							background-color:#888888;
+							position:relative;
+							">
+								<div class="font whiteFont"
+								style="
+								font-size:1.5vw;
+								text-align:center;
+								">
+									{{selectedGroups.length}} targets selected
+								</div>
+								<div class="users-list-scroll-left"
+								ng-click="scrollGroupList(-1)"
+								style="
+								height:1vw;
+								width:1vw;
+								position:absolute;
+								background-color:red;
+								left:0.5vw;
+								top:0.5vw;
+								">
+								</div>
+								<div class="users-list-scroll-right"
+								ng-click="scrollGroupList(1)"
+								style="
+								height:1vw;
+								width:1vw;
+								position:absolute;
+								background-color:red;
+								right:0.5vw;
+								top:0.5vw;
+								">
+								</div>
+							</div>
+							<div class="question-composer-button-container"
+							style="
+							height:4.5vw;
+							margin:1.5vw;
+							">
+								<button class="btn send-question floatRight font" ng-disabled="composerQuestion.description.length == 0 || selectedGroups.length == 0" ng-click="sendQuestion()"
+								style="
+								font-size:1.5vw;
+								width:10vw;
+								height:3vw;
+								padding:0.5vw;
+								">Send Question</button>
 							</div>
 						</div>
 						
-						<div class="row">
-							<div class="groups-list">
-                                <div>
-									<!-- List of Groups to Send the Question to -->
-									<h3 class="font whiteFont boldText">Groups To Send To:</h3>
-                                    <div class="row-fluid">
-										<button class="btn select-group font" ng-class="{'btn-info' : inSelectedGroups($index), 'btn-success' : !inSelectedGroups($index)}" ng-repeat="group in socket.getSocketGroups()" ng-if="$index > 0" ng-click="toggleSelectedGroup($index)">{{group}}</button>
-
-                                        <button class="btn send-question floatRight font" ng-disabled="composerQuestion.description.length == 0 || selectedGroups.length == 0" ng-click="sendQuestion()">Send Question</button>
-                                    </div>
-                                </div>
+						<!-- Tutor Waiting for Answers -->
+						<div class="answers-received" ng-repeat="(uuid, question) in questions"
+						style="
+						position:relative;
+						background-color:white;
+						margin-top:1.5vw;
+						padding-top:3vw;
+						">
+							<div class="question-composer-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Question {{$index + 1}}
+								<div class="grade-question-button-container"
+								style="
+								position: absolute;
+								right: 0;
+								top: 0;
+								height: 3vw;
+								">
+									<button class="btn grade-question font" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)"
+									style="
+									font-size: 2vw;
+									width: 10vw;
+									height: 3vw;
+									padding: 0;
+									border:none;
+									vertical-align:baseline;
+									">ANNOUNCE</button>	
+								</div>
 							</div>
+							
+							<div class="question-description-container"
+							style="
+							margin:1.5vw;
+							">
+								<h3 class="font" ng-bind-html="question.description"
+								style="
+								font-size:3vw;
+								">
+								</h3>
+							</div>
+							
+							<div class="received-answers-container" 
+							ng-repeat="group in question.groupNames"
+							style="
+							position:relative;
+							padding-top:4.5vw;
+							">
+								<div class="received-answer-header font whiteFont"
+								style="
+									position:absolute;
+									margin-right:1.5vw;
+									margin-left:1.5vw;
+									margin-bottom:1.5vw;
+									width:calc(100% - 3vw);
+									height:3vw;
+									left:0px;
+									top:0px;
+									font-size:2vw;
+									color:white;
+									background-color:#888888;
+									padding-left:1.5vw;
+									padding-right:1.5vw;
+									text-align:left;
+								">
+									{{group}}
+									<div class="font received-answer-tag"
+									style="
+									position:absolute;
+									top:0px;
+									right:1.5vw;
+									padding-left:0.5vw;
+									font-size:2vw;
+									">
+										<div class="received-answer-waiting" ng-show="!question.groupAnswers[group].answered">
+											Status: Waiting for Answer...
+										</div>
+										<div class="received-answer-waiting" ng-show="question.groupAnswers[group].answered">
+											Status: Answered by {{question.groupAnswers[group].student}}
+										</div>
+									</div>
+								</div>
+								
+								<div class="received-answer-body" ng-show="question.groupAnswers[question.selectedGroup].answered"
+								style="
+								margin-right:1.5vw;
+								margin-left:1.5vw;
+								margin-bottom:1.5vw;
+								height:11.5vw;
+								width:calc(100% - 3vw);
+								position:relative;
+								">
+									<div class="answer-description font" ng-bind-html="question.groupAnswers[group].description"
+									style="
+									height: 10vw;
+									width: 50%;
+									overflow-y: auto;
+									background-color: #DDDDDD;
+									font-size:1.5vw;
+									padding:0.5vw;
+									position:absolute;
+									top:0;
+									left:0;
+									">
+									</div>
+									<div class="explanation-area font"
+									style="
+									position:absolute;
+									top:0;
+									right:0;
+									margin-left: 1.5vw;
+									width: calc(50% - 2vw);
+									">
+										<div class="answer-explanation-container"
+										style="
+										height:7vw;
+										">
+											<textarea class="answer-explanation-input" ng-model="question.groupAnswers[group].explanation"
+											placeholder="Comments" type="text"  ng-trim="false" ng-disabled="question.graded"
+											style="
+											resize:none;
+											width:100%;
+											height:100%;
+											overflow:auto;
+											font-size:1.5vw;
+											border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
+											border-color: {{question.groupAnswers[group].experience == 1 ? 'red' : (question.groupAnswers[group].experience == 5 ? 'orange' : (question.groupAnswers[group].experience == 10 ? 'green' : 'blue'))}};
+											-webkit-transition: all 0.2s ease-out;
+											-moz-transition: all 0.2s ease-out;
+											-ms-transition: all 0.2s ease-out;
+											-o-transition: all 0.2s ease-out;
+											transition: all 0.2s ease-out;
+											">
+											</textarea>
+										</div>
+										
+										<div class="grade-area font"
+										style="
+										height:3vw;
+										font-size:1.5vw;
+										color:white;
+										">
+											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 1" ng-disabled="question.graded"
+											style="
+											display:inline-block;
+											background-color: red;
+											float:left;
+											width: calc(25% - 1.125vw);
+											margin-right:1.5vw;
+											height: 3vw;
+											text-align:center;
+											cursor:pointer;
+											font-size: 2vw;
+											padding: 0;
+											border:none;
+											vertical-align:baseline;
+											">
+												Bleh
+											</button>
+											
+											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 5" ng-disabled="question.graded"
+											style="
+											display:inline-block;
+											background-color: orange;
+											float:left;
+											width: calc(25% - 1.125vw);
+											margin-right:1.5vw;
+											height: 3vw;
+											text-align:center;
+											cursor:pointer;
+											font-size: 2vw;
+											padding: 0;
+											border:none;
+											vertical-align:baseline;
+											">
+												Meh
+											</button>
+											
+											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 10" ng-disabled="question.graded"
+											style="
+											display:inline-block;
+											background-color: green;
+											float:left;
+											width: calc(25% - 1.125vw);
+											margin-right:1.5vw;
+											height: 3vw;
+											text-align:center;
+											cursor:pointer;
+											font-size: 2vw;
+											padding: 0;
+											border:none;
+											vertical-align:baseline;
+											">
+												Ooh
+											</button>
+											
+											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 25" ng-disabled="question.graded"
+											style="
+											display:inline-block;
+											float:left;
+											background-color: blue;
+											width: calc(25% - 1.125vw);
+											height: 3vw;
+											text-align:center;
+											cursor:pointer;
+											font-size: 2vw;
+											padding: 0;
+											border:none;
+											vertical-align:baseline;
+											">
+												Wow
+											</button>
+											<!--<input class="experience-input font" type="number" ng-model="question.groupAnswers[group].experience" ng-disabled="question.graded"/>-->
+										</div>
+									</div>
+								</div>
+							</div>
+		
+							<!--
+							<div class="row">
+								<button class="btn answers-received-select-group font" ng-class="{'btn-info' : question.selectedGroup == question.groupNames[$index], 'btn-success' : question.selectedGroup != question.groupNames[$index]}" ng-repeat="group in question.groupNames" ng-click="setSelectedGroup(uuid, $index)">{{group}}</button>
+							</div>
+							
+							<div class="row group-received-answers" ng-show="question.groupAnswers[question.selectedGroup].answered">
+								<div class="container-fluid">
+									<div class="col-md-4 col-sm-4 col-xs-4 font whiteFont lobbyGeneralFontSize">
+										<div>	{{question.groupAnswers[question.selectedGroup].student}}
+										</div>
+									</div>
+									
+									<div class="col-md-8 col-sm-8 col-xs-8 font whiteFont lobbyGeneralFontSize">
+										<div class="answer-description chatWhiteSpace" ng-bind-html="question.groupAnswers[question.selectedGroup].description"></div>
+									</div>
+								</div>
+								
+								<div class="container-fluid">
+									<div class="explanation-area font maximumWidth">
+										<textarea class="answer-explanation-input maximumWidth lobbyGeneralFontSize" ng-model="question.groupAnswers[question.selectedGroup].explanation"
+											placeholder="Explanation!" type="text"  ng-trim="false" ng-disabled="question.graded">
+										</textarea>
+									</div>
+								</div>
+								
+								<div class="container-fluid">
+									<input class="experience-input font maximumWidth lobbyGeneralFontSize" type="number" ng-model="question.groupAnswers[question.selectedGroup].experience" ng-disabled="question.graded"/>
+										<button class="btn grade-question floatRight font" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)">Announce</button>	
+								</div>
+							</div>
+							
+							<div class="row" ng-show="!question.groupAnswers[question.selectedGroup].answered">
+								<div class="font whiteFont lobbyGeneralFontSize">
+									Status: Waiting for Answer...
+								</div>
+							</div>
+							-->
 						</div>
-						
-						<div class="row">
-							<!-- Tutor Waiting for Answers -->
-							<div class="answers-received-area">
-								<div class="answers-received-list">
-	                                <div class="answers-received" ng-repeat="(uuid, question) in questions">
-	                                    <div class="col-md-12 col-sm-12 col-xs-12 border-gold-trimmed marginTop">
-	                                        <div class="row">
-	                                            <h3 class="font whiteFont boldText marginBottom chatWhiteSpace" ng-bind-html="question.description"></h3>
-	                                        </div>
-	                    
-											<div class="row">
-		                                    	<button class="btn answers-received-select-group font" ng-class="{'btn-info' : question.selectedGroup == question.groupNames[$index], 'btn-success' : question.selectedGroup != question.groupNames[$index]}" ng-repeat="group in question.groupNames" ng-click="setSelectedGroup(uuid, $index)">{{group}}</button>
-	                                        </div>
-	                                        
-											<div class="row group-received-answers" ng-show="question.groupAnswers[question.selectedGroup].answered">
-	                                            <div class="container-fluid border-gold-trimmed">
-	                                            	<div class="col-md-4 col-sm-4 col-xs-4 font whiteFont lobbyGeneralFontSize">
-	                                            		<div>	{{question.groupAnswers[question.selectedGroup].student}}
-                                                   		</div>
-	                                                </div>
-	                                                
-													<div class="col-md-8 col-sm-8 col-xs-8 font whiteFont lobbyGeneralFontSize">
-                                                   		<div class="answer-description chatWhiteSpace" ng-bind-html="question.groupAnswers[question.selectedGroup].description"></div>
-	                                                </div>
-	                                            </div>
-	                                            
-												<!-- Justify Damage for Answer -->
-												<div class="container-fluid">
-													<div class="explanation-area font maximumWidth">
-														<textarea class="answer-explanation-input maximumWidth lobbyGeneralFontSize" ng-model="question.groupAnswers[question.selectedGroup].explanation"
-															placeholder="Explanation!" type="text"  ng-trim="false" ng-disabled="question.graded">
-														</textarea>
-													</div>
-												</div>
-												
-												<div class="container-fluid">
-		                                        	<input class="experience-input font maximumWidth lobbyGeneralFontSize" type="number" ng-model="question.groupAnswers[question.selectedGroup].experience" ng-disabled="question.graded"/>
-														<button class="btn grade-question floatRight font" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)">Announce</button>	
-		                                        </div>
-	                                        </div>
-	                                        
-											<div class="row" ng-show="!question.groupAnswers[question.selectedGroup].answered">
-                                                <div class="font whiteFont lobbyGeneralFontSize">
-                                               		Status: Waiting for Answer...
-                                                </div>
-                                            </div>
-	                                    </div>
-	                                </div>
-	                            </div>
+					</div>
+					<div ng-if="showPrompt == true && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'" id="tutor-prompt-window" class="prompt-window"
+					style = "
+					z-index : 99;
+					width : 100%;
+					height : 100%;
+					top : 0;
+					left : 0;
+					position : fixed;
+					">
+						<!-- Background screen -->
+						<div
+						style = "
+						width : 100%;
+						height : 100%;
+						top : 0;
+						left : 0;
+						position : fixed;
+						background : rgba(0,0,0,.7);
+						background-color : rgba(0,0,0,.7);
+						opacity : 0.7;
+						"
+						>
+						</div>
+						<div class="prompt-container"
+						style="
+						position:fixed;
+						width:40vw;
+						height:20vw;
+						background-color:white;
+						left:30vw;
+						top:calc(50% - 10vw);
+						">
+							<div class="prompt-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								padding-right:1.5vw;
+								text-align:left;
+							">
+								OVERDRIVE
+							</div>
+							
+							<div class="prompt-text font"
+							style="
+							font-size:1.5vw;
+							color:#888888;
+							padding-top:4.5vw;
+							padding-left:1.5vw;
+							padding-right:1.5vw;
+							">
+								<p>The mighty fall, and you have lost one of your many lives. Do our heroes enter overdrive and reap extra rewards for their conquest...Or do you live to fight another round.</p>
+								<p>(Choosing to go into overdrive mode will allow students to get extra rewards based on their performance in the current round.)</p>
+							</div>
+							
+							<div id="overdrive-mode-options-container" class="centerText"
+							style="
+							height:3vw;
+							margin-top:1.5vw;
+							background-color:#888888;
+							">
+								<div class="overdrive-mode-toggle">
+									<button class="btn font whiteFont" ng-click="startBattle()"
+									style="
+										float:right;
+										height:3vw;
+										font-size:1.5vw;
+										padding:0.5vw;
+									">
+										OVERDRIVE
+									</button>
+								</div>
+								
+								<div class="respawn-mode-toggle">
+									<button class="btn font whiteFont" ng-click="respawn()"
+									style="
+										float:left;
+										height:3vw;
+										font-size:1.5vw;
+										padding:0.5vw;
+									">
+										RESPAWN
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
                 
                 <div ng-controller="studentCtrl"> <!-- Tutee View -->
-					<div class="col-md-3 col-sm-3 col-xs-3 affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
-						<div class="text-center row smoothImage border-normal">
-							<div class="font whiteFont level-container">
-                    			
-                    			<div class="row">
-	                    			<div class="col-md-4 col-sm-6 col-xs-6">
-										<img ng-src="{{tutorInfo.imgSrc}}" class="img-responsive smoothImage fullImage"/>
-									</div>
-
-									<div class="col-md-8 col-sm-6 col-xs-6">
-				                   		<h2 class="brownFont centerText boldText">{{tutorInfo.username}}</h2>
-				                    </div>
-				                </div>
-			                    
-								<div class="tutorial-level-bar centerText lobbyGeneralFontSize">
-			                        Health: {{health}} / {{maxHealth}}
-			                        <br>
-			                        <div class="progress">
-										<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
-										{{health/maxHealth * 100}}%
-										</div>
-			                        </div>
-			                    </div>
-			                </div>
+					<div class="affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'"
+					style="
+						left:3.5vw;
+						top:6.5vw;
+						width:20vw;
+						height:auto;
+					">
+						<div class="font whiteFont text-center smoothImage level-container"
+						style="
+						background-color:white;
+						position:relative;
+						padding-top:4.5vw;
+						padding-bottom:1.5vw;
+						box-shadow:0.7vw 0.7vw #999999;
+						">
+							<div class="tutor-name-header"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								{{tutorInfo.username}}
+							</div>
+							
+							<div class="tutor-avatar-container"
+							style="
+								background-color: yellow;
+								width: calc(100% - 3vw);
+								height: 10vw;
+								margin-left:1.5vw;
+								margin-right:1.5vw;
+							">
+								<div class="tutor-avatar-icon smoothImage"
+								ng-style="{'background-image' : 'url(' + tutorInfo.imgSrc + ')'}"
+								style="
+								width : 10vw;
+								height : 10vw;
+								margin-left : calc(50% - 5vw);
+								background-repeat: no-repeat;
+								background-size: cover;
+								">
+								</div>
+							</div>
+							<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
+							style= "
+								width: calc(100% - 3vw);
+								margin-left:1.5vw;
+								margin-right:1.5vw;
+								height : 2vw;
+								position:relative;
+							">
+								<div class="tutor-label-details-container"
+								style="
+								position:absolute;
+								width:100%;
+								left:50%;
+								margin-left:-50%;
+								font-size:1.5vw;
+								">
+										Health: {{health}} / {{maxHealth}}
+								</div>
+								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
+								</div>
+							</div>
 						</div>
-						<div class="row smoothImage border-normal">
+						
+						<div class="smoothImage"
+						style="
+						position:relative;
+						background-color:white;
+						margin-top:1.5vw;
+						padding-top:3.5vw;
+						">
+							<div class="active-users-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Active Users
+							</div>
+							
 							<div ng-controller="activeUsersCtrl">
-								<div class="col-md-12 col-sm-12 col-xs-12" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
-									<div class="text-center row">
-										<h2 class="font whiteFont centerText boldText lobbyBottomFiller"> Active Users </h2>
-									</div>
-									
-									<div class="row">
-										<div class="groups-list">
-			                                <div class="container-fluid">
-			                                    <div class="row outer-container font">
-			                                        <button class="btn select-group" ng-class="{'btn-info' : selectedGroup == $index, 'btn-success' : selectedGroup != $index}" ng-repeat="group in socket.getAllSocketGroups()" ng-click="setSelectedGroup($index)">{{group}}</button>
-			                                    </div>
-			                                </div>
-										</div>
-									</div>
-									
-									<div class="row outer-container" ng-if="socket.getUserType() =='tutor'">
-										<div class="users-active-list">
-											<div class="users-active">
-												<div class="user-active border-gold-trimmed maximumWidth" ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]">
-				                                    <div class="container-fluid">
-				                                        <div class="row-fluid font lobbyGeneralFontSize" ng-click="selectUser(user.socketId);" ng-style="{'color' : selectedUsers.indexOf (user.socketId) < 0 ? 'white' : 'yellow'}">
-				                                            {{user.username}}
-				                                        </div>
-				                                    </div>
-				                                </div>
+								<div class="" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
+									<!-- List of Groups -->
+									<div class="groups-list"
+									style="
+									height: 4vw;
+									width: 100%;
+									overflow: hidden;
+									">
+										<div class=""
+										style="
+										height: 3vw;
+										width: 1000vw;
+										">
+											<div class="select-group"
+											ng-class="{'selected' : selectedGroup == ($index + groupRangeIndex)}"
+											ng-repeat="group in socket.getAllSocketGroups() | limitTo : 4 : groupRangeIndex"
+											ng-click="setSelectedGroup($index + groupRangeIndex)"
+											style="
+												width:5.6vw;
+												margin-left:0.5vw;
+												font-size:1vw;
+												position:relative;
+												display:inline-block;
+											">
+												<button class="btn select-group-button"
+												style="
+												width:5.6vw;
+												height:3vw;
+												font-size:1vw;
+												text-overflow: ellipsis;
+												overflow: hidden;
+												white-space: nowrap;
+												">
+													{{group}}
+												</button>
 											</div>
 										</div>
 									</div>
-									
-									<div class="row outer-container" ng-if="socket.getUserType() == 'student'">
-										<div class="users-active-list">
-											<div class="users-active">
-												<div class="user-active border-gold-trimmed maximumWidth" ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]">
-				                                    <div class="container-fluid">
-				                                        <div class="row-fluid font lobbyGeneralFontSize" ng-click="selectUser(user.socketId);" ng-style="{'color' : selectedUsers.indexOf (user.socketId) < 0 ? 'white' : 'yellow'}">
-				                                            {{user.username}}
-				                                        </div>
-				                                    </div>
-				                                </div>
-											</div>
+									<div class=""
+									style="
+									height: 2vw;
+									width: calc(100% - 1vw);
+									background-color:#888888;
+									margin-left:0.5vw;
+									position:relative;
+									">
+										<div class="font whiteFont"
+										style="
+										font-size:1.5vw;
+										text-align:center;
+										">
+											{{socket.getAllSocketGroups()[selectedGroup]}}
+										</div>
+										<div class="users-list-scroll-left"
+										ng-click="scrollGroupList(-1)"
+										style="
+										height:1vw;
+										width:1vw;
+										position:absolute;
+										background-color:red;
+										left:0.5vw;
+										top:0.5vw;
+										">
+										</div>
+										<div class="users-list-scroll-right"
+										ng-click="scrollGroupList(1)"
+										style="
+										height:1vw;
+										width:1vw;
+										position:absolute;
+										background-color:red;
+										right:0.5vw;
+										top:0.5vw;
+										">
 										</div>
 									</div>
 									
-									<div class="row-fluid" ng-if="socket.getUserType() == 'tutor'">
-										<div class="row">
-			                            	<input class="input-group-name font maximumWidth lobbyGeneralFontSize" ng-model="$parent.$parent.newGroupName" placeholder="Type Your Group Name Here!"/>
-			                        	</div>
-
-			                        	<div class="row">
-			                            	<button class="btn create-group font" ng-click="createGroup()" ng-disabled="!isValidGroupParams()">Create Group!</button>
-			                            	<div ng-if="selectedGroup > 0">
-			                            		<button class="btn delete-group font" ng-click="deleteGroup()">Delete Group</button>
-			                            	</div>
-			                        	</div>
-			                        </div>
-								
+									<!-- List and Toggle Tutees in Groups -->
+									<div class="">
+										<div class="users-active-list"
+										style="
+										max-height: 12vw;
+										min-height: 12vw;
+										height: 12vw;
+										overflow-y: scroll;
+										padding-top: 0.5vw;
+										margin-left:0.5vw;
+										margin-right:0.5vw;
+										">
+											<div class="user-active"
+											ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]"
+											ng-class="{'active' : selectedUsers.indexOf (user.socketId) >= 0 }"
+											style="
+											margin-right: 1.5vw;
+											margin-bottom : 1vw;
+											padding-left: 1.5vw;
+											position:relative;
+											cursor:pointer;
+											">
+												<div class="user-active-text font"
+												ng-click="selectUser(user.socketId);"
+												style="
+												font-size:1.5vw;
+												">
+													{{user.username}}
+												</div>
+												<div class="font users-active-tag"
+												ng-show="user.userId == userId"
+												style="
+												position:absolute;
+												top:0px;
+												right:0px;
+												padding-left:0.5vw;
+												width:3vw;
+												background-color:green;
+												font-size:1.5vw;
+												">
+													You
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				
-                	<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3 smoothImage border-normal" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
-						<div class="text-center row">
-							<h2 class="font whiteFont centerText boldText"> Combat Log </h2>
+                	<div class="smoothImage" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'"
+					style="
+					margin-left: 25vw;
+					top: 6.5vw;
+					width: 50vw;
+					height: auto;
+					">
+						<!-- Combat log header -->
+						<div class="combat-log-header-container"
+						style="
+						position:relative;
+						height:3vw;
+						">
+							<div class="combat-log-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Combat Log
+							</div>
 						</div>
 						
 						<!-- Tutee Receive Questions -->
-						<div class="row">
-							<div class="questions-received-area outer-container maximumWidth overflow">
-								<div class="questions-received-list">
-	                                <div class="question-received border-gold-trimmed outer-container" ng-repeat="(uuid, question) in questions">
-	                                    <div class="col-md-12 col-sm-12 col-xs-12">
-	                                        <div class="row">
-	                                            <h3 class="font whiteFont boldText chatWhiteSpace" ng-bind-html="question.description"></h3>
-	                                        </div>
-	                                        
-											<div class="question-received-answers">
-	                                            <div ng-repeat="answer in question.answers" class="row border-gold-trimmed">
-	                                            	<div class="row">
-		                                            	<div class="col-md-4 col-sm-4 col-xs-4 font whiteFont lobbyGeneralFontSize">
-	                                                   		{{answer.student.username}}
-		                                                </div>
-		                                                
-														<div class="col-md-8 col-sm-8 col-xs-8">
-	                                                   		<textarea class="answer-description-input font maximumWidth lobbyGeneralFontSize" ng-show="answer.owned" ng-model="answer.description" placeholder="Type answer..." type="text"  ng-trim="false" ng-disabled="question.submitted"></textarea>
-	                                                   		<div class="answer-description chatWhiteSpace font whiteFont" ng-show="!answer.owned" ng-bind-html="answer.description"></div>
-		                                                </div>
-	                                                </div>
-													
-	                                                <div class="row-fluid">
-														<button class="btn vote-answer font floatLeft" ng-class="{'btn-success' : answer.selected, 'btn-warning' : !answer.selected }" ng-click="selectAnswer(uuid, $index)"  ng-disabled="question.submitted">Vote: {{answer.selectedCount}} </button>
-
-			                                        </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                    
-										<div class="container-fluid" ng-show="question.graded">
-	                                    	<div class="row-fluid"">
-		                                    	<button class="row btn answers-received-select-group font marginTop" ng-class="{'btn-info' : question.selectedGroup == question.groupNames[$index], 'btn-success' : question.selectedGroup != question.groupNames[$index]}" ng-repeat="group in question.groupNames" ng-click="setSelectedGroup(uuid, $index)">{{group}}</button>
-	                                        </div>
-	                                       
-											<div class="row-fluid group-received-answers">
-	                                            <div class="row border-gold-trimmed">
-	                                            	<div class="col-md-3 col-sm-3 col-xs-3 font whiteFont lobbyGeneralFontSize">
-	                                            		<div>	{{question.groupAnswers[question.selectedGroup].student}}
-                                                   		</div>
-	                                                </div>
-	                                                
-													<div class="col-md-9 col-sm-9 col-xs-9 font whiteFont lobbyGeneralFontSize">
-                                                   		<div class="answer-description font whiteFont chatWhiteSpace" ng-bind-html="question.groupAnswers[question.selectedGroup].description"></div>
-	                                                </div>
-	                                            </div>
-	                                            
-												<div class="row border-gold-trimmed">
-													<div class="col-md-3 col-sm-3 col-xs-3 whiteFont">
-														<div class="experience-input font whiteFont lobbyGeneralFontSize floatLeft"
-															ng-bind-html="question.groupAnswers[question.selectedGroup].experience">
-														</div>
-													</div>
-													
-													<div class="col-md-9 col-sm-9 col-xs-9 font whiteFont lobbyGeneralFontSize">
-														<div class="answer-explanation-input whiteFont maximumWidth"
-															ng-bind-html="question.groupAnswers[question.selectedGroup].explanation">
-														</div>
-													</div>
-												</div>
-	                                        </div>
-	                                    </div>
-
-										<div class="container-fluid" ng-show="!question.graded">
-	                                    	<div class="row font whiteFont lobbyGeneralFontSize">
-		                                    	Status: Waiting for Grading...
+						<div class="question-received" ng-repeat="(uuid, question) in questions"
+						style="
+						position:relative;
+						background-color:white;
+						margin-top:1.5vw;
+						padding-top:3vw;
+						">
+							<div class="question-received-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Question {{$index + 1}}
+								<div class="answer-question-button-container"
+								style="
+								position: absolute;
+								right: 0;
+								top: 0;
+								height: 3vw;
+								">
+									<button class="btn answer-question font" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
+									style="
+									font-size: 2vw;
+									width: 10vw;
+									height: 3vw;
+									padding: 0;
+									border:none;
+									vertical-align:baseline;
+									">ATTACK</button>	
+								</div>
+							</div>
+							
+							<div class="question-description-container"
+							style="
+							margin:1.5vw;
+							">
+								<h3 class="font" ng-bind-html="question.description"
+								style="
+								font-size:3vw;
+								">
+								</h3>
+							</div>
+							
+							<div class="student-answers-container"
+							ng-repeat="answer in question.answers"
+							style="
+							position:relative;
+							padding-top:3vw;
+							">
+								<div class="student-answer-header font whiteFont"
+								style="
+									position:absolute;
+									margin-right:1.5vw;
+									margin-left:1.5vw;
+									margin-bottom:1.5vw;
+									width:calc(100% - 3vw);
+									height:3vw;
+									left:0px;
+									top:0px;
+									font-size:2vw;
+									color:white;
+									background-color:#888888;
+									padding-left:1.5vw;
+									padding-right:1.5vw;
+									text-align:left;
+								">
+									{{answer.student.username}}
+									<div class="font answer-vote-tag"
+									style="
+									position:absolute;
+									top:0px;
+									right:1.5vw;
+									padding-left:0.5vw;
+									font-size:2vw;
+									">
+										<div class="answer-votes"
+										style="
+										">
+											Votes: {{answer.selectedCount}}
+										</div>
+									</div>
+								</div>
+								
+								<div class="answer-area"
+								style="
+									font-size:1.5vw;
+									margin-left:1.5vw;
+									margin-top:1.5vw;
+									margin-right:1.5vw;
+									padding-bottom:1.5vw;
+								">
+									<div class="answer-area-container"
+									style="
+									position:relative;
+									width: calc(100% - 17vw);
+									height:10vw;
+									display:inline-block;
+									">
+										<textarea class="answer-area-input font" 
+										ng-model="answer.description"
+										placeholder="{{answer.owned ? 'Type your answer here...' : 'Waiting for answer...'}}" type="text"  ng-trim="false"
+										ng-disabled="question.submitted || !answer.owned"
+										style="
+										width: 100%;
+										height:10vw;
+										resize:none;
+										border:none;
+										background-color:#DDDDDD;
+										"></textarea>
+										
+										<button class="btn update-answer font" ng-click="updateAnswer(uuid)" ng-disabled="question.submitted" ng-show="answer.owned"
+										style="
+										font-size:1.5vw;
+										width:5vw;
+										height:3vw;
+										padding:0.5vw;
+										position:absolute;
+										right:0;
+										bottom:0;
+										">Update</button>
+									</div>
+									
+									<div class="student-avatar-container"
+									style="
+										background-color: yellow;
+										width: 15vw;
+										height: 10vw;
+										margin-left:1.5vw;
+										display:inline-block;
+										position:relative;
+										border: {{(answer.selected ? '0.5vw solid' : '0vw solid')}};
+										border-color: red;
+										-webkit-transition: all 0.2s ease-out;
+										-moz-transition: all 0.2s ease-out;
+										-ms-transition: all 0.2s ease-out;
+										-o-transition: all 0.2s ease-out;
+										transition: all 0.2s ease-out;
+									">
+										<div class="student-avatar-icon smoothImage"
+										ng-style="{'background-image' : 'url(' + answer.student.userAvatar + ')'}"
+										style="
+										width : 10vw;
+										height : 100%;
+										margin-left : calc(50% - 5vw);
+										background-repeat: no-repeat;
+										background-size: cover;
+										">
+										</div>
+										
+										<div class="answer-vote-button-container"
+										style="
+										position:absolute;
+										height:3vw;
+										width:5vw;
+										right:0;
+										bottom:0;
+										">
+											<button class="btn vote-answer font" ng-click="selectAnswer(uuid, $index)"  ng-disabled="question.submitted"
+											style="
+											font-size:1.5vw;
+											width:5vw;
+											height:3vw;
+											padding:0.5vw;
+											">Vote</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div ng-show="question.submitted">
+								<div class="graded-answer-status font"
+								style="
+								font-size:2vw;
+								margin-left:1.5vw;
+								padding-bottom:1.5vw;
+								">
+									{{question.graded ? 'Grading Results' : 'Status : Waiting for grading...'}}
+								</div>
+							</div>
+							
+							<div ng-show="question.graded">
+								<div class="graded-answers-container"
+								ng-repeat="group in question.groupNames"
+								style="
+								position:relative;
+								padding-top:4.5vw;
+								">
+									<div class="graded-answer-header font whiteFont"
+									style="
+										position:absolute;
+										margin-right:1.5vw;
+										margin-left:1.5vw;
+										margin-bottom:1.5vw;
+										width:calc(100% - 3vw);
+										height:3vw;
+										left:0px;
+										top:0px;
+										font-size:2vw;
+										color:white;
+										background-color:#888888;
+										padding-left:1.5vw;
+										padding-right:1.5vw;
+										text-align:left;
+									">
+										{{group}}
+										<div class="font answer-source-tag"
+										style="
+										position:absolute;
+										top:0px;
+										right:1.5vw;
+										padding-left:0.5vw;
+										font-size:2vw;
+										">
+											<div class="answer-source" ng-show="question.groupAnswers[group].answered">
+												Answered by {{question.groupAnswers[group].student}}
 											</div>
-	                                    </div>
-
-	                                    <div class="container-fluid" ng-show="!question.graded">
-	                                    	<div class="row font whiteFont">
-	                                    		<button class="btn update-answer font floatLeft" ng-disabled="question.submitted" ng-click="updateAnswer(uuid)">Update</button>
-												<button class="btn submit-answer floatRight font" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)">Attack</button>
-	                                    	</div>
-	                                    </div>
-	                                </div>
-	                            </div>
+										</div>
+									</div>
+									
+									<div class="graded-answer-body"
+									style="
+									margin-right:1.5vw;
+									margin-left:1.5vw;
+									margin-bottom:1.5vw;
+									height:11.5vw;
+									width:calc(100% - 3vw);
+									position:relative;
+									">
+										<div class="answer-description font" ng-bind-html="question.groupAnswers[group].description"
+										style="
+										height: 10vw;
+										width: 50%;
+										overflow-y: auto;
+										background-color: #DDDDDD;
+										font-size:1.5vw;
+										padding:0.5vw;
+										position:absolute;
+										top:0;
+										left:0;
+										">
+										</div>
+										<div class="explanation-area font"
+										style="
+										position:absolute;
+										top:0;
+										right:0;
+										margin-left: 1.5vw;
+										width: calc(50% - 2vw);
+										">
+											<div class="answer-explanation-container"
+											style="
+											height:7vw;
+											">
+												<div class="answer-explanation-input" ng-bind-html="question.groupAnswers[group].explanation"
+												style="
+												width:100%;
+												height:100%;
+												overflow:auto;
+												font-size:1.5vw;
+												border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
+												border-color: {{question.groupAnswers[group].experience == 1 ? 'red' : (question.groupAnswers[group].experience == 5 ? 'orange' : (question.groupAnswers[group].experience == 10 ? 'green' : 'blue'))}};
+												-webkit-transition: all 0.2s ease-out;
+												-moz-transition: all 0.2s ease-out;
+												-ms-transition: all 0.2s ease-out;
+												-o-transition: all 0.2s ease-out;
+												transition: all 0.2s ease-out;
+												">
+												</div>
+											</div>
+											
+											<div class="grade-area font"
+											style="
+											height:3vw;
+											font-size:1.5vw;
+											color:white;
+											">
+												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 1"
+												style="
+												display:inline-block;
+												background-color: red;
+												float:left;
+												width: calc(25% - 1.125vw);
+												margin-right:1.5vw;
+												height: 3vw;
+												text-align:center;
+												cursor:pointer;
+												font-size: 2vw;
+												padding: 0;
+												border:none;
+												vertical-align:baseline;
+												">
+													Bleh
+												</button>
+												
+												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 5"
+												style="
+												display:inline-block;
+												background-color: orange;
+												float:left;
+												width: calc(25% - 1.125vw);
+												margin-right:1.5vw;
+												height: 3vw;
+												text-align:center;
+												cursor:pointer;
+												font-size: 2vw;
+												padding: 0;
+												border:none;
+												vertical-align:baseline;
+												">
+													Meh
+												</button>
+												
+												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 10"
+												style="
+												display:inline-block;
+												background-color: green;
+												float:left;
+												width: calc(25% - 1.125vw);
+												margin-right:1.5vw;
+												height: 3vw;
+												text-align:center;
+												cursor:pointer;
+												font-size: 2vw;
+												padding: 0;
+												border:none;
+												vertical-align:baseline;
+												">
+													Ooh
+												</button>
+												
+												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 25"
+												style="
+												display:inline-block;
+												float:left;
+												background-color: blue;
+												width: calc(25% - 1.125vw);
+												height: 3vw;
+												text-align:center;
+												cursor:pointer;
+												font-size: 2vw;
+												padding: 0;
+												border:none;
+												vertical-align:baseline;
+												">
+													Wow
+												</button>
+												<!--<input class="experience-input font" type="number" ng-model="question.groupAnswers[group].experience" ng-disabled="question.graded"/>-->
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 					
-					<div class="col-md-3 col-md-offset-9 col-sm-3 col-sm-offset-9 col-xs-3 col-xs-offset-9 affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
-						<div class="text-center row smoothImage border-normal">
-							<div class="font whiteFont level-container">
-                    			
-                    			<div class="row">
-	                    			<div class="col-md-4 col-sm-6 col-xs-6">
-										<img ng-src="{{userInfo.imgSrc}}" class="img-responsive smoothImage fullImage"/>
-									</div>
-
-									<div class="col-md-8 col-sm-6 col-xs-6">
-				                   		<h2 class="brownFont centerText boldText"><%= username %></h2>
-				                    </div>
-				                </div>
-			                    
-								<div class="tutorial-level-bar centerText lobbyGeneralFontSize">
-									Level: <span ng-bind-html="userInfo.level"></span>
-									<br>
-			                        Experience: {{userInfo.exp}} / {{userInfo.expToNext}}
-			                        <br>
-			                        <div class="progress">
-										<div class="progress-bar" role="progressbar" aria-valuenow="{{userInfo.exp / userInfo.expToNext * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{userInfo.exp / userInfo.expToNext * 100}}%">
-										{{userInfo.exp / userInfo.expToNext * 100}}%
-										</div>
-			                        </div>
-			                    </div>
-			                </div>
-						</div>
-					</div>
-				</div>	
-			</div>
-
-			<div class="row" id="lobby-container">
-
-				<!-- Message Area -->
-				<div ng-controller="chatCtrl">
-					<div class="smoothImage border-normal" id="chat-container" ng-if="socket.getConnectionState() == socket.CONNECTED()" ng-class="{ 'col-md-7 col-md-offset-4 col-sm-9 col-sm-offset-3 col-xs-7 col-xs-offset-5' : socket.getUserType() == 'tutor', 'col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' : socket.getUserType() == 'student'}">
-						
-						<div class="text-center row">
-							<h2 class="font whiteFont centerText boldText lobbyBottomFiller"> Messages </h2>
-						</div>
-						
-						<div class="row">
-							<div class="groups-list">
-                                <div class="container-fluid">
-                                    <div class="row outer-container font">
-                                        <button class="btn select-group" ng-class="{'btn-info' : selectedGroup == $index, 'btn-success' : selectedGroup != $index}" ng-repeat="group in socket.getSocketGroups()" ng-click="setSelectedGroup($index)">{{group}}</button>
-                                    </div>
-                                </div>
+					<div class="affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'"
+					style="
+						left:76.5vw;
+						top:6.5vw;
+						width:20vw;
+						height:auto;
+					">
+						<div class="font whiteFont text-center smoothImage level-container"
+						style="
+						background-color:white;
+						position:relative;
+						padding-top:4.5vw;
+						padding-bottom:1.5vw;
+						box-shadow:0.7vw 0.7vw #999999;
+						">
+							<div class="tutor-name-header"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								<%= username %>
+							</div>
+							
+							<div class="tutor-avatar-container"
+							style="
+								background-color: yellow;
+								width: calc(100% - 3vw);
+								height: 10vw;
+								margin-left:1.5vw;
+								margin-right:1.5vw;
+							">
+								<div class="tutor-avatar-icon smoothImage"
+								ng-style="{'background-image' : 'url(' + userInfo.imgSrc + ')'}"
+								style="
+								width : 10vw;
+								height : 10vw;
+								margin-left : calc(50% - 5vw);
+								background-repeat: no-repeat;
+								background-size: cover;
+								">
+								</div>
+							</div>
+							<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
+							style= "
+								width: calc(100% - 3vw);
+								margin-left:1.5vw;
+								margin-right:1.5vw;
+								height : 2vw;
+								position:relative;
+							">
+								<div
+								style="
+								position:absolute;
+								right:0;
+								bottom:100%;
+								font-size:1.5vw;
+								background-color:#888888;
+								padding:0.5vw;
+								">
+									Lvl: <span ng-bind-html="userInfo.level"></span>
+								</div>
+								<div class="tutor-label-details-container"
+								style="
+								position:absolute;
+								width:100%;
+								left:50%;
+								margin-left:-50%;
+								font-size:1.5vw;
+								color:grey;
+								">
+									Experience: {{userInfo.exp}} / {{userInfo.expToNext}}
+								</div>
+								<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{userInfo.exp / userInfo.expToNext * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{userInfo.exp / userInfo.expToNext * 100}}%">
+								</div>
 							</div>
 						</div>
-						
-						<div class="row outer-container">
-							<div class="chat-area border-gold-trimmed" id="messageBox">
+					</div>
+				</div>
+				
+				<!-- Message Area -->
+				<div ng-controller="chatCtrl">
+					<div class="smoothImage" id="chat-container" ng-if="socket.getConnectionState() == socket.CONNECTED()"
+					style="
+					margin-top:1.5vw;
+					margin-left: {{socket.getUserType() == 'student' ? '25vw' : '30vw'}};
+					margin-bottom:1.5vw;
+					width: {{socket.getUserType() == 'student' ? '50vw' : '65vw'}};
+					height: auto;
+					">
+						<div class="messages-container"
+						style="
+						position:relative;
+						background-color:white;
+						padding-top:3vw;
+						">
+							<div class="messages-header font whiteFont"
+							style="
+								position:absolute;
+								width:100%;
+								height:3vw;
+								left:0px;
+								top:0px;
+								font-size:2vw;
+								color:white;
+								background-color:#888888;
+								padding-left:1.5vw;
+								text-align:left;
+							">
+								Messages
+							</div>
+							
+							<!-- List of Groups -->
+							<div class="groups-list"
+							style="
+							height: 4vw;
+							margin-left:1.5vw;
+							margin-right:1.5vw;
+							margin-top:1vw;
+							overflow: hidden;
+							">
+								<div class=""
+								style="
+								height: 3vw;
+								width: 1000vw;
+								">
+									<div class="select-group"
+									ng-class="{'selected' : selectedGroup == ($index + groupRangeIndex)}"
+									ng-repeat="group in socket.getSocketGroups() | limitTo : 6 : groupRangeIndex"
+									ng-click="setSelectedGroup($index + groupRangeIndex)"
+									style="
+										width:9.1vw;
+										margin-right:1.5vw;
+										font-size:1vw;
+										position:relative;
+										display:inline-block;
+									">
+										<button class="btn select-group-button"
+										style="
+										width:9.1vw;
+										height:3vw;
+										font-size:1vw;
+										text-overflow: ellipsis;
+										overflow: hidden;
+										white-space: nowrap;
+										">
+											{{group}}
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class=""
+							style="
+							height: 2vw;
+							margin-right:1.5vw;
+							margin-left:1.5vw;
+							background-color:#888888;
+							position:relative;
+							">
+								<div class="font whiteFont"
+								style="
+								font-size:1.5vw;
+								text-align:center;
+								">
+									{{socket.getSocketGroups()[selectedGroup]}}
+								</div>
+								<div class="users-list-scroll-left"
+								ng-click="scrollGroupList(-1)"
+								style="
+								height:1vw;
+								width:1vw;
+								position:absolute;
+								background-color:red;
+								left:0.5vw;
+								top:0.5vw;
+								">
+								</div>
+								<div class="users-list-scroll-right"
+								ng-click="scrollGroupList(1)"
+								style="
+								height:1vw;
+								width:1vw;
+								position:absolute;
+								background-color:red;
+								right:0.5vw;
+								top:0.5vw;
+								">
+								</div>
+							</div>
+							<div class="chat-area" id="messageBox"
+							style="
+							width: calc(100% - 3vw);
+							height:15vw;
+							margin-left: 1.5vw;
+							padding:0.5vw;
+							background-color:#DDDDDD;
+							font-size:1.5vw;
+							">
 								<div class="messages">
 									<div ng-repeat="message in messages[socket.getSocketGroups()[selectedGroup]]"
 										ng-class="{'log' : message.type=='log', 'message' : message.type=='message'}"
@@ -1108,28 +3474,45 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						
-						<div class="row">
-							<div class="typing-message-area maximumWidth">
-								<div class="typing-messages">
-									<div ng-repeat="typingMessage in typingMessages">
-										<div>
-											<span class="username font whiteFont lobbyGeneralFontSize" ng-bind="typingMessage.user" style="color:{{getUsernameColor(typingMessage.user)}};"></span>
-											<span class="messageBody font whiteFont lobbyGeneralFontSize" ng-bind="typingMessage.message"></span>
-										</div>
+							<div class="typing-messages"
+							style="
+							width: calc(100% - 3vw);
+							height:2vw;
+							margin-left: 1.5vw;
+							background-color:#888888;
+							text-align:center;
+							font-size:1.5vw;
+							">
+								<div ng-repeat="typingMessage in typingMessages">
+									<div>
+										<span class="username font whiteFont" ng-bind="typingMessage.user" style="color:{{getUsernameColor(typingMessage.user)}};"></span>
+										<span class="messageBody font whiteFont" ng-bind="typingMessage.message"></span>
 									</div>
 								</div>
 							</div>
+							<div class="message-input-container"
+							style="
+							width: calc(100% - 3vw);
+							height:4.5vw;
+							margin-left: 1.5vw;
+							">
+								<!-- ng-model within ng-if block must reference the data prepended by $parent -->
+								<input class="inputMessage font maximumWidth lobbyGeneralFontSize"
+								ng-model="$parent.chatMessage" ng-enter="sendMessage()" ng-change="updateTyping()" 
+								placeholder="Type Your Message Here!"
+								style="
+								padding:0.5vw;
+								font-size:1.5vw;
+								"/>
+							</div>
 						</div>
-						
-						<div class="row">
-							<!-- ng-model within ng-if block must reference the data prepended by $parent -->
-							<input class="inputMessage font maximumWidth lobbyGeneralFontSize" ng-model="$parent.chatMessage" ng-enter="sendMessage()" ng-change="updateTyping()" placeholder="Type Your Message Here!"/>
-						</div>
-					
 					</div>
 				</div>
+			</div>
+
+			<div class="" id="lobby-container">
+
+				
 			</div>
 			
 			

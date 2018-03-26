@@ -6,6 +6,7 @@
  */
 angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $window, socket) {
 	$scope.socket = socket;
+	$scope.userId = $window.userId;
 	
 	$scope.showBattleWindow = false;
 	$scope.showSplash = false;
@@ -24,9 +25,16 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 	
 	$scope.groups = [];
 	$scope.runes = [];
+	$scope.selectedGroupIndex = -1;
 	$scope.effects = {};
 	
+	$scope.rankIcons = {
+		3 : '/images/crown-b.png',
+		2 : '/images/crown-s.png',
+		1 : '/images/crown-g.png'
+	};
 	$scope.rankedGroups = [];
+	$scope.rankDisplayTime = 5000;
 	
     /*
      *   Listeners for tutor client.
@@ -58,9 +66,9 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 				
 				//Get the longest duration from all the groups and use that for the tutor.
 				var overdriveDuration = 0;
-				for ( var group in data )
+				for ( var group in data.rewards )
 				{
-					if ( data[group].overdriveDuration > overdriveDuration )
+					if ( data.rewards[group].overdriveDuration > overdriveDuration )
 					{
 						overdriveDuration = data.rewards[group].overdriveDuration;
 					}
@@ -81,25 +89,29 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					return groupKeysToRank[a] - groupKeysToRank[b];
 				});
 				
-				$scope.setUpRunesAndGroups (sortedGroupKeysByRank, users);
+				$scope.setUpGroups (sortedGroupKeysByRank, users);
 				
 				var groupIndex = 0;
 				$scope.showGroupRankings ( groupIndex, sortedGroupKeysByRank, data );
             });
 			
 			socket.on ('start battle', function ( data ) {
-				if ( $scope.showSplash )
-				{
-					$scope.runes.forEach ( function ( rune, index ) {
-						$scope.getAndSetRune ( index );
-					});
-					
-					$scope.showSplash = false;
-				}
 			});
 			
 			//Get the runes from the server.
 			socket.on ('tutor set rune', function (data) {
+				$scope.runes.push ({
+					'completed' : false,
+					'symbols' : data.runeData.symbols,
+					'width' : data.runeData.width,
+					'height' : data.runeData.height,
+					'id' : data.runeData.id, //Identifier for the symbol set of the rune.
+					'name' : data.runeData.name,
+					'runeId' : data.runeId, //Identifier for the rune.
+					'positionBottom' : 50,
+					'positionRight' : 50
+				});
+				/*
 				$scope.runes[data.index].completed = false;
                 $scope.runes[data.index].symbols = data.runeData.symbols;
 				$scope.runes[data.index].width = data.runeData.width;
@@ -107,32 +119,35 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 				$scope.runes[data.index].id = data.runeData.id;
 				$scope.runes[data.index].name = data.runeData.name;
 				$scope.runes[data.index].runeId = data.runeId;
+				*/
             });
 			
 			socket.on ( 'show attack effect', function (data) {
 				var key = Date.now();
 				var positionLeft = 0;
 				var positionTop = 0;
-				var marginLeft = -data.effect.width;
+				var marginLeft = -data.effect.width * 0.5;
 				var marginTop = -data.effect.height * 0.5;
+				var animationType = "firedFromTutor";
 				if (data.targetGroup !== "")
 				{
 					var groupId = '#' + $.escapeSelector ('group-' + data.targetGroup);
 					var groupElement = $(groupId)[0].getBoundingClientRect();
 					positionTop = groupElement.top;
-					marginLeft = 0;
 				}
 				else if (data.sourceId !== "")
 				{
 					var sourceMember = $scope.getMemberFromUserId ( data.sourceId, data.sourceGroup );
 					var studentId = '#' + $.escapeSelector ('student-' + sourceMember.userId);
-					console.log ( $(studentId)[0].getBoundingClientRect());
 					var studentElement = $(studentId)[0].getBoundingClientRect();
 					positionTop = studentElement.top + (studentElement.height * 0.5);
 					positionLeft = studentElement.left + (studentElement.width * 0.5);
+					animationType = "firedFromStudent";
 				}
 				
 				$scope.effects[key] = ({
+					'duration' : data.effect.duration * 0.001,
+					'animation' : "",
 					'image' : data.effect.image,
 					'width' : data.effect.width,
 					'height' : data.effect.height,
@@ -141,6 +156,20 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					'positionTop' : positionTop,
 					'positionLeft' : positionLeft
 				});
+				
+				setTimeout ( function()
+				{
+					$scope.$apply ( function () {
+						$scope.effects[key].animation = animationType;
+					});
+				}, 100);
+				
+				setTimeout ( function()
+				{
+					$scope.$apply ( function () {
+						$scope.effects[key].animation = animationType + "End";
+					});
+				}, data.effect.duration - 250);
 				
 				setTimeout ( function()
 				{
@@ -165,12 +194,14 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 				console.log ("waiting for " + data.groupName);
 			});
 			
-			socket.on ( 'show end screen', function (data) {
+			socket.on ( 'show loot screen', function (data) {
 				$scope.showEndSplash = true;
 				setTimeout ( function()
 				{
-					$scope.showEndSplash = false;
-					$scope.showBattleWindow = false;
+					$scope.$apply (function() {
+						$scope.showEndSplash = false;
+						$scope.showBattleWindow = false;
+					});
 				}, 1000);
 			});
         }
@@ -197,29 +228,73 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 			var sortedMembersByRank = Object.keys ( groupMembersToRank ). sort ( function ( a, b ) {
 				return groupMembersToRank[a] - groupMembersToRank[b];
 			});
+			
+			//Get the number of top players for the group to display; choose 1 player if none of the players are tops, or a maximum of 4 top players if the tops are evenly spread out.
+			var numberOfTops = sortedMembersByRank.length;
+			numberOfTops = numberOfTops == 0 ? 1 : (numberOfTops > 4 ? 4 : numberOfTops);
+			console.log ( numberOfTops );
+					
 			//Push in members who aren't ranked as bronze members.
 			for ( var i = 0; i< data.userList[group].length; i++ )
 			{
-				if ( sortedMembersByRank.indexOf ( data.userList[group][i].userId ) == -1 && data.userList[group][i].userType == "student" )
+				if ( data.userList[group][i].userType == "student" )
 				{
-					sortedMembersByRank.push (data.userList[group][i].userId);
-					data.rewards[group].members[data.userList[group][i].userId] = 
+					if ( sortedMembersByRank.indexOf ( data.userList[group][i].userId ) == -1 )
 					{
-						'params' : {
-							'userAvatar' : data.userList[group][i].userAvatar,
-							'username' : data.userList[group][i].username,
-							'rank' : 3,
-							'rewards' : 0
-						}
-					};
+						sortedMembersByRank.push (data.userList[group][i].userId);
+						data.rewards[group].members[data.userList[group][i].userId] = 
+						{
+							'params' : {
+								'userAvatar' : data.userList[group][i].userAvatar,
+								'username' : data.userList[group][i].username,
+								'rank' : 3,
+								'answersSubmitted' : 0,
+								'reward' : 0
+							}
+						};
+					}
+					else
+					{
+						data.rewards[group].members[data.userList[group][i].userId].params.userAvatar = data.userList[group][i].userAvatar;
+						data.rewards[group].members[data.userList[group][i].userId].params.username = data.userList[group][i].username;
+					}
 				}
 			}
 			
+			var groupData = $scope.getGroupFromName ( group );
+			var color = 0;
+			var saturation = 100;
+			if ( groupData !== null )
+			{
+				color = groupData.color;
+				saturation = groupData.saturation;
+			}
 			$scope.rankedGroups.push ({
 				'groupName' : group,
+				'color' : color,
+				'saturation' : saturation,
 				'ranking' : data.rewards[group].ranking,
-				'members' : []
+				'totalQuestions' : data.rewards[group].totalQuestions,
+				'overdriveDuration' : data.rewards[group].overdriveDuration,
+				'currentTime' : $scope.rankDisplayTime,
+				'totalDisplayTime' : $scope.rankDisplayTime,
+				'topMembers' : [],
+				'allMembers' : []
 			});
+			console.log ( $scope.rankedGroups );
+			
+			//Get a complete list of all members sorted by rank.
+			for ( var i = 0; i < sortedMembersByRank.length; i++ )
+			{
+				$scope.rankedGroups[$scope.rankedGroups.length - 1].allMembers.push ({
+					'userId' : sortedMembersByRank[i],
+					'username' : data.rewards[group].members[sortedMembersByRank[i]].params.username,
+					'userAvatar' : data.rewards[group].members[sortedMembersByRank[i]].params.userAvatar,
+					'rank' : data.rewards[group].members[sortedMembersByRank[i]].params.rank,
+					'rankIcon' : $scope.rankIcons[data.rewards[group].members[sortedMembersByRank[i]].params.rank],
+					'answersSubmitted' : data.rewards[group].members[sortedMembersByRank[i]].params.answersSubmitted
+				});
+			}
 			
 			var studentIndex = 0;
 			var memberInterval = setInterval ( function () {
@@ -229,22 +304,43 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					//All the students are shown.
 					clearInterval ( memberInterval );
 					//Start the timeout to close the pop up and open up the next one.
-					setTimeout ( function () {
+					var displayTick = setInterval ( function () {
 						$scope.$apply ( function () {
-							$scope.rankedGroups.splice ( 0, 1 );
-							$scope.showGroupRankings ( groupIndex + 1, sortedGroupKeysByRank, data );
+							$scope.rankedGroups[$scope.rankedGroups.length - 1].currentTime -= 1000;
 						});
-					}, 5000 );
+						if ( $scope.rankedGroups[$scope.rankedGroups.length - 1].currentTime < 0 )
+						{
+							//Give a small grace period before changing screens.
+							setTimeout ( function () {
+								clearInterval ( displayTick );
+								$scope.$apply ( function () {
+									$scope.rankedGroups.splice ( 0, 1 );
+									$scope.showGroupRankings ( groupIndex + 1, sortedGroupKeysByRank, data );
+								});
+							}, 500 );
+						}
+					}, 1000);
 				}
 				else
 				{
+					var widthToSplit = 100 / (numberOfTops+1);
+					var cardSize = numberOfTops >= 3 ? 12 : 17.5;
 					$scope.$apply ( function () {
-						//Print out the group members in 0.5 second intervals.
-						$scope.rankedGroups[$scope.rankedGroups.length - 1].members.push ({
-							'username' : data.rewards[group].members[userId].params.username,
-							'userAvatar' : data.rewards[group].members[userId].params.userAvatar,
-							'rank' : data.rewards[group].members[userId].params.rank
-						});
+						//Print out the top group members in 0.5 second intervals up to a maximum of 4, and only if the player rank is 2 and below.
+						if ( ($scope.rankedGroups[$scope.rankedGroups.length - 1].topMembers.length < 4 && data.rewards[group].members[userId].params.rank <= 2) ||
+							($scope.rankedGroups[$scope.rankedGroups.length - 1].topMembers.length === 0))
+						{
+							$scope.rankedGroups[$scope.rankedGroups.length - 1].topMembers.push ({
+								'userId' : userId,
+								'username' : data.rewards[group].members[userId].params.username,
+								'userAvatar' : data.rewards[group].members[userId].params.userAvatar,
+								'rank' : data.rewards[group].members[userId].params.rank,
+								'rankIcon' : $scope.rankIcons[data.rewards[group].members[userId].params.rank],
+								'answersSubmitted' : data.rewards[group].members[userId].params.answersSubmitted,
+								'positionLeft' : widthToSplit * (studentIndex + 1),
+								'size' : cardSize
+							});
+						}
 					});
 					studentIndex++;
 				}
@@ -254,9 +350,27 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 		{
 			//End of all the groups.
 			socket.emit ( 'finish splash', {});
+			//socket.emit ( 'tutor get rune', {});
+					
+			$scope.showSplash = false;
 			return;
 		}
 	};
+	
+	/**
+     * Get the group data given a group name.
+	 *
+     */
+    $scope.getGroupFromName = function ( groupName ) {
+		for ( var i = 0; i < $scope.groups.length; i++ )
+		{
+			if ( $scope.groups[i].groupName == groupName )
+			{
+				return $scope.groups[i];
+			}
+		}
+		return null;
+	}; 
 	 
 	 /**
      * Get a group member given the userId and userGroup.
@@ -282,16 +396,15 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 	};
 	
 	 /**
-     * Create a server call to get the rune data to use for the rune at given index.
+     * Select a group to send an attack to.
 	 *
-	 * @param (Integer) index
+	 * @param (Integer) groupIndex
      */
-    $scope.getAndSetRune = function (index) {
-		if ( index >= 0 && index < $scope.runes.length )
+    $scope.selectGroup = function (groupIndex) {
+		$scope.selectedGroupIndex = groupIndex;
+		if ($scope.runes.length == 0)
 		{
-			socket.emit ( 'tutor get rune', { 
-				'index' : index
-			});
+			socket.emit ( 'tutor get rune', {});
 		}
 	};
 	 
@@ -301,8 +414,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 	 *
 	 * @param (Array) groupData
      */
-    $scope.setUpRunesAndGroups = function (groupNames, userData) {
-		//TODO: Move the "set" widths of the avatars to the scope level.
+    $scope.setUpGroups = function (groupNames, userData) {
 		var tutorWidth = 25;
 		var tutorHeight = tutorWidth * ($scope.tutorAvatar.avatarHeight/$scope.tutorAvatar.avatarWidth);
 		$scope.tutorAvatar.avatarWidth = tutorWidth;
@@ -318,7 +430,6 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 			var parsedGroupMembers = [];
 			//Make the group members occupy a maximum of 30% of screen width.
 			withinGroupInterval = 30.0 / groupMembers.length;
-			var studentCounter = 0;
 			groupMembers.forEach ( function ( member, index ) {
 				if ( member.userType == 'student' )
 				{
@@ -329,33 +440,23 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 						'userAvatar' : member.userAvatar,
 						'avatarWidth' : studentWidth,
 						'avatarHeight' : studentHeight,
-						'displacementBottom' : 0, //TODO: Make this displacement a bit more random to distribute the students.
-						'displacementRight' :  withinGroupInterval * studentCounter
+						'displacementBottom' : (Math.random() * (3 - (-3)) + (-3)), //TODO: Make this displacement a bit more random to distribute the students.
+						'displacementRight' :  withinGroupInterval - (Math.random() * 2)
 					});
-					studentCounter++;
 				}
 			});
 			
 			$scope.groups.push ({
 				'groupName' : groupNames[i],
+				'color' : (Math.random() * 360), //A number between 0 and 360 because CSS filters with hue-rotate is used.
+				'saturation' : (Math.random() * (100 - 25) + 25),
 				'positionBottom' : 10 + groupPositioningInterval * (i + 1),
-				'positionRight' : 5,
+				'positionRight' : 10,
 				'members' : parsedGroupMembers
-			});
-			
-			$scope.runes.push ({
-				'completed' : false,
-				'id' : '',
-				'name' : '',
-				'width' : 0,
-				'height' : 0,
-				'positionRight' : 5,
-				'positionBottom' : groupPositioningInterval * (i + 1) + 10.0,
-				'targetGroup' : groupNames[i],
-				'symbols' : []
 			});
 		}
 	};
+	
 	
 	 /**
      * Check if all the runes are completed.
@@ -421,9 +522,10 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 			$scope.runes[runeIndex].width *= 5;
 			$scope.runes[runeIndex].height *= 5;
 			
+			var targetGroup = $scope.groups[$scope.selectedGroupIndex].groupName;
 			//TODO: Send this to the server along with more data about the type of attack.
 			socket.emit ('tutor rune attack', {
-				'targetGroup' : $scope.runes[runeIndex].targetGroup,
+				'targetGroup' : targetGroup,
 				'runeId' : $scope.runes[runeIndex].runeId,
 				'id' : $scope.runes[runeIndex].id
 			});
@@ -431,9 +533,9 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 			//Get a new rune from the server after a small break.
 			setTimeout ( function()
 			{
-				socket.emit ( 'tutor get rune', { 
-					'index' : runeIndex
-				});
+				$scope.runes.splice ( runeIndex, 1 );
+				$scope.selectedGroupIndex = -1;
+				//socket.emit ( 'tutor get rune', {});
 			}, 500);
 		}
 		/*

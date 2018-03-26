@@ -4,11 +4,13 @@
  *
  * @module javascripts/lobby/lobby-angular-activeusers-controller
  */
-angular.module('lobbyApp').controller ('activeUsersCtrl', function($scope, socket) {
+angular.module('lobbyApp').controller ('activeUsersCtrl', function($scope, $window, socket) {
 	$scope.socket = socket;
+	$scope.userId = $window.userId;
 
 	$scope.newGroupName = '';
 	$scope.selectedGroup = 0;
+	$scope.groupRangeIndex = 0;
 	$scope.selectedUsers = [];
 
     $scope.users = {};
@@ -36,6 +38,18 @@ angular.module('lobbyApp').controller ('activeUsersCtrl', function($scope, socke
     /*
      *  Scope functions used by angular in the DOM.
      */
+	 
+	/**
+    * Allow users to iterate through the list of groups.
+    *
+    */
+    $scope.scrollGroupList = function (direction) {
+		var newIndexRange = $scope.groupRangeIndex + direction;
+		if ( newIndexRange >= 0 && newIndexRange < ($scope.socket.getAllSocketGroups().length - 3) )
+		{
+			$scope.groupRangeIndex = newIndexRange;
+		}
+    }
 
     /**
     * Set the active users list to display the users in the selected group.

@@ -168,28 +168,32 @@ function Lobby () {
 			'type' : 'experience',
 			'value' : 20,
 			'icon' : '/images/crown-b.png',
-			'rarity' : 100
+			'rarity' : 100,
+			'flavour' : 'That feeling when you have to put Wikipedia in your citations.'
 		},
 		{
 			'name' : 'Deeper Insight',
 			'type' : 'experience',
 			'value' : 30,
-			'icon' : '/images/crown-s.png',
-			'rarity' : 70
+			'icon' : '/images/crown-b.png',
+			'rarity' : 70,
+			'flavour' : "Unleashing your inner academic at a workshop on your university's e-library services."
 		},
 		{
 			'name' : 'Revelation',
 			'type' : 'experience',
 			'value' : 60,
 			'icon' : '/images/crown-s.png',
-			'rarity' : 40
+			'rarity' : 40,
+			'flavour' : 'You are worthy of the true reality.'
 		},
 		{
 			'name' : 'True Enlightenment',
 			'type' : 'experience',
 			'value' : 100,
 			'icon' : '/images/crown-g.png',
-			'rarity' : 20
+			'rarity' : 10,
+			'flavour' : 'You done cracked the code.'
 		}
 	];
 }
@@ -519,73 +523,71 @@ lobbyio.on ('connection', function (socket) {
 				socket.runes = {
 					'0' : [
 						{
-							'width' : 100,
-							'height' : 100,
+							'width' : 20,
+							'height' : 20,
 							'name' : 'Attack_Type01',
 							'damage' : 10,
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 100,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 10,
+								'height' : 10,
+								'duration' : 3000
 							},
 							'symbols' : [
 								{
 									'positionTop' : 0,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 0,
 									'positionLeft' : 60,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 0,
 									'positionLeft' : 100,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
 						},
 						{
-							'width' : 150,
-							'height' : 150,
+							'width' : 25,
+							'height' : 25,
 							'name' : 'Attack_Type02',
 							'damage' : 13,
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 200,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 10,
+								'height' : 15,
+								'duration' : 2000
 							},
 							'symbols' : [
 								{
 									'positionTop' : 0,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 10,
 									'positionLeft' : 60,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 60,
 									'positionLeft' : 100,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
@@ -593,73 +595,71 @@ lobbyio.on ('connection', function (socket) {
 					],
 					'1' : [
 						{
-							'width' : 200,
-							'height' : 200,
+							'width' : 30,
+							'height' : 30,
 							'name' : 'Attack_Type01',
 							'damage' : 8,
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 70,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 30,
+								'height' : 10,
+								'duration' : 1000
 							},
 							'symbols' : [
 								{
 									'positionTop' : 0,
 									'positionLeft' : 0,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 30,
 									'positionLeft' : 70,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 50,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
 						},
 						{
-							'width' : 100,
-							'height' : 100,
+							'width' : 13,
+							'height' : 13,
 							'name' : 'Attack_Type02',
 							'damage' : 5,
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 50,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 20,
+								'height' : 20,
+								'duration' : 1500
 							},
 							'symbols' : [
 								{
 									'positionTop' : 60,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 30,
 									'positionLeft' : 0,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 20,
 									'positionLeft' : 10,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
@@ -684,106 +684,103 @@ lobbyio.on ('connection', function (socket) {
 				socket.runes = {
 					'0' : [
 						{
-							'width' : 100,
-							'height' : 100,
+							'width' : 30,
+							'height' : 30,
 							'name' : 'Attack_Type01',
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 100,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 30,
+								'height' : 30,
+								'duration' : 1500
 							},
 							'symbols' : [
 								{
 									'positionTop' : 0,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 0,
 									'positionLeft' : 60,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 0,
 									'positionLeft' : 100,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
 						},
 						{
-							'width' : 150,
-							'height' : 150,
+							'width' : 20,
+							'height' : 20,
 							'name' : 'Attack_Type02',
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 200,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 10,
+								'height' : 10,
+								'duration' : 1000
 							},
 							'symbols' : [
 								{
 									'positionTop' : 0,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 10,
 									'positionLeft' : 60,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 60,
 									'positionLeft' : 100,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
 						},
 						{
-							'width' : 200,
-							'height' : 200,
+							'width' : 15,
+							'height' : 15,
 							'name' : 'Attack_Type03',
 							'effect' : {
 								'image' : '/images/border-image.png',
-								'width' : 500,
-								'height' : 300,
-								'marginLeft' : 0,
-								'duration' : 500
+								'width' : 10,
+								'height' : 10,
+								'duration' : 1000
 							},
 							'symbols' : [
 								{
 									'positionTop' : 0,
 									'positionLeft' : 30,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 30,
 									'positionLeft' : 40,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								},
 								{
 									'positionTop' : 20,
 									'positionLeft' : 10,
-									'height' : 20,
-									'width' : 20,
+									'height' : 3,
+									'width' : 3,
 									'completed' : false
 								}
 							]
@@ -1057,23 +1054,12 @@ lobbyio.on ('connection', function (socket) {
             });
 
             //Grant experience to all students in the lobby when the tutor's health is reduced to 0.
-            socket.on ('experience payout', function (uuid) {
-                var lobby = lobbyList.getLobby(socket.moduleGroup, socket.tutorialGroup);
-
-                lobby.questions[uuid].groups.forEach (function (groupName, i) {
-                    var socketsInGroup = lobby.getUsersInRoom (groupName);
-                    socketsInGroup.forEach (function (socketClient, i) {
-                        if (socketClient.userType == 'student') {
-                            db.changeExp (socketClient.userId, socketClient.tutorialId, lobby.payoutExperience);
-                        }
-                    });
-                });
-
-                lobby.emitToLobby ( 'experience payout', {
-                    'exp' : lobby.payoutExperience,
-                    'message': "The mighty fall, and " + socket.username + " has lost one of their many lives. " + lobby.payoutExperience + " experience points for all!"
-                });
-
+            socket.on ('tutor death', function (uuid) {
+                socket.emit ('overdrive prompt');
+            });
+			
+			//Grant experience to all students in the lobby when the tutor's health is reduced to 0.
+            socket.on ('tutor respawn', function (uuid) {
                 socket.emit ('reset health');
             });
 
@@ -1124,6 +1110,8 @@ lobbyio.on ('connection', function (socket) {
 						lobby.rewards[groupName] = {
 							'params' : {},
 							'overdriveDuration' : 30000,
+							'totalQuestions' : lobby.currentRoundParameters.totalQuestions,
+							'groupPerformance' : 0,
 							'ranking' : 'bronze'
 						};
 						var groupPerformance = (lobby.performanceMap[groupName].totalDamage / lobby.currentRoundParameters.totalDamage) * 100.0;
@@ -1134,6 +1122,7 @@ lobbyio.on ('connection', function (socket) {
 								//Group performed better than cutoff.
 								if ( groupPerformance >= lobby.performanceRewards.groupRewards[ranking].cutoff )
 								{
+									lobby.rewards[groupName].groupPerformance = groupPerformance;
 									lobby.rewards[groupName].ranking = ranking;
 									lobby.rewards[groupName].params = lobby.performanceRewards.groupRewards[ranking];
 									lobby.rewards[groupName].overdriveDuration = lobby.battleDuration + lobby.performanceRewards.groupRewards[ranking].reward;
@@ -1158,6 +1147,7 @@ lobbyio.on ('connection', function (socket) {
 											memberRewards[member] = {
 												'params' : lobby.performanceRewards.playerRewards[ranking]
 											};
+											memberRewards[member].params.answersSubmitted = lobby.performanceMap[groupName].members[member].answersSubmitted;
 											break;
 										}
 									}
@@ -1206,6 +1196,7 @@ lobbyio.on ('connection', function (socket) {
 									usersInGroup.forEach (function (value, i) {
 										if ( value.userType == 'student' )
 										{
+											var totalExp = 0;
 											var personalLootBonus = 0;
 											if ( lobby.rewards[groupName].members.hasOwnProperty ( value.userId ) )
 											{
@@ -1224,11 +1215,15 @@ lobbyio.on ('connection', function (socket) {
 													if ( lobby.lootTable[j].rarity >= dropRarity )
 													{
 														lootToDrop.push ( lobby.lootTable[j] );
+														totalExp += lobby.lootTable[j].value;
 													}
 												}
 												if ( lootToDrop.length > 0 )
 													lootToSpawn.push ( lootToDrop[randomIntFromInterval ( 0, lootToDrop.length - 1 )] );
 											}
+											
+											db.changeExp (value.userId, value.tutorialId, totalExp);
+											
 											//TODO: Make this instead instead just send out an end state thing.
 											lobbyio.to(value.socketId).emit ('store loot', {
 												'loot' : lootToSpawn
@@ -1297,7 +1292,6 @@ lobbyio.on ('connection', function (socket) {
 				var symbolToUse = runeObject.runeData[symbolSetIndex];
 				symbolToUse.id = symbolSetIndex;
 				socket.emit ( 'tutor set rune', {
-					'index' : data.index,
 					'runeId' : runeObject.key,
 					'runeData' : symbolToUse
 				});
