@@ -14,7 +14,8 @@ var dataTable = {
 		'coursename' : 'TEST COURSE 1',
 		'week' : 'Every Week',
 		'day' : 'Monday',
-		'time' : '1000-1200'
+		'time' : '1000 - 1200',
+		'description' : 'This is a test module.'
 	},
 	'test2' : {
 		'id' : 'test2',
@@ -25,7 +26,8 @@ var dataTable = {
 		'coursename' : 'TEST COURSE E4',
 		'week' : 'Every Week',
 		'day' : 'Monday',
-		'time' : '1100-1300'
+		'time' : '1100 - 1300',
+		'description' : 'This is another test module.'
 	}
 };
 

@@ -44,8 +44,13 @@ angular.module('lobbyApp').controller ('activeUsersCtrl', function($scope, $wind
     *
     */
     $scope.scrollGroupList = function (direction) {
+		if ( $scope.groupRangeIndex < 0 || $scope.groupRangeIndex >= $scope.socket.getAllSocketGroups().length )
+		{
+			$scope.groupRangeIndex = $scope.socket.getAllSocketGroups().length - 1;
+			return;
+		}
 		var newIndexRange = $scope.groupRangeIndex + direction;
-		if ( newIndexRange >= 0 && newIndexRange < ($scope.socket.getAllSocketGroups().length - 3) )
+		if ( newIndexRange >= 0 && newIndexRange < $scope.socket.getAllSocketGroups().length )
 		{
 			$scope.groupRangeIndex = newIndexRange;
 		}

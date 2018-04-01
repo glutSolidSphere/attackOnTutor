@@ -3,7 +3,7 @@
 var dataTable = {
 	'0' : {
 		'id' : '0',
-		'AvatarId' : 'avatar-01',
+		'AvatarId' : 'avatar-02',
 		'UserId' : 'b0123456'
 	},
 	'1' : {

@@ -34,7 +34,1079 @@
             window.tutorialUuid = "<%= tid %>";
         </script>
 		
+		<!--
+			//BG Color : #cdc8b0
+			//Panel Color : #dad4bb
+			//Lighter Panel Color : #b4af9a
+			//Header Color : #635f54
+			//Drop Shadow Color : #9a9784
+			//Text background : rgb(255,255,255,0.5)
+			//Chat background : rbg(0,0,0,0.1)
+			-->
 		<style>
+		
+			/* Chat Styles */
+			
+			
+		
+			/* QA MODE STYLES */
+			.default-style-button
+			{
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				background-color:#b4af9a;
+				color:#635f54;
+				border:none;
+				
+				height:3vw;
+				font-size:2vw;
+				cursor:pointer;
+				font-family: 'VT323', monospace;
+				text-align:center;
+			}
+			
+			.default-style-button:focus, .default-style-button:active
+			{
+				outline:none;
+				border:1px solid #9a9784;
+				cursor:pointer;
+			}
+			
+			.default-style-button:hover
+			{
+				color:#dad4bb;
+				background-color:#635f54;
+				cursor:pointer;
+			}
+			
+			.default-style-button[disabled]:hover
+			{
+				color:#dad4bb;
+				background-color:#9a9784;
+				outline:none;
+				border:none;
+				cursor:no-drop;
+			}
+			
+			.default-style-button[disabled]
+			{
+				color:#dad4bb;
+				background-color:#b4af9a;
+				outline:none;
+				border:none;
+				cursor:no-drop;
+			}
+			
+			.tutor-qa-left-container
+			{
+				position:fixed;
+				left:3.5vw;
+				top:6.5vw;
+				width:25vw;
+				height:auto;
+			}
+			
+			.tutor-qa-tutor-details-container, .student-qa-tutor-details-container
+			{
+				background-color:#DAD4BB;
+				position:relative;
+				padding-top:4.5vw;
+				padding-bottom:1.5vw;
+				box-shadow:0.7vw 0.7vw #9a9784;
+				text-align:center;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-tutor-name-header, .student-qa-tutor-name-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				text-align:left;
+			}
+			
+			.tutor-qa-tutor-avatar-container, .student-qa-tutor-avatar-container
+			{
+				background-color: #b4af9a;
+				width: calc(100% - 3vw);
+				height: 10vw;
+				margin-left:1.5vw;
+				margin-right:1.5vw;
+			}
+			
+			.tutor-qa-tutor-avatar-icon, .student-qa-tutor-avatar-icon
+			{
+				width : 10vw;
+				height : 10vw;
+				margin-left : calc(50% - 5vw);
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			
+			.tutor-qa-tutor-health-container, .student-qa-tutor-health-container
+			{
+				width: calc(100% - 3vw);
+				margin-left:1.5vw;
+				margin-right:1.5vw;
+				height : 2vw;
+				position:relative;
+				background-color:#b4af9a;
+			}
+			
+			.tutor-qa-tutor-health-text, .student-qa-tutor-health-text
+			{
+				position:absolute;
+				left:50%;
+				margin-left:-25%;
+				font-size:1.5vw;
+				color:#635f54;
+			}
+			
+			.active-users-container
+			{
+				position:relative;
+				background-color:#DAD4BB;
+				margin-top:1.5vw;
+				padding-top:3.5vw;
+			}
+			
+			.active-users-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#DAD4BB;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				text-align:left;
+				
+				font-family: 'VT323', monospace;
+			}
+			
+			.active-users-list
+			{
+				height: 4vw;
+				width: 100%;
+				margin-left:0.5vw;
+				margin-right:0.5vw;
+				overflow: hidden;
+			}
+			
+			.active-users-list-group-container
+			{
+				height: 3vw;
+				width: 1000vw;
+			}
+			
+			.scroll-bar-container
+			{
+				height: 2vw;
+				width: calc(100% - 1vw);
+				background-color:#b4af9a;
+				margin-left:0.5vw;
+				position:relative;
+			}
+			
+			.scroll-bar-text
+			{
+				font-size:1.5vw;
+				text-align:center;
+				color:#dad4bb;
+				font-family: 'VT323', monospace;
+			}
+			
+			.users-list-scroll-left
+			{
+				height:0;
+				width:0;
+				position:absolute;
+				left:0.5vw;
+				top:0.5vw;
+				border-top: 0.5vw solid transparent;
+				border-bottom: 0.5vw solid transparent;
+				border-right: 0.86vw solid #635f54;
+				cursor:pointer;
+			}
+			
+			.users-list-scroll-left:before
+			{
+				content:"";
+				position:absolute;
+				background-color:#635f54;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height: 1vw;
+				width: 0.3vw;
+				top: -0.5vw;
+				right: -1vw;
+				opacity : 0;
+				
+			}
+			
+			.users-list-scroll-left:hover:before
+			{
+				right: -1.5vw;
+				opacity : 1;
+			}
+			
+			.users-list-scroll-right
+			{
+				height:0;
+				width:0;
+				position:absolute;
+				right:0.5vw;
+				top:0.5vw;
+				border-top: 0.5vw solid transparent;
+				border-bottom: 0.5vw solid transparent;
+				border-left: 0.86vw solid #635f54;
+				cursor:pointer;
+			}
+			
+			.users-list-scroll-right:before
+			{
+				content:"";
+				position:absolute;
+				background-color:#635f54;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height: 1vw;
+				width: 0.3vw;
+				top: -0.5vw;
+				left: -1vw;
+				opacity : 0;
+				
+			}
+			
+			.users-list-scroll-right:hover:before
+			{
+				left: -1.5vw;
+				opacity : 1;
+			}
+			
+			.select-group
+			{
+				width:5.6vw;
+				font-size:1vw;
+				margin-right:0.5vw;
+				position:relative;
+				display:inline-block;
+			}
+			
+			.select-group-button
+			{
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				background-color:#b4af9a;
+				color:#dad4bb;
+				border:none;
+				
+				height:3vw;
+				font-size:1.5vw;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				
+				font-family: 'VT323', monospace;
+			}
+			
+			.select-group-button:focus, .select-group-button:active
+			{
+				outline:none;
+				border:none;
+			}
+			
+			.select-group-button:hover
+			{
+				color:#635f54;
+			}
+			
+			.select-group-button::before {
+				content:"";
+				position:absolute;
+				background-color:#b4af9a;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:0px;
+				width:100%;
+				top:100%;
+				left:0;
+				opacity : 0;
+			}
+			
+			.select-group.selected .select-group-button::before
+			{
+				height : 1.7vw;
+				top:100%;
+				opacity : 1;
+			}
+			
+			.select-group-button::after {
+				content:"";
+				position:absolute;
+				background-color:#635f54;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:100%;
+				width:0.5vw;
+				bottom:0;
+				left:0;
+				opacity : 0;
+			}
+			
+			.select-group.selected .select-group-button::after
+			{
+				width : 0.5vw;
+				height:100%;
+				bottom:0;
+				opacity : 1;
+			}
+			
+			.user-active-list
+			{
+				max-height: 12vw;
+				min-height: 12vw;
+				height: 12vw;
+				overflow-y: scroll;
+				padding-top: 0.5vw;
+				margin-left:0.5vw;
+				margin-right:0.5vw;
+			}
+			
+			.user-active
+			{
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				margin-right: 1.5vw;
+				margin-bottom : 1vw;
+				padding-left: 1.5vw;
+				position:relative;
+				cursor:pointer;
+			}
+		
+			.user-active:hover
+			{
+				background-color:#b4af9a;
+				color:#cdc8b0;
+			}
+			
+			.user-active.active
+			{
+				background-color:#b4af9a;
+				color:#cdc8b0;
+			}
+			
+			.user-active-text
+			{
+				font-size:1.5vw;
+				color:#b4af9a;
+				font-family: 'VT323', monospace;
+			}
+			
+			.user-active-text::after {
+				content:"";
+				position:absolute;
+				background-color:#b4af9a;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:2px;
+				width:100%;
+				top:100%;
+				left:0;
+				opacity : 0;
+			}
+			
+			.user-active-text::before {
+				content:"";
+				position:absolute;
+				background-color:#b4af9a;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+				
+				height:2px;
+				width:100%;
+				bottom:100%;
+				left:0;
+				opacity : 0;
+			}
+			
+			.user-active:hover .user-active-text, .user-active.active .user-active-text
+			{
+				color:#635f54;
+			}
+			
+			.user-active.active .user-active-text::before
+			{
+				height : 2px;
+				bottom : 103%;
+				opacity : 0.75;
+				background-color:#b4af9a;
+			}
+			
+			.user-active.active:hover .user-active-text::before
+			{
+				height : 2px;
+				bottom : 103%;
+				opacity : 1;
+				background-color:#b4af9a;
+			}
+			
+			.user-active.active .user-active-text::after
+			{
+				height : 2px;
+				top : 103%;
+				opacity : 0.75;
+				background-color:#b4af9a;
+			}
+			
+			.user-active.active:hover .user-active-text::after
+			{
+				height : 2px;
+				top : 103%;
+				opacity : 1;
+				background-color:#b4af9a;
+			}
+			
+			.user-active-tag
+			{
+				position:absolute;
+				top:0px;
+				right:0px;
+				padding-left:0.5vw;
+				width:3vw;
+				background-color:#635f54;
+				color:#b4af9a;
+				font-size:1.5vw;
+
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-group-methods-container
+			{
+				padding-bottom:0.5vw;
+			}
+			
+			.tutor-qa-input-group-name-container
+			{
+				margin:0.5vw;
+				margin-top:0;
+				height:3vw;
+			}
+			
+			.tutor-qa-input-group-name
+			{
+				width:100%;
+				font-size:1.5vw;
+				background-color:#b4af9a;
+				border:none;
+				border-left:0.5vw solid;
+				border-color:#635f54;
+				padding-left:0.5vw;
+				color:#635f54;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-group-buttons-container
+			{
+				margin-left:0.5vw;
+				margin-right:0.5vw;
+				margin-top:0;
+				height:3vw;
+			}
+			
+			.tutor-qa-center-container
+			{
+				margin-left: 30vw;
+				top: 6.5vw;
+				width: 65vw;
+				height: auto;
+			}
+			
+			.question-composer-container
+			{
+				position:relative;
+				background-color:#DAD4BB;
+				padding-top:3vw;
+			}
+			
+			.question-composer-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				text-align:left;
+				font-family: 'VT323', monospace;
+			}
+			
+			.question-composer-input-container
+			{
+				font-size:1.5vw;
+				margin-left:1.5vw;
+				margin-top:1.5vw;
+				margin-right:1.5vw;
+			}
+			
+			.question-composer-input
+			{
+				width:100%;
+				background-color:#b4af9a;
+				border:none;
+				border-left:0.5vw solid;
+				border-color:#635f54;
+				padding-left:0.5vw;
+				color:#635f54;
+				resize:vertical;
+				font-family: 'VT323', monospace;
+			}
+			
+			.question-composer-groups-list
+			{
+				height: 4vw;
+				margin-left:1.5vw;
+				margin-right:1.5vw;
+				margin-top:1vw;
+				overflow: hidden;
+			}
+			
+			.question-composer-groups-container
+			{
+				height: 3vw;
+				width: 1000vw;
+			}
+			
+			.question-composer-button-container
+			{
+				height:4.5vw;
+				margin:1.5vw;
+			}
+				
+			.tutor-qa-answers-received
+			{
+				position:relative;
+				background-color:#DAD4BB;
+				margin-top:1.5vw;
+				padding-top:3vw;
+			}
+			
+			.tutor-qa-answers-received-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				text-align:left;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-grade-question-container, .student-qa-answer-question-container
+			{
+				position: absolute;
+				right: 0;
+				top: 0;
+				height: 3vw;
+			}
+			
+			.tutor-qa-answers-received-question-container, .student-qa-question-received-description-container
+			{
+				margin:1.5vw;
+			}
+			
+			.tutor-qa-answers-received-question, .student-qa-question-received-description
+			{
+				font-size:2vw;
+				color:#635f54;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-answers-received-divider, .student-qa-question-received-divider
+			{
+				height:0.5vw;
+				margin:1.5vw;
+				width:calc(100% - 3vw);
+				background-color:#b4af9a;
+			}
+			
+			.tutor-qa-received-answer-container, .student-qa-graded-answer-container
+			{
+				position:relative;
+				padding-top:4.5vw;
+			}
+			
+			.tutor-qa-received-answer-header, .student-qa-graded-answer-header
+			{
+				position:absolute;
+				margin-right:1.5vw;
+				margin-left:1.5vw;
+				margin-bottom:1.5vw;
+				width:calc(100% - 3vw);
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#635f54;
+				background-color:#b4af9a;
+				padding-left:1.5vw;
+				padding-right:1.5vw;
+				text-align:left;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-received-answer-status, .student-qa-graded-answer-status
+			{
+				position:absolute;
+				top:0px;
+				right:1.5vw;
+				padding-left:0.5vw;
+				font-size:2vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-received-answer-body, .student-qa-graded-answer-body
+			{
+				margin-right:1.5vw;
+				margin-left:1.5vw;
+				margin-bottom:1.5vw;
+				height:11.5vw;
+				width:calc(100% - 3vw);
+				position:relative;
+			}
+			
+			.tutor-qa-received-answer-description, .student-qa-graded-answer-description
+			{
+				height: 10vw;
+				width: 50%;
+				overflow-y: auto;
+				background-color: #b4af9a;
+				color:#dad4bb;
+				font-size:1.5vw;
+				padding:0.5vw;
+				position:absolute;
+				top:0;
+				left:0;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-explanation-container, .student-qa-explanation-container
+			{
+				position:absolute;
+				top:0;
+				right:0;
+				margin-left: 1.5vw;
+				width: calc(50% - 2vw);
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-explanation, .student-qa-explanation
+			{
+				height:7vw;
+			}
+			
+			.tutor-qa-explanation-input, .student-qa-explanation-input
+			{
+				resize:none;
+				width:100%;
+				height:100%;
+				overflow:auto;
+				font-size:1.5vw;
+				background-color: #b4af9a;
+				padding-left: 0.5vw;
+				color: #635f54;
+				
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+			}
+			
+			.tutor-qa-grade-container, .student-qa-grade-container
+			{
+				height:3vw;
+				font-size:1.5vw;
+			}
+			
+			.grading-button
+			{
+				display:inline-block;
+				color:#dad4bb;
+				float:left;
+				width: 25%;
+				height: 3vw;
+				text-align:center;
+				cursor:pointer;
+				font-size: 2vw;
+				padding: 0;
+				border:none;
+				vertical-align:baseline;
+			}
+			
+			.tutor-qa-prompt-window
+			{
+				z-index : 99;
+				width : 100%;
+				height : 100%;
+				top : 0;
+				left : 0;
+				position : fixed;
+			}
+			
+			.tutor-qa-prompt-overlay
+			{
+				width : 100%;
+				height : 100%;
+				top : 0;
+				left : 0;
+				position : fixed;
+				background : rgba(0,0,0,.7);
+				background-color : rgba(0,0,0,.7);
+			}
+			
+			.tutor-qa-prompt-container
+			{
+				position:fixed;
+				width:40vw;
+				height:auto;
+				background-color:#DAD4BB;
+				left:30vw;
+				top:calc(50% - 10vw);
+			}
+			
+			.tutor-qa-prompt-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				padding-right:1.5vw;
+				text-align:left;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-prompt-text
+			{
+				font-size:1.5vw;
+				color:#635f54;
+				padding-top:4.5vw;
+				padding-left:1.5vw;
+				padding-right:1.5vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-qa-options-container
+			{
+				height:3vw;
+				margin-top:1.5vw;
+			}
+			
+			.student-qa-left-container
+			{
+				left:3.5vw;
+				top:6.5vw;
+				width:20vw;
+				height:auto;
+				position:fixed;
+			}
+			
+			.student-qa-center-container
+			{
+				margin-left: 25vw;
+				top: 6.5vw;
+				width: 50vw;
+				height: auto;
+			}
+			
+			.combat-log-header-container
+			{
+				position:relative;
+				height:4vw;
+			}
+			
+			.combat-log-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				color:#635f54;
+				font-size:3vw;
+				text-shadow: 0.35vw 0.35vw #9a9784;
+				text-align:left;
+			}
+			
+			.student-qa-question-received-container
+			{
+				position:relative;
+				background-color:#DAD4BB;
+				margin-top:1.5vw;
+				padding-top:3vw;
+			}
+			
+			.student-qa-question-received-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				text-align:left;
+				font-family: 'VT323', monospace;
+			}
+			
+			.student-qa-question-received-answers-container
+			{
+				position:relative;
+				padding-top:3vw;
+			}
+			
+			.student-qa-question-received-answer-header
+			{
+				position:absolute;
+				margin-right:1.5vw;
+				margin-left:1.5vw;
+				margin-bottom:1.5vw;
+				width:calc(100% - 3vw);
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#635f54;
+				background-color:#b4af9a;
+				padding-left:1.5vw;
+				padding-right:1.5vw;
+				text-align:left;
+				font-family: 'VT323', monospace;
+			}
+			
+			.student-qa-question-received-vote-count
+			{
+				position:absolute;
+				top:0px;
+				right:1.5vw;
+				padding-left:0.5vw;
+				font-size:2vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.student-qa-question-received-answer
+			{
+				font-size:1.5vw;
+				margin-left:1.5vw;
+				margin-top:1.5vw;
+				margin-right:1.5vw;
+				padding-bottom:1.5vw;
+			}
+			
+			.student-qa-question-received-answer-container
+			{
+				position:relative;
+				width: calc(100% - 17vw);
+				height:10vw;
+				display:inline-block;
+			}
+			
+			.student-qa-question-received-answer-input
+			{
+				width: 100%;
+				height:10vw;
+				resize:none;
+				background-color: #b4af9a;
+				padding-left: 0.5vw;
+				color: #635f54;
+				border:none;
+				border-left: 0.5vw solid #635f54;
+				font-family: 'VT323', monospace;
+			}
+			
+			.student-qa-question-received-avatar-container
+			{
+				background-color: #b4af9a;
+				width: 15vw;
+				height: 10vw;
+				margin-left:1.5vw;
+				display:inline-block;
+				position:relative;
+				border-color: #635f54;
+				-webkit-transition: all 0.2s ease-out;
+				-moz-transition: all 0.2s ease-out;
+				-ms-transition: all 0.2s ease-out;
+				-o-transition: all 0.2s ease-out;
+				transition: all 0.2s ease-out;
+			}
+			
+			.student-qa-question-received-avatar
+			{
+				width : 10vw;
+				height : 100%;
+				margin-left : calc(50% - 5vw);
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			
+			.student-qa-question-received-vote-container
+			{
+				position:absolute;
+				right:0;
+				bottom:0;
+			}
+			
+			.student-qa-question-received-status
+			{
+				font-size:2vw;
+				color:#635f54;
+				margin-left:1.5vw;
+				padding-bottom:1.5vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.student-qa-right-container
+			{
+				position:fixed;
+				left:76.5vw;
+				top:6.5vw;
+				width:20vw;
+				height:auto;
+			}
+			
+			.student-qa-student-details-container
+			{
+				background-color:#DAD4BB;
+				position:relative;
+				padding-top:4.5vw;
+				padding-bottom:1.5vw;
+				box-shadow:0.7vw 0.7vw #9a9784;
+				font-family: 'VT323', monospace;
+				text-align:center;
+			}
+			
+			.student-qa-student-name-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				text-align:left;
+			}
+			
+			.student-qa-student-avatar-container
+			{
+				background-color: #b4af9a;
+				width: calc(100% - 3vw);
+				height: 10vw;
+				margin-left:1.5vw;
+				margin-right:1.5vw;
+			}
+			
+			.student-qa-student-avatar
+			{
+				width : 10vw;
+				height : 10vw;
+				margin-left : calc(50% - 5vw);
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			
+			.student-qa-experience-container
+			{
+				width: calc(100% - 3vw);
+				margin-left:1.5vw;
+				margin-right:1.5vw;
+				height : 2vw;
+				position:relative;
+				background-color:#b4af9a;
+				text-align:center;
+			}
+			
+			.student-qa-level
+			{
+				position:absolute;
+				right:0;
+				bottom:100%;
+				font-size:1.5vw;
+				background-color:#635f54;
+				color:#dad4bb;
+				padding:0.5vw;
+			}
+			
+			.student-qa-experience
+			{
+				position:absolute;
+				left:50%;
+				margin-left:-25%;
+				font-size:1.5vw;
+				color:#635f54;
+			}
+			
+			/*  Overdrive Mode Style */
+
 			.rune
 			{
 				-webkit-transition: all 0.5s ease-out;
@@ -50,12 +1122,14 @@
 				animation: expand 0.2s ease-out;
 				
 				opacity : 1;
+				transform: scale(1);
 				
 				transform-origin : center;
 			}
-			.completed-rune
+			.rune.completed-rune
 			{
 				opacity : 0;
+				transform : scale(3);
 			}
 			
 			.rune-symbol
@@ -73,12 +1147,13 @@
 				animation: expand 0.2s ease-out;
 				
 				opacity : 1;
-				
+				transform : scale(1);
 				transform-origin : center;
 			}
-			.completed-symbol
+			.rune-symbol.completed-symbol
 			{
 				opacity : 0;
+				transform : scale(3);
 			}
 			
 			@keyframes expand
@@ -122,136 +1197,858 @@
 				left : 10% !important;
 			}
 			
-			.user-active
+			.battle-window
 			{
+				z-index : 99;
+				width : 100%;
+				height : 100%;
+				top : 0;
+				left : 0;
+				position : fixed;
+			}
+			
+			.overlay-screen
+			{
+				width : 100%;
+				height : 100%;
+				top : 0;
+				left : 0;
+				position : fixed;
+				background-image: url("/images/bg.png");
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-position: center; 
+				background-size: cover;
+				opacity:0.9;
+			}
+			
+			.student-group
+			{
+				position:fixed;
+			}
+			
+			.student-group-avatar
+			{
+				position : absolute;
+				background-repeat : no-repeat;
+				background-size:cover;		
+				image-rendering:pixelated;
+			}
+			
+			.battle-group-container
+			{
+				height: 3vw;
+				font-size: 2vw;
+				background-color: #b4af9a;
+				position: absolute;
+				right: -7vw;
+				top: 6vw;
+				z-index : 101;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-group-icon
+			{
+				width : 2vw;
+				height : 2vw;
+				margin : 0.5vw;
+				float : left;
+				background-color:red;
+			}
+			
+			.battle-group-name
+			{
+				height: 100%;
+				width:calc(100% - 3.5)vw;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				font-size:2vw;
+				color:#635f54;
+			}
+			
+			.battle-group-identifier-tag
+			{
+				width: 5vw;
+				height: 3vw;
+				font-size: 2vw;
+				position: absolute;
+				text-align: center;
+				color: #dad4bb;
+				background-color: #635f54;
+				right:0;
+				top:0;
+			}
+			
+			.battle-group-selected-tag
+			{
+				width : 0vw;
+				height : 0vw;
+				position : absolute;
+				left : -3vw;
+				opacity : 0;
+				background-color:#635f54;
+				
 				-webkit-transition: all 0.2s ease-out;
 				-moz-transition: all 0.2s ease-out;
 				-ms-transition: all 0.2s ease-out;
 				-o-transition: all 0.2s ease-out;
 				transition: all 0.2s ease-out;
 			}
-		
-			.user-active:hover
-			{
-				background-color:#888888;
-				color:white;
-			}
 			
-			.user-active.active
-			{
-				background-color:#888888;
-				color:white;
-			}
-			
-			.user-active-text::after {
+			.battle-group-selected-tag::before {
 				content:"";
 				position:absolute;
-				background-color:#888888;
+				background-color:#635f54;
 				-webkit-transition: all 0.2s ease-out;
 				-moz-transition: all 0.2s ease-out;
 				-ms-transition: all 0.2s ease-out;
 				-o-transition: all 0.2s ease-out;
 				transition: all 0.2s ease-out;
 				
-				height:2px;
+				height:0.5vw;
 				width:100%;
 				top:100%;
 				left:0;
 				opacity : 0;
 			}
 			
-			.user-active-text::before {
+			.battle-group-selected-tag::after {
 				content:"";
 				position:absolute;
-				background-color:#888888;
+				background-color:#635f54;
 				-webkit-transition: all 0.2s ease-out;
 				-moz-transition: all 0.2s ease-out;
 				-ms-transition: all 0.2s ease-out;
 				-o-transition: all 0.2s ease-out;
 				transition: all 0.2s ease-out;
 				
-				height:2px;
+				height:0.5vw;
 				width:100%;
 				bottom:100%;
 				left:0;
 				opacity : 0;
 			}
 			
-			.user-active.active .user-active-text::before
+			.battle-group-container.selected .battle-group-selected-tag::after
 			{
 				height : 2px;
-				bottom : 103%;
-				opacity : 0.75;
-				background-color:#888888;
-			}
-			
-			.user-active.active:hover .user-active-text::before
-			{
-				height : 2px;
-				bottom : 103%;
+				bottom: 110%;
 				opacity : 1;
-				background-color:#888888;
 			}
 			
-			.user-active.active .user-active-text::after
+			.battle-group-container.selected .battle-group-selected-tag::before
 			{
 				height : 2px;
-				top : 103%;
-				opacity : 0.75;
-				background-color:#888888;
-			}
-			
-			.user-active.active:hover .user-active-text::after
-			{
-				height : 2px;
-				top : 103%;
+				top:110%;
 				opacity : 1;
-				background-color:#888888;
 			}
 			
-			.select-group-button::before {
-				content:"";
+			.battle-group-container.selected .battle-group-selected-tag
+			{
+				opacity : 1;
+				width : 3vw;
+				height : 3vw;
+				left : -4.5vw;
+			}
+			
+			.battle-group-container.selected:hover .battle-group-selected-tag
+			{
+				opacity : 1;
+				width : 3vw;
+				height : 3vw;
+				left : -4.5vw;
+				top:0;
+			}
+			
+			.battle-group-container:hover .battle-group-selected-tag
+			{
+				opacity: 1;
+				width: 1.5vw;
+				height: 1.5vw;
+				left: -3vw;
+				top: 0.75vw;
+			}
+			
+			.tutor-group
+			{
+				bottom : 50%;
+				position : fixed;
+				left : 3vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.tutor-avatar
+			{
+				position : absolute;
+				z-index : 100;
+			}
+			
+			.tutor-battle-info-container
+			{
+				position : absolute;
+				height : 7vw;
+				left : 0;
+				z-index : 100;
+				background-color:#dad4bb;
+			}
+			
+			.tutor-battle-info-header
+			{
 				position:absolute;
-				background-color:#888888;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:0px;
 				width:100%;
-				top:100%;
-				left:0;
-				opacity : 0;
+				height:3vw;
+				left:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				z-index : 1;
 			}
 			
-			.select-group.selected .select-group-button::before
+			.tutor-battle-info
 			{
-				height : 1.7vw;
-				top:100%;
-				opacity : 1;
+				position : absolute;
+				width : 100%;
+				height : 100%;
+				overflow : hidden;
+				font-family: 'VT323', monospace;
 			}
 			
+			.tutor-battle-loot-details
+			{
+				width : 100%;
+				height : 2vw;
+				font-size : 1.5vw;
+				margin-left : 1.5vw;
+				margin-top : 3vw;
+			}
+			
+			.tutor-battle-overdrive-bar
+			{
+				position: absolute;
+				z-index : 100;
+				width : 100%;
+				height : 2vw;
+				bottom: 0;
+			}
+			
+			.tutor-battle-overdrive-details
+			{
+				width: 100%;
+				height: 2vw;
+				font-size:1.5vw;
+				color:#635f54;
+				bottom: 0;
+				position: absolute;
+				z-index: 101;
+				text-align: center;
+			}
+			
+			.effect
+			{
+				transform : scale(0);
+				opacity : 0;
+				z-index : 0;
+				position : fixed;
+			}
+			
+			.tutor-battle-target-prompt
+			{
+				width:30vw;
+				height:5vw;
+				position:fixed;
+				left:calc(50% - 15vw);
+				top:calc(50% - 2.5vw);
+				font-size:3vw;
+				color:#635f54;
+				font-family: 'VT323', monospace;
+				text-align:center;
+			}
+			
+			.timer-container
+			{
+				position : fixed;
+				top : 0;
+				left : 50%;
+				width : 100%;
+				height : 2vw;
+				margin-left : -50%;
+				z-index:99;
+			}
+			
+			.battle-ranking-overlay
+			{
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				position:absolute;
+				background-color:rgba(0,0,0,.7);
+			}
+			
+			.battle-ranking-container
+			{
+				width : 70vw;
+				height : 40vw;
+				top : calc(50% - 20vw);
+				left : 15vw;
+				position : fixed;
+				background-color : #cdc8b0;
+				padding:0;
+				box-shadow:0.7vw 0.7vw #9a9784;
+			}
+			
+			.battle-ranking-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-ranking-details-container
+			{
+				position : absolute;
+				width : 100%;
+				height : 100%;
+			}
+			
+			.battle-ranking-mvp-banner
+			{
+				position: absolute;
+				width: 100%;
+				height: 20vw;
+				font-size: 15vw;
+				color: #635f54;
+				padding-left: 1.5vw;
+				text-shadow: 0.7vw 0.7vw #9a9784;
+				text-align: center;
+				font-family: 'VT323', monospace;
+				left: -100%;
+				
+				-webkit-animation: slide-inout 3s ease-in-out;
+				-moz-animation: slide-inout 3s ease-in-out;
+				-ms-animation: slide-inout 3s ease-in-out;
+				-o-animation: slide-inout 3s ease-in-out;
+				animation: slide-inout 3s ease-in-out;
+			}
+			
+			@keyframes slide-inout
+			{
+				0% { left:-100%; }
+				20% { left:0%; }
+				80% { left:0% }
+				100% { left:100% }
+				
+			}
+			
+			.battle-ranking-mvp-container
+			{
+				position: absolute;
+				bottom : 18vw;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-ranking-mvp-sprite
+			{
+				width : 24vw;
+				height : 24vw;
+				position: absolute;
+				margin-left : -12vw;
+				bottom : 0;
+			}
+			
+			.battle-ranking-mvp-label-container
+			{
+				width : 100%;
+				height : 100%;
+				position : absolute;
+				bottom : 0;
+			}
+			
+			.battle-ranking-mvp-questions-answered
+			{
+				width : 100%;
+				font-size : 8vw;
+				line-height: 4vw;
+				padding-top:3vw;
+				text-align : center;
+				color:#5bc0de;
+			}
+			
+			.battle-ranking-mvp-questions-answered-label
+			{
+				width : 100%;
+				height : 3vw;
+				font-size : 2vw;
+				text-align : center;
+				color:#5bc0de;
+			}
+			
+			.battle-ranking-mvp-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				bottom:0;
+				font-size:2vw;
+				color:#635f54;
+				background-color:#b4af9a;
+			}
+			
+			.battle-ranking-mvp-icon
+			{
+				width : 2vw;
+				height : 2vw;
+				margin : 0.5vw;
+				float : left;
+			}
+			
+			.battle-ranking-mvp-username
+			{
+				height: 100%;
+				width: calc(100% - 3.5vw);
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			
+			.battle-ranking-mvp-identifier-tag
+			{
+				width: 5vw;
+				height: 3vw;
+				font-size: 2vw;
+				position: absolute;
+				text-align: center;
+				color: #dad4bb;
+				background-color: #635f54;
+				right:0;
+				top:-3vw;
+			}
+			
+			.battle-ranking-rewards-container
+			{
+				width : 25vw;
+				height : 15vw;
+				position : absolute;
+				bottom : 1.5vw;
+				left : 1.5vw;
+				background-color:#dad4bb;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-ranking-rewards-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#b4af9a;
+				padding-left:1.5vw;
+				z-index : 1;
+			}
+			
+			.battle-ranking-rewards
+			{
+				position : absolute;
+				width : 100%;
+				height : 100%;
+				overflow : hidden;
+			}
+			
+			.battle-ranking-rewards-overdrive
+			{
+				width : 100%;
+				height : 3vw;
+				font-size : 2vw;
+				margin-left : 1.5vw;
+				margin-top : 3vw;
+				color:#b4af9a;
+			}
+			
+			.battle-ranking-rewards-loot
+			{
+				width : 100%;
+				height : 3vw;
+				font-size : 2vw;
+				margin-left : 1.5vw;
+				color:#b4af9a;
+			}
+			
+			.battle-ranking-tier-container
+			{
+				width : 14vw;
+				height : 15vw;
+				position : absolute;
+				bottom : 1.5vw;
+				left : 28vw;
+				background-color:#dad4bb;
+				box-shadow:0.7vw 0.7vw #9a9784;
+			}
+			
+			.battle-ranking-tier
+			{
+				position : absolute;
+				width : 100%;
+				height : 5vw;
+				font-size : 5vw;
+				font-weight:bold;
+				color:#635f54;
+				text-align : center;
+				text-transform:uppercase;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-ranking-members-container
+			{
+				width : 25vw;
+				height : 15vw;
+				position : absolute;
+				bottom : 1.5vw;
+				right : 1.5vw;
+				overflow-y : scroll;
+			}
+			
+			.battle-ranking-member
+			{
+				width : calc(100% - 2.5vw);
+				height : 3vw;
+				font-size : 2vw;
+				margin-bottom : 1.5vw;
+				margin-left : 1.5vw;
+				background-color:#b4af9a;
+				color:#dad4bb;
+				position:relative;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-ranking-member-rank
+			{
+				width : 2vw;
+				height : 2vw;
+				margin : 0.5vw;
+				float : left;
+			}
+			
+			.battle-ranking-member-name
+			{
+				height: 100%;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			
+			.battle-ranking-member-identifier-tag
+			{
+				width: 5vw;
+				height: 3vw;
+				font-size: 2vw;
+				position: absolute;
+				text-align: center;
+				color: #dad4bb;
+				background-color: #635f54;
+				right:0;
+				top:0;
+			}
+			
+			.battle-ranking-timer-container
+			{
+				position: absolute;
+				top: -1.5vw;
+				left: 50%;
+				width: 100%;
+				height: 1.5vw;
+				margin-left: -50%;
+				z-index:-1;
+			}
+			
+			.battle-start-splash-overlay
+			{
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				position:absolute;
+			}
+			
+			.battle-start-splash-background
+			{
+				width : 100%;
+				height : 100%;
+				top : 0;
+				left : 0;
+				position : fixed;
+				background : rgba(0,0,0,1);
+				background-color : rgba(0,0,0,1);
+			}
+			
+			.battle-start-splash-text
+			{
+				font-size: 20vw;
+				color: white;
+				position: fixed;
+				width: 100%;
+				height: auto;
+				margin-left: -50%;
+				margin-top: -20%;
+				text-align: center;
+				top: 50%;
+				left: 50%;
+				text-shadow: 0.7vw 0.7vw gray;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-loot-overlay
+			{
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				position:absolute;
+				background-color:rgba(0,0,0,.7);
+			}
+			
+			.battle-loot-container
+			{
+				width: 35vw;
+				height: 30vw;
+				top: calc(50% - 15vw);
+				left: 12.5vw;
+				position: fixed;
+				padding-top : 3vw;
+				background-color: #DAD4BB;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-loot-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				top:0;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				z-index : 1;
+			}
+			
+			.battle-loot-list
+			{
+				width : 100%;
+				height : calc(100% - 6vw);
+				position : absolute;
+				padding-top : 1.5vw;
+				overflow-y : scroll;
+			}
+			
+			.battle-loot-item-container
+			{
+				width : calc(100% - 2.5vw);
+				height : 3vw;
+				font-size : 2vw;
+				margin-bottom : 1.5vw;
+				margin-left : 1.5vw;
+				padding-left: 1.5vw;
+				position:relative;
+				cursor:pointer;
+				font-family: 'VT323', monospace;
+				background-color:none;
+				color:#635f54;
+				
+				-webkit-transition: all 0.5s ease-out;
+				-moz-transition: all 0.5s ease-out;
+				-ms-transition: all 0.5s ease-out;
+				-o-transition: all 0.5s ease-out;
+				transition: all 0.5s ease-out;
+			}
+			
+			.battle-loot-item-container.active
+			{
+				background-color:#635f54;
+				color:#dad4bb;
+			}
+			
+			.battle-loot-item-pointer
+			{
+				width : 0;
+				height : 0;
+				position : absolute;
+				right : 0.5vw;
+				top : 0.5vw;
+				background-color : #dad4bb;
+				
+				-webkit-transition: all 0.5s ease-out;
+				-moz-transition: all 0.5s ease-out;
+				-ms-transition: all 0.5s ease-out;
+				-o-transition: all 0.5s ease-out;
+				transition: all 0.5s ease-out;
+			}
+			
+			.battle-loot-item-container.active .battle-loot-item-pointer
+			{
+				width : 2vw;
+				height : 2vw;
+			}
+			
+			.battle-loot-item-name
+			{
+				width: 100%;
+				height: 100%;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			
+			.battle-loot-info-container
+			{
+				width: 35vw;
+				height: 30vw;
+				top: calc(50% - 15vw);
+				left: 52.5vw;
+				position: fixed;
+				background-color: #DAD4BB;
+				font-family: 'VT323', monospace;
+			}
+			
+			.battle-loot-empty-header
+			{
+				position:absolute;
+				width:100%;
+				height:10vw;
+				top:50%;
+				left:0;
+				font-size:8vw;
+				color:#635f54;
+				margin-top:-5vw;
+				text-align:center;
+				z-index : 1;
+			}
+			
+			.battle-loot-info-header
+			{
+				position:absolute;
+				width:100%;
+				height:3vw;
+				left:0px;
+				font-size:2vw;
+				color:#dad4bb;
+				background-color:#635f54;
+				padding-left:1.5vw;
+				z-index : 1;
+			}
+			
+			.battle-loot-image-container
+			{
+				background-color: #b4af9a;
+				width: 32vw;
+				height: 10vw;
+				top: 4.5vw;
+				left: 1.5vw;
+				position: absolute;
+			}
+			
+			.battle-loot-image
+			{
+				width : 10vw;
+				height : 10vw;
+				margin-left : 11vw;
+				background-repeat : no-repeat;
+				background-size: cover;
+			}
+			
+			.battle-loot-details-container
+			{
+				position: absolute;
+				width: calc(100% - 3vw);
+				height: 12.5vw;
+				overflow: hidden;
+				top: 16vw;
+				left: 1.5vw;
+				color:#635f54;
+			}
+			
+			.battle-loot-details
+			{
+				width: 100%;
+				height: 3vw;
+				font-size: 2vw;
+			}
+			
+			.battle-loot-details-long
+			{
+				width: 100%;
+				height: 6vw;
+				font-size: 1.5vw;
+			}
+			
+			.battle-end-splash-overlay
+			{
+				width : 100%;
+				height : 100%;
+				top : 0;
+				left : 0;
+				position : fixed;
+				background : rgba(0,0,0,1);
+				background-color : rgba(0,0,0,1);
+			}
+			
+			.battle-end-splash-text
+			{
+				font-size: 20vw;
+				color: white;
+				position: fixed;
+				width: 100%;
+				height: auto;
+				margin-left: -50%;
+				margin-top: -20%;
+				text-align: center;
+				top: 50%;
+				left: 50%;
+				text-shadow: 0.7vw 0.7vw gray;
+				font-family: 'VT323', monospace;
+			}
 		</style>
     </head>
 
     <body ng-app="lobbyApp">
-	
-		<ul id="header"
-		style="
-			height:5vw;
-			margin-bottom:1.5vw;
-		"> <!-- Header -->
-			<li class="header">
-				<a class="active font headerGeneralFontSize" href="/">Index Page</a>
+		
+		<ul id="header"> <!-- Header -->
+			<li class="header"
+			style="
+				margin-right:3.5vw;
+			">
+				<div class="link-flourish">
+				</div>
+				<a class="font" href="/">Index</a>
 			</li>
 		
 			<li class="header">
-				<a class="active font headerGeneralFontSize" href="/dashboard">Dashboard Page</a>
+				<div class="link-flourish">
+				</div>
+				<a class="font" href="/dashboard">Dashboard</a>
 			</li>
+			
+			<div class="header-flourish">
+			</div>
 		</ul>
 	
+		<div class="header-padding"
+		style="
+			width:100%;
+			height:6.8vw;
+		"></div>
+		
 		<div ng-controller="socketCtrl" class="container" id="header-bar"> <!-- Title Box -->
 			<!--<div class="row">
 				<div class="text-center col-md-12 col-sm-12 col-xs-12">
@@ -260,189 +2057,88 @@
 			</div>-->
 		</div>
 		
+		<!-- Student Battle Overlay -->
 		<div ng-controller="studentBattleCtrl">
-			<div ng-if="showBattleWindow == true  && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'" id="student-battle-window" class="battle-window"
-			style = "
-			z-index : 99;
-			width : 100%;
-			height : 100%;
-			top : 0;
-			left : 0;
-			position : fixed;
-			">
+			<div id="student-battle-window" class="battle-window"
+			ng-if="showBattleWindow == true  && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
 				<!-- Background screen -->
-				<div
-				style = "
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-				background : rgba(0,0,0,.7);
-				background-color : rgba(0,0,0,.7);
-				opacity : 0.7;
-				"
-				>
+				<div class="overlay-screen">
 				</div>
 				
 				<!-- Avatars of students -->
 				<div class="student-group"
 				ng-repeat="group in groups"
 				id="group-{{group.groupName}}"
-				ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}"
-				style="
-					position : fixed;
-				">
+				ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}">
 					<div class="student-group-avatar"
 					id="student-{{student.userId}}"
 					ng-repeat="student in group.members"
 					style="
-						width: {{student.avatarWidth}}vw;
-						height: {{student.avatarHeight}}vw;
+						width: {{student.userAvatar.width}}vw;
+						height: {{student.userAvatar.height}}vw;
 						bottom: {{student.displacementBottom}}vw;
 						right: {{student.displacementRight * $index}}vw;
-						margin-right: {{student.avatarWidth * -0.5}}vw;
-						margin-bottom: {{student.avatarHeight * -0.5}}vw;
-						position : absolute;
+						margin-right: {{student.userAvatar.width * -0.5}}vw;
+						margin-bottom: {{student.userAvatar.height * -0.5}}vw;
 						z-index : {{100 - $index}};
-						background : url({{student.userAvatar}}) no-repeat;
-						background-size: cover;
+						background-image : url('{{student.currentAnim}}');
 						-webkit-filter:brightness({{ student.userId == userId ? 100 : 70}}%);
 						filter:brightness({{ student.userId == userId ? 100 : 70}}%);
-						image-rendering:pixelated;
 					">
 					</div>
-					<div class="group-row-container"
+					
+					<!-- Group marker for the battle to identify clusters of student avatars -->
+					<div class="battle-group-container"
 					style="
-					width: {{tutorAvatar.avatarWidth}}vw;
-					height: 3vw;
-					font-size: 2vw;
-					background-color: #888888;
-					position: absolute;
-					right: -7vw;
-					top: 6vw;
-					z-index : 101;
+					width: {{tutorAvatar.width}}vw;
 					">
-						<div class="group-icon smoothImage"
+						<div class="battle-group-icon smoothImage"
 						style="
-							width : 2vw;
-							height : 2vw;
-							margin : 0.5vw;
-							float : left;
-							background-color:red;
 							-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
 							filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
 						">
 						</div>
-						<div class="group-name"
+						<div class="battle-group-name"
 						style="
 							width: calc(100% - {{group.groupName == groupName ? 8.5 : 3.5}}vw);
-							height: 100%;
-							text-overflow: ellipsis;
-							overflow: hidden;
-							white-space: nowrap;
 						">
 							{{group.groupName}}
 						</div>
-						<div class="member-name"
-							ng-show="group.groupName == groupName"
-							style="
-								width: 5vw;
-								height: 3vw;
-								font-size: 2vw;
-								position: absolute;
-								text-align: center;
-								color: white;
-								background-color: green;
-								right:0;
-								top:0;
-							">
+						
+						<!-- Mark groups that the player belongs to -->
+						<div class="battle-group-identifier-tag"
+							ng-show="group.groupName == groupName">
 								You
 						</div>
 					</div>
 				</div>
 				
 				<!-- Avatar of tutor -->
-				<div class="tutor-avatar-group"
-					id="tutor-avatar-group"
-					style="
-						bottom : 50%;
-						position : fixed;
-						left : 3vw;
-					">
+				<div class="tutor-group"
+					id="tutor-group">
 					<div class="tutor-avatar"
-						ng-style="{'width' : tutorAvatar.avatarWidth + 'vw', 'height' : tutorAvatar.avatarHeight + 'vw',
-								'margin-top' : tutorAvatar.avatarHeight * -0.5 + 'vw'}"
-						style="
-							position : absolute;
-							z-index : 100;
-							background : yellow;
-						">
+						ng-style="{'width' : tutorAvatar.width + 'vw', 'height' : tutorAvatar.height + 'vw',
+								'margin-top' : tutorAvatar.height * -0.5 + 'vw', 'background' : 'url(' + tutorAvatar.currentAnim + ') no-repeat', 'background-size' : 'cover'}">
 					</div>
 					
-					<div class="tutor-battle-panel-container"
+					<div class="tutor-battle-info-container"
 					style="
-						width : {{tutorAvatar.avatarWidth}}vw;
-						height : 7vw;
-						position : absolute;
-						bottom : {{tutorAvatar.avatarHeight * -0.5}}vw;
-						left : 0;
-						z-index : 100;
-						background-color:red;
+						width : {{tutorAvatar.width}}vw;
+						bottom : {{tutorAvatar.height * -0.5}}vw;
 					">
-						<div class="tutor-battle-panel-header"
-						style="
-							position:absolute;
-							width:100%;
-							height:3vw;
-							left:0px;
-							font-size:2vw;
-							color:white;
-							background-color:#888888;
-							padding-left:1.5vw;
-							z-index : 1;
-						">
-							{{tutorAvatar.tutorName}}
+						<div class="tutor-battle-info-header">
+							{{tutorAvatar.username}}
 						</div>
-						<div class="tutor-battle-container"
-						style="
-							position : absolute;
-							width : 100%;
-							height : 100%;
-							overflow : hidden;
-						">
-							<div class="tutor-label-details-container"
-							style="
-								width : 100%;
-								height : 2vw;
-								font-size : 1.5vw;
-								margin-left : 1.5vw;
-								margin-top : 3vw;
-							">
+						<div class="tutor-battle-info">
+							<div class="tutor-battle-loot-details">
 								Bonus Loot: +{{totalDeath}}
 							</div>
 						</div>
-						<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
-						style= "
-							position: absolute;
-							z-index : 100;
-							width : 100%;
-							height : 2vw;
-							bottom: 0;
-						">
+						<div class="tutor-battle-overdrive-bar">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
 							</div>
 						</div>
-						<div class="tutor-label-details-container"
-						style="
-						width: 100%;
-						height: 2vw;
-						font-size: 1.5vw;
-						bottom: 0;
-						position: absolute;
-						z-index: 101;
-						text-align: center;
-						">
+						<div class="tutor-battle-overdrive-details">
 								Health: {{health}} / {{maxHealth}}
 						</div>
 					</div>
@@ -464,10 +2160,6 @@
 				-ms-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
 				-o-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
 				transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
-				transform : scale(0);
-				opacity : 0;
-				z-index : 0;
-				position : fixed;
 				">
 				</div>
 				
@@ -485,7 +2177,7 @@
 						margin-right : {{rune.width * -0.5}}vw;
 						
 						position : fixed;
-						background : white;
+						background : #DAD4BB;
 					">
 					<div class="rune-symbol"
 						ng-repeat="symbol in rune.symbols"
@@ -504,389 +2196,118 @@
 				</div>
 				
 				<!-- Battle timer -->
-				<div class="timer-container"
-					style="
-						position : fixed;
-						top : 0;
-						left : 50%;
-						width : 100%;
-						height : 2vw;
-						margin-left : -50%;
-					">
+				<div class="timer-container">
 					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{currentTime/battleDuration * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{currentTime/battleDuration * 100}}%">
 					</div>
 				</div>
 				
 				<!-- Splash screen -->
-				<div ng-show="showSplash == true" id="battle-splash-overlay" class="battle-splash-container"
-				style ="
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				background-color:rgba(255,0,0,.5);
-				"
-				>
-					<div class="group-ranking-container" id="group-ranking-container"
-					ng-repeat="group in rankedGroups"
-					style="
-					width : 70vw;
-					height : 40vw;
-					top : calc(50% - 20vw);
-					left : 15vw;
-					position : fixed;
-					background-color : white;
-					padding:0;
-					box-shadow:0.7vw 0.7vw #888888;
-					">
-						<div class="group-name-header"
-						style="
-							position:absolute;
-							width:100%;
-							height:3vw;
-							left:0px;
-							font-size:2vw;
-							color:white;
-							background-color:#888888;
-							padding-left:1.5vw;
-						">
+				<div ng-show="showSplash == true" id="battle-ranking-overlay" class="battle-ranking-overlay">
+					<div class="battle-ranking-container" id="battle-ranking-container"
+					ng-repeat="group in rankedGroups">
+						<div class="battle-ranking-header">
 							{{group.groupName}}
-						<div class="group-color-tag"
-						style="
-							width: 10vw;
-							height: 3vw;
-							font-size: 2vw;
-							position: absolute;
-							text-align: center;
-							color: white;
-							background-color: red;
-							-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-							filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-							right:0;
-							top:0;
-						">
+							<!--<div class="group-color-tag"
+							style="
+								width: 10vw;
+								height: 3vw;
+								font-size: 2vw;
+								position: absolute;
+								text-align: center;
+								color: white;
+								background-color: red;
+								-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+								filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
+								right:0;
+								top:0;
+							">
+							</div>-->
 						</div>
-						</div>
-						<div class="group-members-container"
-						style="
-							position : absolute;
-							width : 100%;
-							height : 100%;
-						">
-							<div class="mvp-icon-container"
+						<div class="battle-ranking-details-container">
+							<div class="battle-ranking-mvp-banner">
+								MVPs
+							</div>
+							
+							<div class="battle-ranking-mvp-container"
 							ng-repeat="member in group.topMembers"
 							style="
 								width : {{member.size}}vw;
 								height : {{member.size}}vw;
-								position: absolute;
-								bottom : 18vw;
 								margin-left: {{member.size * -0.5}}vw;
 								left : {{member.positionLeft}}%;
 							">
-								<div class="mvp-icon smoothImage"
+								<div class="battle-ranking-mvp-sprite smoothImage"
+								ng-style="{'background' : 'url(' + member.userAvatar.idleAnim + ') no-repeat', 'background-size' : 'cover'}"
 								style="
-									width : 24vw;
-									height : 24vw;
-									background : url({{member.userAvatar}}) no-repeat;
-									background-size: cover;
-									position: absolute;
-									margin-left : -12vw;
 									left : {{member.size * 0.5}}vw;
-									bottom : 0;
 								">
 								</div>
-								<div class="mvp-label-container"
-								style="
-									width : 100%;
-									height : 100%;
-									position : absolute;
-									bottom : 0;
-								">
-									<div class="mvp-label-details-container"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 3vw;
-										text-align : center;
-									">
-										{{member.answersSubmitted}} / {{group.totalQuestions}}
+								<div class="battle-ranking-mvp-label-container">
+									<div class="battle-ranking-mvp-questions-answered">
+										{{member.answersSubmitted}}
 									</div>
 									
-									<div class="mvp-label-details-container"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 1.5vw;
-										text-align : center;
-									">
+									<div class="battle-ranking-mvp-questions-answered-label">
 										Questions answered
 									</div>
 									
-									<div class="mvp-label-header"
-									style="
-										position:absolute;
-										width:100%;
-										height:3vw;
-										left:0px;
-										bottom:0;
-										font-size:2vw;
-										color:white;
-										background-color:#888888;
-									">
-										<div class="mvp-icon smoothImage"
-										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
-										style="
-											width : 2vw;
-											height : 2vw;
-											margin : 0.5vw;
-											float : left;
-										">
+									<div class="battle-ranking-mvp-header">
+										<div class="battle-ranking-mvp-icon smoothImage"
+										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}">
 										</div>
-										<div class="mvp-name"
-										style="
-											width: calc(100% - 3.5vw);
-											height: 100%;
-											text-overflow: ellipsis;
-											overflow: hidden;
-											white-space: nowrap;
-										">
+										
+										<div class="battle-ranking-mvp-username">
 											{{member.username}}
 										</div>
-										<div class="member-name"
-										ng-show="member.userId == userId"
-										style="
-											width: 5vw;
-											height: 3vw;
-											font-size: 2vw;
-											position: absolute;
-											text-align: center;
-											color: white;
-											background-color: green;
-											right:0;
-											top:-3vw;
-										">
+										<div class="battle-ranking-mvp-identifier-tag"
+										ng-show="member.userId == userId">
 											You
 										</div>
 									</div>
 								</div>
 							</div>
 							
-							<div class="rewards-panel-container"
-							style="
-								width : 25vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								left : 1.5vw;
-								background-color:red;
-							">
-								<div class="rewards-panel-header"
-								style="
-									position:absolute;
-									width:100%;
-									height:3vw;
-									left:0px;
-									font-size:2vw;
-									color:white;
-									background-color:#888888;
-									padding-left:1.5vw;
-									z-index : 1;
-								">
+							<div class="battle-ranking-rewards-container">
+								<div class="battle-ranking-rewards-header">
 									Rewards
 								</div>
-								<div class="rewards-container"
-								style="
-									position : absolute;
-									width : 100%;
-									height : 100%;
-									overflow : hidden;
-								">
-									<div class="mvp-label-details-container"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 2vw;
-										margin-left : 1.5vw;
-										margin-top : 3vw;
-									">
+								<div class="battle-ranking-rewards">
+									<div class="battle-ranking-rewards-overdrive">
 										Overdrive Time: +{{group.overdriveDuration/1000.0}}s
 									</div>
-									<div class="mvp-label-details-container"
-									ng-if="groupName == group.groupName"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 2vw;
-										margin-left : 1.5vw;
-									">
+									<div class="battle-ranking-rewards-loot"
+									ng-if="groupName == group.groupName">
 										Bonus Loot: +{{bonusLootAmount}}
 									</div>
 								</div>
 							</div>
 							
-							<div class="tier-panel-container"
-							style="
-								width : 14vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								left : 28vw;
-								background-color:red;
-								box-shadow:0.7vw 0.7vw #888888;
-							">
-								<div class="tier-container"
-								style="
-									position : absolute;
-									width : 100%;
-									height : 100%;
-									font-size : 4vw;
-									text-align : center;
-								">
+							<div class="battle-ranking-tier-container">
+								<div class="battle-ranking-tier">
 									{{group.ranking}}
 								</div>
 							</div>
 
-							<div class="members-container"
-							style="
-								width : 25vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								right : 1.5vw;
-								overflow-y : scroll;
-							">
-								<div class="member-label-container"
-								ng-repeat="member in group.allMembers"
-								style="
-									width : calc(100% - 2.5vw);
-									height : 3vw;
-									font-size : 2vw;
-									margin-bottom : 1.5vw;
-									margin-left : 1.5vw;
-									background-color:#888888;
-									position:relative;
-								">
-									<div class="member-icon smoothImage"
-									ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
-									style="
-										width : 2vw;
-										height : 2vw;
-										margin : 0.5vw;
-										float : left;
-									">
+							<div class="battle-ranking-members-container">
+								<div class="battle-ranking-member"
+								ng-repeat="member in group.allMembers">
+									<div class="battle-ranking-member-rank smoothImage"
+									ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}">
 									</div>
-									<div class="member-name"
+									<div class="battle-ranking-member-name"
 									style="
 										width: calc(100% - {{member.userId == userId ? 8.5 : 3.5}}vw);
-										height: 100%;
-										text-overflow: ellipsis;
-										overflow: hidden;
-										white-space: nowrap;
 									">
 										{{member.username}}
 									</div>
-									<div class="member-name"
-										ng-show="member.userId == userId"
-										style="
-											width: 5vw;
-											height: 3vw;
-											font-size: 2vw;
-											position: absolute;
-											text-align: center;
-											color: white;
-											background-color: green;
-											right:0;
-											top:0;
-										">
-											You
+									<div class="battle-ranking-member-identifier-tag"
+									ng-show="member.userId == userId">
+										You
 									</div>
 								</div>
 							</div>
-							<!--
-							<div class="members-panel-container"
-							style="
-								width : 25vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								right : 1.5vw;
-								background-color:red;
-							">
-								<div class="members-panel-header"
-								style="
-									position:absolute;
-									width:100%;
-									height:3vw;
-									left:0px;
-									font-size:2vw;
-									color:white;
-									background-color:#888888;
-									padding-left:1.5vw;
-								">
-									Members
-								</div>
-								<div class="members-container"
-								style="
-									position : absolute;
-									width : 100%;
-									height : 100%;
-									overflow-y : scroll;
-								">
-									<div class="member-label-container"
-									style="
-										width : calc(100% - 3vw);
-										height : 3vw;
-										font-size : 2vw;
-										margin-left : 1.5vw;
-									">
-									</div>
-									
-									<div class="member-label-container"
-									ng-repeat="member in group.allMembers"
-									style="
-										width : calc(100% - 3vw);
-										height : 3vw;
-										font-size : 2vw;
-										margin-top : 1.5vw;
-										margin-left : 1.5vw;
-										background-color:#888888;
-									">
-										<div class="member-icon smoothImage"
-										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat',
-													'background-size' : 'cover'}"
-										style="
-											width : 2vw;
-											height : 2vw;
-											margin : 0.5vw;
-											float : left;
-										">
-										</div>
-										<div class="member-name"
-										style="
-											width: calc(100% - 3.5vw);
-											height: 100%;
-											text-overflow: ellipsis;
-											overflow: hidden;
-											white-space: nowrap;
-										">
-											{{member.username}}
-										</div>
-										
-									</div>
-								</div>
-							</div>
-							-->
 						</div>
-						<div class="group-ranking-timer-container"
-							style="
-							position: absolute;
-							top: -1.5vw;
-							left: 50%;
-							width: 100%;
-							height: 1.5vw;
-							margin-left: -50%;
-							">
+						<div class="battle-ranking-timer-container">
 							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{group.currentTime/group.totalDisplayTime * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{group.currentTime/group.totalDisplayTime * 100}}%">
 							</div>
 						</div>
@@ -894,270 +2315,95 @@
 				</div>
 				
 				<!-- Start splash screen -->
-				<div ng-if="showStartSplash == true" id="start-splash-overlay" class="start-splash-container"
-				style ="
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				"
-				>
+				<div ng-if="showStartSplash == true" id="battle-start-splash-overlay" class="battle-start-splash-overlay">
 					<!-- Background screen -->
 					<div
-					class="start-splash-background"
-					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}"
-					style="
-					width : 100%;
-					height : 100%;
-					top : 0;
-					left : 0;
-					position : fixed;
-					background : rgba(255,255,255,1);
-					background-color : rgba(255,255,255,1);
-					"
-					>
-						<div class="start-splash-text font"
-						style="
-						font-size: 20vw;
-						color: red;
-						position: fixed;
-						width: 100%;
-						height: auto;
-						margin-left: -50%;
-						margin-top: -20%;
-						text-align: center;
-						top: 50%;
-						left: 50%;
-						text-shadow: 0.7vw 0.7vw #999999;
-						">
+					class="battle-start-splash-background"
+					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}">
+						<div class="battle-start-splash-text">
 						OVERDRIVE
 						</div>
 					</div>
 				</div>	
 				
 				<!-- End Splash screen -->
-				<div ng-show="showEndSplash == true" id="battle-splash-overlay" class="battle-splash-container"\
-				style ="
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				background-color:rgba(0,0,0,.5);
-				"
-				>
-					<div class="loot-list-container" id="loot-list-container"
-					style="
-					width: 35vw;
-					height: 30vw;
-					top: calc(50% - 15vw);
-					left: 12.5vw;
-					position: fixed;
-					padding-top : 3vw;
-					background-color: white;
-					">
-						<div class="loot-list-header"
-						style="
-							position:absolute;
-							width:100%;
-							height:3vw;
-							left:0px;
-							top:0;
-							font-size:2vw;
-							color:white;
-							background-color:#888888;
-							padding-left:1.5vw;
-							z-index : 1;
-						">
+				<div ng-show="showEndSplash == true" id="battle-loot-overlay" class="battle-loot-overlay">
+					<div class="battle-loot-container" id="battle-loot-container">
+						<div class="battle-loot-header">
 							Loot
 						</div>
-						<div class="loot-list"
-						style="
-							width : 100%;
-							height : calc(100% - 6vw);
-							position : absolute;
-							padding-top : 1.5vw;
-							overflow-y : scroll;
-						">
-							<div class="loot-item-container"
+						<div class="battle-loot-list">
+							<div class="battle-loot-item-container"
+							ng-class="{'active' : selectedLootIndex == $index}"
 							ng-repeat="lootItem in loot"
 							ng-click="selectLoot ($index);"
-							ng-mouseover="selectLoot ($index);"
-							style="
-								width : calc(100% - 2.5vw);
-								height : 3vw;
-								font-size : 2vw;
-								margin-bottom : 1.5vw;
-								margin-left : 1.5vw;
-								padding-left: 1.5vw;
-								background-color:#888888;
-								position:relative;
-								cursor:pointer;
-							">
-								<div class="loot-item-pointer smoothImage"
-									ng-show="selectedLootIndex == $index"
-									style="
-										width : 2vw;
-										height : 2vw;
-										position : absolute;
-										right : 0.5vw;;
-										top : 0.5vw;
-										background-color : red;
-									">
+							ng-mouseover="selectLoot ($index);">
+								<div class="battle-loot-item-pointer">
 								</div>
-								<div class="loot-item-name"
-								style="
-									width: 100%;
-									height: 100%;
-									text-overflow: ellipsis;
-									overflow: hidden;
-									white-space: nowrap;
-								">
+								<div class="battle-loot-item-name">
 									{{lootItem.name}}
 								</div>
 							</div>
 						</div>
-						<div class="loot-close-container"
+						<div class="default-style-button"
 						ng-click="claimLoot()"
 						style="
 						position: absolute;
-						width: 10vw;
-						height: 3vw;
-						font-size: 2vw;
 						bottom: 0;
 						right: 0;
-						background: red;
-						cursor: pointer;
+						width:8vw;
 						">
-							<div class="loot-close-text"
-							style="
-								font-size:100%;
-								color:white;
-								position:relative;
-								float:left;
-								top:50%;
-								left:50%;
-								transform:translate(-50%,-50%);
-							">
-								Claim
-							</div>
+							Claim
 						</div>
 					</div>
 					
-					<div class="loot-info-container" id="loot-info-container"
-					style="
-					width: 35vw;
-					height: 30vw;
-					top: calc(50% - 15vw);
-					left: 52.5vw;
-					position: fixed;
-					background-color: white;
-					">
+					<div class="battle-loot-info-container" id="battle-loot-info-container">
 						<div ng-show="loot.length == 0 || selectedLootIndex >= loot.length || selectedLootIndex < 0">
-							<div class="loot-info-header"
-							style="
-								position:absolute;
-								width:100%;
-								height:10vw;
-								top:50%;
-								left:0;
-								font-size:5vw;
-								color:red;
-								margin-top:-5vw;
-								text-align:center;
-								z-index : 1;
-							">
+							<div class="battle-loot-empty-header">
 								EMPTY
 							</div>
 						</div>
 						<div ng-show="loot.length > 0 && selectedLootIndex >= 0 && selectedLootIndex < loot.length">
-							<div class="loot-info-header"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								z-index : 1;
-							">
+							<div class="battle-loot-info-header">
 								{{loot[selectedLootIndex].name}}
 							</div>
-							<div class="loot-info-image-container"
-							style="
-								background-color: yellow;
-								width: 32vw;
-								height: 10vw;
-								top: 4.5vw;
-								left: 1.5vw;
-								position: absolute;
-							">
-								<div class="loot-info-icon smoothImage"
+							<div class="battle-loot-image-container">
+								<div class="battle-loot-image smoothImage"
 								style="
-									width : 10vw;
-									height : 10vw;
-									margin-left : 11vw;
-									background : url({{selectedLootItem.icon}}) no-repeat;
-									background-size: cover;
+									background-image : url({{selectedLootItem.icon}});
 								">
 								</div>
 							</div>
-							<div class="loot-info-details-container"
-							style="
-								position: absolute;
-								width: calc(100% - 3vw);
-								height: 12.5vw;
-								overflow: hidden;
-								top: 16vw;
-								left: 1.5vw;
-							">
-								<div class="loot-info-details"
-								style="
-									width: 100%;
-									height: 3vw;
-									font-size: 2vw;
-								">
-									<div class="loot-info-details-label"
+							<div class="battle-loot-details-container">
+								<div class="battle-loot-details">
+									<div class="battle-loot-details-label"
 									style="
 									float : left;
 									">
 										Type:
 									</div>
-									<div class="loot-info-details-content"
+									<div class="battle-loot-details-content"
 									style="
 									float : right;
 									">
 										{{loot[selectedLootIndex].type}}
 									</div>
 								</div>
-								<div class="loot-info-details"
-								style="
-									width: 100%;
-									height: 3vw;
-									font-size: 2vw;
-								">
-									<div class="loot-info-details-label"
+								<div class="battle-loot-details">
+									<div class="battle-loot-details-label"
 									style="
 									float : left;
 									">
 										Value:
 									</div>
-									<div class="loot-info-details-content"
+									<div class="battle-loot-details-content"
 									style="
 									float : right;
 									">
 										+{{loot[selectedLootIndex].value}} exp
 									</div>
 								</div>
-								<div class="loot-info-details"
-								style="
-									width: 100%;
-									height: 6vw;
-									font-size: 1.5vw;
-								">
+								<div class="battle-loot-details-long">
 									{{loot[selectedLootIndex].flavour}}
 								</div>
 							</div>
@@ -1166,131 +2412,22 @@
 					
 					<!-- Background screen -->
 					<div
-					class="start-splash-background"
+					class="battle-end-splash-overlay"
 					ng-show="showFinSplash == true"
-					ng-class="{'show' : showFinSplash == true, 'hide' : showFinSplash == false}"
-					style="
-					width : 100%;
-					height : 100%;
-					top : 0;
-					left : 0;
-					position : fixed;
-					background : rgba(255,255,255,1);
-					background-color : rgba(255,255,255,1);
-					"
-					>
-						<div class="start-splash-text font"
-						style="
-						font-size: 20vw;
-						color: red;
-						position: fixed;
-						width: 100%;
-						height: auto;
-						margin-left: -50%;
-						margin-top: -20%;
-						text-align: center;
-						top: 50%;
-						left: 50%;
-						text-shadow: 0.7vw 0.7vw #999999;
-						">
+					ng-class="{'show' : showFinSplash == true, 'hide' : showFinSplash == false}">
+						<div class="battle-end-splash-text">
 						FINISH
 						</div>
 					</div>
-					<!-- <div class="loot-container container" id="loot-container"
-					style="
-						width : 50%;
-						height : 50%;
-						top : 25%;
-						left : 25%;
-						position : fixed;
-						background-color : white;
-						padding:0;
-					">
-						<div class="loot-header"
-						style="
-							position:absolute;
-							width:98%;
-							height:5%;
-							top:-6%;
-							left:-1%
-							font-size:100%;
-							color:white;
-						">
-							LOOT WINDOW
-						</div>
-						<div class="loot-container"
-						style="
-							position : absolute;
-							width : 98%;
-							height : 98%;
-							top : 1%;
-							left : 1%;
-							overflow-y : scroll;
-						">
-							<div class="loot-icon smoothImage"
-							ng-repeat="lootItem in loot"
-							style="
-								float:left;
-								width : 15%;
-								padding-top:15%;
-								margin : 5%;
-								margin-bottom : 0;
-								background : url({{lootItem.icon}}) no-repeat;
-								background-size: cover;
-							">
-							</div>
-						</div>
-						<div class="loot-close-container"
-						ng-click="claimLoot()"
-						style="
-							position:absolute;
-							width:20%;
-							height:10%;
-							bottom:-5%;
-							right:40%;
-							background:red;
-						">
-							<div class="loot-close-text"
-							style="
-								font-size:100%;
-								color:white;
-								position:relative;
-								float:left;
-								top:50%;
-								left:50%;
-								transform:translate(-50%,-50%);
-							">
-								CLAIM
-							</div>
-						</div>
-					</div> -->
 				</div>
 			</div>
 		</div>
 		
+		<!-- Tutor Battle Overlay -->
 		<div ng-controller="tutorBattleCtrl" >
-			<div ng-if="showBattleWindow == true && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'" id="tutor-battle-window" class="battle-window"
-			style = "
-			z-index : 99;
-			width : 100%;
-			height : 100%;
-			top : 0;
-			left : 0;
-			position : fixed;
-			">
+			<div ng-if="showBattleWindow == true && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'" id="tutor-battle-window" class="battle-window">
 				<!-- Background screen -->
-				<div
-				style = "
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-				background : rgba(0,0,0,.7);
-				background-color : rgba(0,0,0,.7);
-				opacity : 0.7;
-				"
-				>
+				<div class="overlay-screen">
 				</div>
 				
 				<!-- Avatars of students -->
@@ -1305,136 +2442,66 @@
 					id="student-{{student.userId}}"
 					ng-repeat="student in group.members"
 					style="
-						width: {{student.avatarWidth}}vw;
-						height: {{student.avatarHeight}}vw;
+						width: {{student.userAvatar.width}}vw;
+						height: {{student.userAvatar.height}}vw;
 						bottom: {{student.displacementBottom}}vw;
 						right: {{student.displacementRight * $index}}vw;
-						margin-right: {{student.avatarWidth * -0.5}}vw;
-						margin-bottom: {{student.avatarHeight * -0.5}}vw;
-						position : absolute;
+						margin-right: {{student.userAvatar.width * -0.5}}vw;
+						margin-bottom: {{student.userAvatar.height * -0.5}}vw;
+						background-image : url('{{student.currentAnim}}');
 						z-index : {{100 - $index}};
-						background : url({{student.userAvatar}}) no-repeat;
-						background-size: cover;
-						image-rendering:pixelated;
 					">
 					</div>
-					<div class="group-row-container"
+					
+					<!-- Group marker for the battle to identify clusters of student avatars -->
+					<div class="battle-group-container"
+					ng-class="{'selected' : selectedGroupIndex == $index}"
 					ng-click="selectGroup ($index)"
 					style="
-					width: {{tutorAvatar.avatarWidth}}vw;
-					height: 3vw;
-					font-size: 2vw;
-					background-color: #888888;
-					position: absolute;
-					right: -7vw;
-					top: 6vw;
-					z-index : 101;
+					width: {{tutorAvatar.width}}vw;
+					cursor:pointer;
 					">
-						<div class="group-icon smoothImage"
+						<div class="battle-group-selected-tag">
+						</div>
+						
+						<div class="battle-group-icon smoothImage"
 						style="
-							width : 2vw;
-							height : 2vw;
-							margin : 0.5vw;
-							float : left;
-							background-color:red;
 							-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
 							filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
 						">
 						</div>
-						<div class="group-name"
-						style="
-							width: calc(100% - 3.5vw);
-							height: 100%;
-							text-overflow: ellipsis;
-							overflow: hidden;
-							white-space: nowrap;
-						">
+						<div class="battle-group-name">
 							{{group.groupName}}
 						</div>
 					</div>
 				</div>
 				
 				<!-- Avatar of tutor -->
-				<div class="tutor-avatar-group"
-					id="tutor-avatar-group"
-					style="
-						bottom : 50%;
-						position : fixed;
-						left : 3vw;
-					">
+				<div class="tutor-group"
+					id="tutor-group">
 					<div class="tutor-avatar"
-						ng-style="{'width' : tutorAvatar.avatarWidth + 'vw', 'height' : tutorAvatar.avatarHeight + 'vw',
-								'margin-top' : tutorAvatar.avatarHeight * -0.5 + 'vw'}"
-						style="
-							position : absolute;
-							z-index : 100;
-							background : yellow;
-						">
+						ng-style="{'width' : tutorAvatar.width + 'vw', 'height' : tutorAvatar.height + 'vw',
+								'margin-top' : tutorAvatar.height * -0.5 + 'vw', 'background' : 'url(' + tutorAvatar.currentAnim + ') no-repeat', 'background-size' : 'cover'}">
 					</div>
 					
-					<div class="tutor-battle-panel-container"
+					<div class="tutor-battle-info-container"
 					style="
-						width : {{tutorAvatar.avatarWidth}}vw;
-						height : 7vw;
-						position : absolute;
-						bottom : {{tutorAvatar.avatarHeight * -0.5}}vw;
-						left : 0;
-						z-index : 100;
-						background-color:red;
+						width : {{tutorAvatar.width}}vw;
+						bottom : {{tutorAvatar.height * -0.5}}vw;
 					">
-						<div class="tutor-battle-panel-header"
-						style="
-							position:absolute;
-							width:100%;
-							height:3vw;
-							left:0px;
-							font-size:2vw;
-							color:white;
-							background-color:#888888;
-							padding-left:1.5vw;
-							z-index : 1;
-						">
-							{{tutorAvatar.tutorName}}
+						<div class="tutor-battle-info-header">
+							{{tutorAvatar.username}}
 						</div>
-						<div class="tutor-battle-container"
-						style="
-							position : absolute;
-							width : 100%;
-							height : 100%;
-							overflow : hidden;
-						">
-							<div class="tutor-label-details-container"
-							style="
-								width : 100%;
-								height : 2vw;
-								font-size : 1.5vw;
-								margin-left : 1.5vw;
-								margin-top : 3vw;
-							">
+						<div class="tutor-battle-info">
+							<div class="tutor-battle-loot-details">
 								Bonus Loot: +{{totalDeath}}
 							</div>
 						</div>
-						<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
-						style= "
-							position: absolute;
-							z-index : 100;
-							width : 100%;
-							height : 2vw;
-							bottom: 0;
-						">
+						<div class="tutor-battle-overdrive-bar">
 							<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
 							</div>
 						</div>
-						<div class="tutor-label-details-container"
-						style="
-						width: 100%;
-						height: 2vw;
-						font-size: 1.5vw;
-						bottom: 0;
-						position: absolute;
-						z-index: 101;
-						text-align: center;
-						">
+						<div class="tutor-battle-overdrive-details">
 								Health: {{health}} / {{maxHealth}}
 						</div>
 					</div>
@@ -1456,10 +2523,6 @@
 				-ms-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
 				-o-transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
 				transition: left {{effect.duration}}s ease-out, opacity 0.2s ease-out, transform 0.2s ease-out;
-				transform : scale(0);
-				opacity : 0;
-				z-index : 0;
-				position : fixed;
 				">
 				</div>
 				
@@ -1475,17 +2538,8 @@
 					">
 				</div> -->
 				
-				<div class="select-target-prompt-container font"
-				ng-show="selectedGroupIndex == -1"
-				style="
-				width:10vw;
-				height:5vw;
-				position:fixed;
-				left:calc(50% - 5vw);
-				top:calc(50% - 2.5vw);
-				font-size:3vw;
-				color:red;
-				">
+				<div class="tutor-battle-target-prompt"
+				ng-show="selectedGroupIndex == -1">
 					Select a group from the left to target it!
 				</div>
 				
@@ -1503,7 +2557,7 @@
 						margin-right : {{rune.width * -0.5}}vw;
 						
 						position : fixed;
-						background : white;
+						background : #DAD4BB;
 					">
 					<div class="rune-symbol"
 						ng-repeat="symbol in rune.symbols"
@@ -1522,286 +2576,94 @@
 				</div>
 				
 				<!-- Battle timer -->
-				<div class="timer-container"
-					style="
-						position : fixed;
-						top : 0;
-						left : 50%;
-						width : 100%;
-						height : 2vw;
-						margin-left : -50%;
-					">
+				<div class="timer-container">
 					<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{currentTime/battleDuration * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{currentTime/battleDuration * 100}}%">
 					</div>
 				</div>
 			
 				<!-- Splash screen -->
-				<div ng-show="showSplash == true" id="battle-splash-overlay" class="battle-splash-container"
-				style ="
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				background-color:rgba(255,0,0,.5);
-				"
-				>
+				<div ng-show="showSplash == true" id="battle-ranking-overlay" class="battle-ranking-overlay">
 					<!-- Container for the group ranking display -->
-					<div class="group-ranking-container" id="group-ranking-container"
-					ng-repeat="group in rankedGroups"
-					style="
-					width : 70vw;
-					height : 40vw;
-					top : calc(50% - 20vw);
-					left : 15vw;
-					position : fixed;
-					background-color : white;
-					padding:0;
-					box-shadow:0.7vw 0.7vw #888888;
-					">
+					<div class="battle-ranking-container" id="battle-ranking-container"
+					ng-repeat="group in rankedGroups">
 						<!-- Header for the display -->
-						<div class="group-name-header"
-						style="
-							position:absolute;
-							width:100%;
-							height:3vw;
-							left:0px;
-							font-size:2vw;
-							color:white;
-							background-color:#888888;
-							padding-left:1.5vw;
-						">
+						<div class="battle-ranking-header">
 							{{group.groupName}}
-							
-							<div class="group-color-tag"
-							style="
-								width: 10vw;
-								height: 3vw;
-								font-size: 2vw;
-								position: absolute;
-								text-align: center;
-								color: white;
-								background-color: red;
-								-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-								filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-								right:0;
-								top:0;
-							">
-							</div>
 						</div>
 						
-						<!-- Container for the main content of the group ranking display -->
-						<div class="group-members-container"
-						style="
-							position : absolute;
-							width : 100%;
-							height : 100%;
-						">
-							<!-- MVPs of the Q&A round -->
-							<div class="mvp-icon-container"
+						<div class="battle-ranking-details-container">
+							<div class="battle-ranking-mvp-banner">
+								MVPs
+							</div>
+							
+							<div class="battle-ranking-mvp-container"
 							ng-repeat="member in group.topMembers"
 							style="
 								width : {{member.size}}vw;
 								height : {{member.size}}vw;
-								position: absolute;
-								bottom : 18vw;
 								margin-left: {{member.size * -0.5}}vw;
 								left : {{member.positionLeft}}%;
 							">
-								<div class="mvp-icon smoothImage"
+								<div class="battle-ranking-mvp-sprite smoothImage"
+								ng-style="{'background' : 'url(' + member.userAvatar.idleAnim + ') no-repeat', 'background-size' : 'cover'}"
 								style="
-									width : 24vw;
-									height : 24vw;
-									background : url({{member.userAvatar}}) no-repeat;
-									background-size: cover;
-									position: absolute;
-									margin-left : -12vw;
 									left : {{member.size * 0.5}}vw;
-									bottom : 0;
 								">
 								</div>
-								<div class="mvp-label-container"
-								style="
-									width : 100%;
-									height : 100%;
-									position : absolute;
-									bottom : 0;
-								">
-									<div class="mvp-label-details-container"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 3vw;
-										text-align : center;
-									">
-										{{member.answersSubmitted}} / {{group.totalQuestions}}
+								<div class="battle-ranking-mvp-label-container">
+									<div class="battle-ranking-mvp-questions-answered">
+										{{member.answersSubmitted}}
 									</div>
 									
-									<div class="mvp-label-details-container"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 1.5vw;
-										text-align : center;
-									">
+									<div class="battle-ranking-mvp-questions-answered-label">
 										Questions answered
 									</div>
 									
-									<div class="mvp-label-header"
-									style="
-										position:absolute;
-										width:100%;
-										height:3vw;
-										left:0px;
-										bottom:0;
-										font-size:2vw;
-										color:white;
-										background-color:#888888;
-									">
-										<div class="mvp-icon smoothImage"
-										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
-										style="
-											width : 2vw;
-											height : 2vw;
-											margin : 0.5vw;
-											float : left;
-										">
+									<div class="battle-ranking-mvp-header">
+										<div class="battle-ranking-mvp-icon smoothImage"
+										ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}">
 										</div>
-										<div class="mvp-name"
-										style="
-											width: calc(100% - 3.5vw);
-											height: 100%;
-											text-overflow: ellipsis;
-											overflow: hidden;
-											white-space: nowrap;
-										">
+										
+										<div class="battle-ranking-mvp-username">
 											{{member.username}}
 										</div>
 									</div>
 								</div>
 							</div>
 							
-							<!-- Rewards for each group's performance -->
-							<div class="rewards-panel-container"
-							style="
-								width : 25vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								left : 1.5vw;
-								background-color:red;
-							">
-								<div class="rewards-panel-header"
-								style="
-									position:absolute;
-									width:100%;
-									height:3vw;
-									left:0px;
-									font-size:2vw;
-									color:white;
-									background-color:#888888;
-									padding-left:1.5vw;
-									z-index : 1;
-								">
+							<div class="battle-ranking-rewards-container">
+								<div class="battle-ranking-rewards-header">
 									Rewards
 								</div>
-								<div class="rewards-container"
-								style="
-									position : absolute;
-									width : 100%;
-									height : 100%;
-									overflow : hidden;
-								">
-									<div class="mvp-label-details-container"
-									style="
-										width : 100%;
-										height : 3vw;
-										font-size : 2vw;
-										margin-left : 1.5vw;
-										margin-top : 3vw;
-									">
+								<div class="battle-ranking-rewards">
+									<div class="battle-ranking-rewards-overdrive">
 										Overdrive Time: +{{group.overdriveDuration/1000.0}}s
 									</div>
 								</div>
 							</div>
 							
-							<!-- Reward tier for the group -->
-							<div class="tier-panel-container"
-							style="
-								width : 14vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								left : 28vw;
-								background-color:red;
-								box-shadow:0.7vw 0.7vw #888888;
-							">
-								<div class="tier-container"
-								style="
-									position : absolute;
-									width : 100%;
-									height : 100%;
-									font-size : 4vw;
-									text-align : center;
-								">
+							<div class="battle-ranking-tier-container">
+								<div class="battle-ranking-tier">
 									{{group.ranking}}
 								</div>
 							</div>
 
-							<!-- List of all members in the group -->
-							<div class="members-container"
-							style="
-								width : 25vw;
-								height : 15vw;
-								position : absolute;
-								bottom : 1.5vw;
-								right : 1.5vw;
-								overflow-y : scroll;
-							">
-								<div class="member-label-container"
-								ng-repeat="member in group.allMembers"
-								style="
-									width : calc(100% - 2.5vw);
-									height : 3vw;
-									font-size : 2vw;
-									margin-bottom : 1.5vw;
-									margin-left : 1.5vw;
-									background-color:#888888;
-									position:relative;
-								">
-									<div class="member-icon smoothImage"
-									ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}"
-									style="
-										width : 2vw;
-										height : 2vw;
-										margin : 0.5vw;
-										float : left;
-									">
+							<div class="battle-ranking-members-container">
+								<div class="battle-ranking-member"
+								ng-repeat="member in group.allMembers">
+									<div class="battle-ranking-member-rank smoothImage"
+									ng-style="{'background' : 'url(' + member.rankIcon + ') no-repeat', 'background-size' : 'cover'}">
 									</div>
-									<div class="member-name"
+									<div class="battle-ranking-member-name"
 									style="
 										width: calc(100% - 3.5vw);
-										height: 100%;
-										text-overflow: ellipsis;
-										overflow: hidden;
-										white-space: nowrap;
 									">
 										{{member.username}}
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<!-- Timer for the display of each group's rank -->
-						<div class="group-ranking-timer-container"
-							style="
-							position: absolute;
-							top: -1.5vw;
-							left: 50%;
-							width: 100%;
-							height: 1.5vw;
-							margin-left: -50%;
-							">
+						<div class="battle-ranking-timer-container">
 							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{group.currentTime/group.totalDisplayTime * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{group.currentTime/group.totalDisplayTime * 100}}%">
 							</div>
 						</div>
@@ -1809,87 +2671,25 @@
 				</div>
 				
 				<!-- Start splash screen -->
-				<div ng-if="showStartSplash == true" id="start-splash-overlay" class="start-splash-container"
-				style ="
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				"
-				>
+				<div ng-if="showStartSplash == true" id="battle-start-splash-overlay" class="battle-start-splash-overlay">
 					<!-- Background screen -->
 					<div
-					class="start-splash-background"
-					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}"
-					style="
-					width : 100%;
-					height : 100%;
-					top : 0;
-					left : 0;
-					position : fixed;
-					background : rgba(255,255,255,1);
-					background-color : rgba(255,255,255,1);
-					"
-					>
-						<div class="start-splash-text font"
-						style="
-						font-size: 20vw;
-						color: red;
-						position: fixed;
-						width: 100%;
-						height: auto;
-						margin-left: -50%;
-						margin-top: -20%;
-						text-align: center;
-						top: 50%;
-						left: 50%;
-						text-shadow: 0.7vw 0.7vw #999999;
-						">
+					class="battle-start-splash-background"
+					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}">
+						<div class="battle-start-splash-text">
 						OVERDRIVE
 						</div>
 					</div>
-				</div>	
+				</div>
 				
 				<!-- End splash screen -->
-				<div ng-if="showEndSplash == true" id="end-splash-overlay" class="end-splash-container"
-				style ="
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				"
-				>
+				<div ng-if="showEndSplash == true" id="battle-loot-overlay" class="battle-loot-overlay">
 					<!-- Background screen -->
 					<div
-					class="end-splash-background"
-					ng-class="{'show' : showEndSplash == true, 'hide' : showEndSplash == false}"
-					style="
-					width : 100%;
-					height : 100%;
-					top : 0;
-					left : 0;
-					position : fixed;
-					background : rgba(255,255,255,1);
-					background-color : rgba(255,255,255,1);
-					"
-					>
-						<div class="end-splash-text font"
-						style="
-						font-size: 20vw;
-						color: red;
-						position: fixed;
-						width: 100%;
-						height: auto;
-						margin-left: -50%;
-						margin-top: -20%;
-						text-align: center;
-						top: 50%;
-						left: 50%;
-						text-shadow: 0.7vw 0.7vw #999999;
-						">
-						FINISH
+					class="battle-end-splash-overlay"
+					ng-class="{'show' : showEndSplash == true, 'hide' : showEndSplash == false}">
+						<div class="battle-end-splash-text">
+							FINISH
 						</div>
 					</div>
 				</div>	
@@ -1898,220 +2698,76 @@
 		
 		<div class="container-fluid">
 			<div class="row" id="battle-container">
+				<!-- Tutor Q&A -->
 				<div ng-controller="tutorCtrl">
 					
-					<div class="affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'"
-					style="
-						left:3.5vw;
-						top:6.5vw;
-						width:25vw;
-						height:auto;
-					">
-						<div class="font whiteFont text-center smoothImage level-container"
-						style="
-						background-color:white;
-						position:relative;
-						padding-top:4.5vw;
-						padding-bottom:1.5vw;
-						box-shadow:0.7vw 0.7vw #999999;
-						">
-							<div class="tutor-name-header"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+					<div class="tutor-qa-left-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'">
+						<div class="tutor-qa-tutor-details-container">
+							<div class="tutor-qa-tutor-name-header">
 								<%= username %>
 							</div>
 							
-							<div class="tutor-avatar-container"
-							style="
-								background-color: yellow;
-								width: calc(100%-3vw);
-								height: 10vw;
-								margin-left:1.5vw;
-								margin-right:1.5vw;
-							">
-								<div class="loot-info-icon smoothImage"
-								style="
-									width : 10vw;
-									height : 10vw;
-									margin-left : 6vw;
-									background : url({{userInfo.imgSrc}}) no-repeat;
-									background-size: cover;
-								">
+							<div class="tutor-qa-tutor-avatar-container">
+								<div class="tutor-qa-tutor-avatar-icon"
+								ng-style="{'background-image' : 'url(' + userInfo.icon + ')'}">
 								</div>
 							</div>
 							
-							<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
-							style= "
-								width: calc(100%-3vw);
-								margin-left:1.5vw;
-								margin-right:1.5vw;
-								height : 2vw;
-								position:relative;
-							">
-								<div class="tutor-label-details-container"
-								style="
-								position:absolute;
-								left:50%;
-								margin-left:-25%;
-								font-size:1.5vw;
-								">
+							<div class="tutor-qa-tutor-health-container">
+								<div class="tutor-qa-tutor-health-text">
 										Health: {{health}} / {{maxHealth}}
 								</div>
 								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
 								</div>
 							</div>
 						</div>
-						<div class="smoothImage"
-						style="
-						position:relative;
-						background-color:white;
-						margin-top:1.5vw;
-						padding-top:3.5vw;
-						">
-							<div class="active-users-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+						<div class="active-users-container">
+							<div class="active-users-header">
 								Active Users
 							</div>
 							
 							<div ng-controller="activeUsersCtrl">
-								<div class="" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
+								<div class="active-users-list-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
 									<!-- List of Groups -->
-									<div class="groups-list"
-									style="
-									height: 4vw;
-									width: 100%;
-									overflow: hidden;
-									">
-										<div class=""
-										style="
-										height: 3vw;
-										width: 1000vw;
-										">
+									<div class="active-users-list">
+										<div class="active-users-list-group-container">
 											<div class="select-group"
 											ng-class="{'selected' : selectedGroup == ($index + groupRangeIndex)}"
 											ng-repeat="group in socket.getAllSocketGroups() | limitTo : 4 : groupRangeIndex"
-											ng-click="setSelectedGroup($index + groupRangeIndex)"
-											style="
-												width:5.6vw;
-												margin-left:0.5vw;
-												font-size:1vw;
-												position:relative;
-												display:inline-block;
-											">
-												<button class="btn select-group-button"
+											ng-click="setSelectedGroup($index + groupRangeIndex)">
+												<button class="select-group-button font"
 												style="
 												width:5.6vw;
-												height:3vw;
-												font-size:1vw;
-												text-overflow: ellipsis;
-												overflow: hidden;
-												white-space: nowrap;
 												">
 													{{group}}
 												</button>
 											</div>
 										</div>
 									</div>
-									<div class=""
-									style="
-									height: 2vw;
-									width: calc(100% - 1vw);
-									background-color:#888888;
-									margin-left:0.5vw;
-									position:relative;
-									">
-										<div class="font whiteFont"
-										style="
-										font-size:1.5vw;
-										text-align:center;
-										">
+									<div class="scroll-bar-container">
+										<div class="scroll-bar-text font">
 											{{socket.getAllSocketGroups()[selectedGroup]}}
 										</div>
 										<div class="users-list-scroll-left"
-										ng-click="scrollGroupList(-1)"
-										style="
-										height:1vw;
-										width:1vw;
-										position:absolute;
-										background-color:red;
-										left:0.5vw;
-										top:0.5vw;
-										">
+										ng-click="scrollGroupList(-1)">
 										</div>
 										<div class="users-list-scroll-right"
-										ng-click="scrollGroupList(1)"
-										style="
-										height:1vw;
-										width:1vw;
-										position:absolute;
-										background-color:red;
-										right:0.5vw;
-										top:0.5vw;
-										">
+										ng-click="scrollGroupList(1)">
 										</div>
 									</div>
 									
 									<!-- List and Toggle Tutees in Groups -->
-									<div class="">
-										<div class="users-active-list"
-										style="
-										max-height: 12vw;
-										min-height: 12vw;
-										height: 12vw;
-										overflow-y: scroll;
-										padding-top: 0.5vw;
-										margin-left:0.5vw;
-										margin-right:0.5vw;
-										">
+									<div class="user-active-list-container">
+										<div class="user-active-list">
 											<div class="user-active"
 											ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]"
-											ng-class="{'active' : selectedUsers.indexOf (user.socketId) >= 0 }"
-											style="
-											margin-right: 1.5vw;
-											margin-bottom : 1vw;
-											padding-left: 1.5vw;
-											position:relative;
-											cursor:pointer;
-											">
-												<div class="user-active-text font"
-												ng-click="selectUser(user.socketId);"
-												style="
-												font-size:1.5vw;
-												">
+											ng-class="{'active' : selectedUsers.indexOf (user.socketId) >= 0 }">
+												<div class="user-active-text"
+												ng-click="selectUser(user.socketId);">
 													{{user.username}}
 												</div>
-												<div class="font users-active-tag"
-												ng-show="user.userId == userId"
-												style="
-												position:absolute;
-												top:0px;
-												right:0px;
-												padding-left:0.5vw;
-												width:3vw;
-												background-color:green;
-												font-size:1.5vw;
-												">
+												<div class="user-active-tag"
+												ng-show="user.userId == userId">
 													You
 												</div>
 											</div>
@@ -2119,48 +2775,25 @@
 									</div>
 									
 									<!-- Tutors will be able to Create and Delete Groups -->
-									<div class="" ng-if="socket.getUserType() == 'tutor'"
-									style="
-									padding-bottom:0.5vw;
-									">
-										<div class="input-group-name-container"
-										style="
-										margin:0.5vw;
-										margin-bottom:0;
-										height:3vw;
-										">
-			                            	<input class="input-group-name font maximumWidth"
-											style="
-											font-size:1.5vw;
-											"
-											ng-model="$parent.$parent.newGroupName" placeholder="Enter a group name here."/>
+									<div class="tutor-qa-group-methods-container" ng-if="socket.getUserType() == 'tutor'">
+										<div class="tutor-qa-input-group-name-container">
+			                            	<input class="tutor-qa-input-group-name"
+											ng-model="$parent.$parent.newGroupName" placeholder="Enter a group name here..."/>
 			                        	</div>
 
-			                        	<div class="group-buttons-container"
-										style="
-										margin-left:0.5vw;
-										margin-right:0.5vw;
-										margin-top:0;
-										height:3vw;
-										">
+			                        	<div class="tutor-qa-group-buttons-container">
 											<div>
-												<button class="btn font" ng-click="createGroup()" ng-disabled="!isValidGroupParams()"
+												<button class="default-style-button" ng-click="createGroup()" ng-disabled="!isValidGroupParams()"
 												style="
 													float:right;
-													height:3vw;
-													font-size:1.5vw;
-													padding:0.5vw;
 												">
 													CREATE
 												</button>
 											</div>
 			                            	<div ng-if="selectedGroup > 0">
-			                            		<button class="btn font" ng-click="deleteGroup()"
+			                            		<button class="default-style-button" ng-click="deleteGroup()"
 												style="
 													float:left;
-													height:3vw;
-													font-size:1.5vw;
-													padding:0.5vw;
 												">
 													DELETE
 												</button>
@@ -2173,63 +2806,20 @@
 						</div>
 					</div>
 					
-					<div id="tutor-question-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'"
-					style="
-					margin-left: 30vw;
-					top: 6.5vw;
-					width: 65vw;
-					height: auto;
-					">
+					<div class="tutor-qa-center-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'">
 						<!-- Question composer -->
-						<div class="question-composer-container"
-						style="
-						position:relative;
-						background-color:white;
-						padding-top:3vw;
-						">
-							<div class="question-composer-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+						<div class="question-composer-container">
+							<div class="question-composer-header">
 								Question Composer
 							</div>
 							
-							<div class="question-area"
-							style="
-								font-size:1.5vw;
-								margin-left:1.5vw;
-								margin-top:1.5vw;
-								margin-right:1.5vw;
-							">
-								<textarea class="question-description-input font maximumWidth" ng-model="composerQuestion.description" placeholder="Type Your Question Here!" type="text"  ng-trim="false"
-								style="
-								resize:vertical;
-								"></textarea>
+							<div class="question-composer-input-container">
+								<textarea class="question-composer-input" ng-model="composerQuestion.description" placeholder="Type your question here..." type="text"  ng-trim="false"></textarea>
 							</div>
 							
 							<!-- List of Groups -->
-							<div class="groups-list"
-							style="
-							height: 4vw;
-							margin-left:1.5vw;
-							margin-right:1.5vw;
-							margin-top:1vw;
-							overflow: hidden;
-							">
-								<div class=""
-								style="
-								height: 3vw;
-								width: 1000vw;
-								">
+							<div class="question-composer-groups-list">
+								<div class="question-composer-groups-container">
 									<div class="select-group"
 									ng-class="{'selected' : inSelectedGroups(($index + groupRangeIndex))}"
 									ng-repeat="group in socket.getAllSocketGroups() | limitTo : ((groupRangeIndex + $index) > 0 ? 6 : 7) : groupRangeIndex"
@@ -2238,430 +2828,151 @@
 									style="
 										width:9.1vw;
 										margin-right:1.5vw;
-										font-size:1vw;
-										position:relative;
-										display:inline-block;
 									">
-										<button class="btn select-group-button"
+										<button class="select-group-button font"
 										style="
 										width:9.1vw;
-										height:3vw;
-										font-size:1vw;
-										text-overflow: ellipsis;
-										overflow: hidden;
-										white-space: nowrap;
 										">
 											{{group}}
 										</button>
 									</div>
 								</div>
 							</div>
-							<div class=""
+							<div class="scroll-bar-container"
 							style="
-							height: 2vw;
-							margin-right:1.5vw;
 							margin-left:1.5vw;
-							background-color:#888888;
-							position:relative;
+							margin-left:1.5vw;
+							width:calc(100% - 3vw);
 							">
-								<div class="font whiteFont"
-								style="
-								font-size:1.5vw;
-								text-align:center;
-								">
+								<div class="scroll-bar-text font">
 									{{selectedGroups.length}} targets selected
 								</div>
 								<div class="users-list-scroll-left"
-								ng-click="scrollGroupList(-1)"
-								style="
-								height:1vw;
-								width:1vw;
-								position:absolute;
-								background-color:red;
-								left:0.5vw;
-								top:0.5vw;
-								">
+								ng-click="scrollGroupList(-1)">
 								</div>
 								<div class="users-list-scroll-right"
-								ng-click="scrollGroupList(1)"
-								style="
-								height:1vw;
-								width:1vw;
-								position:absolute;
-								background-color:red;
-								right:0.5vw;
-								top:0.5vw;
-								">
+								ng-click="scrollGroupList(1)">
 								</div>
 							</div>
-							<div class="question-composer-button-container"
-							style="
-							height:4.5vw;
-							margin:1.5vw;
-							">
-								<button class="btn send-question floatRight font" ng-disabled="composerQuestion.description.length == 0 || selectedGroups.length == 0" ng-click="sendQuestion()"
+							<div class="question-composer-button-container">
+								<button class="default-style-button" ng-disabled="composerQuestion.description.length == 0 || selectedGroups.length == 0" ng-click="sendQuestion()"
 								style="
-								font-size:1.5vw;
-								width:10vw;
-								height:3vw;
-								padding:0.5vw;
+								float:right;
 								">Send Question</button>
 							</div>
 						</div>
 						
 						<!-- Tutor Waiting for Answers -->
-						<div class="answers-received" ng-repeat="(uuid, question) in questions"
-						style="
-						position:relative;
-						background-color:white;
-						margin-top:1.5vw;
-						padding-top:3vw;
-						">
-							<div class="question-composer-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+						<div class="tutor-qa-answers-received" ng-repeat="(uuid, question) in questions">
+							<div class="tutor-qa-answers-received-header">
 								Question {{$index + 1}}
-								<div class="grade-question-button-container"
-								style="
-								position: absolute;
-								right: 0;
-								top: 0;
-								height: 3vw;
-								">
-									<button class="btn grade-question font" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)"
+								<div class="tutor-qa-grade-question-container">
+									<button class="default-style-button" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)"
 									style="
-									font-size: 2vw;
-									width: 10vw;
-									height: 3vw;
-									padding: 0;
-									border:none;
 									vertical-align:baseline;
 									">ANNOUNCE</button>	
 								</div>
 							</div>
 							
-							<div class="question-description-container"
-							style="
-							margin:1.5vw;
-							">
-								<h3 class="font" ng-bind-html="question.description"
-								style="
-								font-size:3vw;
-								">
+							<div class="tutor-qa-answers-received-question-container">
+								<h3 class="tutor-qa-answers-received-question" ng-bind-html="question.description">
 								</h3>
 							</div>
 							
-							<div class="received-answers-container" 
-							ng-repeat="group in question.groupNames"
-							style="
-							position:relative;
-							padding-top:4.5vw;
-							">
-								<div class="received-answer-header font whiteFont"
-								style="
-									position:absolute;
-									margin-right:1.5vw;
-									margin-left:1.5vw;
-									margin-bottom:1.5vw;
-									width:calc(100% - 3vw);
-									height:3vw;
-									left:0px;
-									top:0px;
-									font-size:2vw;
-									color:white;
-									background-color:#888888;
-									padding-left:1.5vw;
-									padding-right:1.5vw;
-									text-align:left;
-								">
+							<div class="tutor-qa-answers-received-divider">
+							</div>
+							
+							<div class="tutor-qa-received-answer-container" 
+							ng-repeat="group in question.groupNames">
+								<div class="tutor-qa-received-answer-header">
 									{{group}}
-									<div class="font received-answer-tag"
-									style="
-									position:absolute;
-									top:0px;
-									right:1.5vw;
-									padding-left:0.5vw;
-									font-size:2vw;
-									">
-										<div class="received-answer-waiting" ng-show="!question.groupAnswers[group].answered">
+									<div class="font tutor-qa-received-answer-status">
+										<div class="received-answer-status-text" ng-show="!question.groupAnswers[group].answered">
 											Status: Waiting for Answer...
 										</div>
-										<div class="received-answer-waiting" ng-show="question.groupAnswers[group].answered">
+										<div class="received-answer-status-text" ng-show="question.groupAnswers[group].answered">
 											Status: Answered by {{question.groupAnswers[group].student}}
 										</div>
 									</div>
 								</div>
 								
-								<div class="received-answer-body" ng-show="question.groupAnswers[question.selectedGroup].answered"
-								style="
-								margin-right:1.5vw;
-								margin-left:1.5vw;
-								margin-bottom:1.5vw;
-								height:11.5vw;
-								width:calc(100% - 3vw);
-								position:relative;
-								">
-									<div class="answer-description font" ng-bind-html="question.groupAnswers[group].description"
-									style="
-									height: 10vw;
-									width: 50%;
-									overflow-y: auto;
-									background-color: #DDDDDD;
-									font-size:1.5vw;
-									padding:0.5vw;
-									position:absolute;
-									top:0;
-									left:0;
-									">
+								<div class="tutor-qa-received-answer-body" ng-show="question.groupAnswers[group].answered">
+									<div class="tutor-qa-received-answer-description" ng-bind-html="question.groupAnswers[group].description">
 									</div>
-									<div class="explanation-area font"
-									style="
-									position:absolute;
-									top:0;
-									right:0;
-									margin-left: 1.5vw;
-									width: calc(50% - 2vw);
-									">
-										<div class="answer-explanation-container"
-										style="
-										height:7vw;
-										">
-											<textarea class="answer-explanation-input" ng-model="question.groupAnswers[group].explanation"
+									<div class="tutor-qa-explanation-container">
+										<div class="tutor-qa-explanation">
+											<textarea class="tutor-qa-explanation-input" ng-model="question.groupAnswers[group].explanation"
 											placeholder="Comments" type="text"  ng-trim="false" ng-disabled="question.graded"
 											style="
-											resize:none;
-											width:100%;
-											height:100%;
-											overflow:auto;
-											font-size:1.5vw;
 											border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
 											border-color: {{question.groupAnswers[group].experience == 1 ? 'red' : (question.groupAnswers[group].experience == 5 ? 'orange' : (question.groupAnswers[group].experience == 10 ? 'green' : 'blue'))}};
-											-webkit-transition: all 0.2s ease-out;
-											-moz-transition: all 0.2s ease-out;
-											-ms-transition: all 0.2s ease-out;
-											-o-transition: all 0.2s ease-out;
-											transition: all 0.2s ease-out;
+											border-left: 0.5vw solid #635f54;
 											">
 											</textarea>
 										</div>
 										
-										<div class="grade-area font"
-										style="
-										height:3vw;
-										font-size:1.5vw;
-										color:white;
-										">
-											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 1" ng-disabled="question.graded"
+										<div class="tutor-qa-grade-container">
+											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 1" ng-disabled="question.graded"
 											style="
-											display:inline-block;
 											background-color: red;
-											float:left;
-											width: calc(25% - 1.125vw);
-											margin-right:1.5vw;
-											height: 3vw;
-											text-align:center;
-											cursor:pointer;
-											font-size: 2vw;
-											padding: 0;
-											border:none;
-											vertical-align:baseline;
 											">
 												Bleh
 											</button>
 											
-											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 5" ng-disabled="question.graded"
+											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 5" ng-disabled="question.graded"
 											style="
-											display:inline-block;
 											background-color: orange;
-											float:left;
-											width: calc(25% - 1.125vw);
-											margin-right:1.5vw;
-											height: 3vw;
-											text-align:center;
-											cursor:pointer;
-											font-size: 2vw;
-											padding: 0;
-											border:none;
-											vertical-align:baseline;
 											">
 												Meh
 											</button>
 											
-											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 10" ng-disabled="question.graded"
+											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 10" ng-disabled="question.graded"
 											style="
-											display:inline-block;
 											background-color: green;
-											float:left;
-											width: calc(25% - 1.125vw);
-											margin-right:1.5vw;
-											height: 3vw;
-											text-align:center;
-											cursor:pointer;
-											font-size: 2vw;
-											padding: 0;
-											border:none;
-											vertical-align:baseline;
 											">
 												Ooh
 											</button>
 											
-											<button class="btn grading-button" ng-click="question.groupAnswers[group].experience = 25" ng-disabled="question.graded"
+											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 25" ng-disabled="question.graded"
 											style="
-											display:inline-block;
-											float:left;
 											background-color: blue;
-											width: calc(25% - 1.125vw);
-											height: 3vw;
-											text-align:center;
-											cursor:pointer;
-											font-size: 2vw;
-											padding: 0;
-											border:none;
-											vertical-align:baseline;
 											">
 												Wow
 											</button>
-											<!--<input class="experience-input font" type="number" ng-model="question.groupAnswers[group].experience" ng-disabled="question.graded"/>-->
 										</div>
 									</div>
 								</div>
 							</div>
-		
-							<!--
-							<div class="row">
-								<button class="btn answers-received-select-group font" ng-class="{'btn-info' : question.selectedGroup == question.groupNames[$index], 'btn-success' : question.selectedGroup != question.groupNames[$index]}" ng-repeat="group in question.groupNames" ng-click="setSelectedGroup(uuid, $index)">{{group}}</button>
-							</div>
-							
-							<div class="row group-received-answers" ng-show="question.groupAnswers[question.selectedGroup].answered">
-								<div class="container-fluid">
-									<div class="col-md-4 col-sm-4 col-xs-4 font whiteFont lobbyGeneralFontSize">
-										<div>	{{question.groupAnswers[question.selectedGroup].student}}
-										</div>
-									</div>
-									
-									<div class="col-md-8 col-sm-8 col-xs-8 font whiteFont lobbyGeneralFontSize">
-										<div class="answer-description chatWhiteSpace" ng-bind-html="question.groupAnswers[question.selectedGroup].description"></div>
-									</div>
-								</div>
-								
-								<div class="container-fluid">
-									<div class="explanation-area font maximumWidth">
-										<textarea class="answer-explanation-input maximumWidth lobbyGeneralFontSize" ng-model="question.groupAnswers[question.selectedGroup].explanation"
-											placeholder="Explanation!" type="text"  ng-trim="false" ng-disabled="question.graded">
-										</textarea>
-									</div>
-								</div>
-								
-								<div class="container-fluid">
-									<input class="experience-input font maximumWidth lobbyGeneralFontSize" type="number" ng-model="question.groupAnswers[question.selectedGroup].experience" ng-disabled="question.graded"/>
-										<button class="btn grade-question floatRight font" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)">Announce</button>	
-								</div>
-							</div>
-							
-							<div class="row" ng-show="!question.groupAnswers[question.selectedGroup].answered">
-								<div class="font whiteFont lobbyGeneralFontSize">
-									Status: Waiting for Answer...
-								</div>
-							</div>
-							-->
 						</div>
 					</div>
-					<div ng-if="showPrompt == true && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'" id="tutor-prompt-window" class="prompt-window"
-					style = "
-					z-index : 99;
-					width : 100%;
-					height : 100%;
-					top : 0;
-					left : 0;
-					position : fixed;
-					">
+					<div ng-if="showPrompt == true && socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'" class="tutor-qa-prompt-window">
 						<!-- Background screen -->
-						<div
-						style = "
-						width : 100%;
-						height : 100%;
-						top : 0;
-						left : 0;
-						position : fixed;
-						background : rgba(0,0,0,.7);
-						background-color : rgba(0,0,0,.7);
-						opacity : 0.7;
-						"
-						>
+						<div class="tutor-qa-prompt-overlay">
 						</div>
-						<div class="prompt-container"
-						style="
-						position:fixed;
-						width:40vw;
-						height:20vw;
-						background-color:white;
-						left:30vw;
-						top:calc(50% - 10vw);
-						">
-							<div class="prompt-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								padding-right:1.5vw;
-								text-align:left;
-							">
+						<div class="tutor-qa-prompt-container">
+							<div class="tutor-qa-prompt-header">
 								OVERDRIVE
 							</div>
 							
-							<div class="prompt-text font"
-							style="
-							font-size:1.5vw;
-							color:#888888;
-							padding-top:4.5vw;
-							padding-left:1.5vw;
-							padding-right:1.5vw;
-							">
+							<div class="tutor-qa-prompt-text">
 								<p>The mighty fall, and you have lost one of your many lives. Do our heroes enter overdrive and reap extra rewards for their conquest...Or do you live to fight another round.</p>
 								<p>(Choosing to go into overdrive mode will allow students to get extra rewards based on their performance in the current round.)</p>
 							</div>
 							
-							<div id="overdrive-mode-options-container" class="centerText"
-							style="
-							height:3vw;
-							margin-top:1.5vw;
-							background-color:#888888;
-							">
+							<div class="tutor-qa-options-container">
 								<div class="overdrive-mode-toggle">
-									<button class="btn font whiteFont" ng-click="startBattle()"
+									<button class="default-style-button" ng-click="startBattle()"
 									style="
 										float:right;
-										height:3vw;
-										font-size:1.5vw;
-										padding:0.5vw;
 									">
 										OVERDRIVE
 									</button>
 								</div>
 								
 								<div class="respawn-mode-toggle">
-									<button class="btn font whiteFont" ng-click="respawn()"
+									<button class="default-style-button" ng-click="respawn()"
 									style="
 										float:left;
-										height:3vw;
-										font-size:1.5vw;
-										padding:0.5vw;
 									">
 										RESPAWN
 									</button>
@@ -2672,72 +2983,19 @@
 				</div>
                 
                 <div ng-controller="studentCtrl"> <!-- Tutee View -->
-					<div class="affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'"
-					style="
-						left:3.5vw;
-						top:6.5vw;
-						width:20vw;
-						height:auto;
-					">
-						<div class="font whiteFont text-center smoothImage level-container"
-						style="
-						background-color:white;
-						position:relative;
-						padding-top:4.5vw;
-						padding-bottom:1.5vw;
-						box-shadow:0.7vw 0.7vw #999999;
-						">
-							<div class="tutor-name-header"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+					<div class="student-qa-left-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
+						<div class="student-qa-tutor-details-container">
+							<div class="student-qa-tutor-name-header">
 								{{tutorInfo.username}}
 							</div>
 							
-							<div class="tutor-avatar-container"
-							style="
-								background-color: yellow;
-								width: calc(100% - 3vw);
-								height: 10vw;
-								margin-left:1.5vw;
-								margin-right:1.5vw;
-							">
-								<div class="tutor-avatar-icon smoothImage"
-								ng-style="{'background-image' : 'url(' + tutorInfo.imgSrc + ')'}"
-								style="
-								width : 10vw;
-								height : 10vw;
-								margin-left : calc(50% - 5vw);
-								background-repeat: no-repeat;
-								background-size: cover;
-								">
+							<div class="student-qa-tutor-avatar-container">
+								<div class="student-qa-tutor-avatar-icon"
+								ng-style="{'background-image' : 'url(' + tutorInfo.icon + ')'}">
 								</div>
 							</div>
-							<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
-							style= "
-								width: calc(100% - 3vw);
-								margin-left:1.5vw;
-								margin-right:1.5vw;
-								height : 2vw;
-								position:relative;
-							">
-								<div class="tutor-label-details-container"
-								style="
-								position:absolute;
-								width:100%;
-								left:50%;
-								margin-left:-50%;
-								font-size:1.5vw;
-								">
+							<div class="student-qa-tutor-health-container">
+								<div class="student-qa-tutor-health-text">
 										Health: {{health}} / {{maxHealth}}
 								</div>
 								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{health/maxHealth * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{health/maxHealth * 100}}%">
@@ -2745,147 +3003,59 @@
 							</div>
 						</div>
 						
-						<div class="smoothImage"
+						<div class="active-users-container"
 						style="
-						position:relative;
-						background-color:white;
-						margin-top:1.5vw;
-						padding-top:3.5vw;
+						padding-bottom:1.5vw;
 						">
-							<div class="active-users-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+							<div class="active-users-header">
 								Active Users
 							</div>
 							
 							<div ng-controller="activeUsersCtrl">
-								<div class="" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
+								<div class="active-users-list-container" id="userlist-container" ng-if="socket.getConnectionState() == socket.CONNECTED()">
 									<!-- List of Groups -->
-									<div class="groups-list"
-									style="
-									height: 4vw;
-									width: 100%;
-									overflow: hidden;
-									">
-										<div class=""
-										style="
-										height: 3vw;
-										width: 1000vw;
-										">
+									<div class="active-users-list">
+										<div class="active-users-list-group-container">
 											<div class="select-group"
 											ng-class="{'selected' : selectedGroup == ($index + groupRangeIndex)}"
 											ng-repeat="group in socket.getAllSocketGroups() | limitTo : 4 : groupRangeIndex"
 											ng-click="setSelectedGroup($index + groupRangeIndex)"
 											style="
 												width:5.6vw;
-												margin-left:0.5vw;
-												font-size:1vw;
-												position:relative;
-												display:inline-block;
 											">
-												<button class="btn select-group-button"
+												<button class="select-group-button"
 												style="
 												width:5.6vw;
-												height:3vw;
-												font-size:1vw;
-												text-overflow: ellipsis;
-												overflow: hidden;
-												white-space: nowrap;
 												">
 													{{group}}
 												</button>
 											</div>
 										</div>
 									</div>
-									<div class=""
-									style="
-									height: 2vw;
-									width: calc(100% - 1vw);
-									background-color:#888888;
-									margin-left:0.5vw;
-									position:relative;
-									">
-										<div class="font whiteFont"
-										style="
-										font-size:1.5vw;
-										text-align:center;
-										">
+									<div class="scroll-bar-container">
+										<div class="scroll-bar-text">
 											{{socket.getAllSocketGroups()[selectedGroup]}}
 										</div>
 										<div class="users-list-scroll-left"
-										ng-click="scrollGroupList(-1)"
-										style="
-										height:1vw;
-										width:1vw;
-										position:absolute;
-										background-color:red;
-										left:0.5vw;
-										top:0.5vw;
-										">
+										ng-click="scrollGroupList(-1)">
 										</div>
 										<div class="users-list-scroll-right"
-										ng-click="scrollGroupList(1)"
-										style="
-										height:1vw;
-										width:1vw;
-										position:absolute;
-										background-color:red;
-										right:0.5vw;
-										top:0.5vw;
-										">
+										ng-click="scrollGroupList(1)">
 										</div>
 									</div>
 									
 									<!-- List and Toggle Tutees in Groups -->
 									<div class="">
-										<div class="users-active-list"
-										style="
-										max-height: 12vw;
-										min-height: 12vw;
-										height: 12vw;
-										overflow-y: scroll;
-										padding-top: 0.5vw;
-										margin-left:0.5vw;
-										margin-right:0.5vw;
-										">
+										<div class="user-active-list">
 											<div class="user-active"
 											ng-repeat="user in users[socket.getAllSocketGroups()[selectedGroup]]"
-											ng-class="{'active' : selectedUsers.indexOf (user.socketId) >= 0 }"
-											style="
-											margin-right: 1.5vw;
-											margin-bottom : 1vw;
-											padding-left: 1.5vw;
-											position:relative;
-											cursor:pointer;
-											">
-												<div class="user-active-text font"
-												ng-click="selectUser(user.socketId);"
-												style="
-												font-size:1.5vw;
-												">
+											ng-class="{'active' : selectedUsers.indexOf (user.socketId) >= 0 }">
+												<div class="user-active-text"
+												ng-click="selectUser(user.socketId);">
 													{{user.username}}
 												</div>
-												<div class="font users-active-tag"
-												ng-show="user.userId == userId"
-												style="
-												position:absolute;
-												top:0px;
-												right:0px;
-												padding-left:0.5vw;
-												width:3vw;
-												background-color:green;
-												font-size:1.5vw;
-												">
+												<div class="user-active-tag"
+												ng-show="user.userId == userId">
 													You
 												</div>
 											</div>
@@ -2896,392 +3066,141 @@
 						</div>
 					</div>
 				
-                	<div class="smoothImage" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'"
-					style="
-					margin-left: 25vw;
-					top: 6.5vw;
-					width: 50vw;
-					height: auto;
-					">
+                	<div class="student-qa-center-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
 						<!-- Combat log header -->
-						<div class="combat-log-header-container"
-						style="
-						position:relative;
-						height:3vw;
-						">
-							<div class="combat-log-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
-								Combat Log
+						<div class="combat-log-header-container">
+							<div class="combat-log-header">
+								COMBAT LOG
 							</div>
 						</div>
 						
 						<!-- Tutee Receive Questions -->
-						<div class="question-received" ng-repeat="(uuid, question) in questions"
-						style="
-						position:relative;
-						background-color:white;
-						margin-top:1.5vw;
-						padding-top:3vw;
-						">
-							<div class="question-received-header font whiteFont"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+						<div class="student-qa-question-received-container" ng-repeat="(uuid, question) in questions">
+							<div class="student-qa-question-received-header">
 								Question {{$index + 1}}
-								<div class="answer-question-button-container"
-								style="
-								position: absolute;
-								right: 0;
-								top: 0;
-								height: 3vw;
-								">
-									<button class="btn answer-question font" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
+								<div class="student-qa-answer-question-container">
+									<button class="default-style-button" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
 									style="
-									font-size: 2vw;
-									width: 10vw;
-									height: 3vw;
-									padding: 0;
-									border:none;
 									vertical-align:baseline;
 									">ATTACK</button>	
 								</div>
 							</div>
 							
-							<div class="question-description-container"
-							style="
-							margin:1.5vw;
-							">
-								<h3 class="font" ng-bind-html="question.description"
-								style="
-								font-size:3vw;
-								">
+							<div class="student-qa-question-received-description-container">
+								<h3 class="student-qa-question-received-description" ng-bind-html="question.description">
 								</h3>
 							</div>
 							
-							<div class="student-answers-container"
-							ng-repeat="answer in question.answers"
-							style="
-							position:relative;
-							padding-top:3vw;
-							">
-								<div class="student-answer-header font whiteFont"
-								style="
-									position:absolute;
-									margin-right:1.5vw;
-									margin-left:1.5vw;
-									margin-bottom:1.5vw;
-									width:calc(100% - 3vw);
-									height:3vw;
-									left:0px;
-									top:0px;
-									font-size:2vw;
-									color:white;
-									background-color:#888888;
-									padding-left:1.5vw;
-									padding-right:1.5vw;
-									text-align:left;
-								">
+							<div class="student-qa-question-received-divider">
+							</div>
+							
+							<div class="student-qa-question-received-answers-container"
+							ng-repeat="answer in question.answers">
+								<div class="student-qa-question-received-answer-header">
 									{{answer.student.username}}
-									<div class="font answer-vote-tag"
-									style="
-									position:absolute;
-									top:0px;
-									right:1.5vw;
-									padding-left:0.5vw;
-									font-size:2vw;
-									">
-										<div class="answer-votes"
-										style="
-										">
+									<div class="student-qa-question-received-vote-count">
+										<div class="answer-votes">
 											Votes: {{answer.selectedCount}}
 										</div>
 									</div>
 								</div>
 								
-								<div class="answer-area"
-								style="
-									font-size:1.5vw;
-									margin-left:1.5vw;
-									margin-top:1.5vw;
-									margin-right:1.5vw;
-									padding-bottom:1.5vw;
-								">
-									<div class="answer-area-container"
-									style="
-									position:relative;
-									width: calc(100% - 17vw);
-									height:10vw;
-									display:inline-block;
-									">
-										<textarea class="answer-area-input font" 
+								<div class="student-qa-question-received-answer">
+									<div class="student-qa-question-received-answer-container">
+										<textarea class="student-qa-question-received-answer-input" 
 										ng-model="answer.description"
 										placeholder="{{answer.owned ? 'Type your answer here...' : 'Waiting for answer...'}}" type="text"  ng-trim="false"
-										ng-disabled="question.submitted || !answer.owned"
-										style="
-										width: 100%;
-										height:10vw;
-										resize:none;
-										border:none;
-										background-color:#DDDDDD;
-										"></textarea>
+										ng-disabled="question.submitted || !answer.owned"></textarea>
 										
-										<button class="btn update-answer font" ng-click="updateAnswer(uuid)" ng-disabled="question.submitted" ng-show="answer.owned"
+										<button class="default-style-button" ng-click="updateAnswer(uuid)" ng-disabled="question.submitted" ng-show="answer.owned"
 										style="
-										font-size:1.5vw;
-										width:5vw;
-										height:3vw;
-										padding:0.5vw;
 										position:absolute;
 										right:0;
 										bottom:0;
+										outline:0.5vw solid #dad4bb;
 										">Update</button>
 									</div>
 									
-									<div class="student-avatar-container"
+									<div class="student-qa-question-received-avatar-container"
 									style="
-										background-color: yellow;
-										width: 15vw;
-										height: 10vw;
-										margin-left:1.5vw;
-										display:inline-block;
-										position:relative;
 										border: {{(answer.selected ? '0.5vw solid' : '0vw solid')}};
-										border-color: red;
-										-webkit-transition: all 0.2s ease-out;
-										-moz-transition: all 0.2s ease-out;
-										-ms-transition: all 0.2s ease-out;
-										-o-transition: all 0.2s ease-out;
-										transition: all 0.2s ease-out;
 									">
-										<div class="student-avatar-icon smoothImage"
-										ng-style="{'background-image' : 'url(' + answer.student.userAvatar + ')'}"
-										style="
-										width : 10vw;
-										height : 100%;
-										margin-left : calc(50% - 5vw);
-										background-repeat: no-repeat;
-										background-size: cover;
-										">
+										<div class="student-qa-question-received-avatar"
+										ng-style="{'background-image' : 'url(' + answer.student.userAvatar.icon + ')'}">
 										</div>
 										
-										<div class="answer-vote-button-container"
-										style="
-										position:absolute;
-										height:3vw;
-										width:5vw;
-										right:0;
-										bottom:0;
-										">
-											<button class="btn vote-answer font" ng-click="selectAnswer(uuid, $index)"  ng-disabled="question.submitted"
+										<div class="student-qa-question-received-vote-container">
+											<button class="default-style-button" ng-click="selectAnswer(uuid, $index)"  ng-disabled="question.submitted"
 											style="
-											font-size:1.5vw;
-											width:5vw;
-											height:3vw;
-											padding:0.5vw;
-											">Vote</button>
+											outline:0.5vw solid;
+											outline-color: {{(answer.selected ? '#635f54' : '#dad4bb')}};
+											">
+											Vote
+											</button>
 										</div>
 									</div>
 								</div>
 							</div>
 							
 							<div ng-show="question.submitted">
-								<div class="graded-answer-status font"
-								style="
-								font-size:2vw;
-								margin-left:1.5vw;
-								padding-bottom:1.5vw;
-								">
+								<div class="student-qa-question-received-status">
 									{{question.graded ? 'Grading Results' : 'Status : Waiting for grading...'}}
 								</div>
 							</div>
 							
 							<div ng-show="question.graded">
-								<div class="graded-answers-container"
-								ng-repeat="group in question.groupNames"
-								style="
-								position:relative;
-								padding-top:4.5vw;
-								">
-									<div class="graded-answer-header font whiteFont"
-									style="
-										position:absolute;
-										margin-right:1.5vw;
-										margin-left:1.5vw;
-										margin-bottom:1.5vw;
-										width:calc(100% - 3vw);
-										height:3vw;
-										left:0px;
-										top:0px;
-										font-size:2vw;
-										color:white;
-										background-color:#888888;
-										padding-left:1.5vw;
-										padding-right:1.5vw;
-										text-align:left;
-									">
+								<div class="student-qa-graded-answer-container"
+								ng-repeat="group in question.groupNames">
+									<div class="student-qa-graded-answer-header">
 										{{group}}
-										<div class="font answer-source-tag"
-										style="
-										position:absolute;
-										top:0px;
-										right:1.5vw;
-										padding-left:0.5vw;
-										font-size:2vw;
-										">
+										<div class="student-qa-graded-answer-status">
 											<div class="answer-source" ng-show="question.groupAnswers[group].answered">
 												Answered by {{question.groupAnswers[group].student}}
 											</div>
 										</div>
 									</div>
 									
-									<div class="graded-answer-body"
-									style="
-									margin-right:1.5vw;
-									margin-left:1.5vw;
-									margin-bottom:1.5vw;
-									height:11.5vw;
-									width:calc(100% - 3vw);
-									position:relative;
-									">
-										<div class="answer-description font" ng-bind-html="question.groupAnswers[group].description"
-										style="
-										height: 10vw;
-										width: 50%;
-										overflow-y: auto;
-										background-color: #DDDDDD;
-										font-size:1.5vw;
-										padding:0.5vw;
-										position:absolute;
-										top:0;
-										left:0;
-										">
+									<div class="student-qa-graded-answer-body">
+										<div class="student-qa-graded-answer-description" ng-bind-html="question.groupAnswers[group].description">
 										</div>
-										<div class="explanation-area font"
-										style="
-										position:absolute;
-										top:0;
-										right:0;
-										margin-left: 1.5vw;
-										width: calc(50% - 2vw);
-										">
-											<div class="answer-explanation-container"
-											style="
-											height:7vw;
-											">
-												<div class="answer-explanation-input" ng-bind-html="question.groupAnswers[group].explanation"
+										<div class="student-qa-explanation-container">
+											<div class="student-qa-explanation">
+												<div class="student-qa-explanation-input" ng-bind-html="question.groupAnswers[group].explanation"
 												style="
-												width:100%;
-												height:100%;
-												overflow:auto;
-												font-size:1.5vw;
 												border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
 												border-color: {{question.groupAnswers[group].experience == 1 ? 'red' : (question.groupAnswers[group].experience == 5 ? 'orange' : (question.groupAnswers[group].experience == 10 ? 'green' : 'blue'))}};
-												-webkit-transition: all 0.2s ease-out;
-												-moz-transition: all 0.2s ease-out;
-												-ms-transition: all 0.2s ease-out;
-												-o-transition: all 0.2s ease-out;
-												transition: all 0.2s ease-out;
 												">
 												</div>
 											</div>
 											
-											<div class="grade-area font"
-											style="
-											height:3vw;
-											font-size:1.5vw;
-											color:white;
-											">
-												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 1"
+											<div class="student-qa-grade-container">
+												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 1"
 												style="
-												display:inline-block;
 												background-color: red;
-												float:left;
-												width: calc(25% - 1.125vw);
-												margin-right:1.5vw;
-												height: 3vw;
-												text-align:center;
-												cursor:pointer;
-												font-size: 2vw;
-												padding: 0;
-												border:none;
-												vertical-align:baseline;
 												">
 													Bleh
 												</button>
-												
-												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 5"
+								
+												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 5"
 												style="
-												display:inline-block;
 												background-color: orange;
-												float:left;
-												width: calc(25% - 1.125vw);
-												margin-right:1.5vw;
-												height: 3vw;
-												text-align:center;
-												cursor:pointer;
-												font-size: 2vw;
-												padding: 0;
-												border:none;
-												vertical-align:baseline;
 												">
 													Meh
 												</button>
 												
-												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 10"
+												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 10"
 												style="
-												display:inline-block;
 												background-color: green;
-												float:left;
-												width: calc(25% - 1.125vw);
-												margin-right:1.5vw;
-												height: 3vw;
-												text-align:center;
-												cursor:pointer;
-												font-size: 2vw;
-												padding: 0;
-												border:none;
-												vertical-align:baseline;
 												">
 													Ooh
 												</button>
 												
-												<button class="btn grading-button" ng-disabled="question.groupAnswers[group].experience != 25"
+												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 25"
 												style="
-												display:inline-block;
-												float:left;
 												background-color: blue;
-												width: calc(25% - 1.125vw);
-												height: 3vw;
-												text-align:center;
-												cursor:pointer;
-												font-size: 2vw;
-												padding: 0;
-												border:none;
-												vertical-align:baseline;
 												">
 													Wow
 												</button>
-												<!--<input class="experience-input font" type="number" ng-model="question.groupAnswers[group].experience" ng-disabled="question.graded"/>-->
 											</div>
 										</div>
 									</div>
@@ -3290,84 +3209,22 @@
 						</div>
 					</div>
 					
-					<div class="affix" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'"
-					style="
-						left:76.5vw;
-						top:6.5vw;
-						width:20vw;
-						height:auto;
-					">
-						<div class="font whiteFont text-center smoothImage level-container"
-						style="
-						background-color:white;
-						position:relative;
-						padding-top:4.5vw;
-						padding-bottom:1.5vw;
-						box-shadow:0.7vw 0.7vw #999999;
-						">
-							<div class="tutor-name-header"
-							style="
-								position:absolute;
-								width:100%;
-								height:3vw;
-								left:0px;
-								top:0px;
-								font-size:2vw;
-								color:white;
-								background-color:#888888;
-								padding-left:1.5vw;
-								text-align:left;
-							">
+					<div class="student-qa-right-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'student'">
+						<div class="student-qa-student-details-container">
+							<div class="student-qa-student-name-header">
 								<%= username %>
 							</div>
 							
-							<div class="tutor-avatar-container"
-							style="
-								background-color: yellow;
-								width: calc(100% - 3vw);
-								height: 10vw;
-								margin-left:1.5vw;
-								margin-right:1.5vw;
-							">
-								<div class="tutor-avatar-icon smoothImage"
-								ng-style="{'background-image' : 'url(' + userInfo.imgSrc + ')'}"
-								style="
-								width : 10vw;
-								height : 10vw;
-								margin-left : calc(50% - 5vw);
-								background-repeat: no-repeat;
-								background-size: cover;
-								">
+							<div class="student-qa-student-avatar-container">
+								<div class="student-qa-student-avatar"
+								ng-style="{'background-image' : 'url(' + userInfo.avatar.icon + ')'}">
 								</div>
 							</div>
-							<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
-							style= "
-								width: calc(100% - 3vw);
-								margin-left:1.5vw;
-								margin-right:1.5vw;
-								height : 2vw;
-								position:relative;
-							">
-								<div
-								style="
-								position:absolute;
-								right:0;
-								bottom:100%;
-								font-size:1.5vw;
-								background-color:#888888;
-								padding:0.5vw;
-								">
+							<div class="student-qa-experience-container">
+								<div class="student-qa-level">
 									Lvl: <span ng-bind-html="userInfo.level"></span>
 								</div>
-								<div class="tutor-label-details-container"
-								style="
-								position:absolute;
-								width:100%;
-								left:50%;
-								margin-left:-50%;
-								font-size:1.5vw;
-								color:grey;
-								">
+								<div class="student-qa-experience">
 									Experience: {{userInfo.exp}} / {{userInfo.expToNext}}
 								</div>
 								<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{userInfo.exp / userInfo.expToNext * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{userInfo.exp / userInfo.expToNext * 100}}%">
@@ -3390,7 +3247,7 @@
 						<div class="messages-container"
 						style="
 						position:relative;
-						background-color:white;
+						background-color:#DAD4BB;
 						padding-top:3vw;
 						">
 							<div class="messages-header font whiteFont"
@@ -3401,8 +3258,8 @@
 								left:0px;
 								top:0px;
 								font-size:2vw;
-								color:white;
-								background-color:#888888;
+								color:#dad4bb;
+								background-color:#635f54;
 								padding-left:1.5vw;
 								text-align:left;
 							">
@@ -3430,18 +3287,13 @@
 									style="
 										width:9.1vw;
 										margin-right:1.5vw;
-										font-size:1vw;
 										position:relative;
 										display:inline-block;
 									">
-										<button class="btn select-group-button"
+										<button class="select-group-button font"
 										style="
 										width:9.1vw;
-										height:3vw;
-										font-size:1vw;
-										text-overflow: ellipsis;
-										overflow: hidden;
-										white-space: nowrap;
+										font-size:1.5vw;
 										">
 											{{group}}
 										</button>
@@ -3453,37 +3305,17 @@
 							height: 2vw;
 							margin-right:1.5vw;
 							margin-left:1.5vw;
-							background-color:#888888;
+							background-color:#b4af9a;
 							position:relative;
 							">
-								<div class="font whiteFont"
-								style="
-								font-size:1.5vw;
-								text-align:center;
-								">
+								<div class="scroll-bar-text font">
 									{{socket.getSocketGroups()[selectedGroup]}}
 								</div>
 								<div class="users-list-scroll-left"
-								ng-click="scrollGroupList(-1)"
-								style="
-								height:1vw;
-								width:1vw;
-								position:absolute;
-								background-color:red;
-								left:0.5vw;
-								top:0.5vw;
-								">
+								ng-click="scrollGroupList(-1)">
 								</div>
 								<div class="users-list-scroll-right"
-								ng-click="scrollGroupList(1)"
-								style="
-								height:1vw;
-								width:1vw;
-								position:absolute;
-								background-color:red;
-								right:0.5vw;
-								top:0.5vw;
-								">
+								ng-click="scrollGroupList(1)">
 								</div>
 							</div>
 							<div class="chat-area" id="messageBox"
@@ -3492,7 +3324,6 @@
 							height:15vw;
 							margin-left: 1.5vw;
 							padding:0.5vw;
-							background-color:#DDDDDD;
 							font-size:1.5vw;
 							">
 								<div class="messages">
@@ -3519,7 +3350,7 @@
 							width: calc(100% - 3vw);
 							height:2vw;
 							margin-left: 1.5vw;
-							background-color:#888888;
+							background-color:#b4af9a;
 							text-align:center;
 							font-size:1.5vw;
 							">
@@ -3541,23 +3372,22 @@
 								ng-model="$parent.chatMessage" ng-enter="sendMessage()" ng-change="updateTyping()" 
 								placeholder="Type Your Message Here!"
 								style="
-								padding:0.5vw;
+								background-color: #b4af9a;
+								border: none;
+								border-left: 0.5vw solid;
+								border-top: 1px solid;
+								border-color: #635f54;
+								padding-left: 0.5vw;
+								color: #635f54;
 								font-size:1.5vw;
+								vertical-align: top;
 								"/>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="" id="lobby-container">
-
-				
-			</div>
-			
-			
-		</div>			
-
+		</div>
 	</body>
 </html>
 

@@ -6,8 +6,296 @@ var userAvatar = require ('./userAvatar');
 var dataTable = {
 	'avatar-01' : {
 		'id' : 'avatar-01',
-		'name' : 'Avatar 1',
-		'url' : '/images/avatars/avatar-01.png'
+		'type' : 'student',
+		'exp' : '1',
+		'name' : 'Mathemagician',
+		'description' : 'She fell on an abacus rack and said "I\'ll take it all!"',
+		'icon' : '/images/avatars/mathemagician_icon.gif',
+		'idleAnim' : '/images/avatars/mathemagician_icon.gif',
+		'attackAnim' : '/images/avatars/avatar-04.png',
+		'height' : '1',
+		'width' : '1',
+		'runes' : {
+			'0' : [
+				{
+					'width' : 20,
+					'height' : 20,
+					'name' : 'The Bell Tolls',
+					'image' : '',
+					'description' : 'Not-so-subtly influencing the bell curve.',
+					'damage' : 13,
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 10,
+						'height' : 10,
+						'duration' : 3000
+					},
+					'symbols' : [
+						{
+							'positionTop' : 0,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 0,
+							'positionLeft' : 60,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 0,
+							'positionLeft' : 100,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				},
+				{
+					'width' : 25,
+					'height' : 25,
+					'name' : 'Abacurse',
+					'image' : '',
+					'description' : 'The best way to solve problem sums.',
+					'damage' : 13,
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 10,
+						'height' : 15,
+						'duration' : 2000
+					},
+					'symbols' : [
+						{
+							'positionTop' : 0,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 10,
+							'positionLeft' : 60,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 60,
+							'positionLeft' : 100,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				}
+			],
+			'1' : [
+				{
+					'width' : 30,
+					'height' : 30,
+					'name' : 'Hexadecimation',
+					'image' : '',
+					'description' : 'Destruction to the 16th base.',
+					'damage' : 8,
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 30,
+						'height' : 10,
+						'duration' : 1000
+					},
+					'symbols' : [
+						{
+							'positionTop' : 0,
+							'positionLeft' : 0,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 30,
+							'positionLeft' : 70,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 50,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				},
+				{
+					'width' : 13,
+					'height' : 13,
+					'name' : 'Ride The Tangent',
+					'image' : '',
+					'description' : 'Popularised by the band Mathtallica.',
+					'damage' : 5,
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 20,
+						'height' : 20,
+						'duration' : 1500
+					},
+					'symbols' : [
+						{
+							'positionTop' : 60,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 30,
+							'positionLeft' : 0,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 20,
+							'positionLeft' : 10,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				}
+			]
+		}
+	},
+	'avatar-02' : {
+		'id' : 'avatar-02',
+		'type' : 'tutor',
+		'exp' : '1',
+		'name' : 'Hecatutores',
+		'description' : 'A hundred hands of unfathomable strength, with fifty heads to boot. Because teaching is hard.',
+		'icon' : '/images/avatars/avatar-02.png',
+		'idleAnim' : '/images/avatars/avatar-02.png',
+		'attackAnim' : '/images/avatars/avatar-03.png',
+		'height' : '2',
+		'width' : '1',
+		'runes' : {
+			'0' : [
+				{
+					'width' : 30,
+					'height' : 30,
+					'name' : 'Palm Reading',
+					'damage' : '3',
+					'description' : 'Many fates lie in the palms of your hands.',
+					'image' : '',
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 30,
+						'height' : 30,
+						'duration' : 1500
+					},
+					'symbols' : [
+						{
+							'positionTop' : 0,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 0,
+							'positionLeft' : 60,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 0,
+							'positionLeft' : 100,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				},
+				{
+					'width' : 20,
+					'height' : 20,
+					'name' : 'Backhanded Compliment',
+					'damage' : '3',
+					'description' : 'Contractually obliged to help those that don\'t appreciate it.',
+					'image' : '',
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 10,
+						'height' : 10,
+						'duration' : 1000
+					},
+					'symbols' : [
+						{
+							'positionTop' : 0,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 10,
+							'positionLeft' : 60,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 60,
+							'positionLeft' : 100,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				},
+				{
+					'width' : 15,
+					'height' : 15,
+					'name' : 'Heavyhanded Approach',
+					'damage' : '3',
+					'description' : 'The oven may be hot but it takes heat for the bread to rise.',
+					'image' : '',
+					'effect' : {
+						'image' : '/images/border-image.png',
+						'width' : 10,
+						'height' : 10,
+						'duration' : 1000
+					},
+					'symbols' : [
+						{
+							'positionTop' : 0,
+							'positionLeft' : 30,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 30,
+							'positionLeft' : 40,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						},
+						{
+							'positionTop' : 20,
+							'positionLeft' : 10,
+							'height' : 3,
+							'width' : 3,
+							'completed' : false
+						}
+					]
+				}
+			]
+		}
 	}
 };
 

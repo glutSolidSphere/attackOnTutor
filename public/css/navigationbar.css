@@ -12,25 +12,81 @@ body {
    ---------- */
 ul#header {
 	overflow: hidden;
-	background-color: #141311;
+	height: 5.3vw;
+	width:100%;
+    margin-bottom: 1.5vw;
+    background-color: #cdc8b0;
+    border-bottom: 0.1vw dashed #635f54;
+    position: fixed;
+	top:0;
+	left:0;
+	z-index:1;
 }
 
 li.header {
 	float: right;
 	list-style-type: none;
+	margin-top: 1vw;
+	margin-right: 1.5vw;
+	width: 13vw;
+	height: 3vw;
+	background-color: #b4af9a;
+	color: #635f54;
+	position:relative;
 }
 
-li a {
-	font-size: 1.5em;
-	color: #FFFFFF;
-	display: block;
-	padding: 0.5em;
-	text-align: center;
+li.header a {
+	font-size: 2vw;
+	padding: 0;
+	padding-left:3vw;
+	color: #635f54;
+	display:block;
+	text-align: left;
 	text-decoration: none;
+	
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
 }
 
-li a:hover {
-	background-color: #B7B7B6;
+div.link-flourish
+{
+	width:1vw;
+	height:1vw;
+	position:absolute;
+	top:1vw;
+	left:1vw;
+	background-color:#635f54;
+	
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+
+div.header-flourish
+{
+	width:100%;
+	height:4.8vw;
+	position:absolute;
+	left:0;
+	top:0;
+	border-bottom:0.2vw solid #635f54;
+	z-index:-1;
+}
+
+li.header:hover a {
+	background-color: #635f54;
+	color:#dad4bb;
+	height:3.8vw;
+}
+
+li.header:hover div.link-flourish
+{
+	background-color: #dad4bb;
 }
 
 #logout {

@@ -32,6 +32,19 @@ router.get ('/error',
 	}
 );
 
+router.get ('/error/lobbyClosed',
+	function (req, res, next)
+	{
+		console.log ("YES");
+		var errorMessage = "There are no tutorial sessions for your group in progress right now!";
+		
+		res.render('error.ejs', {
+			success : false,
+			errorMessage: errorMessage
+		});
+	}
+);
+
 router.post('/api/dashboard/getTutorials', auth.ensureAuth, dashboard.getTutorials);
 router.post('/api/dashboard/getUserInfo', auth.ensureAuth, dashboard.getUserInfo);
 router.post('/api/dashboard/getTopUsers', auth.ensureAuth, dashboard.getTopUsers);

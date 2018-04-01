@@ -56,8 +56,6 @@ var getTutorials = function (req, res, next) {
 		var user = req.body.auth.decoded;
 		var tuts = [];
 		db.findAndCountAllTutorials(user.id).then(function (data) {
-			console.log ("Maybe?" );
-			console.log (data);
 			for (i = 0; i < data.rows.length; i++) {
 				tuts.push(data.rows[i].dataValues);
 			}
@@ -104,28 +102,32 @@ var processUserInfo = function (result) {
 	var user = result.rows[0];
 	var returnObject = {}
 	returnObject.name = user.name;
-	returnObject.avatarId = user.avatarId;
-	returnObject.avatars = user.Avatar.dataValues;
-	returnObject.levelsSpent = 0;
-	returnObject.imgSrc = "images/avatars/" + user.avatarId + ".png";
-	var tuts = user.Tutorial;
+	returnObject.avatar = user.Avatar.rows[0].dataValues;
+	var tuts = user.Tutorial.rows;
 	var tutArray = [];
 	for (i = 0; i < tuts.length; i++) {
 		var tut = tuts[i];
-		if (tut.userTutorial.role == "student") {
-			tutArray.push ({
-				coursecode: tut.coursecode,
-				coursename: tut.coursename,
-				exp: tut.userTutorial.exp,
-				level: level.calculateLevel(tut.userTutorial.exp)
-			});
-		}
+		tutArray.push ({
+			coursecode: tut.coursecode,
+			coursename: tut.coursename,
+			name : tut.name,
+			week : tut.week,
+			day : tut.day,
+			time : tut.time,
+			description : tut.description,
+			exp: tut.userTutorial.exp,
+			role: tut.userTutorial.role,
+			level: level.calculateLevel(tut.userTutorial.exp)
+		});
 	}
 	var totalLevels = 0;
+	var totalExp = 0;
 	for (i = 0; i < tutArray.length; i++) {
 		totalLevels += tutArray[i].level;
+		totalExp += tutArray[i].exp;
 	}
 	returnObject.totalLevels = totalLevels;
+	returnObject.totalExp = totalExp;
 	returnObject.tutorials = level.setLevelInfo(tutArray);
 	return returnObject;
 }
@@ -170,9 +172,9 @@ var processTopUsers = function (data) {
 
 var setAvatar = function (req, res, next) {
 	var uid = req.body.auth.decoded.id;
-	var aid = req.body.aid;
+	var aid = req.body.avatarId;
 	db.setUserAvatar(uid, aid).then(function (result) {
-		res.json({ success: true, message: 'Success' });
+		res.json({ success: true, message: 'Success', data : result });
 	});
 }
 

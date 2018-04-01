@@ -8,6 +8,7 @@ var Avatar = require ('../../models/avatar');
 var userTutorial = require ('../../models/userTutorial');
 //var userAvatar = models.userAvatar;
 var userAvatar = require ('../../models/userAvatar');
+var level = require ('./level');
 
 
 /**
@@ -63,10 +64,15 @@ var findAndCountAllTutorials = function (uid) {
 var findAndCountAllUsersInTutorial = function(tid){
 	return ( new Promise ( function (resolve, reject) {
 		resolve ( User.findAndCountAll({
-			include:[{
-				model: Tutorial,
-				where: {id: tid}
-			}],
+			include:[
+				{
+					model: Tutorial,
+					where: {id: tid}
+				},
+				{
+					model: Avatar
+				}
+			],
 			attributes:['id','name', 'avatarId']
 		}));
 	}));
@@ -165,7 +171,6 @@ var findTutorialInfo = function (tid) {
 var getAllAvatars = function () {
 	return ( new Promise ( function (resolve, reject) {
 		resolve (  Avatar.findAndCountAll({
-			attributes: ['id', 'price', 'url', 'name']
 		}));
 	}));
 }
@@ -177,9 +182,44 @@ var getAllAvatars = function () {
  * @return {Promise}
  */
 var setUserAvatar = function(uid, aid) {
-	return User.findOne({ where: {id: uid} }).then(function (user) {
-		if ( user !== null )
-			return user.update({ avatarId: aid })
+	
+	var userTutorials = userTutorial.findAll ({
+		'where' :
+		{
+			'userId' : uid
+		}
+	});
+	
+	return Avatar.findOne ({
+		'where' :
+		{
+			'id' : aid
+		}
+	}).then ( function (avatar) {
+		if ( avatar !== null )
+		{
+			var totalExp = 0;
+			for ( var i = 0; i < userTutorials.rows.length; i++ )
+			{
+				totalExp += userTutorials.rows[i].exp;
+			}
+			
+			var currentLevel = level.calculateLevel ( totalExp );
+			
+			return userAvatar.findOne({ where: {UserId: uid} }).then(function (user) {
+				if ( user !== null )
+				{
+					if ( currentLevel >= avatar.exp )
+					{
+						user.update({ AvatarId: aid });
+						return true;
+					}
+				}
+				return false;
+			});
+		}
+		
+		return false;
 	});
 }
 

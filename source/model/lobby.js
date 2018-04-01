@@ -59,6 +59,26 @@ LobbyList.prototype.addLobby = function (roomData) {
 }
 
 /**
+ * Remove a lobby from the LobbyList.
+ *
+ * @param {roomData}
+ *      roomData {
+ *          moduleId : {string},
+ *          tutorialId : {string},
+ *          namespace : {string} concatenation of the form "[moduleId]/[tutorialId]"
+ *      }
+ * @returns {boolean}
+ */
+LobbyList.prototype.removeLobby = function (roomData) {
+	if (this.lobbies[roomData.moduleId][roomData.tutorialId]) {
+		delete this.lobbies[roomData.moduleId][roomData.tutorialId];
+		this.lobbyCount--;
+		return true;
+	}
+	return false;
+}
+
+/**
  * Get the lobby for the given module and tutorial id.
  *
  * @param {String} moduleId
@@ -310,8 +330,6 @@ Lobby.prototype.getUsersInRoom = function (roomName) {
                         'userId' : lobbyio.connected[socketId].userId,
                         'tutorialId' : lobbyio.connected[socketId].tutorialId,
 						'userAvatar' : lobbyio.connected[socketId].userAvatar,
-						'avatarHeight' : lobbyio.connected[socketId].avatarHeight,
-						'avatarWidth' : lobbyio.connected[socketId].avatarWidth,
 						'group' : lobbyio.connected[socketId].group,
                         'socketId' : socketId
                     });
@@ -492,21 +510,21 @@ lobbyio.on ('connection', function (socket) {
         db.findAndCountAllUsersInTutorial(socket.tutorialId).then(function (data) {
             var returnObj = LobbyModule.processLobbyUsers(data);
             if (socket.userType == 'student') {
-                var studentAvatar = "";
+                var studentAvatar = {};
                 var studentExp = 0;
                 //Get this socket's data from the list of students retrieved by the database call.
                 for (var i = 0; i < returnObj.students.length; i++) {
                     if (returnObj.students[i].id == socket.userId) {
-                        studentAvatar = returnObj.students[i].avatarId;
+                        studentAvatar = returnObj.students[i].avatar.dataValues;
                         studentExp = returnObj.students[i].exp;
                         break;
                     }
                 }
-
+				
                 socket.emit ('login', {
-                    'tutorAvatar' : "/images/avatars/" + returnObj.tutor.avatarId + ".png",
+                    'tutorAvatar' : returnObj.tutor.avatar.dataValues,
                     'tutorName' : returnObj.tutor.name,
-                    'userAvatar' : "/images/avatars/" + studentAvatar + ".png",
+                    'userAvatar' : studentAvatar,
                     'experience' : studentExp,
                     'userType': socket.userType,
                     'username': socket.username,
@@ -515,160 +533,13 @@ lobbyio.on ('connection', function (socket) {
                 });
 				
 				//TODO: Update this to make the socket store the relevant information necessary for the battle mode.
-				socket.userAvatar = "/images/avatars/" + studentAvatar + ".png";
-				socket.avatarWidth = "1";
-				socket.avatarHeight = "1";
+				socket.userAvatar = studentAvatar;
 				
 				//TODO: Change this to get the data from the database instead. Can probably store this as a JSON data type.
-				socket.runes = {
-					'0' : [
-						{
-							'width' : 20,
-							'height' : 20,
-							'name' : 'Attack_Type01',
-							'damage' : 10,
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 10,
-								'height' : 10,
-								'duration' : 3000
-							},
-							'symbols' : [
-								{
-									'positionTop' : 0,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 0,
-									'positionLeft' : 60,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 0,
-									'positionLeft' : 100,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						},
-						{
-							'width' : 25,
-							'height' : 25,
-							'name' : 'Attack_Type02',
-							'damage' : 13,
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 10,
-								'height' : 15,
-								'duration' : 2000
-							},
-							'symbols' : [
-								{
-									'positionTop' : 0,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 10,
-									'positionLeft' : 60,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 60,
-									'positionLeft' : 100,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						}
-					],
-					'1' : [
-						{
-							'width' : 30,
-							'height' : 30,
-							'name' : 'Attack_Type01',
-							'damage' : 8,
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 30,
-								'height' : 10,
-								'duration' : 1000
-							},
-							'symbols' : [
-								{
-									'positionTop' : 0,
-									'positionLeft' : 0,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 30,
-									'positionLeft' : 70,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 50,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						},
-						{
-							'width' : 13,
-							'height' : 13,
-							'name' : 'Attack_Type02',
-							'damage' : 5,
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 20,
-								'height' : 20,
-								'duration' : 1500
-							},
-							'symbols' : [
-								{
-									'positionTop' : 60,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 30,
-									'positionLeft' : 0,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 20,
-									'positionLeft' : 10,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						}
-					]
-				};
+				socket.runes = studentAvatar.runes;
             } else {
                 socket.emit ('login', {
-                    'userAvatar' : "/images/avatars/" + returnObj.tutor.avatarId + ".png",
+                    'userAvatar' : returnObj.tutor.avatar.dataValues,
                     'userType': socket.userType,
                     'username': socket.username,
                     'numUsers': lobby.numUsers,
@@ -676,117 +547,10 @@ lobbyio.on ('connection', function (socket) {
                 });
 				
 				//TODO: Update this to make the socket store the relevant information necessary for the battle mode.
-				socket.userAvatar = "/images/avatars/" + returnObj.tutor.avatarId + ".png";
-				socket.avatarWidth = "1";
-				socket.avatarHeight = "2";
+				socket.userAvatar = returnObj.tutor.avatar.dataValues;
 				
 				//TODO: Change this to get the data from the database instead. Can probably store this as a JSON data type.
-				socket.runes = {
-					'0' : [
-						{
-							'width' : 30,
-							'height' : 30,
-							'name' : 'Attack_Type01',
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 30,
-								'height' : 30,
-								'duration' : 1500
-							},
-							'symbols' : [
-								{
-									'positionTop' : 0,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 0,
-									'positionLeft' : 60,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 0,
-									'positionLeft' : 100,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						},
-						{
-							'width' : 20,
-							'height' : 20,
-							'name' : 'Attack_Type02',
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 10,
-								'height' : 10,
-								'duration' : 1000
-							},
-							'symbols' : [
-								{
-									'positionTop' : 0,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 10,
-									'positionLeft' : 60,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 60,
-									'positionLeft' : 100,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						},
-						{
-							'width' : 15,
-							'height' : 15,
-							'name' : 'Attack_Type03',
-							'effect' : {
-								'image' : '/images/border-image.png',
-								'width' : 10,
-								'height' : 10,
-								'duration' : 1000
-							},
-							'symbols' : [
-								{
-									'positionTop' : 0,
-									'positionLeft' : 30,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 30,
-									'positionLeft' : 40,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								},
-								{
-									'positionTop' : 20,
-									'positionLeft' : 10,
-									'height' : 3,
-									'width' : 3,
-									'completed' : false
-								}
-							]
-						}
-					]
-				};
+				socket.runes = returnObj.tutor.avatar.runes;
             }
 
             //Update the active users list in the other clients.
@@ -894,7 +658,6 @@ lobbyio.on ('connection', function (socket) {
 
             //Send tutor's graded answers/experience to the students.
             socket.on ('grade question', function (data) {
-				console.log ( data );
                 var lobby = lobbyList.getLobby(socket.moduleGroup, socket.tutorialGroup);
                 lobby.questions[data.uuid]['groupAnswers'] = data.groupAnswers;
 
@@ -1226,7 +989,8 @@ lobbyio.on ('connection', function (socket) {
 											
 											//TODO: Make this instead instead just send out an end state thing.
 											lobbyio.to(value.socketId).emit ('store loot', {
-												'loot' : lootToSpawn
+												'loot' : lootToSpawn,
+												'totalExp' : totalExp
 											});
 										}
 									});
@@ -1353,6 +1117,16 @@ lobbyio.on ('connection', function (socket) {
             });
 
             updateUsers (lobby, socket);
+			
+			if (lobby.numUsers == 0)
+			{
+				console.log ("Removing empty lobby.");
+				lobbyList.removeLobby ({
+					'tutorialId' : socket.tutorialGroup,
+					'moduleId' : socket.moduleGroup,
+					'namespace' : lobby.namespace
+				});
+			}
         }
     });
 });

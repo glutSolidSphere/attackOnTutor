@@ -18,7 +18,7 @@ var setLevelInfo = function(tutArray) {
 			tutObj.currExp = exp;
 		}
 	
-        tutObj.totalToNext = calculateExp(tutObj.level) - calculateExp(tutObj.level-1);
+        tutObj.totalToNext = calculateExp(tutObj.level);
         tutObj.percentage = Math.floor(tutObj.currExp/tutObj.totalToNext * 100);
     }
     return tutArray;

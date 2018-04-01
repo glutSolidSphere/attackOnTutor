@@ -4,17 +4,14 @@
  *
  * @module javascripts/lobby/lobby-angular-student-controller
  */
-angular.module('lobbyApp').controller ('studentCtrl', function($scope, socket) {
+angular.module('lobbyApp').controller ('studentCtrl', function($scope, $window, socket) {
 	$scope.socket = socket;
-    $scope.tutorInfo = {
-        'imgSrc' : '',
-        'username' : ''
-    }
+    $scope.tutorInfo = {};
     $scope.health = 100;
     $scope.maxHealth = 100;
 
     $scope.userInfo = {
-        'imgSrc' : '',
+        'avatar' : {},
         'exp' : 0
     };
     
@@ -24,20 +21,23 @@ angular.module('lobbyApp').controller ('studentCtrl', function($scope, socket) {
      *   Listeners for student client.
      */
 
+	 socket.on ( 'invalid', function ( data ) {
+		$window.location.href = '/error/lobbyClosed';
+	 });
+	 
     //Listen for login response from server before initialising everything else.
     socket.on ( 'login', function (data) { 
-        
-        $scope.userInfo.imgSrc = data.userAvatar;
-        $scope.userInfo.exp = data.experience;
-        $scope.userInfo.level = $scope.calculateLevel($scope.userInfo.exp);
-        $scope.userInfo.expToNext = $scope.expToNextLevel($scope.userInfo.level + 1);
-
-        $scope.tutorInfo.imgSrc = data.tutorAvatar;
-        $scope.tutorInfo.username = data.tutorName;
-		console.log ($scope.tutorInfo);
 
         //Ensure the user logged in is a student, otherwise do not initialise all these socket listeners.
         if (data.userType == 'student') {
+			$scope.userInfo.avatar = data.userAvatar;
+			$scope.userInfo.exp = data.experience;
+			$scope.userInfo.level = $scope.calculateLevel($scope.userInfo.exp);
+			$scope.userInfo.expToNext = $scope.expToNextLevel($scope.userInfo.level + 1);
+
+			$scope.tutorInfo = data.tutorAvatar;
+			$scope.tutorInfo.username = data.tutorName;
+			
             //Receives questions composed and sent by tutor
             socket.on ('add question', function (data) {
             	var answers = [];
@@ -102,6 +102,12 @@ angular.module('lobbyApp').controller ('studentCtrl', function($scope, socket) {
                 $scope.userInfo.level = $scope.calculateLevel($scope.userInfo.exp);
                 $scope.userInfo.expToNext = $scope.expToNextLevel($scope.userInfo.level + 1);
             });
+			
+			socket.on ( 'store loot', function (data) {
+				$scope.userInfo.exp += data.totalExp;
+                $scope.userInfo.level = $scope.calculateLevel($scope.userInfo.exp);
+                $scope.userInfo.expToNext = $scope.expToNextLevel($scope.userInfo.level + 1);
+			});
         }
     });
 

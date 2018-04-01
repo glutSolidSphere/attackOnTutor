@@ -24,8 +24,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
 
     //Listen for login response from server before initialising everything else.
     socket.on ('login', function (data) {
-
-        $scope.userInfo.imgSrc = data.userAvatar;
+        $scope.userInfo.icon = data.userAvatar.icon;
         //Ensure the user logged in is a tutor, otherwise do not initialise all these socket listeners.
         if (data.userType == 'tutor') {
 
@@ -40,6 +39,10 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
                         groupAnswer.description = data.answer.description;
                     }
                 }
+            });
+			
+			socket.on ('deleted group', function (data) {
+				$scope.selectedGroups = [];
             });
 
             //Log the question in this client after it has been sent out to all the students in the selected groups by the server.
@@ -97,8 +100,13 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
     *
     */
     $scope.scrollGroupList = function (direction) {
+		if ( $scope.groupRangeIndex < 0 || $scope.groupRangeIndex >= $scope.socket.getAllSocketGroups().length )
+		{
+			$scope.groupRangeIndex = $scope.socket.getAllSocketGroups().length - 1;
+			return;
+		}
 		var newIndexRange = $scope.groupRangeIndex + direction;
-		if ( newIndexRange >= 0 && newIndexRange < ($scope.socket.getAllSocketGroups().length - 3) )
+		if ( newIndexRange >= 0 && newIndexRange < $scope.socket.getAllSocketGroups().length )
 		{
 			$scope.groupRangeIndex = newIndexRange;
 		}
@@ -120,6 +128,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
      * @param {Integer} index
      */
 	$scope.toggleSelectedGroup = function (index) {
+		
 		if ($scope.inSelectedGroups(index)) {
 			$scope.selectedGroups.splice ($scope.selectedGroups.indexOf (index), 1);
 		} else {
@@ -233,6 +242,7 @@ angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
      */
     $scope.startBattle = function () {
 		$scope.showPrompt = false;
+		$scope.respawn();
 		socket.emit ('start battle');
 	};
 });

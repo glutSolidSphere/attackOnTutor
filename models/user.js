@@ -12,7 +12,7 @@ var dataTable = {
 		'email' : 'happy@student.com',
 		'gender' : 'male',
 		'token' : 'fake-token-1',
-		'avatarId' : 'avatar-01',
+		'avatarId' : 'avatar-02',
 		'accountName' : 'happy',
 		'password' : '5f4dcc3b5aa765d61d8327deb882cf99'
 	},

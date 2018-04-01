@@ -8,18 +8,308 @@
     <script type="text/javascript" src="/libs/js-cookie-2.1.0/js.cookie.min.js"></script>
 
     <script src="libs\angular-1.6.3\angular.min.js" type="application/javascript"></script>
-    <script src="javascripts/dashboard/dashboard-user-controller.js" type="application/javascript"></script>
     <script src="javascripts/dashboard/dashboard-module-controller.js" type="application/javascript"></script>
-    <script src="javascripts/dashboard/dashboard-avatar-controller.js" type="application/javascript"></script>
 
 	
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=VT323">
     <link rel="stylesheet" href="/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
 	<link rel="stylesheet" type="text/css" href="/css/navigationbar.css">	
+	
+	<style>
+		
+		body {
+			background-image: url("/images/bg.png");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center; 
+			background-size: cover;
+		}
+		
+		.tutorial-container
+		{
+			-webkit-transition: all 0.5s ease-out;
+			-moz-transition: all 0.5s ease-out;
+			-ms-transition: all 0.5s ease-out;
+			-o-transition: all 0.5s ease-out;
+			transition: all 0.5s ease-out;
+			background-color:none;
+		}
+		
+		.tutorial-container:hover, .tutorial-container.active
+		{
+			background-color:#635f54;
+			color:#dad4bb;
+		}
+		
+		.tutorial-text::after {
+			content:"";
+			position:absolute;
+			background-color:#635f54;
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			height:2px;
+			width:100%;
+			top:100%;
+			left:0;
+			opacity : 0;
+		}
+		
+		.tutorial-text::before {
+			content:"";
+			position:absolute;
+			background-color:#635f54;
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			height:2px;
+			width:100%;
+			bottom:100%;
+			left:0;
+			opacity : 0;
+		}
+		
+		.tutorial-container.active .tutorial-text::before
+		{
+			height : 3px;
+			bottom : 110%;
+			opacity : 0.75;
+			background-color:#635f54;
+		}
+		
+		.tutorial-container.active:hover .tutorial-text::before
+		{
+			height : 3px;
+			bottom : 110%;
+			opacity : 1;
+			background-color:#635f54;
+		}
+		
+		.tutorial-container.active .tutorial-text::after
+		{
+			height : 3px;
+			top : 110%;
+			opacity : 0.75;
+			background-color:#635f54;
+		}
+		
+		.tutorial-container.active:hover .tutorial-text::after
+		{
+			height : 3px;
+			top : 110%;
+			opacity : 1;
+			background-color:#635f54;
+		}
+		
+		.tutorial-pointer
+		{
+			-webkit-transition: all 0.5s ease-out;
+			-moz-transition: all 0.5s ease-out;
+			-ms-transition: all 0.5s ease-out;
+			-o-transition: all 0.5s ease-out;
+			transition: all 0.5s ease-out;
+			
+			width:0vw;
+			height:0vw;
+			margin-left:0;
+			margin-top:0;
+			position:absolute;
+			left:-2vw;
+			top:1.5vw;
+			background-color:#635f54;
+		}
+		
+		.tutorial-pointer.active
+		{
+			width:3vw;
+			height:3vw;
+			margin-top:-1.5vw;
+			margin-left:-1.5vw;
+		}
+		
+		.list-selector-button
+		{
+			-webkit-transition: all 0.5s ease-out;
+			-moz-transition: all 0.5s ease-out;
+			-ms-transition: all 0.5s ease-out;
+			-o-transition: all 0.5s ease-out;
+			transition: all 0.5s ease-out;
+			
+			display:inline-block;
+			cursor:pointer;
+			font-size:1.5vw;
+			color:#635f54;
+			text-shadow: 0vw 0vw #9a9784;
+			vertical-align:baseline;
+			line-height:4vw;
+			height:4vw;
+			position:relative;
+		}
+		
+		.list-selector-button:before
+		{
+			content:"";
+			position:absolute;
+			background-color:#635f54;
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			height:0.5vw;
+			width:0.5vw;
+			top:calc(50% - 0.25vw);
+			left:0;
+			opacity : 0;
+		}
+		
+		.list-selector-button:after
+		{
+			content:"";
+			position:absolute;
+			background-color:#635f54;
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			height:0.5vw;
+			width:0.5vw;
+			top:calc(50% - 0.25vw);
+			right:0;
+			opacity : 0;
+		}
+		
+		.list-selector-button.active, .list-selector-button.active:hover
+		{
+			font-size:3vw;
+			text-shadow: 0.35vw 0.35vw #9a9784;
+		}
+		
+		.list-selector-button:hover:before
+		{
+			left:-1vw;
+			opacity : 1;
+			background-color:#635f54;
+		}
+		
+		.list-selector-button:hover:after
+		{
+			right:-1vw;
+			opacity : 1;
+			background-color:#635f54;
+		}
+		
+		.list-selector-divider
+		{
+			display:inline-block;
+			text-shadow: none;
+			font-size:2vw;
+			margin-right:1vw;
+			margin-left:1vw;
+			
+			opacity:1;
+			
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+		}
+		
+		.page-header-container:hover .list-selector-divider
+		{
+			opacity:0;
+		}
+		
+		.users-list-scroll-left
+		{
+			height:0;
+			width:0;
+			position:absolute;
+			left:0.5vw;
+			top:0.5vw;
+			border-top: 0.5vw solid transparent;
+			border-bottom: 0.5vw solid transparent;
+			border-right: 0.86vw solid #b4af9a;
+			cursor:pointer;
+		}
+		
+		.users-list-scroll-left:before
+		{
+			content:"";
+			position:absolute;
+			background-color:#b4af9a;
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			height: 1vw;
+			width: 0.3vw;
+			top: -0.5vw;
+			right: -1vw;
+			opacity : 0;
+			
+		}
+		
+		.users-list-scroll-left:hover:before
+		{
+			right: -1.5vw;
+			opacity : 1;
+		}
+		
+		.users-list-scroll-right
+		{
+			height:0;
+			width:0;
+			position:absolute;
+			right:0.5vw;
+			top:0.5vw;
+			border-top: 0.5vw solid transparent;
+			border-bottom: 0.5vw solid transparent;
+			border-left: 0.86vw solid #b4af9a;
+			cursor:pointer;
+		}
+		
+		.users-list-scroll-right:before
+		{
+			content:"";
+			position:absolute;
+			background-color:#b4af9a;
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			height: 1vw;
+			width: 0.3vw;
+			top: -0.5vw;
+			left: -1vw;
+			opacity : 0;
+			
+		}
+		
+		.users-list-scroll-right:hover:before
+		{
+			left: -1.5vw;
+			opacity : 1;
+		}
+	</style>
 </head>
 
-<body>
+<body ng-app="dashboardApp">
 	<ul id="header"> <!-- Header -->
 			<li class="header">
 				<a class="active font dashboardGeneralFontSize" href="/">Index Page</a>
@@ -28,108 +318,671 @@
 	
 	<input id="uid" type="hidden" value="<%= user.id %>">
 
-	<div class="container-fluid border-normal" ng-app="dashboardApp">
-		<div class="row">
-			<div class="col-md-3">
-				<!-- User Details -->
-				<div class="border-gold-trimmed">
-					<div class="font whiteFont level-container" ng-controller="userCtrl">
+	<div class="container-fluid" ng-controller="dashboardCtrl">
+		<div class="page-header-container"
+		style="
+			position:fixed;
+			left:3.5vw;
+			top:6.5vw;
+			width:auto;
+			height:4vw;
+		">
+			<div class="list-selector-button"
+			ng-class="{'active' : selectedList == 'modules'}"
+			ng-click="selectList ('modules')">
+				MODULES
+			</div>
 
-						<div class="row padded-row">
-						<img ng-src="{{userInfo.imgSrc}}" class="img-responsive smoothImage"/>
-						
-						<!-- User's Name -->
-						<h2 class="brownFont centerText boldText">{{userInfo.name}}</h2> 
-						
-						<div class="dashboardGeneralFontSize centerText"> Total Levels: {{userInfo.totalLevels}} </div>
+			<div class="list-selector-divider">
+			-
+			</div>
+			
+			<div class="list-selector-button"
+			ng-class="{'active' : selectedList == 'avatars'}"
+			ng-click="selectList ('avatars')">
+				AVATARS
+			</div>
+		</div>
 					
-						
-						<div class="row padded-row" ng-controller="avatarCtrl">
-							<div class="padded-row-vertical">
-								<center><button class="btn" ng-click="changeAvatarClicked()">Change Avatar</button>
-								<div ng-show="pickerIsVisible">
-									<div class="row" ng-repeat="row in avatarRows">
-										<img class="picker-img smoothImage" ng-repeat="image in row" ng-mouseenter="setMouseoverPicker(image)" ng-mouseleave="setMouseoverPicker(null)" ng-click="avatarPicked(image)" ng-src="{{image.url}}"></img>
-									</div>
-									<div ng-show="showPickerAvatarDetails">
-										{{pickerHoveredImg.name}}
-									</div>									
-								</div></center>
-							</div>
-							<div class="padded-row-vertical">
-								<center><button class="btn" ng-click="buyAvatarsClicked()">Buy Avatars</button></center>
-								<div ng-show="shopIsVisible">
-									<div class="row" ng-repeat="row in shopRows">
-										<img class="picker-img smoothImage" ng-repeat="image in row" ng-mouseenter="setMouseoverShop(image)" ng-mouseleave="setMouseoverShop(null)" ng-src="{{image.url}}" ng-click="avatarBought(image)"></img>
-									</div>
-									<div ng-show="showShopAvatarDetails">
-										{{hoveredImg.name}}
-										<br>
-										Price: {{hoveredImg.price}}
-									</div>
-								</div>
-							</div>
+		<div class="module-selector-container"
+		style="
+			position:fixed;
+			left:3.5vw;
+			top:13.5vw;
+			width: 33.5vw;
+			height: 40vw;
+		">
+			<div class="side-motif-wide"
+			style="
+			position:absolute;
+			width:1.5vw;
+			height:40vw;
+			left:0;
+			top:0;
+			background-color:#b4af9a;
+			">
+			</div>
+			<div class="side-motif-narrow"
+			style="
+			position:absolute;
+			width:0.5vw;
+			height:40vw;
+			left:2vw;
+			top:0;
+			background-color:#b4af9a;
+			">
+			</div>
+			<div class="tutorial-list-container" id="tutorial-list-container"
+			style="
+				position:absolute;
+				left:3.5vw;
+				top:0;
+				width:30vw;
+				height:40vw;
+				background-color:#dad4bb;
+				box-shadow: 0.7vw 0.7vw #9a9784;
+				overflow-y:auto;
+				padding-right:3vw;
+				padding-top:1.5vw;
+				padding-bottom:1.5vw;
+				overflow:visible;
+			">
+				<div ng-if="selectedList == 'modules'">
+					<!-- List of Modules and Tutorials -->
+					<div class="tutorial-container" 
+					ng-class="{'active' : selectedTutorialIndex == $index}"
+					ng-click="selectTutorialIndex ( $index )"
+					ng-repeat="t in tuts"
+					style="
+					width:100%;
+					height:3vw;
+					padding-left:1.5vw;
+					padding-right:1.5vw;
+					margin-bottom:1.5vw;
+					cursor:pointer;
+					position:relative;
+					"> 
+						<div class="tutorial-pointer"
+						ng-class="{'active' : selectedTutorialIndex == $index}"
+						>
 						</div>
-						<div class="row padded-row">
-							<div class="tutorial-level-bar centerText dashboardGeneralFontSize" ng-repeat="t in userInfo.tutorials">
+						<div class="tutorial-text font"
+						style="
+						width:100%;
+						height:3vw;
+						font-size:2vw;
+						">
+							<div style="float:left;">
+								 {{t.coursename}}
+							</div>
+							<div style="float:right;">
 								{{t.coursecode}}
-								<br>
-								Level: {{t.level}}
-								<br>
-								Experience: {{t.currExp}} / {{t.totalToNext}}
-								<br>
-								<div class="progress">
-									<div class="progress-bar" role="progressbar" style="width: {{t.percentage}}%">
-									</div>
-								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div ng-if="selectedList == 'avatars'">
+					<!-- List of Avatars -->
+					<div class="tutorial-container" 
+					ng-class="{'active' : selectedAvatarIndex == $index}"
+					ng-click="selectAvatarIndex ( $index )"
+					ng-repeat="avatar in avatars"
+					style="
+					width:100%;
+					height:3vw;
+					padding-left:1.5vw;
+					padding-right:1.5vw;
+					margin-bottom:1.5vw;
+					cursor:pointer;
+					position:relative;
+					"> 
+						<div class="tutorial-pointer"
+						ng-class="{'active' : selectedAvatarIndex == $index}"
+						>
+						</div>
+						<div class="tutorial-text font"
+						style="
+						width:100%;
+						height:3vw;
+						font-size:2vw;
+						">
+							<div style="float:left;">
+								 {{avatar.name}}
+							</div>
+							<div style="float:right;">
+								Lvl: {{avatar.exp}}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-			<div class="col-md-9"> <!-- Module Details -->
-				<div class="border-gold-trimmed">
-					<h2 class="font brownFont centerText boldText border-bronze-trimmed">Modules</h2>
-								
-					<div class="list-group" ng-controller="moduleCtrl">
-						<div id="tutorials">
-							<div ng-repeat="t in tuts"> <!-- List of Modules and Tutorials -->
-								<div class="module-container font border-bronze-trimmed whiteFont dashboardMarginBottom dashboardGeneralFontSize">
-								
-									<div>
-										{{t.coursecode}} {{t.coursename}}
-									</div>
-									
-									<div class="separateModules">
-										<button class="btn lobby-button" ng-click="redirect(t)" name="tut-id" value="{{t.id}}"> Join Tutorial </button>
-										<button class="btn" ng-click="toggleLeaderboard(t)"> View Leaderboard </button>
-									</div>
-									
-									<div>
-										<!-- List of Tutees in Leaderboard -->
-										<table class="table" ng-show="t.leaderboardIsVisible">
-											<tr>
-												<th></th>
-												<th>Name</th>
-												<th>Level</th>
-											</tr>
-											<tr ng-repeat="s in t.students">
-												<td>{{ $index + 1 }}</td>
-												<td>{{ s.name }}</td>
-												<td>{{ s.level }}</td>
-											</tr>
-										</table>
-									</div>
-
-								</div>
+		
+		<!-- User Details -->
+		<div class="details-container font whiteFont"
+		style="
+		position:fixed;
+		right:3.5vw;
+		top:13.5vw;
+		width: 55vw;
+		height: 40vw;
+		background-color:#dad4bb;
+		">
+			<div ng-if="selectedList == 'modules'">
+				<div class="details-header"
+				style="
+					position:absolute;
+					width:100%;
+					height:3vw;
+					left:0px;
+					font-size:2vw;
+					color:#dad4bb;
+					background-color:#635f54;
+					padding-left:1.5vw;
+					padding-right:1.5vw;
+					z-index : 1;
+				">
+					<div style="float:left;">
+						{{tuts[selectedTutorialIndex].coursename}}
+					</div>
+					<div style="float:right;">
+						{{tuts[selectedTutorialIndex].coursecode}}
+					</div>
+				</div>
+				
+				<div class="player-sprite-container"
+				style="
+					position:absolute;
+					width:20vw;
+					height:34vw;
+					left:1.5vw;
+					top:4.5vw;
+					background-color:#b4af9a;
+					z-index : 1;
+					overflow:hidden;
+				">
+					<div class="player-avatar-container"
+					style="
+						position:absolute;
+						width: 20vw;
+						height: {{20 * userInfo.avatar.height / userInfo.avatar.width}}vw;
+						top:calc(50% - {{10 * userInfo.avatar.height / userInfo.avatar.width}}vw);
+					">
+						<div class="loot-info-icon smoothImage"
+						ng-style="{'background' : 'url(' + userInfo.avatar.idleAnim + ') no-repeat', 'background-size' : 'cover'}"
+						style="
+							width : 20vw;
+							height : {{20 * userInfo.avatar.height / userInfo.avatar.width}}vw;
+						">
+						</div>
+					</div>
+				</div>
+				
+				<div class="player-info-container"
+				style="
+					position: absolute;
+					width: 30.5vw;
+					height: 12.5vw;
+					left: 23vw;
+					top: 4.5vw;
+					z-index: 1;
+				">
+					<div class="player-avatar-container"
+					style="
+						background-color: #b4af9a;
+						width: 12.5vw;
+						height: 12.5vw;
+						padding:0.5vw;
+					">
+						<div class="loot-info-icon smoothImage"
+						ng-style="{'background' : 'url(' + userInfo.avatar.icon + ') no-repeat', 'background-size' : 'cover'}"
+						style="
+							width : 11.5vw;
+							height : 11.5vw;
+						">
+						</div>
+					</div>
+					<div class="player-info-header"
+					style="
+						position:absolute;
+						width:18vw;
+						height:3vw;
+						left:12.5vw;
+						top:0;
+						font-size:2vw;
+						color:#635f54;
+						background-color:#b4af9a;
+						padding-left:0.5vw;
+						padding-right:1.5vw;
+						z-index : 1;
+					">
+						{{userInfo.name}}
+					</div>
+					<div class="player-details-container"
+					style="
+						position:absolute;
+						width:18vw;
+						height:9.5vw;
+						left:12.5vw;
+						top:3vw;
+						font-size:2vw;
+						color:#635f54;
+						padding:0.5vw;
+					">
+						<div class="player-details-row"
+						style="
+						height:3vw;
+						width:100%;
+						">
+							<div style="float:left;">
+								Role:
+							</div>
+							<div style="float:right;">
+								{{userInfo.tutorials[selectedTutorialIndex].role}}
+							</div>
+						</div>
+						<div class="player-details-row"
+						ng-show="userInfo.tutorials[selectedTutorialIndex].role == 'student'"
+						style="
+						height:3vw;
+						width:100%;
+						">
+							<div style="float:left;">
+								Level:
+							</div>
+							<div style="float:right;">
+								{{userInfo.tutorials[selectedTutorialIndex].level}}
+							</div>
+						</div>
+						
+						<div class="tutorial-level-bar centerText lobbyGeneralFontSize"
+						ng-show="!userInfo.tutor"
+						style= "
+							width: calc(100% - 3vw);
+							margin-left:1.5vw;
+							margin-right:1.5vw;
+							height : 2vw;
+							position:relative;
+							background-color:#b4af9a;
+						">
+							<div class="tutor-label-details-container"
+							style="
+							position:absolute;
+							width:100%;
+							left:50%;
+							margin-left:-50%;
+							font-size:1.5vw;
+							color:#635f54;
+							">
+								Experience: {{userInfo.tutorials[selectedTutorialIndex].exp}} / {{userInfo.tutorials[selectedTutorialIndex].totalToNext}}
+							</div>
+							<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{userInfo.tutorials[selectedTutorialIndex].exp / userInfo.tutorials[selectedTutorialIndex].totalToNext * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{userInfo.tutorials[selectedTutorialIndex].exp / userInfo.tutorials[selectedTutorialIndex].totalToNext * 100}}%">
 							</div>
 						</div>
 					</div>
 				</div>
+				
+				<div class="tutorial-info-container"
+				style="
+				position: absolute;
+				width: 30.5vw;
+				height: 21.5vw;
+				left: 23vw;
+				bottom: 1.5vw;
+				font-size:2vw;
+				color:#635f54;
+				padding:0.5vw;
+				z-index: 1;
+				">
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					">
+						<div style="float:left;">
+							Tutorial Group:
+						</div>
+						<div style="float:right;">
+							{{userInfo.tutorials[selectedTutorialIndex].name}}
+						</div>
+					</div>
+					
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					">
+						<div style="float:left;">
+							Day:
+						</div>
+						<div style="float:right;">
+							{{userInfo.tutorials[selectedTutorialIndex].day}}
+						</div>
+					</div>
+					
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					">
+						<div style="float:left;">
+							Time:
+						</div>
+						<div style="float:right;">
+							{{userInfo.tutorials[selectedTutorialIndex].time}}
+						</div>
+					</div>
+					
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					">
+						<div style="float:left;">
+							Week:
+						</div>
+						<div style="float:right;">
+							{{userInfo.tutorials[selectedTutorialIndex].week}}
+						</div>
+					</div>
+					
+					<div class="tutorial-details-partition"
+					style="
+					height:0.2vw;
+					width:100%;
+					background-color:#b4af9a;
+					margin-bottom:0.5vw;
+					margin-top:0.5vw;
+					">
+					</div>
+					
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					font-size:1.5vw;
+					">
+						<div style="float:left;">
+							{{userInfo.tutorials[selectedTutorialIndex].description}}
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<button class="btn lobby-button" ng-click="redirect(tuts[selectedTutorialIndex])" name="tut-id" value="{{tuts[selectedTutorialIndex].id}}"
+					style="
+					height:3vw;
+					padding : 0;
+					font-size:2vw;
+					position:absolute;
+					bottom: 1.5vw;
+					right: 1.5vw;
+					z-index:2;
+					"> Join Tutorial </button>
+				</div>
 			</div>
-		</div>
+			
+			<!-- Avatar information -->
+			<div ng-if="selectedList == 'avatars'">
+				<div class="details-header"
+				style="
+					position:absolute;
+					width:100%;
+					height:3vw;
+					left:0px;
+					font-size:2vw;
+					color:#dad4bb;
+					background-color:#635f54;
+					padding-left:1.5vw;
+					padding-right:1.5vw;
+					z-index : 1;
+				">
+					<div style="float:left;">
+						{{avatars[selectedAvatarIndex].name}}
+					</div>
+					<div style="float:right;">
+						Lvl: {{avatars[selectedAvatarIndex].exp}}
+					</div>
+				</div>
+				
+				<div class="player-sprite-container"
+				style="
+					position:absolute;
+					width:20vw;
+					height:34vw;
+					left:1.5vw;
+					top:4.5vw;
+					background-color:#b4af9a;
+					z-index : 1;
+					overflow:hidden;
+				">
+					<div class="player-avatar-container"
+					style="
+						position:absolute;
+						width: 20vw;
+						height: {{20 * avatars[selectedAvatarIndex].height / avatars[selectedAvatarIndex].width}}vw;
+						top:calc(50% - {{10 * avatars[selectedAvatarIndex].height / avatars[selectedAvatarIndex].width}}vw);
+					">
+						<div class="loot-info-icon smoothImage"
+						ng-style="{'background' : 'url(' + avatars[selectedAvatarIndex].idleAnim + ') no-repeat', 'background-size' : 'cover'}"
+						style="
+							width : 20vw;
+							height : {{20 * avatars[selectedAvatarIndex].height / avatars[selectedAvatarIndex].width}}vw;
+						">
+						</div>
+					</div>
+				</div>
+				
+				<div class="player-info-container"
+				style="
+					position: absolute;
+					width: 30.5vw;
+					height: 14.5vw;
+					left: 23vw;
+					top: 4.5vw;
+					z-index: 1;
+				">
+					<div class="player-avatar-container"
+					style="
+						background-color: #b4af9a;
+						width: 12.5vw;
+						height: 12.5vw;
+						padding:0.5vw;
+					">
+						<div class="rune"
+						ng-style="{'background' : 'url(' + avatars[selectedAvatarIndex].runes[selectedRune].image + ') no-repeat', 'background-size' : 'cover'}"
+						style="
+							width : 11.5vw;
+							height: 11.5vw;
+							position:relative;
+							z-index:0;
+						">
+							<div class="rune-symbol"
+								ng-repeat="symbol in avatars[selectedAvatarIndex].runes[selectedRune].symbols"
+								ng-style="{'width' : symbol.width + 'vw', 'height' : symbol.height + 'vw',
+										'top' : symbol.positionTop + '%', 'left' : symbol.positionLeft + '%',
+										'margin-left' : symbol.width * -0.5 + 'vw', 'margin-top' : symbol.height * -0.5 + 'vw'}"
+								style="
+									position : absolute;
+									background : red;
+									z-index : 100;
+								">
+							</div>
+						</div>
+					</div>
+					<div class="player-info-header"
+					style="
+						position:absolute;
+						width:18vw;
+						height:3vw;
+						left:12.5vw;
+						top:0;
+						font-size:2vw;
+						color:#635f54;
+						background-color:#b4af9a;
+						padding-left:0.5vw;
+						padding-right:1.5vw;
+						z-index : 1;
+						text-overflow: ellipsis;
+						overflow: hidden;
+						white-space: nowrap;
+					">
+						{{avatars[selectedAvatarIndex].runes[selectedRune].name}}
+					</div>
+					<div class="player-details-container"
+					style="
+						position:absolute;
+						width:18vw;
+						height:9.5vw;
+						left:12.5vw;
+						top:3vw;
+						font-size:2vw;
+						color:#635f54;
+						padding:0.5vw;
+					">
+						<div class="player-details-row"
+						ng-show="userInfo.tutorials[selectedTutorialIndex].role == 'student'"
+						style="
+						height:3vw;
+						width:100%;
+						">
+							<div style="float:left;">
+								Damage:
+							</div>
+							<div style="float:right;">
+								{{avatars[selectedAvatarIndex].runes[selectedRune].damage}}
+							</div>
+						</div>
+						<div class="player-details-row"
+						style="
+						height:3vw;
+						width:100%;
+						font-size:1.5vw;
+						">
+							<div style="float:left;">
+								{{avatars[selectedAvatarIndex].runes[selectedRune].description}}
+							</div>
+						</div>
+					</div>
+					
+					<div class=""
+					style="
+					height: 2vw;
+					width: 100%;
+					background-color:#635f54;
+					position:relative;
+					">
+						<div class="users-list-scroll-left"
+						ng-click="scrollRuneList(-1)">
+						</div>
+						<div class="users-list-scroll-right"
+						ng-click="scrollRuneList(1)">
+						</div>
+					</div>
+
+				</div>
+								
+				<div class="tutorial-info-container"
+				style="
+				position: absolute;
+				width: 30.5vw;
+				height: 19.5vw;
+				left: 23vw;
+				bottom: 1.5vw;
+				font-size:2vw;
+				color:#635f54;
+				padding:0.5vw;
+				z-index: 1;
+				">
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					">
+						<div style="float:left;">
+							Your level:
+						</div>
+						<div style="float:right;">
+							{{userInfo.totalLevels}}
+						</div>
+					</div>
+					
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					">
+						<div style="float:left;">
+							Required level:
+						</div>
+						<div style="float:right;">
+							{{avatars[selectedAvatarIndex].exp}}
+						</div>
+					</div>
+					
+					<div class="tutorial-details-partition"
+					style="
+					height:0.2vw;
+					width:100%;
+					background-color:#b4af9a;
+					margin-bottom:0.5vw;
+					margin-top:0.5vw;
+					">
+					</div>
+					
+					<div class="tutorial-details-row"
+					style="
+					height:3vw;
+					width:100%;
+					font-size:1.5vw;
+					">
+						<div style="float:left;">
+							{{avatars[selectedAvatarIndex].description}}
+						</div>
+					</div>
+				</div>
+				
+				<div>
+					<button class="btn lobby-button" ng-click="setAvatar(avatars[selectedAvatarIndex].id)" name="tut-id"
+					ng-disabled="avatars[selectedAvatarIndex].id == userInfo.avatar.id || userInfo.totalLevels < avatars[selectedAvatarIndex].exp"
+					style="
+					height:3vw;
+					padding : 0;
+					font-size:2vw;
+					position:absolute;
+					bottom: 1.5vw;
+					right: 1.5vw;
+					z-index:2;
+					"> {{avatars[selectedAvatarIndex].id == userInfo.avatar.id ? "Currently equipped" : ( userInfo.totalLevels < avatars[selectedAvatarIndex].exp ? "Level requirements" : "Select avatar" )}} </button>
+				</div>
+			</div>
+			<!--<div class="row padded-row" ng-controller="avatarCtrl">
+				<div class="padded-row-vertical">
+					<center><button class="btn" ng-click="changeAvatarClicked()">Change Avatar</button>
+					<div ng-show="pickerIsVisible">
+						<div class="row" ng-repeat="row in avatarRows">
+							<img class="picker-img smoothImage" ng-repeat="image in row" ng-mouseenter="setMouseoverPicker(image)" ng-mouseleave="setMouseoverPicker(null)" ng-click="avatarPicked(image)" ng-src="{{image.url}}"></img>
+						</div>
+						<div ng-show="showPickerAvatarDetails">
+							{{pickerHoveredImg.name}}
+						</div>									
+					</div></center>
+				</div>
+				<div class="padded-row-vertical">
+					<center><button class="btn" ng-click="buyAvatarsClicked()">Buy Avatars</button></center>
+					<div ng-show="shopIsVisible">
+						<div class="row" ng-repeat="row in shopRows">
+							<img class="picker-img smoothImage" ng-repeat="image in row" ng-mouseenter="setMouseoverShop(image)" ng-mouseleave="setMouseoverShop(null)" ng-src="{{image.url}}" ng-click="avatarBought(image)"></img>
+						</div>
+						<div ng-show="showShopAvatarDetails">
+							{{hoveredImg.name}}
+							<br>
+							Price: {{hoveredImg.price}}
+						</div>
+					</div>
+				</div>
+			</div>-->
 	</div>
 	
 </body>

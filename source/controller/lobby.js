@@ -138,14 +138,15 @@ var processLobbyUsers = function (data) {
 	var students = [];
 	for (i = 0; i < data.rows.length; i++) {
 		var studentObj = {};
-		var student = data.rows[i].dataValues;
+		var student = data.rows[i];
 		var userTut = data.rows[i].Tutorial.rows[0].userTutorial.dataValues;
 		if (userTut.role != 'student') {
-			returnObj.tutor = student;
+			returnObj.tutor = student.dataValues;
+			returnObj.tutor.avatar = student.Avatar.rows[0];
 		} else {
 			studentObj.name = student.name;
 			studentObj.id = student.id;
-			studentObj.avatarId = student.avatarId;
+			studentObj.avatar = student.Avatar.rows[0];
 			studentObj.exp = userTut.exp;
 			students.push(studentObj);
 		}
