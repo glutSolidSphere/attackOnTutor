@@ -108,8 +108,6 @@ function Lobby () {
     this.questions = {};
     
     this.numUsers = 0;
-
-    this.payoutExperience = 300;
 	
 	this.maxHealth = 100;
 	
@@ -142,6 +140,7 @@ function Lobby () {
 		'groupsFinished' : 0,
 		'overdriveDamage' : 0
 	};
+	
 	//Rewards for the groups and players.
 	this.performanceRewards = {
 		'groupRewards' : {
@@ -180,8 +179,6 @@ function Lobby () {
 		}
 	};
 	
-	//TODO: Get the tutor loot table from the database.
-	//TODO: Dropping actual equipment will have a value of the index of the equipment in a separate table.
 	this.lootTable = [
 		{
 			'name' : 'Common Knowledge',
@@ -640,6 +637,9 @@ lobbyio.on ('connection', function (socket) {
 				}
 
                 lobby.questions[data.question.uuid] = data.question;
+				
+				console.log ("Question received:");
+				console.log (lobby.questions);
 
                 //Send the parsed question back to the source socket so they can log the question parameters. (uuid)
                 socket.emit ('log question', {
@@ -660,6 +660,9 @@ lobbyio.on ('connection', function (socket) {
             socket.on ('grade question', function (data) {
                 var lobby = lobbyList.getLobby(socket.moduleGroup, socket.tutorialGroup);
                 lobby.questions[data.uuid]['groupAnswers'] = data.groupAnswers;
+				
+				console.log ( "Graded question:");
+				console.log (lobby.questions[data.uuid]);
 
                 //Send each group's answers to all the other groups.
                 lobby.questions[data.uuid].groups.forEach (function (groupName, i) {

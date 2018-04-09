@@ -4,6 +4,31 @@
  *
  * @module javascripts/lobby/lobby-angular-tutor-controller
  */
+
+angular.module('lobbyApp').controller ('windowCtrl', function($scope, $window) {
+	$scope.width = $window.innerWidth;
+	$scope.height = $window.innerHeight;
+	$scope.onResize = function ()
+	{
+		$scope.width = $window.innerWidth;
+		$scope.height = $window.innerHeight;
+		if ( ($scope.width/$scope.height) > (12/7) )
+		{
+			console.log ("here");
+		}
+	};
+	
+	$scope.onResize();
+	angular.element($window).on('resize', $scope.onResize);
+	
+	function cleanUp()
+	{
+		angular.element($window).off('resize', $scope.onResize);
+	}
+	
+	$scope.$on('$destroy', cleanUp);
+});
+ 
 angular.module('lobbyApp').controller ('tutorCtrl', function($scope, socket) {
 	$scope.showPrompt = false;
     $scope.userInfo = {};

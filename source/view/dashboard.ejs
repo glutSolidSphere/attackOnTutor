@@ -311,10 +311,24 @@
 
 <body ng-app="dashboardApp">
 	<ul id="header"> <!-- Header -->
-			<li class="header">
-				<a class="active font dashboardGeneralFontSize" href="/">Index Page</a>
-			</li>
+		<li class="header"
+		style="
+			margin-right:3.5vw;
+		">
+			<div class="link-flourish">
+			</div>
+			<a class="font" href="/">Index</a>
+		</li>
+		
+		<div class="header-flourish">
+		</div>
 	</ul>
+
+	<div class="header-padding"
+	style="
+		width:100%;
+		height:6.8vw;
+	"></div>
 	
 	<input id="uid" type="hidden" value="<%= user.id %>">
 

@@ -16,19 +16,28 @@
 </head>
 
 <body>
-    <ul>
-		<ul id="header"> <!-- Header -->
-			<li class="header">
-				<a class="active font headerGeneralFontSize" href="https://github.com/nus-mtp/etutorial">GitHub Repository</a>
-			</li>
+	<ul id="header"> <!-- Header -->
+	
+		<% if(user){ %> <!-- Only Shown when User is Logged in -->
+		<li class="header"
+		style="
+			margin-right:3.5vw;
+		">
+			<div class="link-flourish">
+			</div>
+			<a id="logout" class="font">Logout</a>
+		</li>
+		<% } %>
 		
-			<% if(user){ %> <!-- Only Shown when User is Logged in -->
-				<li class="header">
-					<a class="active font headerGeneralFontSize" id="logout">Log Out</a>
-				</li>
-			<% } %>
-		</ul>
-    </ul>
+		<div class="header-flourish">
+		</div>
+	</ul>
+
+	<div class="header-padding"
+	style="
+		width:100%;
+		height:6.8vw;
+	"></div>
 
     <div id="titleContainer"> <!-- Main Body -->
 		<img class="logo smoothImage" src="/images/logo.png"></img> <!-- Logo -->
@@ -74,6 +83,13 @@
 
 <script>
     var logoutConfirmation = "Would You Like to Log Out?";
+	
+	console.log ( window.innerHeight + "    " + window.innerWidth );
+	if ( (window.innerWidth / window.innerHeight) > (12/7) )
+	{
+		console.log ("here");
+		window.resizeTo ( 1200, 700 );
+	}
 	
     $("#logout").on
 	(
