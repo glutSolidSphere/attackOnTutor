@@ -125,6 +125,7 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
 					'symbols' : data.runeData.symbols,
 					'width' : data.runeData.width,
 					'height' : data.runeData.height,
+					'image' : data.runeData.image,
 					'id' : data.runeData.id, //Identifier for the symbol set of the rune.
 					'name' : data.runeData.name,
 					'runeId' : data.runeId, //Identifier for the rune.
@@ -140,6 +141,7 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
 					'symbols' : data.runeData.symbols,
 					'width' : data.runeData.width,
 					'height' : data.runeData.height,
+					'image' : data.runeData.image,
 					'id' : data.runeData.id, //Identifier for the symbol set of the rune.
 					'name' : data.runeData.name,
 					'runeId' : data.runeId, //Identifier for the rune.

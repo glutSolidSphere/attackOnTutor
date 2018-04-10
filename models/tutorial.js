@@ -8,26 +8,26 @@ var dataTable = {
 	'test1' : {
 		'id' : 'test1',
 		'grouptype' : 'Tutorial',
-		'name' : '1',
+		'name' : 'E1',
 		'courseid' : 'testCourse1',
-		'coursecode' : 'TT1011',
-		'coursename' : 'TEST COURSE 1',
+		'coursecode' : 'HA1101',
+		'coursename' : 'The Paradox of War',
 		'week' : 'Every Week',
 		'day' : 'Monday',
 		'time' : '1000 - 1200',
-		'description' : 'This is a test module.'
+		'description' : 'War is not only a normal part of human existence, it is arguably one of the most important factors in making us who we are.'
 	},
 	'test2' : {
 		'id' : 'test2',
 		'grouptype' : 'Tutorial',
-		'name' : 'E4',
+		'name' : 'C5',
 		'courseid' : 'testCourse1',
-		'coursecode' : 'TT1011',
-		'coursename' : 'TEST COURSE E4',
+		'coursecode' : 'TT2034',
+		'coursename' : 'The Language of Cutthroat Business',
 		'week' : 'Every Week',
 		'day' : 'Monday',
 		'time' : '1100 - 1300',
-		'description' : 'This is another test module.'
+		'description' : 'In the language of cutthroat business, there are no words for the concepts of trust or honor; there are more than three-hundred for the concept of profit.'
 	}
 };
 

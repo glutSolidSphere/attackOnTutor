@@ -1125,6 +1125,11 @@
 				transform: scale(1);
 				
 				transform-origin : center;
+				
+				background-size:cover;
+				background-repeat:no-repeat;
+				
+				image-rendering:pixelated;
 			}
 			.rune.completed-rune
 			{
@@ -1149,6 +1154,13 @@
 				opacity : 1;
 				transform : scale(1);
 				transform-origin : center;
+				
+				border-radius: 50%;
+				background-color: #cd533b;
+				opcaity:0.5;
+				
+				position : absolute;
+				z-index : 100;
 			}
 			.rune-symbol.completed-symbol
 			{
@@ -1580,6 +1592,12 @@
 				padding-top:3vw;
 				text-align : center;
 				color:#5bc0de;
+				
+				text-shadow:
+				-1px -1px 0 #635f54,
+				1px -1px 0 #635f54,
+				-1px 1px 0 #635f54,
+				1px 1px 0 #635f54;
 			}
 			
 			.battle-ranking-mvp-questions-answered-label
@@ -1589,6 +1607,12 @@
 				font-size : 2vw;
 				text-align : center;
 				color:#5bc0de;
+				
+				text-shadow:
+				-1px -1px 0 #635f54,
+				1px -1px 0 #635f54,
+				-1px 1px 0 #635f54,
+				1px 1px 0 #635f54;
 			}
 			
 			.battle-ranking-mvp-header
@@ -2184,20 +2208,15 @@
 						margin-bottom : {{rune.height * -0.5}}vw;
 						margin-right : {{rune.width * -0.5}}vw;
 						
+						background-image:url('{{rune.image}}');
 						position : fixed;
-						background : #DAD4BB;
 					">
 					<div class="rune-symbol"
 						ng-repeat="symbol in rune.symbols"
 						ng-class="{'completed-symbol' : symbol.completed, 'incomplete-symbol' : !symbol.completed}"
-						ng-style="{'width' : symbol.width + 'vw', 'height' : symbol.height + 'vw',
+						ng-style="{'width' : symbol.width + '%', 'height' : symbol.height + '%',
 								'top' : symbol.positionTop + '%', 'left' : symbol.positionLeft + '%',
-								'margin-left' : symbol.width * -0.5 + 'vw', 'margin-top' : symbol.height * -0.5 + 'vw'}"
-						style="
-							position : absolute;
-							background : red;
-							z-index : 100;
-						"
+								'margin-left' : symbol.width * -0.5 + '%', 'margin-top' : symbol.height * -0.5 + '%'}"
 						ng-mouseover="markSymbol ($parent.$index, $index)"
 						ng-click="markSymbol ($parent.$index, $index)">
 					</div>
@@ -2378,7 +2397,7 @@
 							<div class="battle-loot-image-container">
 								<div class="battle-loot-image smoothImage"
 								style="
-									background-image : url({{selectedLootItem.icon}});
+									background-image : url('{{loot[selectedLootIndex].icon}}');
 								">
 								</div>
 							</div>
@@ -2564,20 +2583,15 @@
 						margin-bottom : {{rune.height * -0.5}}vw;
 						margin-right : {{rune.width * -0.5}}vw;
 						
+						background-image:url('{{rune.image}}');
 						position : fixed;
-						background : #DAD4BB;
 					">
 					<div class="rune-symbol"
 						ng-repeat="symbol in rune.symbols"
 						ng-class="{'completed-symbol' : symbol.completed, 'incomplete-symbol' : !symbol.completed}"
-						ng-style="{'width' : symbol.width + 'vw', 'height' : symbol.height + 'vw',
+						ng-style="{'width' : symbol.width + '%', 'height' : symbol.height + '%',
 								'top' : symbol.positionTop + '%', 'left' : symbol.positionLeft + '%',
-								'margin-left' : symbol.width * -0.5 + 'vw', 'margin-top' : symbol.height * -0.5 + 'vw'}"
-						style="
-							position : absolute;
-							background : red;
-							z-index : 100;
-						"
+								'margin-left' : symbol.width * -0.5 + '%', 'margin-top' : symbol.height * -0.5 + '%'}"
 						ng-mouseover="markSymbol ($parent.$index, $index)"
 						ng-click="markSymbol ($parent.$index, $index)">
 					</div>

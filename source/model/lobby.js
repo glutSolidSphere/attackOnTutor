@@ -184,7 +184,7 @@ function Lobby () {
 			'name' : 'Common Knowledge',
 			'type' : 'experience',
 			'value' : 20,
-			'icon' : '/images/crown-b.png',
+			'icon' : '/images/items/common_knowledge.gif',
 			'rarity' : 100,
 			'flavour' : 'That feeling when you have to put Wikipedia in your citations.'
 		},
@@ -192,7 +192,7 @@ function Lobby () {
 			'name' : 'Deeper Insight',
 			'type' : 'experience',
 			'value' : 30,
-			'icon' : '/images/crown-b.png',
+			'icon' : '/images/items/common_knowledge.gif',
 			'rarity' : 70,
 			'flavour' : "Unleashing your inner academic at a workshop on your university's e-library services."
 		},
@@ -200,7 +200,7 @@ function Lobby () {
 			'name' : 'Revelation',
 			'type' : 'experience',
 			'value' : 60,
-			'icon' : '/images/crown-s.png',
+			'icon' : '/images/items/common_knowledge.gif',
 			'rarity' : 40,
 			'flavour' : 'You are worthy of the true reality.'
 		},
@@ -208,7 +208,7 @@ function Lobby () {
 			'name' : 'True Enlightenment',
 			'type' : 'experience',
 			'value' : 100,
-			'icon' : '/images/crown-g.png',
+			'icon' : '/images/items/common_knowledge.gif',
 			'rarity' : 10,
 			'flavour' : 'You done cracked the code.'
 		}
@@ -1072,6 +1072,7 @@ lobbyio.on ('connection', function (socket) {
 				//Index of the symbol set used.
 				var symbolSetIndex = Math.floor(Math.random()*runeObject.runeData.length);
 				var symbolToUse = runeObject.runeData[symbolSetIndex];
+				console.log ( symbolToUse );
 				symbolToUse.id = symbolSetIndex;
 				socket.emit ( 'student set rune', {
 					'runeId' : runeObject.key,

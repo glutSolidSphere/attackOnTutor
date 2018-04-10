@@ -18,6 +18,57 @@
 	
 	<style>
 		
+		.default-style-button
+		{
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			background-color:#b4af9a;
+			color:#635f54;
+			border:none;
+			
+			height:3vw;
+			font-size:2vw;
+			cursor:pointer;
+			font-family: 'VT323', monospace;
+			text-align:center;
+		}
+		
+		.default-style-button:focus, .default-style-button:active
+		{
+			outline:none;
+			border:1px solid #9a9784;
+			cursor:pointer;
+		}
+		
+		.default-style-button:hover
+		{
+			color:#dad4bb;
+			background-color:#635f54;
+			cursor:pointer;
+		}
+		
+		.default-style-button[disabled]:hover
+		{
+			color:#dad4bb;
+			background-color:#9a9784;
+			outline:none;
+			border:none;
+			cursor:no-drop;
+		}
+		
+		.default-style-button[disabled]
+		{
+			color:#dad4bb;
+			background-color:#b4af9a;
+			outline:none;
+			border:none;
+			cursor:no-drop;
+		}
+		
 		body {
 			background-image: url("/images/bg.png");
 			background-repeat: no-repeat;
@@ -426,7 +477,11 @@
 						height:3vw;
 						font-size:2vw;
 						">
-							<div style="float:left;">
+							<div style="float:left;
+							width:70%;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							white-space: nowrap;">
 								 {{t.coursename}}
 							</div>
 							<div style="float:right;">
@@ -713,9 +768,10 @@
 					
 					<div class="tutorial-details-row"
 					style="
-					height:3vw;
+					height:4vw;
 					width:100%;
 					font-size:1.5vw;
+					overflow:auto;
 					">
 						<div style="float:left;">
 							{{userInfo.tutorials[selectedTutorialIndex].description}}
@@ -724,11 +780,8 @@
 				</div>
 				
 				<div>
-					<button class="btn lobby-button" ng-click="redirect(tuts[selectedTutorialIndex])" name="tut-id" value="{{tuts[selectedTutorialIndex].id}}"
+					<button class="default-style-button" ng-click="redirect(tuts[selectedTutorialIndex])" name="tut-id" value="{{tuts[selectedTutorialIndex].id}}"
 					style="
-					height:3vw;
-					padding : 0;
-					font-size:2vw;
 					position:absolute;
 					bottom: 1.5vw;
 					right: 1.5vw;
@@ -814,13 +867,15 @@
 						">
 							<div class="rune-symbol"
 								ng-repeat="symbol in avatars[selectedAvatarIndex].runes[selectedRune].symbols"
-								ng-style="{'width' : symbol.width + 'vw', 'height' : symbol.height + 'vw',
+								ng-style="{'width' : symbol.width + '%', 'height' : symbol.height + '%',
 										'top' : symbol.positionTop + '%', 'left' : symbol.positionLeft + '%',
-										'margin-left' : symbol.width * -0.5 + 'vw', 'margin-top' : symbol.height * -0.5 + 'vw'}"
+										'margin-left' : symbol.width * -0.5 + '%', 'margin-top' : symbol.height * -0.5 + '%'}"
 								style="
 									position : absolute;
-									background : red;
 									z-index : 100;
+									border-radius: 50%;
+									background-color: #cd533b;
+									opacity:0.5;
 								">
 							</div>
 						</div>
@@ -958,11 +1013,9 @@
 				</div>
 				
 				<div>
-					<button class="btn lobby-button" ng-click="setAvatar(avatars[selectedAvatarIndex].id)" name="tut-id"
+					<button class="default-style-button" ng-click="setAvatar(avatars[selectedAvatarIndex].id)" name="tut-id"
 					ng-disabled="avatars[selectedAvatarIndex].id == userInfo.avatar.id || userInfo.totalLevels < avatars[selectedAvatarIndex].exp"
 					style="
-					height:3vw;
-					padding : 0;
 					font-size:2vw;
 					position:absolute;
 					bottom: 1.5vw;

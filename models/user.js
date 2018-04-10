@@ -8,7 +8,7 @@ var userAvatar = require ('./userAvatar');
 var dataTable = {
 	'b0123456' : {
 		'id' : 'b0123456',
-		'name' : 'HAPPY STUDENT',
+		'name' : 'Kyle Quah',
 		'email' : 'happy@student.com',
 		'gender' : 'male',
 		'token' : 'fake-token-1',
@@ -18,7 +18,7 @@ var dataTable = {
 	},
 	'c0123456' : {
 		'id' : 'c0123456',
-		'name' : 'SAD STUDENT',
+		'name' : 'Saison Margueritte',
 		'email' : 'sad@student.com',
 		'gender' : 'female',
 		'token' : 'fake-token-2',
@@ -28,7 +28,7 @@ var dataTable = {
 	},
 	'd0123456' : {
 		'id' : 'd0123456',
-		'name' : 'SMART STUDENT',
+		'name' : 'Dale Yee',
 		'email' : 'smart@student.com',
 		'gender' : 'male',
 		'token' : 'fake-token-3',
@@ -38,7 +38,7 @@ var dataTable = {
 	},
 	'e0123456' : {
 		'id' : 'e0123456',
-		'name' : 'BRIGHT STUDENT',
+		'name' : 'Ang Suan Fook',
 		'email' : 'bright@student.com',
 		'gender' : 'female',
 		'token' : 'fake-token-4',
@@ -48,7 +48,7 @@ var dataTable = {
 	},
 	'f0123456' : {
 		'id' : 'f0123456',
-		'name' : 'FUN STUDENT',
+		'name' : 'Goro Yamato',
 		'email' : 'fun@student.com',
 		'gender' : 'male',
 		'token' : 'fake-token-5',

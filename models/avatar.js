@@ -10,8 +10,8 @@ var dataTable = {
 		'exp' : '1',
 		'name' : 'Mathemagician',
 		'description' : 'She fell on an abacus rack and said "I\'ll take it all!"',
-		'icon' : '/images/avatars/mathemagician_icon.gif',
-		'idleAnim' : '/images/avatars/mathemagician_idle.gif',
+		'icon' : '/images/avatars/mathemagician/icon.gif',
+		'idleAnim' : '/images/avatars/mathemagician/idle.gif',
 		'attackAnim' : '/images/avatars/avatar-04.png',
 		'height' : '1',
 		'width' : '1',
@@ -21,7 +21,7 @@ var dataTable = {
 					'width' : 20,
 					'height' : 20,
 					'name' : 'The Bell Tolls',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'description' : 'Not-so-subtly influencing the bell curve.',
 					'damage' : 13,
 					'effect' : {
@@ -32,33 +32,54 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 0,
-							'positionLeft' : 60,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 0,
-							'positionLeft' : 100,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
 				},
 				{
-					'width' : 25,
-					'height' : 25,
+					'width' : 20,
+					'height' : 20,
 					'name' : 'Abacurse',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'description' : 'The best way to solve problem sums.',
 					'damage' : 13,
 					'effect' : {
@@ -69,24 +90,45 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 10,
-							'positionLeft' : 60,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 60,
-							'positionLeft' : 100,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -94,10 +136,10 @@ var dataTable = {
 			],
 			'1' : [
 				{
-					'width' : 30,
-					'height' : 30,
+					'width' : 20,
+					'height' : 20,
 					'name' : 'Hexadecimation',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'description' : 'Destruction to the 16th base.',
 					'damage' : 8,
 					'effect' : {
@@ -108,33 +150,54 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 0,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 30,
-							'positionLeft' : 70,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 50,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
 				},
 				{
-					'width' : 13,
-					'height' : 13,
+					'width' : 20,
+					'height' : 20,
 					'name' : 'Ride The Tangent',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'description' : 'Popularised by the band Mathtallica.',
 					'damage' : 5,
 					'effect' : {
@@ -145,24 +208,45 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 60,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 30,
-							'positionLeft' : 0,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 20,
-							'positionLeft' : 10,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -176,8 +260,8 @@ var dataTable = {
 		'exp' : '1',
 		'name' : 'Hecatutores',
 		'description' : 'A hundred hands of unfathomable strength, with fifty heads to boot. Because teaching is hard.',
-		'icon' : '/images/avatars/avatar-02.png',
-		'idleAnim' : '/images/avatars/hecatutores_idle.gif',
+		'icon' : '/images/avatars/hecatutores/icon.gif',
+		'idleAnim' : '/images/avatars/hecatutores/idle.gif',
 		'attackAnim' : '/images/avatars/avatar-03.png',
 		'height' : '2',
 		'width' : '1',
@@ -189,7 +273,7 @@ var dataTable = {
 					'name' : 'Palm Reading',
 					'damage' : '3',
 					'description' : 'Many fates lie in the palms of your hands.',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'effect' : {
 						'image' : '/images/border-image.png',
 						'width' : 30,
@@ -198,24 +282,45 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 0,
-							'positionLeft' : 60,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 0,
-							'positionLeft' : 100,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -226,7 +331,7 @@ var dataTable = {
 					'name' : 'Backhanded Compliment',
 					'damage' : '3',
 					'description' : 'Contractually obliged to help those that don\'t appreciate it.',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'effect' : {
 						'image' : '/images/border-image.png',
 						'width' : 10,
@@ -235,24 +340,45 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 10,
-							'positionLeft' : 60,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 60,
-							'positionLeft' : 100,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -263,7 +389,7 @@ var dataTable = {
 					'name' : 'Heavyhanded Approach',
 					'damage' : '3',
 					'description' : 'The oven may be hot but it takes heat for the bread to rise.',
-					'image' : '',
+					'image' : '/images/runes/the_bell_tolls_rune.gif',
 					'effect' : {
 						'image' : '/images/border-image.png',
 						'width' : 10,
@@ -272,24 +398,45 @@ var dataTable = {
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 14,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 30,
-							'positionLeft' : 40,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 46,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 20,
-							'positionLeft' : 10,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 74,
+							'positionLeft' : 17,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 36,
+							'positionLeft' : 63,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 66,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 81,
+							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -300,11 +447,11 @@ var dataTable = {
 	'avatar-03' : {
 		'id' : 'avatar-03',
 		'type' : 'student',
-		'exp' : '1',
+		'exp' : '6',
 		'name' : 'Mathemagician Prime',
 		'description' : 'She eventually unlocked the secret lives of Prime numbers...',
-		'icon' : '/images/avatars/mathemagician_icon.gif',
-		'idleAnim' : '/images/avatars/mathemagician_prime_idle.gif',
+		'icon' : '/images/avatars/mathemagician_prime/icon.gif',
+		'idleAnim' : '/images/avatars/mathemagician_prime/idle.gif',
 		'attackAnim' : '/images/avatars/avatar-04.png',
 		'height' : '1',
 		'width' : '1',
