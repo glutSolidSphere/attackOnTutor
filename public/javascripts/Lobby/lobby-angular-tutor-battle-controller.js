@@ -98,7 +98,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 						
 						$scope.showGroupRankings ( groupIndex, sortedGroupKeysByRank, data );
 					});
-				}, 1000);
+				}, 5000);
             });
 			
 			//Get the runes from the server.
@@ -108,7 +108,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					'symbols' : data.runeData.symbols,
 					'width' : data.runeData.width,
 					'height' : data.runeData.height,
-					'image' : data.runeData.image,
+					'image' : data.runeData.image + "?" + Math.random(),
 					'id' : data.runeData.id, //Identifier for the symbol set of the rune.
 					'name' : data.runeData.name,
 					'runeId' : data.runeId, //Identifier for the rune.
@@ -133,11 +133,14 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 				var marginLeft = -data.effect.width * 0.5;
 				var marginTop = -data.effect.height * 0.5;
 				var animationType = "firedFromTutor";
+				var avatarToAnimate = null;
 				if (data.targetGroup !== "")
 				{
 					var groupId = '#' + $.escapeSelector ('group-' + data.targetGroup);
 					var groupElement = $(groupId)[0].getBoundingClientRect();
 					positionTop = groupElement.top;
+					$scope.tutorAvatar.currentAnim = $scope.tutorAvatar.attackAnim;
+					avatarToAnimate = $scope.tutorAvatar;
 				}
 				else if (data.sourceId !== "")
 				{
@@ -147,6 +150,8 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					positionTop = studentElement.top + (studentElement.height * 0.5);
 					positionLeft = studentElement.left + (studentElement.width * 0.5);
 					animationType = "firedFromStudent";
+					sourceMember.currentAnim = sourceMember.userAvatar.attackAnim;
+					avatarToAnimate = sourceMember;
 				}
 				
 				$scope.effects[key] = ({
@@ -160,6 +165,23 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 					'positionTop' : positionTop,
 					'positionLeft' : positionLeft
 				});
+				
+				if ( avatarToAnimate !== null )
+				{
+					setTimeout ( function()
+					{
+						$scope.$apply ( function () {
+							if ( animationType == "firedFromTutor" )
+							{
+								avatarToAnimate.currentAnim = $scope.tutorAvatar.idleAnim;
+							}
+							else
+							{
+								avatarToAnimate.currentAnim = avatarToAnimate.userAvatar.idleAnim;
+							}
+						});
+					}, 500);
+				}
 				
 				setTimeout ( function()
 				{
@@ -206,7 +228,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 						$scope.showEndSplash = false;
 						$scope.showBattleWindow = false;
 					});
-				}, 1000);
+				}, 5000);
 			});
         }
     });
@@ -281,6 +303,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 				'totalQuestions' : data.rewards[group].totalQuestions,
 				'overdriveDuration' : data.rewards[group].overdriveDuration,
 				'groupPerformance' : data.rewards[group].groupPerformance,
+				'rankIcon' : $scope.rankIcons[data.rewards[group].ranking == 'gold' ? 1 : (data.rewards[group].ranking == 'silver' ? 2 : 3)],
 				'currentTime' : $scope.rankDisplayTime,
 				'totalDisplayTime' : $scope.rankDisplayTime,
 				'topMembers' : [],

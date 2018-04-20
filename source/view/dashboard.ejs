@@ -195,13 +195,15 @@
 			
 			display:inline-block;
 			cursor:pointer;
-			font-size:1.5vw;
+			font-size:2vw;
 			color:#635f54;
 			text-shadow: 0vw 0vw #9a9784;
 			vertical-align:baseline;
 			line-height:4vw;
 			height:4vw;
 			position:relative;
+			
+			font-family: 'Share Tech Mono', monospace;
 		}
 		
 		.list-selector-button:before
@@ -242,7 +244,7 @@
 		
 		.list-selector-button.active, .list-selector-button.active:hover
 		{
-			font-size:3vw;
+			font-size:4vw;
 			text-shadow: 0.35vw 0.35vw #9a9784;
 		}
 		
@@ -395,7 +397,7 @@
 			<div class="list-selector-button"
 			ng-class="{'active' : selectedList == 'modules'}"
 			ng-click="selectList ('modules')">
-				MODULES
+				modules
 			</div>
 
 			<div class="list-selector-divider">
@@ -405,7 +407,7 @@
 			<div class="list-selector-button"
 			ng-class="{'active' : selectedList == 'avatars'}"
 			ng-click="selectList ('avatars')">
-				AVATARS
+				avatars
 			</div>
 		</div>
 					
@@ -1013,7 +1015,7 @@
 				</div>
 				
 				<div>
-					<button class="default-style-button" ng-click="setAvatar(avatars[selectedAvatarIndex].id)" name="tut-id"
+					<button class="default-style-button" ng-click="setAvatar(avatars[selectedAvatarIndex].id, avatars[selectedAvatarIndex])" name="tut-id"
 					ng-disabled="avatars[selectedAvatarIndex].id == userInfo.avatar.id || userInfo.totalLevels < avatars[selectedAvatarIndex].exp"
 					style="
 					font-size:2vw;

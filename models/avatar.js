@@ -12,7 +12,7 @@ var dataTable = {
 		'description' : 'She fell on an abacus rack and said "I\'ll take it all!"',
 		'icon' : '/images/avatars/mathemagician/icon.gif',
 		'idleAnim' : '/images/avatars/mathemagician/idle.gif',
-		'attackAnim' : '/images/avatars/avatar-04.png',
+		'attackAnim' : '/images/avatars/mathemagician/attack.gif',
 		'height' : '1',
 		'width' : '1',
 		'runes' : {
@@ -79,9 +79,9 @@ var dataTable = {
 					'width' : 20,
 					'height' : 20,
 					'name' : 'Abacurse',
-					'image' : '/images/runes/the_bell_tolls_rune.gif',
+					'image' : '/images/runes/abacurse_rune.gif',
 					'description' : 'The best way to solve problem sums.',
-					'damage' : 13,
+					'damage' : 8,
 					'effect' : {
 						'image' : '/images/border-image.png',
 						'width' : 10,
@@ -139,9 +139,9 @@ var dataTable = {
 					'width' : 20,
 					'height' : 20,
 					'name' : 'Hexadecimation',
-					'image' : '/images/runes/the_bell_tolls_rune.gif',
+					'image' : '/images/runes/hexadecimation_rune.gif',
 					'description' : 'Destruction to the 16th base.',
-					'damage' : 8,
+					'damage' : 9,
 					'effect' : {
 						'image' : '/images/border-image.png',
 						'width' : 30,
@@ -197,7 +197,7 @@ var dataTable = {
 					'width' : 20,
 					'height' : 20,
 					'name' : 'Ride The Tangent',
-					'image' : '/images/runes/the_bell_tolls_rune.gif',
+					'image' : '/images/runes/ride_the_tangent_rune.gif',
 					'description' : 'Popularised by the band Mathtallica.',
 					'damage' : 5,
 					'effect' : {
@@ -262,7 +262,7 @@ var dataTable = {
 		'description' : 'A hundred hands of unfathomable strength, with fifty heads to boot. Because teaching is hard.',
 		'icon' : '/images/avatars/hecatutores/icon.gif',
 		'idleAnim' : '/images/avatars/hecatutores/idle.gif',
-		'attackAnim' : '/images/avatars/avatar-03.png',
+		'attackAnim' : '/images/avatars/hecatutores/attack.gif',
 		'height' : '2',
 		'width' : '1',
 		'runes' : {
@@ -452,7 +452,7 @@ var dataTable = {
 		'description' : 'She eventually unlocked the secret lives of Prime numbers...',
 		'icon' : '/images/avatars/mathemagician_prime/icon.gif',
 		'idleAnim' : '/images/avatars/mathemagician_prime/idle.gif',
-		'attackAnim' : '/images/avatars/avatar-04.png',
+		'attackAnim' : '/images/avatars/mathemagician_prime/attack.gif',
 		'height' : '1',
 		'width' : '1',
 		'runes' : {
@@ -462,7 +462,7 @@ var dataTable = {
 					'height' : 20,
 					'name' : 'Prime-a Donna',
 					'image' : '',
-					'description' : '',
+					'description' : 'Prime numbers are all the rage now.',
 					'damage' : 13,
 					'effect' : {
 						'image' : '/images/border-image.png',
@@ -497,9 +497,9 @@ var dataTable = {
 				{
 					'width' : 25,
 					'height' : 25,
-					'name' : 'Abacurse',
+					'name' : 'Linear Algeblast',
 					'image' : '',
-					'description' : 'The best way to solve problem sums.',
+					'description' : 'Simultaneous equations are quaking.',
 					'damage' : 13,
 					'effect' : {
 						'image' : '/images/border-image.png',
@@ -536,9 +536,9 @@ var dataTable = {
 				{
 					'width' : 30,
 					'height' : 30,
-					'name' : 'Hexadecimation',
+					'name' : 'High-order Destructives',
 					'image' : '',
-					'description' : 'Destruction to the 16th base.',
+					'description' : 'Many layers of destructive potential, one after another.',
 					'damage' : 8,
 					'effect' : {
 						'image' : '/images/border-image.png',
@@ -573,9 +573,9 @@ var dataTable = {
 				{
 					'width' : 13,
 					'height' : 13,
-					'name' : 'Ride The Tangent',
+					'name' : 'Multivar Calculazer',
 					'image' : '',
-					'description' : 'Popularised by the band Mathtallica.',
+					'description' : 'What\'s better than a lazer? Multivariable lazers.',
 					'damage' : 5,
 					'effect' : {
 						'image' : '/images/border-image.png',

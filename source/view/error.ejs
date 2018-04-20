@@ -13,20 +13,30 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	
 	<link rel="stylesheet" type="text/css" href="/css/error.css">
-	<link rel="stylesheet" type="text/css" href="/css/navigationbar.css">
 </head>
 
 <body>	
+	<div class="glitch-body">
+	</div>
 	<% if(errorMessage){ %> <!-- Prints Out Error Message -->
-		<h1 class="font whiteFont centerText boldText">Error!</h1>
-		<h2 class="font brownFont centerText boldText"><%=errorMessage%></h2>
+		<div class="error-container">
+			<div class="error-header">
+				Error!
+				<div class="return-button-container">
+					<a href="javascript:history.back()"> <!-- Returns User to Last Visited Page -->
+						<button class="default-style-button"
+						style="
+						vertical-align:baseline;
+						">RETURN</button>	
+					</a>
+				</div>
+			</div>
+			<div class="error-message-container">
+				<div class="error-message"><%=errorMessage%></div>
+			</div>
+		</div>
 	<% } %>
 	
-	<a href="javascript:history.back()"> <!-- Returns User to Last Visited Page -->
-		<div class="centralise font">
-			<button type="button" class="btn btn-lg headerGeneralFontSize">Return</button>
-		</div>
-	</a>
 </body>
 
 </html>

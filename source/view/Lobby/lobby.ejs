@@ -18,12 +18,18 @@
 		<script type="text/javascript" src="/javascripts/Lobby/lobby-angular-activeusers-controller.js"></script>
 		<script type="text/javascript" src="/javascripts/Lobby/lobby-angular-tutor-battle-controller.js"></script>
 		<script type="text/javascript" src="/javascripts/Lobby/lobby-angular-student-battle-controller.js"></script>
+		<script type="text/javascript" src="/javascripts/Lobby/lobby-angular-navigation-controller.js"></script>
 		
         <link rel="stylesheet" href="/libs/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Kanit:200|Roboto">
 		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=VT323">
 		<link rel="stylesheet" type="text/css" href="/css/lobby.css">
 		<link rel="stylesheet" type="text/css" href="/css/navigationbar.css">
+		<link rel="stylesheet" type="text/css" href="/css/general_elements.css">
+		<link rel="stylesheet" type="text/css" href="/css/lobby_navigation.css">
+		<link rel="stylesheet" type="text/css" href="/css/lobby_activeusers.css">
+		<link rel="stylesheet" type="text/css" href="/css/lobby_question_and_answer.css">
+		<link rel="stylesheet" type="text/css" href="/css/lobby_overdrive.css">
 		
         <script>
 			window.userId = "<%= userId %>";
@@ -44,2004 +50,7 @@
 			//Chat background : rbg(0,0,0,0.1)
 			-->
 		<style>
-		
-			/* Chat Styles */
 			
-			
-		
-			/* QA MODE STYLES */
-			.default-style-button
-			{
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				background-color:#b4af9a;
-				color:#635f54;
-				border:none;
-				
-				height:3vw;
-				font-size:2vw;
-				cursor:pointer;
-				font-family: 'VT323', monospace;
-				text-align:center;
-			}
-			
-			.default-style-button:focus, .default-style-button:active
-			{
-				outline:none;
-				border:1px solid #9a9784;
-				cursor:pointer;
-			}
-			
-			.default-style-button:hover
-			{
-				color:#dad4bb;
-				background-color:#635f54;
-				cursor:pointer;
-			}
-			
-			.default-style-button[disabled]:hover
-			{
-				color:#dad4bb;
-				background-color:#9a9784;
-				outline:none;
-				border:none;
-				cursor:no-drop;
-			}
-			
-			.default-style-button[disabled]
-			{
-				color:#dad4bb;
-				background-color:#b4af9a;
-				outline:none;
-				border:none;
-				cursor:no-drop;
-			}
-			
-			.tutor-qa-left-container
-			{
-				position:fixed;
-				left:3.5vw;
-				top:6.5vw;
-				width:25vw;
-				height:auto;
-			}
-			
-			.tutor-qa-tutor-details-container, .student-qa-tutor-details-container
-			{
-				background-color:#DAD4BB;
-				position:relative;
-				padding-top:4.5vw;
-				padding-bottom:1.5vw;
-				box-shadow:0.7vw 0.7vw #9a9784;
-				text-align:center;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-tutor-name-header, .student-qa-tutor-name-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				text-align:left;
-			}
-			
-			.tutor-qa-tutor-avatar-container, .student-qa-tutor-avatar-container
-			{
-				background-color: #b4af9a;
-				width: calc(100% - 3vw);
-				height: 10vw;
-				margin-left:1.5vw;
-				margin-right:1.5vw;
-			}
-			
-			.tutor-qa-tutor-avatar-icon, .student-qa-tutor-avatar-icon
-			{
-				width : 10vw;
-				height : 10vw;
-				margin-left : calc(50% - 5vw);
-				background-repeat: no-repeat;
-				background-size: cover;
-			}
-			
-			.tutor-qa-tutor-health-container, .student-qa-tutor-health-container
-			{
-				width: calc(100% - 3vw);
-				margin-left:1.5vw;
-				margin-right:1.5vw;
-				height : 2vw;
-				position:relative;
-				background-color:#b4af9a;
-			}
-			
-			.tutor-qa-tutor-health-text, .student-qa-tutor-health-text
-			{
-				position:absolute;
-				left:50%;
-				margin-left:-25%;
-				font-size:1.5vw;
-				color:#635f54;
-			}
-			
-			.active-users-container
-			{
-				position:relative;
-				background-color:#DAD4BB;
-				margin-top:1.5vw;
-				padding-top:3.5vw;
-			}
-			
-			.active-users-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#DAD4BB;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				text-align:left;
-				
-				font-family: 'VT323', monospace;
-			}
-			
-			.active-users-list
-			{
-				height: 4vw;
-				width: 100%;
-				margin-left:0.5vw;
-				margin-right:0.5vw;
-				overflow: hidden;
-			}
-			
-			.active-users-list-group-container
-			{
-				height: 3vw;
-				width: 1000vw;
-			}
-			
-			.scroll-bar-container
-			{
-				height: 2vw;
-				width: calc(100% - 1vw);
-				background-color:#b4af9a;
-				margin-left:0.5vw;
-				position:relative;
-			}
-			
-			.scroll-bar-text
-			{
-				font-size:1.5vw;
-				text-align:center;
-				color:#dad4bb;
-				font-family: 'VT323', monospace;
-			}
-			
-			.users-list-scroll-left
-			{
-				height:0;
-				width:0;
-				position:absolute;
-				left:0.5vw;
-				top:0.5vw;
-				border-top: 0.5vw solid transparent;
-				border-bottom: 0.5vw solid transparent;
-				border-right: 0.86vw solid #635f54;
-				cursor:pointer;
-			}
-			
-			.users-list-scroll-left:before
-			{
-				content:"";
-				position:absolute;
-				background-color:#635f54;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height: 1vw;
-				width: 0.3vw;
-				top: -0.5vw;
-				right: -1vw;
-				opacity : 0;
-				
-			}
-			
-			.users-list-scroll-left:hover:before
-			{
-				right: -1.5vw;
-				opacity : 1;
-			}
-			
-			.users-list-scroll-right
-			{
-				height:0;
-				width:0;
-				position:absolute;
-				right:0.5vw;
-				top:0.5vw;
-				border-top: 0.5vw solid transparent;
-				border-bottom: 0.5vw solid transparent;
-				border-left: 0.86vw solid #635f54;
-				cursor:pointer;
-			}
-			
-			.users-list-scroll-right:before
-			{
-				content:"";
-				position:absolute;
-				background-color:#635f54;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height: 1vw;
-				width: 0.3vw;
-				top: -0.5vw;
-				left: -1vw;
-				opacity : 0;
-				
-			}
-			
-			.users-list-scroll-right:hover:before
-			{
-				left: -1.5vw;
-				opacity : 1;
-			}
-			
-			.select-group
-			{
-				width:5.6vw;
-				font-size:1vw;
-				margin-right:0.5vw;
-				position:relative;
-				display:inline-block;
-			}
-			
-			.select-group-button
-			{
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				background-color:#b4af9a;
-				color:#dad4bb;
-				border:none;
-				
-				height:3vw;
-				font-size:1.5vw;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-				
-				font-family: 'VT323', monospace;
-			}
-			
-			.select-group-button:focus, .select-group-button:active
-			{
-				outline:none;
-				border:none;
-			}
-			
-			.select-group-button:hover
-			{
-				color:#635f54;
-			}
-			
-			.select-group-button::before {
-				content:"";
-				position:absolute;
-				background-color:#b4af9a;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:0px;
-				width:100%;
-				top:100%;
-				left:0;
-				opacity : 0;
-			}
-			
-			.select-group.selected .select-group-button::before
-			{
-				height : 1.7vw;
-				top:100%;
-				opacity : 1;
-			}
-			
-			.select-group-button::after {
-				content:"";
-				position:absolute;
-				background-color:#635f54;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:100%;
-				width:0.5vw;
-				bottom:0;
-				left:0;
-				opacity : 0;
-			}
-			
-			.select-group.selected .select-group-button::after
-			{
-				width : 0.5vw;
-				height:100%;
-				bottom:0;
-				opacity : 1;
-			}
-			
-			.user-active-list
-			{
-				max-height: 12vw;
-				min-height: 12vw;
-				height: 12vw;
-				overflow-y: scroll;
-				padding-top: 0.5vw;
-				margin-left:0.5vw;
-				margin-right:0.5vw;
-			}
-			
-			.user-active
-			{
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				margin-right: 1.5vw;
-				margin-bottom : 1vw;
-				padding-left: 1.5vw;
-				position:relative;
-				cursor:pointer;
-			}
-		
-			.user-active:hover
-			{
-				background-color:#b4af9a;
-				color:#cdc8b0;
-			}
-			
-			.user-active.active
-			{
-				background-color:#b4af9a;
-				color:#cdc8b0;
-			}
-			
-			.user-active-text
-			{
-				font-size:1.5vw;
-				color:#b4af9a;
-				font-family: 'VT323', monospace;
-			}
-			
-			.user-active-text::after {
-				content:"";
-				position:absolute;
-				background-color:#b4af9a;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:2px;
-				width:100%;
-				top:100%;
-				left:0;
-				opacity : 0;
-			}
-			
-			.user-active-text::before {
-				content:"";
-				position:absolute;
-				background-color:#b4af9a;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:2px;
-				width:100%;
-				bottom:100%;
-				left:0;
-				opacity : 0;
-			}
-			
-			.user-active:hover .user-active-text, .user-active.active .user-active-text
-			{
-				color:#635f54;
-			}
-			
-			.user-active.active .user-active-text::before
-			{
-				height : 2px;
-				bottom : 103%;
-				opacity : 0.75;
-				background-color:#b4af9a;
-			}
-			
-			.user-active.active:hover .user-active-text::before
-			{
-				height : 2px;
-				bottom : 103%;
-				opacity : 1;
-				background-color:#b4af9a;
-			}
-			
-			.user-active.active .user-active-text::after
-			{
-				height : 2px;
-				top : 103%;
-				opacity : 0.75;
-				background-color:#b4af9a;
-			}
-			
-			.user-active.active:hover .user-active-text::after
-			{
-				height : 2px;
-				top : 103%;
-				opacity : 1;
-				background-color:#b4af9a;
-			}
-			
-			.user-active-tag
-			{
-				position:absolute;
-				top:0px;
-				right:0px;
-				padding-left:0.5vw;
-				width:3vw;
-				background-color:#635f54;
-				color:#b4af9a;
-				font-size:1.5vw;
-
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-group-methods-container
-			{
-				padding-bottom:0.5vw;
-			}
-			
-			.tutor-qa-input-group-name-container
-			{
-				margin:0.5vw;
-				margin-top:0;
-				height:3vw;
-			}
-			
-			.tutor-qa-input-group-name
-			{
-				width:100%;
-				font-size:1.5vw;
-				background-color:#b4af9a;
-				border:none;
-				border-left:0.5vw solid;
-				border-color:#635f54;
-				padding-left:0.5vw;
-				color:#635f54;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-group-buttons-container
-			{
-				margin-left:0.5vw;
-				margin-right:0.5vw;
-				margin-top:0;
-				height:3vw;
-			}
-			
-			.tutor-qa-center-container
-			{
-				margin-left: 30vw;
-				top: 6.5vw;
-				width: 65vw;
-				height: auto;
-			}
-			
-			.question-composer-container
-			{
-				position:relative;
-				background-color:#DAD4BB;
-				padding-top:3vw;
-			}
-			
-			.question-composer-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				text-align:left;
-				font-family: 'VT323', monospace;
-			}
-			
-			.question-composer-input-container
-			{
-				font-size:1.5vw;
-				margin-left:1.5vw;
-				margin-top:1.5vw;
-				margin-right:1.5vw;
-			}
-			
-			.question-composer-input
-			{
-				width:100%;
-				background-color:#b4af9a;
-				border:none;
-				border-left:0.5vw solid;
-				border-color:#635f54;
-				padding-left:0.5vw;
-				color:#635f54;
-				resize:vertical;
-				font-family: 'VT323', monospace;
-			}
-			
-			.question-composer-groups-list
-			{
-				height: 4vw;
-				margin-left:1.5vw;
-				margin-right:1.5vw;
-				margin-top:1vw;
-				overflow: hidden;
-			}
-			
-			.question-composer-groups-container
-			{
-				height: 3vw;
-				width: 1000vw;
-			}
-			
-			.question-composer-button-container
-			{
-				height:4.5vw;
-				margin:1.5vw;
-			}
-				
-			.tutor-qa-answers-received
-			{
-				position:relative;
-				background-color:#DAD4BB;
-				margin-top:1.5vw;
-				padding-top:3vw;
-			}
-			
-			.tutor-qa-answers-received-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				text-align:left;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-grade-question-container, .student-qa-answer-question-container
-			{
-				position: absolute;
-				right: 0;
-				top: 0;
-				height: 3vw;
-			}
-			
-			.tutor-qa-answers-received-question-container, .student-qa-question-received-description-container
-			{
-				margin:1.5vw;
-			}
-			
-			.tutor-qa-answers-received-question, .student-qa-question-received-description
-			{
-				font-size:2vw;
-				color:#635f54;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-answers-received-divider, .student-qa-question-received-divider
-			{
-				height:0.5vw;
-				margin:1.5vw;
-				width:calc(100% - 3vw);
-				background-color:#b4af9a;
-			}
-			
-			.tutor-qa-received-answer-container, .student-qa-graded-answer-container
-			{
-				position:relative;
-				padding-top:4.5vw;
-			}
-			
-			.tutor-qa-received-answer-header, .student-qa-graded-answer-header
-			{
-				position:absolute;
-				margin-right:1.5vw;
-				margin-left:1.5vw;
-				margin-bottom:1.5vw;
-				width:calc(100% - 3vw);
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#635f54;
-				background-color:#b4af9a;
-				padding-left:1.5vw;
-				padding-right:1.5vw;
-				text-align:left;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-received-answer-status, .student-qa-graded-answer-status
-			{
-				position:absolute;
-				top:0px;
-				right:1.5vw;
-				padding-left:0.5vw;
-				font-size:2vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-received-answer-body, .student-qa-graded-answer-body
-			{
-				margin-right:1.5vw;
-				margin-left:1.5vw;
-				margin-bottom:1.5vw;
-				height:11.5vw;
-				width:calc(100% - 3vw);
-				position:relative;
-			}
-			
-			.tutor-qa-received-answer-description, .student-qa-graded-answer-description
-			{
-				height: 10vw;
-				width: 50%;
-				overflow-y: auto;
-				background-color: #b4af9a;
-				color:#dad4bb;
-				font-size:1.5vw;
-				padding:0.5vw;
-				position:absolute;
-				top:0;
-				left:0;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-explanation-container, .student-qa-explanation-container
-			{
-				position:absolute;
-				top:0;
-				right:0;
-				margin-left: 1.5vw;
-				width: calc(50% - 2vw);
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-explanation, .student-qa-explanation
-			{
-				height:7vw;
-			}
-			
-			.tutor-qa-explanation-input, .student-qa-explanation-input
-			{
-				resize:none;
-				width:100%;
-				height:100%;
-				overflow:auto;
-				font-size:1.5vw;
-				background-color: #b4af9a;
-				padding-left: 0.5vw;
-				color: #635f54;
-				
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-			}
-			
-			.tutor-qa-grade-container, .student-qa-grade-container
-			{
-				height:3vw;
-				font-size:1.5vw;
-			}
-			
-			.grading-button
-			{
-				display:inline-block;
-				color:#dad4bb;
-				float:left;
-				width: 25%;
-				height: 3vw;
-				text-align:center;
-				cursor:pointer;
-				font-size: 2vw;
-				padding: 0;
-				border:none;
-				vertical-align:baseline;
-			}
-			
-			.tutor-qa-prompt-window
-			{
-				z-index : 99;
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-			}
-			
-			.tutor-qa-prompt-overlay
-			{
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-				background : rgba(0,0,0,.7);
-				background-color : rgba(0,0,0,.7);
-			}
-			
-			.tutor-qa-prompt-container
-			{
-				position:fixed;
-				width:40vw;
-				height:auto;
-				background-color:#DAD4BB;
-				left:30vw;
-				top:calc(50% - 10vw);
-			}
-			
-			.tutor-qa-prompt-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				padding-right:1.5vw;
-				text-align:left;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-prompt-text
-			{
-				font-size:1.5vw;
-				color:#635f54;
-				padding-top:4.5vw;
-				padding-left:1.5vw;
-				padding-right:1.5vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-qa-options-container
-			{
-				height:3vw;
-				margin-top:1.5vw;
-			}
-			
-			.student-qa-left-container
-			{
-				left:3.5vw;
-				top:6.5vw;
-				width:20vw;
-				height:auto;
-				position:fixed;
-			}
-			
-			.student-qa-center-container
-			{
-				margin-left: 25vw;
-				top: 6.5vw;
-				width: 50vw;
-				height: auto;
-			}
-			
-			.combat-log-header-container
-			{
-				position:relative;
-				height:4vw;
-			}
-			
-			.combat-log-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				color:#635f54;
-				font-size:3vw;
-				text-shadow: 0.35vw 0.35vw #9a9784;
-				text-align:left;
-			}
-			
-			.student-qa-question-received-container
-			{
-				position:relative;
-				background-color:#DAD4BB;
-				margin-top:1.5vw;
-				padding-top:3vw;
-			}
-			
-			.student-qa-question-received-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				text-align:left;
-				font-family: 'VT323', monospace;
-			}
-			
-			.student-qa-question-received-answers-container
-			{
-				position:relative;
-				padding-top:3vw;
-			}
-			
-			.student-qa-question-received-answer-header
-			{
-				position:absolute;
-				margin-right:1.5vw;
-				margin-left:1.5vw;
-				margin-bottom:1.5vw;
-				width:calc(100% - 3vw);
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#635f54;
-				background-color:#b4af9a;
-				padding-left:1.5vw;
-				padding-right:1.5vw;
-				text-align:left;
-				font-family: 'VT323', monospace;
-			}
-			
-			.student-qa-question-received-vote-count
-			{
-				position:absolute;
-				top:0px;
-				right:1.5vw;
-				padding-left:0.5vw;
-				font-size:2vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.student-qa-question-received-answer
-			{
-				font-size:1.5vw;
-				margin-left:1.5vw;
-				margin-top:1.5vw;
-				margin-right:1.5vw;
-				padding-bottom:1.5vw;
-			}
-			
-			.student-qa-question-received-answer-container
-			{
-				position:relative;
-				width: calc(100% - 17vw);
-				height:10vw;
-				display:inline-block;
-			}
-			
-			.student-qa-question-received-answer-input
-			{
-				width: 100%;
-				height:10vw;
-				resize:none;
-				background-color: #b4af9a;
-				padding-left: 0.5vw;
-				color: #635f54;
-				border:none;
-				border-left: 0.5vw solid #635f54;
-				font-family: 'VT323', monospace;
-			}
-			
-			.student-qa-question-received-avatar-container
-			{
-				background-color: #b4af9a;
-				width: 15vw;
-				height: 10vw;
-				margin-left:1.5vw;
-				display:inline-block;
-				position:relative;
-				border-color: #635f54;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-			}
-			
-			.student-qa-question-received-avatar
-			{
-				width : 10vw;
-				height : 100%;
-				margin-left : calc(50% - 5vw);
-				background-repeat: no-repeat;
-				background-size: cover;
-			}
-			
-			.student-qa-question-received-vote-container
-			{
-				position:absolute;
-				right:0;
-				bottom:0;
-			}
-			
-			.student-qa-question-received-status
-			{
-				font-size:2vw;
-				color:#635f54;
-				margin-left:1.5vw;
-				padding-bottom:1.5vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.student-qa-right-container
-			{
-				position:fixed;
-				left:76.5vw;
-				top:6.5vw;
-				width:20vw;
-				height:auto;
-			}
-			
-			.student-qa-student-details-container
-			{
-				background-color:#DAD4BB;
-				position:relative;
-				padding-top:4.5vw;
-				padding-bottom:1.5vw;
-				box-shadow:0.7vw 0.7vw #9a9784;
-				font-family: 'VT323', monospace;
-				text-align:center;
-			}
-			
-			.student-qa-student-name-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				text-align:left;
-			}
-			
-			.student-qa-student-avatar-container
-			{
-				background-color: #b4af9a;
-				width: calc(100% - 3vw);
-				height: 10vw;
-				margin-left:1.5vw;
-				margin-right:1.5vw;
-			}
-			
-			.student-qa-student-avatar
-			{
-				width : 10vw;
-				height : 10vw;
-				margin-left : calc(50% - 5vw);
-				background-repeat: no-repeat;
-				background-size: cover;
-			}
-			
-			.student-qa-experience-container
-			{
-				width: calc(100% - 3vw);
-				margin-left:1.5vw;
-				margin-right:1.5vw;
-				height : 2vw;
-				position:relative;
-				background-color:#b4af9a;
-				text-align:center;
-			}
-			
-			.student-qa-level
-			{
-				position:absolute;
-				right:0;
-				bottom:100%;
-				font-size:1.5vw;
-				background-color:#635f54;
-				color:#dad4bb;
-				padding:0.5vw;
-			}
-			
-			.student-qa-experience
-			{
-				position:absolute;
-				left:50%;
-				margin-left:-25%;
-				font-size:1.5vw;
-				color:#635f54;
-			}
-			
-			/*  Overdrive Mode Style */
-
-			.rune
-			{
-				-webkit-transition: all 0.5s ease-out;
-				-moz-transition: all 0.5s ease-out;
-				-ms-transition: all 0.5s ease-out;
-				-o-transition: all 0.5s ease-out;
-				transition: all 0.5s ease-out;
-				
-				-webkit-animation: expand 0.2s ease-out;
-				-moz-animation: expand 0.2s ease-out;
-				-ms-animation: expand 0.2s ease-out;
-				-o-animation: expand 0.2s ease-out;
-				animation: expand 0.2s ease-out;
-				
-				opacity : 1;
-				transform: scale(1);
-				
-				transform-origin : center;
-				
-				background-size:cover;
-				background-repeat:no-repeat;
-				
-				image-rendering:pixelated;
-			}
-			.rune.completed-rune
-			{
-				opacity : 0;
-				transform : scale(3);
-			}
-			
-			.rune-symbol
-			{
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				-webkit-animation: expand 0.2s ease-out;
-				-moz-animation: expand 0.2s ease-out;
-				-ms-animation: expand 0.2s ease-out;
-				-o-animation: expand 0.2s ease-out;
-				animation: expand 0.2s ease-out;
-				
-				opacity : 1;
-				transform : scale(1);
-				transform-origin : center;
-				
-				border-radius: 50%;
-				background-color: #cd533b;
-				opcaity:0.5;
-				
-				position : absolute;
-				z-index : 100;
-			}
-			.rune-symbol.completed-symbol
-			{
-				opacity : 0;
-				transform : scale(3);
-			}
-			
-			@keyframes expand
-			{
-				from { transform: scale(0); opacity : 0; }
-				to { transform: scale(1); opacity : 1; }
-			}
-			
-			@keyframes pulse
-			{
-				0% { transform: scale(0); opacity : 0; }
-				75% { transform: scale (1); opacity : 1; }
-				100% { transform: scale(1); opacity : 0; }
-			}
-			
-			.firedFromTutor
-			{
-				opacity : 1 !important;
-				transform : scale(1) !important;
-				left : 90% !important;
-			}
-			
-			.firedFromStudent
-			{
-				opacity : 1 !important;
-				transform : scale(1) !important;
-				left : 10% !important;
-			}
-			
-			.firedFromTutorEnd
-			{
-				opacity : 0 !important;
-				transform : scale(1.3) !important;
-				left : 90% !important;
-			}
-			
-			.firedFromStudentEnd
-			{
-				opacity : 0 !important;
-				transform : scale(1.3) !important;
-				left : 10% !important;
-			}
-			
-			.battle-window
-			{
-				z-index : 99;
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-			}
-			
-			.overlay-screen
-			{
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-				background-image: url("/images/bg.png");
-				background-repeat: no-repeat;
-				background-attachment: fixed;
-				background-position: center; 
-				background-size: cover;
-				opacity:0.9;
-			}
-			
-			.student-group
-			{
-				position:fixed;
-			}
-			
-			.student-group-avatar
-			{
-				position : absolute;
-				background-repeat : no-repeat;
-				background-size:cover;		
-				image-rendering:pixelated;
-			}
-			
-			.battle-group-container
-			{
-				height: 3vw;
-				font-size: 2vw;
-				background-color: #b4af9a;
-				position: absolute;
-				right: -7vw;
-				top: 6vw;
-				z-index : 101;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-group-icon
-			{
-				width : 2vw;
-				height : 2vw;
-				margin : 0.5vw;
-				float : left;
-				background-color:red;
-			}
-			
-			.battle-group-name
-			{
-				height: 100%;
-				width:calc(100% - 3.5)vw;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-				font-size:2vw;
-				color:#635f54;
-			}
-			
-			.battle-group-identifier-tag
-			{
-				width: 5vw;
-				height: 3vw;
-				font-size: 2vw;
-				position: absolute;
-				text-align: center;
-				color: #dad4bb;
-				background-color: #635f54;
-				right:0;
-				top:0;
-			}
-			
-			.battle-group-selected-tag
-			{
-				width : 0vw;
-				height : 0vw;
-				position : absolute;
-				left : -3vw;
-				opacity : 0;
-				background-color:#635f54;
-				
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-			}
-			
-			.battle-group-selected-tag::before {
-				content:"";
-				position:absolute;
-				background-color:#635f54;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:0.5vw;
-				width:100%;
-				top:100%;
-				left:0;
-				opacity : 0;
-			}
-			
-			.battle-group-selected-tag::after {
-				content:"";
-				position:absolute;
-				background-color:#635f54;
-				-webkit-transition: all 0.2s ease-out;
-				-moz-transition: all 0.2s ease-out;
-				-ms-transition: all 0.2s ease-out;
-				-o-transition: all 0.2s ease-out;
-				transition: all 0.2s ease-out;
-				
-				height:0.5vw;
-				width:100%;
-				bottom:100%;
-				left:0;
-				opacity : 0;
-			}
-			
-			.battle-group-container.selected .battle-group-selected-tag::after
-			{
-				height : 2px;
-				bottom: 110%;
-				opacity : 1;
-			}
-			
-			.battle-group-container.selected .battle-group-selected-tag::before
-			{
-				height : 2px;
-				top:110%;
-				opacity : 1;
-			}
-			
-			.battle-group-container.selected .battle-group-selected-tag
-			{
-				opacity : 1;
-				width : 3vw;
-				height : 3vw;
-				left : -4.5vw;
-			}
-			
-			.battle-group-container.selected:hover .battle-group-selected-tag
-			{
-				opacity : 1;
-				width : 3vw;
-				height : 3vw;
-				left : -4.5vw;
-				top:0;
-			}
-			
-			.battle-group-container:hover .battle-group-selected-tag
-			{
-				opacity: 1;
-				width: 1.5vw;
-				height: 1.5vw;
-				left: -3vw;
-				top: 0.75vw;
-			}
-			
-			.tutor-group
-			{
-				bottom : 50%;
-				position : fixed;
-				left : 3vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-avatar
-			{
-				position : absolute;
-				z-index : 100;
-			}
-			
-			.tutor-battle-info-container
-			{
-				position : absolute;
-				height : 7vw;
-				left : 0;
-				z-index : 100;
-				background-color:#dad4bb;
-			}
-			
-			.tutor-battle-info-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				z-index : 1;
-			}
-			
-			.tutor-battle-info
-			{
-				position : absolute;
-				width : 100%;
-				height : 100%;
-				overflow : hidden;
-				font-family: 'VT323', monospace;
-			}
-			
-			.tutor-battle-loot-details
-			{
-				width : 100%;
-				height : 2vw;
-				font-size : 1.5vw;
-				margin-left : 1.5vw;
-				margin-top : 3vw;
-			}
-			
-			.tutor-battle-overdrive-bar
-			{
-				position: absolute;
-				z-index : 100;
-				width : 100%;
-				height : 2vw;
-				bottom: 0;
-			}
-			
-			.tutor-battle-overdrive-details
-			{
-				width: 100%;
-				height: 2vw;
-				font-size:1.5vw;
-				color:#635f54;
-				bottom: 0;
-				position: absolute;
-				z-index: 101;
-				text-align: center;
-			}
-			
-			.effect
-			{
-				transform : scale(0);
-				opacity : 0;
-				z-index : 0;
-				position : fixed;
-			}
-			
-			.tutor-battle-target-prompt
-			{
-				width:30vw;
-				height:5vw;
-				position:fixed;
-				left:calc(50% - 15vw);
-				top:calc(50% - 2.5vw);
-				font-size:3vw;
-				color:#635f54;
-				font-family: 'VT323', monospace;
-				text-align:center;
-			}
-			
-			.timer-container
-			{
-				position : fixed;
-				top : 0;
-				left : 50%;
-				width : 100%;
-				height : 2vw;
-				margin-left : -50%;
-				z-index:99;
-			}
-			
-			.battle-ranking-overlay
-			{
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				background-color:rgba(0,0,0,.7);
-			}
-			
-			.battle-ranking-container
-			{
-				width : 70vw;
-				height : 40vw;
-				top : calc(50% - 20vw);
-				left : 15vw;
-				position : fixed;
-				background-color : #cdc8b0;
-				padding:0;
-				box-shadow:0.7vw 0.7vw #9a9784;
-			}
-			
-			.battle-ranking-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-ranking-details-container
-			{
-				position : absolute;
-				width : 100%;
-				height : 100%;
-			}
-			
-			.battle-ranking-mvp-banner
-			{
-				position: absolute;
-				width: 100%;
-				height: 20vw;
-				font-size: 15vw;
-				color: #635f54;
-				padding-left: 1.5vw;
-				text-shadow: 0.7vw 0.7vw #9a9784;
-				text-align: center;
-				font-family: 'VT323', monospace;
-				left: -100%;
-				
-				-webkit-animation: slide-inout 3s ease-in-out;
-				-moz-animation: slide-inout 3s ease-in-out;
-				-ms-animation: slide-inout 3s ease-in-out;
-				-o-animation: slide-inout 3s ease-in-out;
-				animation: slide-inout 3s ease-in-out;
-			}
-			
-			@keyframes slide-inout
-			{
-				0% { left:-100%; }
-				20% { left:0%; }
-				80% { left:0% }
-				100% { left:100% }
-				
-			}
-			
-			.battle-ranking-mvp-container
-			{
-				position: absolute;
-				bottom : 18vw;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-ranking-mvp-sprite
-			{
-				width : 24vw;
-				height : 24vw;
-				position: absolute;
-				margin-left : -12vw;
-				bottom : 0;
-			}
-			
-			.battle-ranking-mvp-label-container
-			{
-				width : 100%;
-				height : 100%;
-				position : absolute;
-				bottom : 0;
-			}
-			
-			.battle-ranking-mvp-questions-answered
-			{
-				width : 100%;
-				font-size : 8vw;
-				line-height: 4vw;
-				padding-top:3vw;
-				text-align : center;
-				color:#5bc0de;
-				
-				text-shadow:
-				-1px -1px 0 #635f54,
-				1px -1px 0 #635f54,
-				-1px 1px 0 #635f54,
-				1px 1px 0 #635f54;
-			}
-			
-			.battle-ranking-mvp-questions-answered-label
-			{
-				width : 100%;
-				height : 3vw;
-				font-size : 2vw;
-				text-align : center;
-				color:#5bc0de;
-				
-				text-shadow:
-				-1px -1px 0 #635f54,
-				1px -1px 0 #635f54,
-				-1px 1px 0 #635f54,
-				1px 1px 0 #635f54;
-			}
-			
-			.battle-ranking-mvp-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				bottom:0;
-				font-size:2vw;
-				color:#635f54;
-				background-color:#b4af9a;
-			}
-			
-			.battle-ranking-mvp-icon
-			{
-				width : 2vw;
-				height : 2vw;
-				margin : 0.5vw;
-				float : left;
-			}
-			
-			.battle-ranking-mvp-username
-			{
-				height: 100%;
-				width: calc(100% - 3.5vw);
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-			}
-			
-			.battle-ranking-mvp-identifier-tag
-			{
-				width: 5vw;
-				height: 3vw;
-				font-size: 2vw;
-				position: absolute;
-				text-align: center;
-				color: #dad4bb;
-				background-color: #635f54;
-				right:0;
-				top:-3vw;
-			}
-			
-			.battle-ranking-rewards-container
-			{
-				width : 25vw;
-				height : 15vw;
-				position : absolute;
-				bottom : 1.5vw;
-				left : 1.5vw;
-				background-color:#dad4bb;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-ranking-rewards-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#b4af9a;
-				padding-left:1.5vw;
-				z-index : 1;
-			}
-			
-			.battle-ranking-rewards
-			{
-				position : absolute;
-				width : 100%;
-				height : 100%;
-				overflow : hidden;
-			}
-			
-			.battle-ranking-rewards-overdrive
-			{
-				width : 100%;
-				height : 3vw;
-				font-size : 2vw;
-				margin-left : 1.5vw;
-				margin-top : 3vw;
-				color:#b4af9a;
-			}
-			
-			.battle-ranking-rewards-loot
-			{
-				width : 100%;
-				height : 3vw;
-				font-size : 2vw;
-				margin-left : 1.5vw;
-				color:#b4af9a;
-			}
-			
-			.battle-ranking-tier-container
-			{
-				width : 14vw;
-				height : 15vw;
-				position : absolute;
-				bottom : 1.5vw;
-				left : 28vw;
-				background-color:#dad4bb;
-				box-shadow:0.7vw 0.7vw #9a9784;
-			}
-			
-			.battle-ranking-tier
-			{
-				position : absolute;
-				width : 100%;
-				height : 5vw;
-				font-size : 5vw;
-				font-weight:bold;
-				color:#635f54;
-				text-align : center;
-				text-transform:uppercase;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-ranking-members-container
-			{
-				width : 25vw;
-				height : 15vw;
-				position : absolute;
-				bottom : 1.5vw;
-				right : 1.5vw;
-				overflow-y : scroll;
-			}
-			
-			.battle-ranking-member
-			{
-				width : calc(100% - 2.5vw);
-				height : 3vw;
-				font-size : 2vw;
-				margin-bottom : 1.5vw;
-				margin-left : 1.5vw;
-				background-color:#b4af9a;
-				color:#dad4bb;
-				position:relative;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-ranking-member-rank
-			{
-				width : 2vw;
-				height : 2vw;
-				margin : 0.5vw;
-				float : left;
-			}
-			
-			.battle-ranking-member-name
-			{
-				height: 100%;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-			}
-			
-			.battle-ranking-member-identifier-tag
-			{
-				width: 5vw;
-				height: 3vw;
-				font-size: 2vw;
-				position: absolute;
-				text-align: center;
-				color: #dad4bb;
-				background-color: #635f54;
-				right:0;
-				top:0;
-			}
-			
-			.battle-ranking-timer-container
-			{
-				position: absolute;
-				top: -1.5vw;
-				left: 50%;
-				width: 100%;
-				height: 1.5vw;
-				margin-left: -50%;
-				z-index:-1;
-			}
-			
-			.battle-start-splash-overlay
-			{
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-			}
-			
-			.battle-start-splash-background
-			{
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-				background : rgba(0,0,0,1);
-				background-color : rgba(0,0,0,1);
-			}
-			
-			.battle-start-splash-text
-			{
-				font-size: 20vw;
-				color: white;
-				position: fixed;
-				width: 100%;
-				height: auto;
-				margin-left: -50%;
-				margin-top: -20%;
-				text-align: center;
-				top: 50%;
-				left: 50%;
-				text-shadow: 0.7vw 0.7vw gray;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-loot-overlay
-			{
-				width:100%;
-				height:100%;
-				top:0;
-				left:0;
-				position:absolute;
-				background-color:rgba(0,0,0,.7);
-			}
-			
-			.battle-loot-container
-			{
-				width: 35vw;
-				height: 30vw;
-				top: calc(50% - 15vw);
-				left: 12.5vw;
-				position: fixed;
-				padding-top : 3vw;
-				background-color: #DAD4BB;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-loot-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				top:0;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				z-index : 1;
-			}
-			
-			.battle-loot-list
-			{
-				width : 100%;
-				height : calc(100% - 6vw);
-				position : absolute;
-				padding-top : 1.5vw;
-				overflow-y : scroll;
-			}
-			
-			.battle-loot-item-container
-			{
-				width : calc(100% - 2.5vw);
-				height : 3vw;
-				font-size : 2vw;
-				margin-bottom : 1.5vw;
-				margin-left : 1.5vw;
-				padding-left: 1.5vw;
-				position:relative;
-				cursor:pointer;
-				font-family: 'VT323', monospace;
-				background-color:none;
-				color:#635f54;
-				
-				-webkit-transition: all 0.5s ease-out;
-				-moz-transition: all 0.5s ease-out;
-				-ms-transition: all 0.5s ease-out;
-				-o-transition: all 0.5s ease-out;
-				transition: all 0.5s ease-out;
-			}
-			
-			.battle-loot-item-container.active
-			{
-				background-color:#635f54;
-				color:#dad4bb;
-			}
-			
-			.battle-loot-item-pointer
-			{
-				width : 0;
-				height : 0;
-				position : absolute;
-				right : 0.5vw;
-				top : 0.5vw;
-				background-color : #dad4bb;
-				
-				-webkit-transition: all 0.5s ease-out;
-				-moz-transition: all 0.5s ease-out;
-				-ms-transition: all 0.5s ease-out;
-				-o-transition: all 0.5s ease-out;
-				transition: all 0.5s ease-out;
-			}
-			
-			.battle-loot-item-container.active .battle-loot-item-pointer
-			{
-				width : 2vw;
-				height : 2vw;
-			}
-			
-			.battle-loot-item-name
-			{
-				width: 100%;
-				height: 100%;
-				text-overflow: ellipsis;
-				overflow: hidden;
-				white-space: nowrap;
-			}
-			
-			.battle-loot-info-container
-			{
-				width: 35vw;
-				height: 30vw;
-				top: calc(50% - 15vw);
-				left: 52.5vw;
-				position: fixed;
-				background-color: #DAD4BB;
-				font-family: 'VT323', monospace;
-			}
-			
-			.battle-loot-empty-header
-			{
-				position:absolute;
-				width:100%;
-				height:10vw;
-				top:50%;
-				left:0;
-				font-size:8vw;
-				color:#635f54;
-				margin-top:-5vw;
-				text-align:center;
-				z-index : 1;
-			}
-			
-			.battle-loot-info-header
-			{
-				position:absolute;
-				width:100%;
-				height:3vw;
-				left:0px;
-				font-size:2vw;
-				color:#dad4bb;
-				background-color:#635f54;
-				padding-left:1.5vw;
-				z-index : 1;
-			}
-			
-			.battle-loot-image-container
-			{
-				background-color: #b4af9a;
-				width: 32vw;
-				height: 10vw;
-				top: 4.5vw;
-				left: 1.5vw;
-				position: absolute;
-			}
-			
-			.battle-loot-image
-			{
-				width : 10vw;
-				height : 10vw;
-				margin-left : 11vw;
-				background-repeat : no-repeat;
-				background-size: cover;
-			}
-			
-			.battle-loot-details-container
-			{
-				position: absolute;
-				width: calc(100% - 3vw);
-				height: 12.5vw;
-				overflow: hidden;
-				top: 16vw;
-				left: 1.5vw;
-				color:#635f54;
-			}
-			
-			.battle-loot-details
-			{
-				width: 100%;
-				height: 3vw;
-				font-size: 2vw;
-			}
-			
-			.battle-loot-details-long
-			{
-				width: 100%;
-				height: 6vw;
-				font-size: 1.5vw;
-			}
-			
-			.battle-end-splash-overlay
-			{
-				width : 100%;
-				height : 100%;
-				top : 0;
-				left : 0;
-				position : fixed;
-				background : rgba(0,0,0,1);
-				background-color : rgba(0,0,0,1);
-			}
-			
-			.battle-end-splash-text
-			{
-				font-size: 20vw;
-				color: white;
-				position: fixed;
-				width: 100%;
-				height: auto;
-				margin-left: -50%;
-				margin-top: -20%;
-				text-align: center;
-				top: 50%;
-				left: 50%;
-				text-shadow: 0.7vw 0.7vw gray;
-				font-family: 'VT323', monospace;
-			}
 		</style>
     </head>
 
@@ -2073,20 +82,10 @@
 			height:6.8vw;
 		"></div>
 		
-		<div ng-controller="windowCtrl" class="container" id="header-bar"> <!-- Title Box -->
-			<!--<div class="row">
-				<div class="text-center col-md-12 col-sm-12 col-xs-12">
-					<h1 class="font whiteFont centerText boldText lobbyBottomFiller">Welcome to <%= moduleId %> <%= tutorialId %>'s Lobby!</h1>
-				</div>
-			</div>-->
+		<div ng-controller="windowCtrl">
 		</div>
 		
-		<div ng-controller="socketCtrl" class="container" id="header-bar"> <!-- Title Box -->
-			<!--<div class="row">
-				<div class="text-center col-md-12 col-sm-12 col-xs-12">
-					<h1 class="font whiteFont centerText boldText lobbyBottomFiller">Welcome to <%= moduleId %> <%= tutorialId %>'s Lobby!</h1>
-				</div>
-			</div>-->
+		<div ng-controller="socketCtrl">
 		</div>
 		
 		<!-- Student Battle Overlay -->
@@ -2102,23 +101,6 @@
 				ng-repeat="group in groups"
 				id="group-{{group.groupName}}"
 				ng-style="{'right' : group.positionRight + 'vw', 'bottom' : group.positionBottom + '%'}">
-					<div class="student-group-avatar"
-					id="student-{{student.userId}}"
-					ng-repeat="student in group.members"
-					style="
-						width: {{student.userAvatar.width}}vw;
-						height: {{student.userAvatar.height}}vw;
-						bottom: {{student.displacementBottom}}vw;
-						right: {{student.displacementRight * $index}}vw;
-						margin-right: {{student.userAvatar.width * -0.5}}vw;
-						margin-bottom: {{student.userAvatar.height * -0.5}}vw;
-						z-index : {{100 - $index}};
-						background-image : url('{{student.currentAnim}}');
-						-webkit-filter:brightness({{ student.userId == userId ? 100 : 70}}%);
-						filter:brightness({{ student.userId == userId ? 100 : 70}}%);
-					">
-					</div>
-					
 					<!-- Group marker for the battle to identify clusters of student avatars -->
 					<div class="battle-group-container"
 					style="
@@ -2142,6 +124,23 @@
 							ng-show="group.groupName == groupName">
 								You
 						</div>
+					</div>
+					
+					<div class="student-group-avatar"
+					id="student-{{student.userId}}"
+					ng-repeat="student in group.members"
+					style="
+						width: {{student.userAvatar.width}}vw;
+						height: {{student.userAvatar.height}}vw;
+						bottom: {{student.displacementBottom}}vw;
+						right: {{student.displacementRight * $index}}vw;
+						margin-right: {{student.userAvatar.width * -0.5}}vw;
+						margin-bottom: {{student.userAvatar.height * -0.5}}vw;
+						z-index : {{100 - $index}};
+						background-image : url('{{student.currentAnim}}');
+						-webkit-filter:brightness({{ student.userId == userId ? 100 : 70}}%);
+						filter:brightness({{ student.userId == userId ? 100 : 70}}%);
+					">
 					</div>
 				</div>
 				
@@ -2234,21 +233,6 @@
 					ng-repeat="group in rankedGroups">
 						<div class="battle-ranking-header">
 							{{group.groupName}}
-							<!--<div class="group-color-tag"
-							style="
-								width: 10vw;
-								height: 3vw;
-								font-size: 2vw;
-								position: absolute;
-								text-align: center;
-								color: white;
-								background-color: red;
-								-webkit-filter : hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-								filter :  hue-rotate({{group.color}}deg) saturate({{group.saturation}}%);
-								right:0;
-								top:0;
-							">
-							</div>-->
 						</div>
 						<div class="battle-ranking-details-container">
 							<div class="battle-ranking-mvp-banner">
@@ -2313,6 +297,9 @@
 								<div class="battle-ranking-tier">
 									{{group.ranking}}
 								</div>
+								<div class="battle-ranking-tier-icon"
+								ng-style="{'background' : 'url(' + group.rankIcon + ') no-repeat', 'background-size' : 'cover'}">
+								</div>
 							</div>
 
 							<div class="battle-ranking-members-container">
@@ -2347,8 +334,8 @@
 					<div
 					class="battle-start-splash-background"
 					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}">
-						<div class="battle-start-splash-text">
-						OVERDRIVE
+						<div class="battle-start-splash-text" data-text="overdrive">
+						overdrive
 						</div>
 					</div>
 				</div>	
@@ -2442,8 +429,8 @@
 					class="battle-end-splash-overlay"
 					ng-show="showFinSplash == true"
 					ng-class="{'show' : showFinSplash == true, 'hide' : showFinSplash == false}">
-						<div class="battle-end-splash-text">
-						FINISH
+						<div class="battle-end-splash-text" data-text="finish">
+						finish
 						</div>
 					</div>
 				</div>
@@ -2465,21 +452,6 @@
 				style="
 					position : fixed;
 				">
-					<div class="student-group-avatar"
-					id="student-{{student.userId}}"
-					ng-repeat="student in group.members"
-					style="
-						width: {{student.userAvatar.width}}vw;
-						height: {{student.userAvatar.height}}vw;
-						bottom: {{student.displacementBottom}}vw;
-						right: {{student.displacementRight * $index}}vw;
-						margin-right: {{student.userAvatar.width * -0.5}}vw;
-						margin-bottom: {{student.userAvatar.height * -0.5}}vw;
-						background-image : url('{{student.currentAnim}}');
-						z-index : {{100 - $index}};
-					">
-					</div>
-					
 					<!-- Group marker for the battle to identify clusters of student avatars -->
 					<div class="battle-group-container"
 					ng-class="{'selected' : selectedGroupIndex == $index}"
@@ -2500,6 +472,21 @@
 						<div class="battle-group-name">
 							{{group.groupName}}
 						</div>
+					</div>
+					
+					<div class="student-group-avatar"
+					id="student-{{student.userId}}"
+					ng-repeat="student in group.members"
+					style="
+						width: {{student.userAvatar.width}}vw;
+						height: {{student.userAvatar.height}}vw;
+						bottom: {{student.displacementBottom}}vw;
+						right: {{student.displacementRight * $index}}vw;
+						margin-right: {{student.userAvatar.width * -0.5}}vw;
+						margin-bottom: {{student.userAvatar.height * -0.5}}vw;
+						background-image : url('{{student.currentAnim}}');
+						z-index : {{100 - $index}};
+					">
 					</div>
 				</div>
 				
@@ -2668,6 +655,9 @@
 								<div class="battle-ranking-tier">
 									{{group.ranking}}
 								</div>
+								<div class="battle-ranking-tier-icon"
+								ng-style="{'background' : 'url(' + group.rankIcon + ') no-repeat', 'background-size' : 'cover'}">
+								</div>
 							</div>
 
 							<div class="battle-ranking-members-container">
@@ -2698,8 +688,8 @@
 					<div
 					class="battle-start-splash-background"
 					ng-class="{'show' : showStartSplash == true, 'hide' : showStartSplash == false}">
-						<div class="battle-start-splash-text">
-						OVERDRIVE
+						<div class="battle-start-splash-text" data-text="overdrive">
+						overdrive
 						</div>
 					</div>
 				</div>
@@ -2710,8 +700,8 @@
 					<div
 					class="battle-end-splash-overlay"
 					ng-class="{'show' : showEndSplash == true, 'hide' : showEndSplash == false}">
-						<div class="battle-end-splash-text">
-							FINISH
+						<div class="battle-end-splash-text" data-text="finish">
+							finish
 						</div>
 					</div>
 				</div>	
@@ -2830,7 +820,7 @@
 					
 					<div class="tutor-qa-center-container" ng-if="socket.getConnectionState() == socket.CONNECTED() && socket.getUserType() == 'tutor'">
 						<!-- Question composer -->
-						<div class="question-composer-container">
+						<div class="question-composer-container" id="question-composer">
 							<div class="question-composer-header">
 								Question Composer
 							</div>
@@ -2885,82 +875,85 @@
 						</div>
 						
 						<!-- Tutor Waiting for Answers -->
-						<div class="tutor-qa-answers-received" ng-repeat="(uuid, question) in questions">
-							<div class="tutor-qa-answers-received-header">
-								Question {{$index + 1}}
-								<div class="tutor-qa-grade-question-container">
-									<button class="default-style-button" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)"
-									style="
-									vertical-align:baseline;
-									">ANNOUNCE</button>	
-								</div>
-							</div>
+						<div class="tutor-qa-answers-received" id="question-{{uuid}}" ng-repeat="(uuid, question) in questions">
 							
-							<div class="tutor-qa-answers-received-question-container">
-								<h3 class="tutor-qa-answers-received-question" ng-bind-html="question.description">
-								</h3>
-							</div>
-							
-							<div class="tutor-qa-answers-received-divider">
-							</div>
-							
-							<div class="tutor-qa-received-answer-container" 
-							ng-repeat="group in question.groupNames">
-								<div class="tutor-qa-received-answer-header">
-									{{group}}
-									<div class="font tutor-qa-received-answer-status">
-										<div class="received-answer-status-text" ng-show="!question.groupAnswers[group].answered">
-											Status: Waiting for Answer...
-										</div>
-										<div class="received-answer-status-text" ng-show="question.groupAnswers[group].answered">
-											Status: Answered by {{question.groupAnswers[group].student}}
-										</div>
+							<div class="tutor-qa-answers-wrapper">
+								<div class="tutor-qa-answers-received-header">
+									Question {{$index + 1}}
+									<div class="tutor-qa-grade-question-container">
+										<button class="default-style-button" ng-if="isQuestionAnswered(uuid)" ng-disabled="question.graded" ng-click="gradeQuestion(uuid)"
+										style="
+										vertical-align:baseline;
+										">ANNOUNCE</button>	
 									</div>
 								</div>
 								
-								<div class="tutor-qa-received-answer-body" ng-show="question.groupAnswers[group].answered">
-									<div class="tutor-qa-received-answer-description" ng-bind-html="question.groupAnswers[group].description">
-									</div>
-									<div class="tutor-qa-explanation-container">
-										<div class="tutor-qa-explanation">
-											<textarea class="tutor-qa-explanation-input" ng-model="question.groupAnswers[group].explanation"
-											placeholder="Comments" type="text"  ng-trim="false" ng-disabled="question.graded"
-											style="
-											border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
-											border-color: {{question.groupAnswers[group].experience == 1 ? 'red' : (question.groupAnswers[group].experience == 5 ? 'orange' : (question.groupAnswers[group].experience == 10 ? 'green' : 'blue'))}};
-											border-left: 0.5vw solid #635f54;
-											">
-											</textarea>
+								<div class="tutor-qa-answers-received-question-container">
+									<h3 class="tutor-qa-answers-received-question" ng-bind-html="question.description">
+									</h3>
+								</div>
+								
+								<div class="tutor-qa-answers-received-divider">
+								</div>
+								
+								<div class="tutor-qa-received-answer-container" 
+								ng-repeat="group in question.groupNames">
+									<div class="tutor-qa-received-answer-header">
+										{{group}}
+										<div class="font tutor-qa-received-answer-status">
+											<div class="received-answer-status-text" ng-show="!question.groupAnswers[group].answered">
+												Status: Waiting for Answer...
+											</div>
+											<div class="received-answer-status-text" ng-show="question.groupAnswers[group].answered">
+												Status: Answered by {{question.groupAnswers[group].student}}
+											</div>
 										</div>
-										
-										<div class="tutor-qa-grade-container">
-											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 1" ng-disabled="question.graded"
-											style="
-											background-color: red;
-											">
-												Bleh
-											</button>
+									</div>
+									
+									<div class="tutor-qa-received-answer-body" ng-show="question.groupAnswers[group].answered">
+										<div class="tutor-qa-received-answer-description" ng-bind-html="question.groupAnswers[group].description">
+										</div>
+										<div class="tutor-qa-explanation-container">
+											<div class="tutor-qa-explanation">
+												<textarea class="tutor-qa-explanation-input" ng-model="question.groupAnswers[group].explanation"
+												placeholder="Comments" type="text"  ng-trim="false" ng-disabled="question.graded"
+												style="
+												border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
+												border-color: {{question.groupAnswers[group].experience == 1 ? '#c64A53' : (question.groupAnswers[group].experience == 5 ? '#ccab4c' : (question.groupAnswers[group].experience == 10 ? '#4da83f' : '#42448e'))}};
+												border-left: 0.5vw solid #635f54;
+												">
+												</textarea>
+											</div>
 											
-											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 5" ng-disabled="question.graded"
-											style="
-											background-color: orange;
-											">
-												Meh
-											</button>
-											
-											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 10" ng-disabled="question.graded"
-											style="
-											background-color: green;
-											">
-												Ooh
-											</button>
-											
-											<button class="grading-button" ng-click="question.groupAnswers[group].experience = 25" ng-disabled="question.graded"
-											style="
-											background-color: blue;
-											">
-												Wow
-											</button>
+											<div class="tutor-qa-grade-container">
+												<button class="grading-button" ng-click="question.groupAnswers[group].experience = 1" ng-disabled="question.graded"
+												style="
+												background-color: #c64A53;
+												">
+													Bleh
+												</button>
+												
+												<button class="grading-button" ng-click="question.groupAnswers[group].experience = 5" ng-disabled="question.graded"
+												style="
+												background-color: #ccab4c;
+												">
+													Meh
+												</button>
+												
+												<button class="grading-button" ng-click="question.groupAnswers[group].experience = 10" ng-disabled="question.graded"
+												style="
+												background-color: #4da83f;
+												">
+													Ooh
+												</button>
+												
+												<button class="grading-button" ng-click="question.groupAnswers[group].experience = 25" ng-disabled="question.graded"
+												style="
+												background-color: #42448e;
+												">
+													Wow
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -3092,137 +1085,139 @@
 						<!-- Combat log header -->
 						<div class="combat-log-header-container">
 							<div class="combat-log-header">
-								COMBAT LOG
+								combat log
 							</div>
 						</div>
 						
 						<!-- Tutee Receive Questions -->
-						<div class="student-qa-question-received-container" ng-repeat="(uuid, question) in questions">
-							<div class="student-qa-question-received-header">
-								Question {{$index + 1}}
-								<div class="student-qa-answer-question-container">
-									<button class="default-style-button" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
-									style="
-									vertical-align:baseline;
-									">ATTACK</button>	
-								</div>
-							</div>
-							
-							<div class="student-qa-question-received-description-container">
-								<h3 class="student-qa-question-received-description" ng-bind-html="question.description">
-								</h3>
-							</div>
-							
-							<div class="student-qa-question-received-divider">
-							</div>
-							
-							<div class="student-qa-question-received-answers-container"
-							ng-repeat="answer in question.answers">
-								<div class="student-qa-question-received-answer-header">
-									{{answer.student.username}}
-									<div class="student-qa-question-received-vote-count">
-										<div class="answer-votes">
-											Votes: {{answer.selectedCount}}
-										</div>
+						<div class="student-qa-question-received-container" id="question-{{uuid}}" ng-repeat="(uuid, question) in questions">
+							<div class="student-qa-question-received-wrapper">
+								<div class="student-qa-question-received-header">
+									Question {{$index + 1}}
+									<div class="student-qa-answer-question-container">
+										<button class="default-style-button" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
+										style="
+										vertical-align:baseline;
+										">ATTACK</button>	
 									</div>
 								</div>
 								
-								<div class="student-qa-question-received-answer">
-									<div class="student-qa-question-received-answer-container">
-										<textarea class="student-qa-question-received-answer-input" 
-										ng-model="answer.description"
-										placeholder="{{answer.owned ? 'Type your answer here...' : 'Waiting for answer...'}}" type="text"  ng-trim="false"
-										ng-disabled="question.submitted || !answer.owned"></textarea>
-										
-										<button class="default-style-button" ng-click="updateAnswer(uuid)" ng-disabled="question.submitted" ng-show="answer.owned"
-										style="
-										position:absolute;
-										right:0;
-										bottom:0;
-										outline:0.5vw solid #dad4bb;
-										">Update</button>
-									</div>
-									
-									<div class="student-qa-question-received-avatar-container"
-									style="
-										border: {{(answer.selected ? '0.5vw solid' : '0vw solid')}};
-									">
-										<div class="student-qa-question-received-avatar"
-										ng-style="{'background-image' : 'url(' + answer.student.userAvatar.icon + ')'}">
-										</div>
-										
-										<div class="student-qa-question-received-vote-container">
-											<button class="default-style-button" ng-click="selectAnswer(uuid, $index)"  ng-disabled="question.submitted"
-											style="
-											outline:0.5vw solid;
-											outline-color: {{(answer.selected ? '#635f54' : '#dad4bb')}};
-											">
-											Vote
-											</button>
-										</div>
-									</div>
+								<div class="student-qa-question-received-description-container">
+									<h3 class="student-qa-question-received-description" ng-bind-html="question.description">
+									</h3>
 								</div>
-							</div>
-							
-							<div ng-show="question.submitted">
-								<div class="student-qa-question-received-status">
-									{{question.graded ? 'Grading Results' : 'Status : Waiting for grading...'}}
+								
+								<div class="student-qa-question-received-divider">
 								</div>
-							</div>
-							
-							<div ng-show="question.graded">
-								<div class="student-qa-graded-answer-container"
-								ng-repeat="group in question.groupNames">
-									<div class="student-qa-graded-answer-header">
-										{{group}}
-										<div class="student-qa-graded-answer-status">
-											<div class="answer-source" ng-show="question.groupAnswers[group].answered">
-												Answered by {{question.groupAnswers[group].student}}
+								
+								<div class="student-qa-question-received-answers-container"
+								ng-repeat="answer in question.answers">
+									<div class="student-qa-question-received-answer-header">
+										{{answer.student.username}}
+										<div class="student-qa-question-received-vote-count">
+											<div class="answer-votes">
+												Votes: {{answer.selectedCount}}
 											</div>
 										</div>
 									</div>
 									
-									<div class="student-qa-graded-answer-body">
-										<div class="student-qa-graded-answer-description" ng-bind-html="question.groupAnswers[group].description">
+									<div class="student-qa-question-received-answer">
+										<div class="student-qa-question-received-answer-container">
+											<textarea class="student-qa-question-received-answer-input" 
+											ng-model="answer.description"
+											placeholder="{{answer.owned ? 'Type your answer here...' : 'Waiting for answer...'}}" type="text"  ng-trim="false"
+											ng-disabled="question.submitted || !answer.owned"></textarea>
+											
+											<button class="default-style-button" ng-click="updateAnswer(uuid)" ng-disabled="question.submitted" ng-show="answer.owned"
+											style="
+											position:absolute;
+											right:0;
+											bottom:0;
+											outline:0.5vw solid #dad4bb;
+											">Update</button>
 										</div>
-										<div class="student-qa-explanation-container">
-											<div class="student-qa-explanation">
-												<div class="student-qa-explanation-input" ng-bind-html="question.groupAnswers[group].explanation"
-												style="
-												border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
-												border-color: {{question.groupAnswers[group].experience == 1 ? 'red' : (question.groupAnswers[group].experience == 5 ? 'orange' : (question.groupAnswers[group].experience == 10 ? 'green' : 'blue'))}};
-												">
-												</div>
+										
+										<div class="student-qa-question-received-avatar-container"
+										style="
+											border: {{(answer.selected ? '0.5vw solid' : '0vw solid')}};
+										">
+											<div class="student-qa-question-received-avatar"
+											ng-style="{'background-image' : 'url(' + answer.student.userAvatar.icon + ')'}">
 											</div>
 											
-											<div class="student-qa-grade-container">
-												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 1"
+											<div class="student-qa-question-received-vote-container">
+												<button class="default-style-button" ng-click="selectAnswer(uuid, $index)"  ng-disabled="question.submitted"
 												style="
-												background-color: red;
+												outline:0.5vw solid;
+												outline-color: {{(answer.selected ? '#635f54' : '#dad4bb')}};
 												">
-													Bleh
+												Vote
 												</button>
+											</div>
+										</div>
+									</div>
+								</div>
 								
-												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 5"
-												style="
-												background-color: orange;
-												">
-													Meh
-												</button>
+								<div ng-show="question.submitted">
+									<div class="student-qa-question-received-status">
+										{{question.graded ? 'Grading Results' : 'Status : Waiting for grading...'}}
+									</div>
+								</div>
+								
+								<div ng-show="question.graded">
+									<div class="student-qa-graded-answer-container"
+									ng-repeat="group in question.groupNames">
+										<div class="student-qa-graded-answer-header">
+											{{group}}
+											<div class="student-qa-graded-answer-status">
+												<div class="answer-source" ng-show="question.groupAnswers[group].answered">
+													Answered by {{question.groupAnswers[group].student}}
+												</div>
+											</div>
+										</div>
+										
+										<div class="student-qa-graded-answer-body">
+											<div class="student-qa-graded-answer-description" ng-bind-html="question.groupAnswers[group].description">
+											</div>
+											<div class="student-qa-explanation-container">
+												<div class="student-qa-explanation">
+													<div class="student-qa-explanation-input" ng-bind-html="question.groupAnswers[group].explanation"
+													style="
+													border: {{(question.groupAnswers[group].experience > 0 ? '0.5vw solid' : 'none')}};
+													border-color: {{question.groupAnswers[group].experience == 1 ? '#c64A53' : (question.groupAnswers[group].experience == 5 ? '#ccab4c' : (question.groupAnswers[group].experience == 10 ? '#4da83f' : '#42448e'))}};
+													">
+													</div>
+												</div>
 												
-												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 10"
-												style="
-												background-color: green;
-												">
-													Ooh
-												</button>
-												
-												<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 25"
-												style="
-												background-color: blue;
-												">
-													Wow
-												</button>
+												<div class="student-qa-grade-container">
+													<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 1"
+													style="
+													background-color: #c64A53;
+													">
+														Bleh
+													</button>
+									
+													<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 5"
+													style="
+													background-color: #ccab4c;
+													">
+														Meh
+													</button>
+													
+													<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 10"
+													style="
+													background-color: #4da83f;
+													">
+														Ooh
+													</button>
+													
+													<button class="grading-button" ng-disabled="question.groupAnswers[group].experience != 25"
+													style="
+													background-color: #42448e;
+													">
+														Wow
+													</button>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -3247,7 +1242,7 @@
 									Lvl: <span ng-bind-html="userInfo.level"></span>
 								</div>
 								<div class="student-qa-experience">
-									Experience: {{userInfo.exp}} / {{userInfo.expToNext}}
+									{{userInfo.exp}} / {{userInfo.expToNext}}
 								</div>
 								<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{userInfo.exp / userInfo.expToNext * 100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{userInfo.exp / userInfo.expToNext * 100}}%">
 								</div>
@@ -3354,14 +1349,14 @@
 										data-username="{{message.user}}">
 										<div ng-if="message.type == 'chat'">
 											<span class="username font lobbyGeneralFontSize" ng-bind="message.user" style="color:{{getUsernameColor(message.user)}};"></span> 
-											<span class="messageBody font whiteFont lobbyGeneralFontSize" ng-bind="message.message"></span>
+											<span class="messageBody font lobbyGeneralFontSize" ng-bind="message.message"></span>
 										</div>
 										
-										<div class="font whiteFont lobbyGeneralFontSize" ng-class="{ 'log' : message.type == 'log'}" ng-if="message.type == 'log'">
+										<div class="font lobbyGeneralFontSize" ng-class="{ 'log' : message.type == 'log'}" ng-if="message.type == 'log'">
 											{{ message.message }}
 										</div>
 
-										<div class="font whiteFont lobbyGeneralFontSize" ng-class="{ 'damagelog' : message.type == 'damagelog'}" ng-if="message.type == 'damagelog'">
+										<div class="font lobbyGeneralFontSize" ng-class="{ 'damagelog' : message.type == 'damagelog'}" ng-if="message.type == 'damagelog'">
 											{{ message.message }}
 										</div>
 									</div>
@@ -3408,9 +1403,36 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="navigation-panel-container" ng-controller="navigationCtrl"
+				ng-class="{'open' : isOpen}">
+					<div class="navigation-panel-tab" ng-class="{'update-unread' : hasUpdates}" ng-click="toggleTab()">
+						{{hasUpdates ? '!' : (isOpen ? '<' : '>')}}
+					</div>
+					
+					<div class="navigation-list-container">
+						<div class="navigation-list-element" ng-repeat="pageElement in pageElements"
+						ng-class="{'update-unread' : pageElement.updates, 'navigation-selected' : pageElement.selected}"
+						ng-click="scrollToElement($index)"
+						ng-mouseover="selectElementMessage($index)">
+							<div class="navigation-list-element-label">
+								{{pageElement.label}}
+							</div>
+						</div>
+					</div>
+					
+					<div class="navigation-message-container">
+						<div class="navigation-message" ng-show="messageLogLength > 0">
+							{{messageLog[selectedMessage].message}}
+						</div>
+						
+						<div class="navigation-empty-message" ng-show="messageLogLength == 0">
+							No pending notifications
+						</div>
+					</div>
+					
+				</div>
 			</div>
 		</div>
 	</body>
 </html>
-
-<script src="js/lobby.js" type="application/javascript"></script>

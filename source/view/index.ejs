@@ -7,12 +7,388 @@
     <script type="text/javascript" src="/libs/jquery/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="/libs/js-cookie-2.1.0/js.cookie.min.js"></script>
 
+	<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Kanit:200|Roboto">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=VT323">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
 	<link rel="stylesheet" type="text/css" href="/css/index.css">
 	<link rel="stylesheet" type="text/css" href="/css/navigationbar.css">	
+	
+	<style>
+		.default-style-button
+		{
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-o-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			
+			background-color:#b4af9a;
+			color:#635f54;
+			border:none;
+			
+			height:3vw;
+			font-size:2vw;
+			cursor:pointer;
+			font-family: 'VT323', monospace;
+			text-align:center;
+		}
+		
+		.default-style-button:focus, .default-style-button:active
+		{
+			outline:none;
+			border:1px solid #9a9784;
+			cursor:pointer;
+		}
+		
+		.default-style-button:hover
+		{
+			color:#dad4bb;
+			background-color:#635f54;
+			cursor:pointer;
+		}
+		
+		.default-style-button[disabled]:hover
+		{
+			color:#dad4bb;
+			background-color:#9a9784;
+			outline:none;
+			border:none;
+			cursor:no-drop;
+		}
+		
+		.default-style-button[disabled]
+		{
+			color:#dad4bb;
+			background-color:#b4af9a;
+			outline:none;
+			border:none;
+			cursor:no-drop;
+		}
+		
+		body
+		{
+			background-color:#cdc8b0;
+			background-image: url("/images/bg.png");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center; 
+			background-size: cover;
+		}
+		
+		.logo-container
+		{
+			position:absolute;
+			top:10vw;
+			left:50vw;
+		}
+		
+		.login-container
+		{
+			background-color:#DAD4BB;
+			position:absolute;
+			padding-top:4.5vw;
+			padding-bottom:1.5vw;
+			box-shadow:0.7vw 0.7vw #9a9784;
+			text-align:center;
+			font-family: 'VT323', monospace;
+			width:30vw;
+			height:24vw;
+			
+			top:10vw;
+			left:18.5vw;
+		}
+		
+		.login-header
+		{
+			position:absolute;
+			width:100%;
+			height:3vw;
+			left:0px;
+			top:0px;
+			font-size:2vw;
+			color:#dad4bb;
+			background-color:#635f54;
+			padding-left:1.5vw;
+			text-align:left;
+		}
+		
+		.login-button-container
+		{
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 3vw;
+		}
+		
+		.login-field-container
+		{
+			width:100%;
+			height:3vw;
+			
+			margin-bottom:1.5vw;
+		}
+		
+		.login-field-label
+		{
+			display:inline-block;
+			float:left;
+			margin-left:1.5vw;
+			font-size:2vw;
+			
+			color:#635f54;
+			
+			width:10vw;
+			height:3vw;
+		}
+		
+		.login-field-input
+		{
+			display:inline-block;
+			float:right;
+			margin-right:1.5vw;
+			
+			width:17vw;
+			height:3vw;
+			
+			background-color: #b4af9a;
+			border: none;
+			border-left: 0.5vw solid;
+			border-top: 1px solid;
+			border-color: #635f54;
+			padding-left: 0.5vw;
+			color: #635f54;
+			font-size:1.5vw;
+			vertical-align: top;
+		}
+		
+		.welcome-text
+		{
+			font-size:2vw;
+			line-height:1.5vw;
+			color:#635f54;
+			
+			margin-left:1.5vw;
+			margin-right:1.5vw;
+			
+			float: left;
+		}
+		
+		.failure-text
+		{
+			margin-left:1.5vw;
+			margin-right:1.5vw;
+			width:27vw;
+			font-size:1.5vw;
+			color:#635f54;
+		}
+		
+		.glitch-text
+		{
+			position:relative;
+			font-size:10vw;
+			line-height:8vw;
+			font-family: 'Share Tech Mono', monospace;
+			color:#635f54;
+			text-shadow:0.7vw 0.7vw #9a9784;
+			
+			animation : glitch-anim-1 2.5s infinite linear alternate-reverse;
+		}
+		
+		.glitch-text::before, .glitch-text::after
+		{
+			content : attr(data-text);
+			position : absolute;
+			top : 0;
+			left : 0;
+			width : 100%;
+			height : 100%;
+			
+			font-family: 'Share Tech Mono', monospace;
+			color:#635f54;
+			text-shadow:0.7vw 0.7vw #9a9784;
+		}
+		
+		.glitch-text::before
+		{
+			color:#67f3da;
+			
+			animation : glitch-anim-2 2.5s infinite linear alternate-reverse;
+		}
+		
+		.glitch-text::after
+		{
+			color:#f16f6f;
+			
+			animation : glitch-anim-3 2.5s infinite linear alternate-reverse;
+		}
+		
+		@keyframes glitch-anim-1 {
+			0% {
+				transform: none;
+				opacity: 1;
+			}
+			7% {
+				transform: skew(-0.5deg, -0.9deg);
+				opacity: 0.75;
+			}
+			10% {
+				transform: none;
+				opacity: 1;
+			}
+			27% {
+				transform: none;
+				opacity: 1;
+			}
+			30% {
+				transform: skew(0.8deg, -0.1deg);
+				opacity: 0.75;
+			}
+			35% {
+				transform: none;
+				opacity: 1;
+			}
+			52% {
+				transform: none;
+				opacity: 1;
+			}
+			55% {
+				transform: skew(-1deg, 0.2deg);
+				opacity: 0.75;
+			}
+			50% {
+				transform: none;
+				opacity: 1;
+			}
+			72% {
+				transform: none;
+				opacity: 1;
+			}
+			75% {
+				transform: skew(0.4deg, 1deg);
+				opacity: 0.75;
+			}
+			80% {
+				transform: none;
+				opacity: 1;
+			}
+			100% {
+				transform: none;
+				opacity: 1;
+			}
+		}
+
+		@keyframes glitch-anim-2 {
+			0% {
+				transform: none;
+				opacity: 0.25;
+			}
+			7% {
+				transform: translate(-2px, -3px);
+				opacity: 0.5;
+			}
+			10% {
+				transform: none;
+				opacity: 0.25;
+			}
+			27% {
+				transform: none;
+				opacity: 0.25;
+			}
+			30% {
+				transform: translate(-5px, -2px);
+				opacity: 0.5;
+			}
+			35% {
+				transform: none;
+				opacity: 0.25;
+			}
+			52% {
+				transform: none;
+				opacity: 0.25;
+			}
+			55% {
+				transform: translate(-5px, -1px);
+				opacity: 0.5;
+			}
+			50% {
+				transform: none;
+				opacity: 0.25;
+			}
+			72% {
+				transform: none;
+				opacity: 0.25;
+			}
+			75% {
+				transform: translate(-2px, -6px);
+				opacity: 0.5;
+			}
+			80% {
+				transform: none;
+				opacity: 0.25;
+			}
+			100% {
+				transform: none;
+				opacity: 0.25;
+			}
+		}
+
+		@keyframes glitch-anim-3 {
+			0% {
+				transform: none;
+				opacity: 0.25;
+			}
+			7% {
+				transform: translate(2px, 3px);
+				opacity: 0.5;
+			}
+			10% {
+				transform: none;
+				opacity: 0.25;
+			}
+			27% {
+				transform: none;
+				opacity: 0.25;
+			}
+			30% {
+				transform: translate(5px, 2px);
+				opacity: 0.5;
+			}
+			35% {
+				transform: none;
+				opacity: 0.25;
+			}
+			52% {
+				transform: none;
+				opacity: 0.25;
+			}
+			55% {
+				transform: translate(5px, 1px);
+				opacity: 0.5;
+			}
+			50% {
+				transform: none;
+				opacity: 0.25;
+			}
+			72% {
+				transform: none;
+				opacity: 0.25;
+			}
+			75% {
+				transform: translate(2px, 6px);
+				opacity: 0.5;
+			}
+			80% {
+				transform: none;
+				opacity: 0.25;
+			}
+			100% {
+				transform: none;
+				opacity: 0.25;
+			}
+		}
+	</style>
 </head>
 
 <body>
@@ -40,42 +416,67 @@
 	"></div>
 
     <div id="titleContainer"> <!-- Main Body -->
-		<img class="logo smoothImage" src="/images/logo.png"></img> <!-- Logo -->
+		<div class="logo-container">
+			<div class="glitch-text" data-text="attack">
+				attack
+			</div>
+			<div class="glitch-text" data-text="on">
+				on
+			</div>
+			<div class="glitch-text" data-text="tutor">
+				tutor
+			</div>
+		</div>
 		
-		<% if(user){ %> <!-- Only Shown when User is Logged in -->
-			<h2 id="welcomeText" class="font brownFont centerText">Welcome, <%= user.name %>!</h2>
-			<a href="/dashboard">
-				<div class="centralise font">
-					<button type="button" class="btn btn-lg indexGeneralFontSize">To the Dashboard</button>
+		<div class="login-container">
+			<div class="login-header">
+				aot
+				<div class="login-button-container">
+					<% if(user){ %> <!-- Only Shown when User is Logged in -->
+					<a href="/dashboard">
+						<button class="default-style-button"
+						style="
+						vertical-align:baseline;
+						">DASHBOARD</button>	
+					</a>
+					<% } else{ %>
+						<button class="default-style-button"
+						id="login-btn"
+						style="
+						vertical-align:baseline;
+						">LOGIN</button>
+					<% } %>
 				</div>
-			</a>
-		<% } else{ %>
-			<h2 id="hiddenText">-</h2>
-			<div> 
-				<div class="centralise font">
-					Account Name: <input id="account" type="text" class="">
+			</div>
+			<% if(user){ %>
+				<div class="welcome-text">
+					Welcome, <%= user.name %>!
 				</div>
-				<div class="centralise font">
-					Password: <input id="password" type="password" class="">
-				</div>	
-				<!--<button type="button" class="btn btn-lg indexGeneralFontSize hashit"></button>-->
-			</div>
-			<!--
-			<a href="/ivlelogin"> 
-				<div class="centralise font">
-					<button type="button" class="btn btn-lg indexGeneralFontSize">IVLE Login</button>
-				</div>	
-			</a>
-			-->
-			<div class="centralise font">
-				<button id="login-btn" type="button" class="btn btn-lg indexGeneralFontSize">Login</button>
-			</div>
-			<% if(failedLogin){ %>
-				<div class="centralise font">
+			<% } else{ %>
+				<div> 
+					<div class="login-field-container">
+						<div class="login-field-label">
+						Username:
+						</div>
+						
+						<input id="account" type="text" class="login-field-input">
+					</div>
+					<div class="login-field-container">
+						<div class="login-field-label">
+						Password:
+						</div>
+						
+						<input id="password" type="password" class="login-field-input">
+					</div>	
+				</div>
+				
+				<% if(failedLogin){ %>
+				<div class="failure-text">
 					Username or password incorrect! Please try again.
 				</div>
+				<% } %>
 			<% } %>
-		<% } %>
+		</div>
     </div>
 </body>
 
@@ -116,12 +517,37 @@
 		}
 	);
 	
-	$(".hashit").on
+	$("input#password").on
 	(
-		"click",
+		"keyup",
 		function(event)
 		{
-            $(this).text (md5 ( $("#password").val() ));
+			if ( event.keyCode == 13 )
+			{
+				if ( $("input#account").val().length === 0 || $("input#password").val().length === 0 )
+				{
+					window.location.href = '/loginFailure/0';
+				}
+				else
+					window.location.href = '/login/' + $("input#account").val() + '/' + md5($("input#password").val());
+			}
+		}
+	);
+	
+	$("input#account").on
+	(
+		"keyup",
+		function(event)
+		{
+			if ( event.keyCode == 13 )
+			{
+				if ( $("input#account").val().length === 0 || $("input#password").val().length === 0 )
+				{
+					window.location.href = '/loginFailure/0';
+				}
+				else
+					window.location.href = '/login/' + $("input#account").val() + '/' + md5($("input#password").val());
+			}
 		}
 	);
 	

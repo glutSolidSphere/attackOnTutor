@@ -981,11 +981,14 @@ lobbyio.on ('connection', function (socket) {
 													if ( lobby.lootTable[j].rarity >= dropRarity )
 													{
 														lootToDrop.push ( lobby.lootTable[j] );
-														totalExp += lobby.lootTable[j].value;
 													}
 												}
 												if ( lootToDrop.length > 0 )
-													lootToSpawn.push ( lootToDrop[randomIntFromInterval ( 0, lootToDrop.length - 1 )] );
+												{
+													var spawnedLoot = lootToDrop[randomIntFromInterval ( 0, lootToDrop.length - 1 )] 
+													lootToSpawn.push ( spawnedLoot );
+													totalExp += spawnedLoot.value;
+												}
 											}
 											
 											db.changeExp (value.userId, value.tutorialId, totalExp);

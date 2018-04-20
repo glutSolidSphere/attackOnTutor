@@ -1,0 +1,50 @@
+.default-style-button
+{
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+	
+	background-color:#b4af9a;
+	color:#635f54;
+	border:none;
+	
+	height:3vw;
+	font-size:2vw;
+	cursor:pointer;
+	font-family: 'VT323', monospace;
+	text-align:center;
+}
+
+.default-style-button:focus, .default-style-button:active
+{
+	outline:none;
+	border:1px solid #9a9784;
+	cursor:pointer;
+}
+
+.default-style-button:hover
+{
+	color:#dad4bb;
+	background-color:#635f54;
+	cursor:pointer;
+}
+
+.default-style-button[disabled]:hover
+{
+	color:#dad4bb;
+	background-color:#9a9784;
+	outline:none;
+	border:none;
+	cursor:no-drop;
+}
+
+.default-style-button[disabled]
+{
+	color:#dad4bb;
+	background-color:#b4af9a;
+	outline:none;
+	border:none;
+	cursor:no-drop;
+}

@@ -44,6 +44,7 @@ angular.module('lobbyApp').controller ('studentCtrl', function($scope, $window, 
             	var tutors = [];
             	//Extract the students and tutors in the groupmates list and create separate lists of their data.
             	data.groupmates.forEach (function (groupmate, i) {
+					groupmate.userAvatar.icon = groupmate.userAvatar.icon + "?" + Math.random();
             		if (groupmate.userType == 'tutor') {
             			tutors.push (groupmate);
             		} else if (groupmate.userType == 'student') {

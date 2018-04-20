@@ -108,13 +108,17 @@ angular.module("dashboardApp").controller ('dashboardCtrl', function ($scope, $h
 		}
     }
 
-	$scope.setAvatar = function ( avatarId ) {
+	$scope.setAvatar = function ( avatarId, avatarDetails ) {
 		
 		$http({
 			method: 'POST',
 			url: '/api/dashboard/setAvatar',
 			data: { 'avatarId': avatarId }
 		}).then (function successCallback ( response ) {
+			if ( response.data )
+			{
+				$scope.userInfo.avatar = avatarDetails;
+			}
 			console.log ( response );
 		}, function errorCallback(response) {
 			console.log(response);
