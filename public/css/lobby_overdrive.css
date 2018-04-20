@@ -1,3 +1,15 @@
+:root:body
+{
+	content: url('/images/avatars/hecatutores/attack.gif')
+			url('/images/avatars/mathemagician/attack.gif')
+			url('/images/avatars/mathemagician_prime/attack.gif');
+	background-image: url ('/images/avatars/hecatutores/attack.gif');
+	
+	visibility : hidden;
+	position :  absolute;
+	left : -999em;
+}
+
 .rune
 {
 	-webkit-transition: all 0.5s ease-out;
