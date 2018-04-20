@@ -204,7 +204,7 @@ angular.module('lobbyApp').controller ('studentBattleCtrl', function($scope, $wi
 								avatarToAnimate.currentAnim = avatarToAnimate.userAvatar.idleAnim;
 							}
 						});
-					}, 500);
+					}, 1000);
 				}
 				
 				setTimeout ( function()

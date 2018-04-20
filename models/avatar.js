@@ -25,7 +25,7 @@ var dataTable = {
 					'description' : 'Not-so-subtly influencing the bell curve.',
 					'damage' : 13,
 					'effect' : {
-						'image' : '/images/border-image.png',
+						'image' : '/images/effects/the_bell_tolls_effect.gif',
 						'width' : 10,
 						'height' : 10,
 						'duration' : 3000
@@ -83,50 +83,36 @@ var dataTable = {
 					'description' : 'The best way to solve problem sums.',
 					'damage' : 8,
 					'effect' : {
-						'image' : '/images/border-image.png',
+						'image' : '/images/effects/abacurse_effect.gif',
 						'width' : 10,
-						'height' : 15,
+						'height' : 10,
 						'duration' : 2000
 					},
 					'symbols' : [
 						{
-							'positionTop' : 14,
-							'positionLeft' : 45,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 46,
-							'positionLeft' : 37,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 74,
-							'positionLeft' : 17,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 36,
-							'positionLeft' : 63,
+							'positionTop' : 31,
+							'positionLeft' : 46,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
 							'positionTop' : 66,
-							'positionLeft' : 85,
+							'positionLeft' : 15,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 81,
+							'positionTop' : 74,
 							'positionLeft' : 53,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 37,
+							'positionLeft' : 84,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
@@ -143,50 +129,36 @@ var dataTable = {
 					'description' : 'Destruction to the 16th base.',
 					'damage' : 9,
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 30,
+						'image' : '/images/effects/hexadecimation_effect.gif',
+						'width' : 10,
 						'height' : 10,
 						'duration' : 1000
 					},
 					'symbols' : [
 						{
-							'positionTop' : 14,
-							'positionLeft' : 45,
+							'positionTop' : 19,
+							'positionLeft' : 36,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 46,
-							'positionLeft' : 37,
+							'positionTop' : 79,
+							'positionLeft' : 33,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 74,
-							'positionLeft' : 17,
+							'positionTop' : 20,
+							'positionLeft' : 66,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 36,
-							'positionLeft' : 63,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 66,
-							'positionLeft' : 85,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 81,
-							'positionLeft' : 53,
+							'positionTop' : 80,
+							'positionLeft' : 61,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
@@ -201,50 +173,29 @@ var dataTable = {
 					'description' : 'Popularised by the band Mathtallica.',
 					'damage' : 5,
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 20,
-						'height' : 20,
+						'image' : '/images/effects/ride_the_tangent_effect.gif',
+						'width' : 10,
+						'height' : 10,
 						'duration' : 1500
 					},
 					'symbols' : [
 						{
-							'positionTop' : 14,
-							'positionLeft' : 45,
+							'positionTop' : 18,
+							'positionLeft' : 81,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 46,
-							'positionLeft' : 37,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 74,
-							'positionLeft' : 17,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 36,
-							'positionLeft' : 63,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 66,
-							'positionLeft' : 85,
+							'positionTop' : 49,
+							'positionLeft' : 55,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
 							'positionTop' : 81,
-							'positionLeft' : 53,
+							'positionLeft' : 23,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
@@ -268,57 +219,36 @@ var dataTable = {
 		'runes' : {
 			'0' : [
 				{
-					'width' : 30,
-					'height' : 30,
+					'width' : 15,
+					'height' : 15,
 					'name' : 'Palm Reading',
 					'damage' : '3',
 					'description' : 'Many fates lie in the palms of your hands.',
-					'image' : '/images/runes/the_bell_tolls_rune.gif',
+					'image' : '/images/runes/palm_reading_rune.gif',
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 30,
-						'height' : 30,
-						'duration' : 1500
+						'image' : '/images/effects/palm_reading_effect.gif',
+						'width' : 15,
+						'height' : 15,
+						'duration' : 2500
 					},
 					'symbols' : [
 						{
-							'positionTop' : 14,
-							'positionLeft' : 45,
+							'positionTop' : 39,
+							'positionLeft' : 19,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 46,
-							'positionLeft' : 37,
+							'positionTop' : 20,
+							'positionLeft' : 50,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 74,
-							'positionLeft' : 17,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 36,
-							'positionLeft' : 63,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 66,
-							'positionLeft' : 85,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 81,
-							'positionLeft' : 53,
+							'positionTop' : 47,
+							'positionLeft' : 83,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
@@ -326,57 +256,36 @@ var dataTable = {
 					]
 				},
 				{
-					'width' : 20,
-					'height' : 20,
+					'width' : 15,
+					'height' : 15,
 					'name' : 'Backhanded Compliment',
 					'damage' : '3',
 					'description' : 'Contractually obliged to help those that don\'t appreciate it.',
-					'image' : '/images/runes/the_bell_tolls_rune.gif',
+					'image' : '/images/runes/backhanded_compliment_rune.gif',
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 10,
-						'height' : 10,
-						'duration' : 1000
+						'image' : '/images/effects/backhanded_compliment_effect.gif',
+						'width' : 15,
+						'height' : 15,
+						'duration' : 2500
 					},
 					'symbols' : [
 						{
-							'positionTop' : 14,
-							'positionLeft' : 45,
+							'positionTop' : 27,
+							'positionLeft' : 30,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 46,
-							'positionLeft' : 37,
+							'positionTop' : 49,
+							'positionLeft' : 56,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 74,
-							'positionLeft' : 17,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 36,
-							'positionLeft' : 63,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 66,
-							'positionLeft' : 85,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 81,
-							'positionLeft' : 53,
+							'positionTop' : 84,
+							'positionLeft' : 61,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
@@ -389,52 +298,31 @@ var dataTable = {
 					'name' : 'Heavyhanded Approach',
 					'damage' : '3',
 					'description' : 'The oven may be hot but it takes heat for the bread to rise.',
-					'image' : '/images/runes/the_bell_tolls_rune.gif',
+					'image' : '/images/runes/heavy_handed_approach_rune.gif',
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 10,
-						'height' : 10,
-						'duration' : 1000
+						'image' : '/images/effects/heavy_handed_approach_effect.gif',
+						'width' : 15,
+						'height' : 15,
+						'duration' : 2500
 					},
 					'symbols' : [
 						{
-							'positionTop' : 14,
-							'positionLeft' : 45,
+							'positionTop' : 20,
+							'positionLeft' : 78,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 46,
-							'positionLeft' : 37,
+							'positionTop' : 55,
+							'positionLeft' : 68,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 74,
-							'positionLeft' : 17,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 36,
-							'positionLeft' : 63,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 66,
-							'positionLeft' : 85,
-							'height' : 10,
-							'width' : 10,
-							'completed' : false
-						},
-						{
-							'positionTop' : 81,
-							'positionLeft' : 53,
+							'positionTop' : 80,
+							'positionLeft' : 31,
 							'height' : 10,
 							'width' : 10,
 							'completed' : false
@@ -461,35 +349,56 @@ var dataTable = {
 					'width' : 20,
 					'height' : 20,
 					'name' : 'Prime-a Donna',
-					'image' : '',
+					'image' : '/images/runes/primeadonna_rune.gif',
 					'description' : 'Prime numbers are all the rage now.',
-					'damage' : 13,
+					'damage' : 15,
 					'effect' : {
-						'image' : '/images/border-image.png',
+						'image' : '/images/effects/primeadonna_effect.gif',
 						'width' : 10,
 						'height' : 10,
 						'duration' : 3000
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 23,
+							'positionLeft' : 45,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 0,
-							'positionLeft' : 60,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 68,
+							'positionLeft' : 20,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 0,
-							'positionLeft' : 100,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 58,
+							'positionLeft' : 57,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 85,
+							'positionLeft' : 43,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 35,
+							'positionLeft' : 72,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 74,
+							'positionLeft' : 85,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -498,35 +407,42 @@ var dataTable = {
 					'width' : 25,
 					'height' : 25,
 					'name' : 'Linear Algeblast',
-					'image' : '',
+					'image' : '/images/runes/linear_algeblast_rune.gif',
 					'description' : 'Simultaneous equations are quaking.',
 					'damage' : 13,
 					'effect' : {
-						'image' : '/images/border-image.png',
+						'image' : '/images/effects/linear_algeblast_effect.gif',
 						'width' : 10,
-						'height' : 15,
+						'height' : 10,
 						'duration' : 2000
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 22,
+							'positionLeft' : 18,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 10,
-							'positionLeft' : 60,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 40,
+							'positionLeft' : 76,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 60,
-							'positionLeft' : 100,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 64,
+							'positionLeft' : 25,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 80,
+							'positionLeft' : 86,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -537,35 +453,35 @@ var dataTable = {
 					'width' : 30,
 					'height' : 30,
 					'name' : 'High-order Destructives',
-					'image' : '',
+					'image' : '/images/runes/highorder_destructives_rune.gif',
 					'description' : 'Many layers of destructive potential, one after another.',
-					'damage' : 8,
+					'damage' : 10,
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 30,
+						'image' : '/images/effects/highorder_destructives_effect.gif',
+						'width' : 10,
 						'height' : 10,
 						'duration' : 1000
 					},
 					'symbols' : [
 						{
-							'positionTop' : 0,
-							'positionLeft' : 0,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 25,
+							'positionLeft' : 36,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 30,
-							'positionLeft' : 70,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 67,
+							'positionLeft' : 37,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
-							'positionTop' : 50,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 82,
+							'positionLeft' : 79,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]
@@ -574,35 +490,35 @@ var dataTable = {
 					'width' : 13,
 					'height' : 13,
 					'name' : 'Multivar Calculazer',
-					'image' : '',
+					'image' : '/images/runes/multivar_calculazers_rune.gif',
 					'description' : 'What\'s better than a lazer? Multivariable lazers.',
-					'damage' : 5,
+					'damage' : 7,
 					'effect' : {
-						'image' : '/images/border-image.png',
-						'width' : 20,
-						'height' : 20,
+						'image' : '/images/effects/multivar_calculazers_effect.gif',
+						'width' : 10,
+						'height' : 10,
 						'duration' : 1500
 					},
 					'symbols' : [
 						{
-							'positionTop' : 60,
-							'positionLeft' : 30,
-							'height' : 3,
-							'width' : 3,
-							'completed' : false
-						},
-						{
-							'positionTop' : 30,
-							'positionLeft' : 0,
-							'height' : 3,
-							'width' : 3,
+							'positionTop' : 18,
+							'positionLeft' : 19,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						},
 						{
 							'positionTop' : 20,
-							'positionLeft' : 10,
-							'height' : 3,
-							'width' : 3,
+							'positionLeft' : 72,
+							'height' : 10,
+							'width' : 10,
+							'completed' : false
+						},
+						{
+							'positionTop' : 72,
+							'positionLeft' : 83,
+							'height' : 10,
+							'width' : 10,
 							'completed' : false
 						}
 					]

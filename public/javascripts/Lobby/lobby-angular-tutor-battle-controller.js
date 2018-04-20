@@ -180,7 +180,7 @@ angular.module('lobbyApp').controller ('tutorBattleCtrl', function($scope, $wind
 								avatarToAnimate.currentAnim = avatarToAnimate.userAvatar.idleAnim;
 							}
 						});
-					}, 500);
+					}, 1000);
 				}
 				
 				setTimeout ( function()
