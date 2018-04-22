@@ -18,15 +18,12 @@ var level = require ('./level');
  * @return {Promise}
  */
 var changeExp = function (uid, tid, amount) {
-	console.log ( uid + "    " + tid );
 	return userTutorial.findOne({
 		where: {
 			userId: uid,
 			tutorialId: tid
 		}
 	}).then(function (result) {
-		console.log ( "Yes" );
-		console.log ( result );
 		return result.increment(['exp'], { by: amount });
 	});
 }

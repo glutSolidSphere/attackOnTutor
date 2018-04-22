@@ -630,16 +630,13 @@ lobbyio.on ('connection', function (socket) {
 					if ( !isValidGroup ( data.groups[i], lobby ) )
 					{
 						socket.emit ( "invalid group", {});
-						console.log ( "There is a wrong group" );
+						console.log ( "There is an invalid group selected." );
 						//TODO: Make the client side pop up to react to invalid group selection.
 						return;
 					}
 				}
 
                 lobby.questions[data.question.uuid] = data.question;
-				
-				console.log ("Question received:");
-				console.log (lobby.questions);
 
                 //Send the parsed question back to the source socket so they can log the question parameters. (uuid)
                 socket.emit ('log question', {
@@ -660,9 +657,6 @@ lobbyio.on ('connection', function (socket) {
             socket.on ('grade question', function (data) {
                 var lobby = lobbyList.getLobby(socket.moduleGroup, socket.tutorialGroup);
                 lobby.questions[data.uuid]['groupAnswers'] = data.groupAnswers;
-				
-				console.log ( "Graded question:");
-				console.log (lobby.questions[data.uuid]);
 
                 //Send each group's answers to all the other groups.
                 lobby.questions[data.uuid].groups.forEach (function (groupName, i) {
@@ -1075,7 +1069,6 @@ lobbyio.on ('connection', function (socket) {
 				//Index of the symbol set used.
 				var symbolSetIndex = Math.floor(Math.random()*runeObject.runeData.length);
 				var symbolToUse = runeObject.runeData[symbolSetIndex];
-				console.log ( symbolToUse );
 				symbolToUse.id = symbolSetIndex;
 				socket.emit ( 'student set rune', {
 					'runeId' : runeObject.key,
@@ -1144,11 +1137,8 @@ lobbyio.on ('connection', function (socket) {
  */
 function isValidGroup (groupname, lobby) {
 	var usersInRoom = lobby.getUsersInRoom ( groupname );
-	console.log ( usersInRoom );
-	console.log ( groupname );
 	for ( var i = 0; i < usersInRoom.length; i++ )
 	{
-		console.log ( usersInRoom[i] );
 		if ( usersInRoom[i].userType == "student")
 		{
 			//There is indeed a student within this group, thus it is valid.

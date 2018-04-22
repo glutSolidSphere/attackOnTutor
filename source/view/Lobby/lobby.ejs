@@ -46,6 +46,7 @@
 			//Lighter Panel Color : #b4af9a
 			//Header Color : #635f54
 			//Drop Shadow Color : #9a9784
+			//Blue Highlight: #5bc0de;
 			//Text background : rgb(255,255,255,0.5)
 			//Chat background : rbg(0,0,0,0.1)
 			-->
@@ -1095,7 +1096,7 @@
 								<div class="student-qa-question-received-header">
 									Question {{$index + 1}}
 									<div class="student-qa-answer-question-container">
-										<button class="default-style-button" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
+										<button class="default-style-button flashing-notification" ng-if="hasAllVotes(uuid) && !question.submitted" ng-click="submitAnswer(uuid)"
 										style="
 										vertical-align:baseline;
 										">ATTACK</button>	

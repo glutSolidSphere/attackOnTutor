@@ -785,6 +785,21 @@
 	font-family: 'VT323', monospace;
 }
 
+.flashing-notification
+{
+	-webkit-animation: flash 1s ease-out infinite alternate;
+	-moz-animation: flash 1s ease-out infinite alternate;
+	-ms-animation: flash 1s ease-out infinite alternate;
+	-o-animation: flash 1s ease-out infinite alternate;
+	animation: flash 1s ease-out infinite alternate;
+}
+
+@keyframes flash
+{
+	from { background-color:#b4af9a; }
+	to { background-color:#5bc0de; }
+}
+
 .student-qa-right-container
 {
 	position:fixed;

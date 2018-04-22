@@ -22,7 +22,7 @@ var dataTable = {
 		'role' : 'student',
 		'tutorialId' : 'test1',
 		'userId' : 'd0123456',
-		'exp' : 0
+		'exp' : 3000
 	},
 	'3' : {
 		'id' : '3',

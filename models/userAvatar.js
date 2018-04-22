@@ -13,7 +13,7 @@ var dataTable = {
 	},
 	'2' : {
 		'id' : '2',
-		'AvatarId' : 'avatar-01',
+		'AvatarId' : 'avatar-03',
 		'UserId' : 'd0123456'
 	},
 	'3' : {

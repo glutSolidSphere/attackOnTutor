@@ -241,8 +241,10 @@ angular.module('lobbyApp').controller ('chatCtrl', function ($scope, $window, so
         }
         $scope.messages[groupname].push(message);
 
-        //Scroll chat window to the last received message.
-        $('.chat-area')[0].scrollTop = $('.chat-area')[0].scrollHeight;
+		setTimeout ( function () {
+			//Scroll chat window to the last received message.
+			$('.chat-area')[0].scrollTop = $('.chat-area')[0].scrollHeight;
+		}, 100 );
     };
 	
     /**
